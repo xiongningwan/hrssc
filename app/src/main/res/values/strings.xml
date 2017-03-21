@@ -8,4 +8,25 @@
 
     <!-- 客户热线 -->
     <string name="phone_number">400&#8211;838&#8211;9911</string>
+
+    <string name="daiwobanli_home_fragment">待我办理</string>
+    <string name="shenqing_home_fragment">待我申请</string>
+
+
+
+    <string name="btn_zhengmingbanli_home_fragment">证明办理</string>
+    <string name="btn_shebao_home_fragment">社保</string>
+    <string name="btn_gongjijing_home_fragment">公积金</string>
+    <string name="btn_danganjieyue_home_fragment">档案借阅</string>
+    <string name="btn_hukbl_home_fragment">户口办理</string>
+    <string name="btn_juzhuzbl_home_fragment">居住证办理</string>
+    <string name="btn_xingyg_home_fragment">新员工</string>
+    <string name="btn_more_home_fragment">更多</string>
+
+    <string name="title_last_home_fragment">最新</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>

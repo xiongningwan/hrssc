@@ -1,0 +1,453 @@
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/project_color_basic_white_pure"
+
+    tools:context="com.maiyu.hrssc.home.frament.HomeFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/project_head_view_hight">
+
+
+        <RelativeLayout
+            android:id="@+id/address_btn"
+            android:layout_width="@dimen/base50dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/base16dp">
+            <TextView
+                android:id="@+id/address_btn_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="深圳"
+                android:textColor="@color/project_color_general_hyperlink"
+                android:layout_centerVertical="true"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/address_btn_text"
+                android:layout_marginStart="@dimen/base3dp"
+                android:src="@mipmap/icon_xialajian"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/home_title_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_page_home"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/text_title_gray"
+            android:textSize="@dimen/project_text_number_size_dp_19"
+            />
+
+    <RelativeLayout
+        android:id="@+id/msg_btn"
+        android:layout_width="@dimen/base50dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin">
+
+        <ImageView
+            android:id="@+id/msg_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/base22dp"
+            android:layout_marginRight="@dimen/base7dp"
+            android:src="@mipmap/icon_xiaoxi"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+
+        <com.maiyu.hrssc.base.view.AdvertisementImageBanner
+            android:id="@+id/activity_main_ads"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@color/project_color_basic_white_pure" />
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base10dp"
+            android:background="@color/color_space"/>
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@mipmap/line"/>
+
+
+        <RelativeLayout
+            android:id="@+id/hetong_rl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base45dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iv_hetong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:src="@mipmap/icon_hetong" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/base5dp"
+                android:layout_toEndOf="@id/iv_hetong"
+                android:text="@string/daiwobanli_home_fragment" />
+
+
+            <LinearLayout
+                android:id="@+id/hetong_next_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/base16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/holo_red_light"
+                    android:layout_marginEnd="@dimen/base5dp"
+                    android:textSize="@dimen/project_text_size_dp_12"
+                    android:text="12" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_xianghou" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:background="@mipmap/line"/>
+
+
+        <RelativeLayout
+            android:id="@+id/shenqing_rl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base45dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iv_shenqing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:src="@mipmap/icon_shengqing" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/base5dp"
+                android:layout_toEndOf="@id/iv_shenqing"
+                android:text="@string/daiwobanli_home_fragment" />
+
+
+            <LinearLayout
+                android:id="@+id/next_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/base16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/holo_red_light"
+                    android:layout_marginEnd="@dimen/base5dp"
+                    android:textSize="@dimen/project_text_size_dp_12"
+                    android:text="12" />
+
+                <ImageView
+                    android:id="@+id/xianghou"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_xianghou" />
+            </LinearLayout>
+        </RelativeLayout>
+
+
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@mipmap/line"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base10dp"
+            android:background="@color/color_space"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base180dp"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/base15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="@dimen/base5dp"
+                    android:drawableTop="@mipmap/icon_zmbl"
+                    android:gravity="center"
+                    android:text="@string/btn_zhengmingbanli_home_fragment"
+                    android:textColor="@color/text_title_gray" />
+
+                <TextView
+                    android:id="@+id/btn_sb"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="@dimen/base5dp"
+                    android:drawableTop="@mipmap/icon_sb"
+                    android:gravity="center"
+                    android:text="@string/btn_zhengmingbanli_home_fragment"
+                    android:textColor="@color/text_title_gray" />
+
+                <TextView
+                    android:id="@+id/btn_gjj"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="@dimen/base5dp"
+                    android:drawableTop="@mipmap/icon_gjj"
+                    android:gravity="center"
+                    android:text="@string/btn_zhengmingbanli_home_fragment"
+                    android:textColor="@color/text_title_gray" />
+
+                <TextView
+                    android:id="@+id/btn_dajy"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="@dimen/base5dp"
+                    android:drawableTop="@mipmap/icon_dajy"
+                    android:gravity="center"
+                    android:text="@string/btn_zhengmingbanli_home_fragment"
+                    android:textColor="@color/text_title_gray" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/base15dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btn_hkbl2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="@dimen/base5dp"
+                    android:drawableTop="@mipmap/icon_hkbl"
+                    android:gravity="center"
+                    android:text="@string/btn_hukbl_home_fragment"
+                    android:textColor="@color/text_title_gray" />
+
+
+                <TextView
+                    android:id="@+id/btn_jzzbl"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="@dimen/base5dp"
+                    android:drawableTop="@mipmap/icon_jzzbl"
+                    android:gravity="center"
+                    android:text="@string/btn_juzhuzbl_home_fragment"
+                    android:textColor="@color/text_title_gray" />
+
+                <TextView
+                    android:id="@+id/btn_xyg"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="@dimen/base5dp"
+                    android:drawableTop="@mipmap/icon_xyg"
+                    android:gravity="center"
+                    android:text="@string/btn_xingyg_home_fragment"
+                    android:textColor="@color/text_title_gray" />
+
+                <TextView
+                    android:id="@+id/btn_more"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="@dimen/base5dp"
+                    android:drawableTop="@mipmap/icon_more"
+                    android:gravity="center"
+                    android:text="@string/btn_more_home_fragment"
+                    android:textColor="@color/text_title_gray" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@mipmap/line"/>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@mipmap/line"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base10dp"
+            android:background="@color/color_space"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@mipmap/line"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:text="@string/title_last_home_fragment"
+                android:textColor="@color/text_title_gray"/>
+
+            <LinearLayout
+                android:id="@+id/more_next_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/base16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/base5dp"
+                    android:text="@string/btn_more_home_fragment"
+                    android:textColor="@color/text_title_sub_gray"
+                    android:textSize="@dimen/project_text_size_dp_12"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_xianghou" />
+            </LinearLayout>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/line_1_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/line_1_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:drawablePadding="@dimen/base5dp"
+                android:drawableStart="@mipmap/icon_xialajian"
+                android:text="关于证明办理最新规则"/>
+
+            <TextView
+                android:id="@+id/line_1_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/line_1_content"
+                android:layout_marginStart="@dimen/base29dp"
+                android:textColor="@color/project_color_general_hyperlink"
+                android:textSize="@dimen/project_text_size_dp_12"
+                android:text="2017-2-14"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/line_2_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/line_2_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:drawablePadding="@dimen/base5dp"
+                android:drawableStart="@mipmap/icon_xialajian"
+                android:text="关于证明办理最新规则"/>
+
+            <TextView
+                android:id="@+id/line_2_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/line_2_content"
+                android:layout_marginStart="@dimen/base29dp"
+                android:textColor="@color/project_color_general_hyperlink"
+                android:textSize="@dimen/project_text_size_dp_12"
+                android:text="2017-2-14"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/line_3_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/line_3_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:drawablePadding="@dimen/base5dp"
+                android:drawableStart="@mipmap/icon_xialajian"
+                android:text="关于证明办理最新规则"/>
+
+            <TextView
+                android:id="@+id/line_3_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/line_3_content"
+                android:layout_marginStart="@dimen/base29dp"
+                android:textColor="@color/project_color_general_hyperlink"
+                android:textSize="@dimen/project_text_size_dp_12"
+                android:text="2017-2-14"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</android.support.v4.widget.SwipeRefreshLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="180dp"
+    android:background="@color/white" >
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_detail_banner_pager"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_detail_bannner_indicator_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/base3dp"
+        android:visibility="visible" >
+    </LinearLayout>
+    <!-- android:paddingBottom="@dimen/base10dp" -->
+
+    <LinearLayout
+        android:id="@+id/ll_detail_bannner_ad_language_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/base8dp"
+        android:visibility="visible" >
+
+        <TextView
+            android:id="@+id/ad_language_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base14dp"
+            android:text=""
+            android:textColor="#f8faf9"
+            android:textSize="13dp" 
+            android:visibility="gone"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/ad_bottom_bg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base26dp"
+        android:layout_alignParentBottom="true"
+        android:background="#77ebebeb" 
+        android:visibility="gone"/>
+
+</merge>

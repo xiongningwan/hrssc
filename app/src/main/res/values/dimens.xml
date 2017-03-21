@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">@dimen/base15dp</dimen>
+    <dimen name="activity_horizontal_margin">@dimen/base16dp</dimen>
     <dimen name="activity_vertical_margin">@dimen/base20dp</dimen>
     <dimen name="project_text_size_dp_22">@dimen/base22dp</dimen>
     <!-- 用在少数重要标题， 如导航标题、按钮文字 -->
@@ -26,4 +26,5 @@
 
     <dimen name="refresh_header_height_twitter">60dp</dimen>
     <dimen name="load_more_trigger_offset_google">88dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

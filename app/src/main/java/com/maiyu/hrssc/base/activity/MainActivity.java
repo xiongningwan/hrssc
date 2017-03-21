@@ -1,9 +1,6 @@
 package com.maiyu.hrssc.base.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -12,14 +9,17 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.view.CustomViewPager;
+import com.maiyu.hrssc.home.frament.HomeFragment;
+import com.maiyu.hrssc.integration.frament.IntegrationFragment;
+import com.maiyu.hrssc.my.frament.MyFragment;
+import com.maiyu.hrssc.service.frament.ServiceFragment;
 import com.maiyu.hrssc.util.HintUitl;
 import com.maiyu.hrssc.util.PackageInfoUtil;
+import com.maiyu.hrssc.util.StatusBarCompat;
 
 import java.util.ArrayList;
-import java.util.Map;
 public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
     public static final int AssessmentRequestCode = 1123;
@@ -27,8 +27,9 @@ public class MainActivity extends BaseActivity {
     public static final String isUpdateAssessment = "isUpdateAssessment";
     private CustomViewPager mContentView;
     private RelativeLayout mTabHomeView;
-    private RelativeLayout mTabAccountView;
-    private RelativeLayout mTabPlayView;
+    private RelativeLayout mTabJifenView;
+    private RelativeLayout mTabKefuView;
+    private RelativeLayout mTabMyView;
     /** activity 中的 fragment */
     private ArrayList<Fragment> mFragments = new ArrayList<Fragment>();
     private ArrayList<RelativeLayout> mTabViews = new ArrayList<RelativeLayout>();
@@ -52,23 +53,28 @@ public class MainActivity extends BaseActivity {
         mContentView = (CustomViewPager) findViewById(R.id.activity_main_content);
         //3个tab
         mTabHomeView = (RelativeLayout) findViewById(R.id.activity_main_bottom_tab_home);
-        mTabAccountView = (RelativeLayout) findViewById(R.id.activity_main_bottom_tab_jifen);
-        mTabPlayView = (RelativeLayout) findViewById(R.id.activity_main_bottom_tab_kefu);
-        mTabPlayView = (RelativeLayout) findViewById(R.id.activity_main_bottom_tab_my);
-      /*  mTabHomeView.setSelected(true);
+        mTabJifenView = (RelativeLayout) findViewById(R.id.activity_main_bottom_tab_jifen);
+        mTabKefuView = (RelativeLayout) findViewById(R.id.activity_main_bottom_tab_kefu);
+        mTabMyView = (RelativeLayout) findViewById(R.id.activity_main_bottom_tab_my);
+        mTabHomeView.setSelected(true);
+
+
         mTabHomeView.setOnClickListener(this);
-        mTabAccountView.setOnClickListener(this);
-        mTabPlayView.setOnClickListener(this);
+        mTabJifenView.setOnClickListener(this);
+        mTabKefuView.setOnClickListener(this);
+        mTabMyView.setOnClickListener(this);
 
         //将tab加入到列表中
         mTabViews.add(mTabHomeView);
-        mTabViews.add(mTabAccountView);
-        mTabViews.add(mTabPlayView);
+        mTabViews.add(mTabJifenView);
+        mTabViews.add(mTabKefuView);
+        mTabViews.add(mTabMyView);
 
         // 把fragment加入到列表中
-        mFragments.add(HomeFragment2.newInstance("1","2"));
-        mFragments.add(FinanceFragment.newInstance("11"));
-        mFragments.add(new AccountFragment());
+        mFragments.add(HomeFragment.newInstance());
+        mFragments.add(IntegrationFragment.newInstance());
+        mFragments.add(ServiceFragment.newInstance());
+        mFragments.add(MyFragment.newInstance());
 
         // 给mContentView设置tabAdapter
         mContentView.setAdapter(new TabFragmentPagerAdapter(getSupportFragmentManager(), mFragments));
@@ -76,7 +82,7 @@ public class MainActivity extends BaseActivity {
         mContentView.setOffscreenPageLimit(3);
         mContentView.setScanScroll(false);
         mTabViews.get(0).setSelected(true);
-        StatusBarCompat.translucentStatusBar(this, false);*/
+        StatusBarCompat.translucentStatusBar(this, false);
     }
 
     public class TabFragmentPagerAdapter extends FragmentPagerAdapter {
@@ -136,26 +142,24 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initOnClick(View v) {
-       /* switch (v.getId()) {
-            case R.id.activity_main_bottom_tab_home: {
+        switch (v.getId()) {
+            case R.id.activity_main_bottom_tab_home:
                 mContentView.setCurrentItem(0, true);
                 break;
-            }
-            case R.id.activity_main_bottom_tab_personal: {
 
+            case R.id.activity_main_bottom_tab_jifen:
                 mContentView.setCurrentItem(1, true);
                 break;
-            }
-            case R.id.activity_main_bottom_tab_play: {
+
+            case R.id.activity_main_bottom_tab_kefu:
                 mContentView.setCurrentItem(2, true);
                 break;
-            }
-            case R.id.right_more_btn: {
-                Intent intent = new Intent(this, MoreActivity.class);
-                startActivityForResult(intent, 1);
+
+            case R.id.activity_main_bottom_tab_my:
+                mContentView.setCurrentItem(3, true);
                 break;
-            }
-        }*/
+
+        }
     }
 
     @Override

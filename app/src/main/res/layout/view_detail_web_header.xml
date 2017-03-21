@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/title_left_button"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/base13dp" >
+
+        <ImageView
+            android:id="@+id/left_button_icon"
+            android:layout_width="@dimen/base19dp"
+            android:layout_height="@dimen/base19dp"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/view_head_btn_back_bg_selector" />
+
+        <TextView
+            android:id="@+id/title_button_text"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="4dp"
+            android:layout_toRightOf="@id/left_button_icon"
+            android:gravity="center"
+            android:text="返回"
+            android:textColor="@color/project_color_basic_white_pure"
+            android:textSize="@dimen/project_text_size_dp_16" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:paddingLeft="@dimen/base80dp"
+        android:paddingRight="@dimen/base80dp"
+        android:singleLine="true"
+        android:text="会员中心"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/project_text_size_dp_19" />
+
+    <RelativeLayout
+        android:id="@+id/title_right_button"
+        android:layout_width="@dimen/base42dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:paddingLeft="10dp" >
+
+        <ImageView
+            android:id="@+id/right_button_icon"
+            android:layout_width="@dimen/base19dp"
+            android:layout_height="@dimen/base19dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
+            android:src="@mipmap/btn_share" />
+    </RelativeLayout>
+
+</merge>
