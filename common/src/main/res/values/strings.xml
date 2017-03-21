@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Common</string>
+    <string name="button_allow">同意</string>
+    <string name="button_deny">拒绝</string>
+    <!--  联系人组-->
+    <string name="permission_contacts_rationale">联系人权限是必要的，以显示访问的联系人数据库。</string>
+    <string name="permission_contacts_denied">联系人权限被拒绝。为了使用联系人功能请考虑授权!</string>
+    <string name="permission_contacts_never_askagain">联系人权限被拒绝，并且不再询问</string>
+
+    <!--相机组-->
+    <string name="permission_camera_rationale">相机许可是必要的显示相机预览。</string>
+    <string name="permission_camera_denied">相机权限被拒绝。为了使用相机功能请考虑授权!</string>
+    <string name="permission_camera_never_askagain">照相机权限被拒绝，并且不再询问</string>
+
+    <!--电话组-->
+    <string name="permission_callphone_rationale">拨打电话权限是必要的</string>
+    <string name="permission_callphone_denied">拨打电话权限被拒绝。为了使用拨打电话功能请考虑授权!</string>
+    <string name="permission_callphone_never_askagain">拨打电话权限被拒绝，并且不再询问</string>
+
+    <!--存储器组-->
+    <string name="permission_external_storage_rationale">读写外部存储器权限是必要的</string>
+    <string name="permission_external_storage_denied">读写外部存储器权限被拒绝。为了使用读写外部存储器功能请考虑授权!</string>
+    <string name="permission_external_storage_never_askagain">读写外部存储器权限被拒绝，并且不再询问</string>
+</resources>
