@@ -423,7 +423,7 @@
                 android:layout_marginStart="@dimen/base29dp"
                 android:textColor="@color/project_color_general_hyperlink"
                 android:textSize="@dimen/project_text_size_dp_12"
-                android:text="2017-2-14"/>
+                android:text="2017-3-14"/>
 
         </RelativeLayout>
 
