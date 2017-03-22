@@ -16,7 +16,7 @@ import okhttp3.OkHttpClient;
 
 public class HrsscApplication extends Application {
     private int mNetwork;
-    private ActivityManager activityManager = null; 
+    private ActivityManager activityManager = null;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -44,6 +44,9 @@ public class HrsscApplication extends Application {
         activityManager = ActivityManager.getScreenManager();
         
         CrashReport.initCrashReport(getApplicationContext(), "549197d60d", false);
+
+
+
     }
 
     public int getmNetwork() {
