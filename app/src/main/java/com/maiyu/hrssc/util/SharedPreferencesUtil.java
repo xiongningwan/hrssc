@@ -31,7 +31,7 @@ public class SharedPreferencesUtil {
      * @param time
      */
     public static void savePopUpTime(Context context, long time) {
-        SharedPreferences perfer = context.getSharedPreferences("jhj_info", Context.MODE_PRIVATE);
+        SharedPreferences perfer = context.getSharedPreferences("user_info", Context.MODE_PRIVATE);
         Editor editor = perfer.edit();
         editor.putLong("PopUpTime", time);
         editor.commit();
@@ -43,7 +43,7 @@ public class SharedPreferencesUtil {
      * @return
      */
     public static long getPopUpTime(Context context) {
-        SharedPreferences sp = context.getSharedPreferences("jhj_info", Context.MODE_PRIVATE);
+        SharedPreferences sp = context.getSharedPreferences("user_info", Context.MODE_PRIVATE);
         return sp.getLong("PopUpTime", 0);
     }
 
@@ -56,7 +56,7 @@ public class SharedPreferencesUtil {
      * @param activeTime
      */
     public static void saveUserBaseInfo(Context context, User user, long activeTime) {
-        SharedPreferences perfer = context.getSharedPreferences("jhj_info_vp", Context.MODE_PRIVATE);
+        SharedPreferences perfer = context.getSharedPreferences("user_info_vp", Context.MODE_PRIVATE);
         Editor editor = perfer.edit();
         editor.putLong("userId", user.getId());
         editor.putString("mobile", user.getMobile());
@@ -80,7 +80,7 @@ public class SharedPreferencesUtil {
      * @return
      */
     public static Map<String, Object> getUserBaseInfo(Context context) {
-        SharedPreferences perfer = context.getSharedPreferences("jhj_info_vp", Context.MODE_PRIVATE);
+        SharedPreferences perfer = context.getSharedPreferences("user_info_vp", Context.MODE_PRIVATE);
         Map<String, Object> map = new HashMap<String, Object>();
         User u = new User();
         u.setId(perfer.getLong("userId", -1));
@@ -107,7 +107,7 @@ public class SharedPreferencesUtil {
      * @param lastVersion
      */
     public static void saveAppLastVersion(Context context, String lastVersion) {
-        SharedPreferences perfer = context.getSharedPreferences("jhj_info", Context.MODE_PRIVATE);
+        SharedPreferences perfer = context.getSharedPreferences("user_info", Context.MODE_PRIVATE);
         Editor editor = perfer.edit();
         editor.putString("LastVersion", lastVersion);
         editor.commit();
@@ -119,11 +119,35 @@ public class SharedPreferencesUtil {
      * @return
      */
     public static String getAppLastVersion(Context context) {
-        SharedPreferences perfer = context.getSharedPreferences("jhj_info", Context.MODE_PRIVATE);
+        SharedPreferences perfer = context.getSharedPreferences("user_info", Context.MODE_PRIVATE);
         String lastVersion = perfer.getString("LastVersion", "");
         return lastVersion;
     }
 
+
+
+    /**
+     * 保存城市名称
+     * @param context
+     * @param city
+     */
+    public static void saveCityName(Context context, String city) {
+        SharedPreferences perfer = context.getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        Editor editor = perfer.edit();
+        editor.putString("city", city);
+        editor.commit();
+    }
+
+    /**
+     * 获取城市名称
+     * @param context
+     * @return
+     */
+    public static String getCityName(Context context) {
+        SharedPreferences perfer = context.getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        String city = perfer.getString("city", "深圳");
+        return city;
+    }
 
 
 }

@@ -1,11 +1,23 @@
 package com.maiyu.hrssc.home.frament;
 
+import android.Manifest;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -13,9 +25,85 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationClientOption.AMapLocationProtocol;
 import com.amap.api.location.AMapLocationListener;
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.base.city.SelectCityActivity;
+import com.maiyu.hrssc.base.view.AdvertisementImageBanner;
+import com.maiyu.hrssc.util.SharedPreferencesUtil;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+
+import static android.app.Activity.RESULT_OK;
 
 public class HomeFragment extends Fragment {
+    static final int REQUEST_ACCESS_FINE_LOCATION_PERMISSION = 101;
+    static final int REQUEST_SELECT_CITY = 102;
+    @BindView(R.id.address_btn_text)
+    TextView mAddressBtnText;
+    @BindView(R.id.address_btn)
+    RelativeLayout mAddressBtn;
+    @BindView(R.id.home_title_name)
+    TextView mHomeTitleName;
+    @BindView(R.id.msg_iv)
+    ImageView mMsgIv;
+    @BindView(R.id.msg_btn)
+    RelativeLayout mMsgBtn;
+    @BindView(R.id.activity_main_ads)
+    AdvertisementImageBanner mActivityMainAds;
+    @BindView(R.id.iv_hetong)
+    ImageView mIvHetong;
+    @BindView(R.id.hetong_next_btn)
+    LinearLayout mHetongNextBtn;
+    @BindView(R.id.hetong_rl)
+    RelativeLayout mHetongRl;
+    @BindView(R.id.iv_shenqing)
+    ImageView mIvShenqing;
+    @BindView(R.id.xianghou)
+    ImageView mXianghou;
+    @BindView(R.id.next_btn)
+    LinearLayout mNextBtn;
+    @BindView(R.id.shenqing_rl)
+    RelativeLayout mShenqingRl;
+    @BindView(R.id.btn_zmbl)
+    TextView mBtnZmbl;
+    @BindView(R.id.btn_sb)
+    TextView mBtnSb;
+    @BindView(R.id.btn_gjj)
+    TextView mBtnGjj;
+    @BindView(R.id.btn_dajy)
+    TextView mBtnDajy;
+    @BindView(R.id.btn_hkbl2)
+    TextView mBtnHkbl2;
+    @BindView(R.id.btn_jzzbl)
+    TextView mBtnJzzbl;
+    @BindView(R.id.btn_xyg)
+    TextView mBtnXyg;
+    @BindView(R.id.btn_more)
+    TextView mBtnMore;
+    @BindView(R.id.more_next_btn)
+    LinearLayout mMoreNextBtn;
+    @BindView(R.id.line_1_content)
+    TextView mLine1Content;
+    @BindView(R.id.line_1_time)
+    TextView mLine1Time;
+    @BindView(R.id.line_1_rl)
+    RelativeLayout mLine1Rl;
+    @BindView(R.id.line_2_content)
+    TextView mLine2Content;
+    @BindView(R.id.line_2_time)
+    TextView mLine2Time;
+    @BindView(R.id.line_2_rl)
+    RelativeLayout mLine2Rl;
+    @BindView(R.id.line_3_content)
+    TextView mLine3Content;
+    @BindView(R.id.line_3_time)
+    TextView mLine3Time;
+    @BindView(R.id.line_3_rl)
+    RelativeLayout mLine3Rl;
+    Unbinder unbinder;
     private AMapLocationClient locationClient = null;
+    private RelativeLayout mCityRL;
 
     // TODO: Rename and change types of parameters
 
@@ -38,7 +126,17 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        unbinder = ButterKnife.bind(this, view);
+        initView(view);
+        return view;
+    }
+
+    private void initView(View view) {
+        //初始化定位
+        initLocation();
+        // 检查定位权限
+        checkLocationPermission();
     }
 
 
@@ -55,9 +153,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        //初始化定位
-        initLocation();
-        startLocation();
+
     }
 
     @Override
@@ -65,6 +161,58 @@ public class HomeFragment extends Fragment {
         super.onDestroy();
         destroyLocation();
     }
+
+
+
+
+    private void checkLocationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN // Permission was added in API Level 16
+                && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            requestPermission(Manifest.permission.ACCESS_FINE_LOCATION,
+                    getString(R.string.permission_rationale_location),
+                    REQUEST_ACCESS_FINE_LOCATION_PERMISSION);
+        } else {
+            startLocation();
+        }
+    }
+
+
+    private void requestPermission(final String permission, String rationale, final int requestCode) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission)) {
+            new AlertDialog.Builder(getContext())
+                    .setTitle(R.string.permission_dialog_title)
+                    .setMessage(rationale)
+                    .setPositiveButton(R.string.permission_dialog_ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //ActivityCompat.requestPermissions(getActivity(), new String[]{permission}, requestCode);
+                            HomeFragment.this.requestPermissions(new String[]{permission},
+                                    requestCode);
+
+                        }
+                    })
+                    .setNegativeButton(R.string.permission_dialog_cancel, null)
+                    .create().show();
+        } else {
+            HomeFragment.this.requestPermissions(new String[]{permission}, requestCode);
+        }
+    }
+
+
+      @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_ACCESS_FINE_LOCATION_PERMISSION) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                startLocation();
+            }
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+
 
     /**
      * 初始化定位
@@ -113,11 +261,16 @@ public class HomeFragment extends Fragment {
                 //解析定位结果
                 //String result = Utils.getLocationStr(loc);
                 //tvResult.setText(result);
-
+                String cityName = loc.getCity();
+                mAddressBtnText.setText(cityName);
+                SharedPreferencesUtil.saveCityName(getActivity(), cityName);
                 stopLocation();
-                Log.d("result","loc:"+loc.toString());
+                Log.d("result", "loc:" + loc.toString());
             } else {
                 stopLocation();
+                String cityName = SharedPreferencesUtil.getCityName(getActivity());
+                mAddressBtnText.setText(cityName);
+                Log.d("result", "定位失败，loc is null");
                 // tvResult.setText("定位失败，loc is null");
             }
         }
@@ -161,5 +314,67 @@ public class HomeFragment extends Fragment {
             locationClient.onDestroy();
             locationClient = null;
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    @OnClick({R.id.address_btn, R.id.msg_btn, R.id.hetong_rl, R.id.shenqing_rl, R.id.btn_zmbl ,R.id.btn_sb, R.id.btn_gjj, R.id.btn_dajy, R.id.btn_hkbl2, R.id.btn_jzzbl, R.id.btn_xyg, R.id.btn_more, R.id.more_next_btn, R.id.line_1_rl, R.id.line_2_rl, R.id.line_3_rl})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.address_btn:
+                startActivityForResult(new Intent(getActivity(), SelectCityActivity.class), REQUEST_SELECT_CITY);
+                break;
+            case R.id.msg_btn:
+                break;
+            case R.id.hetong_rl:
+                break;
+            case R.id.shenqing_rl:
+                break;
+            case R.id.btn_zmbl:
+                break;
+            case R.id.btn_sb:
+                break;
+            case R.id.btn_gjj:
+                break;
+            case R.id.btn_dajy:
+                break;
+            case R.id.btn_hkbl2:
+                break;
+            case R.id.btn_jzzbl:
+                break;
+            case R.id.btn_xyg:
+                break;
+            case R.id.btn_more:
+                break;
+            case R.id.more_next_btn:
+                break;
+            case R.id.line_1_rl:
+                break;
+            case R.id.line_2_rl:
+                break;
+            case R.id.line_3_rl:
+                break;
+        }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(RESULT_OK == resultCode) {
+            switch (requestCode) {
+                case REQUEST_SELECT_CITY:
+                    if(data != null) {
+                        String cityName = data.getStringExtra("cityName");
+                        mAddressBtnText.setText(cityName);
+                    }
+                    break;
+            }
+        }
+
     }
 }

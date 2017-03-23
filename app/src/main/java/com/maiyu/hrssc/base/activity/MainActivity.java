@@ -17,14 +17,10 @@ import com.maiyu.hrssc.my.frament.MyFragment;
 import com.maiyu.hrssc.service.frament.ServiceFragment;
 import com.maiyu.hrssc.util.HintUitl;
 import com.maiyu.hrssc.util.PackageInfoUtil;
-import com.maiyu.hrssc.util.StatusBarCompat;
 
 import java.util.ArrayList;
 public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
-    public static final int AssessmentRequestCode = 1123;
-    public static final int InfoRequestCode = 1124;
-    public static final String isUpdateAssessment = "isUpdateAssessment";
     private CustomViewPager mContentView;
     private RelativeLayout mTabHomeView;
     private RelativeLayout mTabJifenView;
@@ -82,7 +78,7 @@ public class MainActivity extends BaseActivity {
         mContentView.setOffscreenPageLimit(3);
         mContentView.setScanScroll(false);
         mTabViews.get(0).setSelected(true);
-        StatusBarCompat.translucentStatusBar(this, false);
+       // StatusBarCompat.translucentStatusBar(this, false); // 状态栏半透明
     }
 
     public class TabFragmentPagerAdapter extends FragmentPagerAdapter {

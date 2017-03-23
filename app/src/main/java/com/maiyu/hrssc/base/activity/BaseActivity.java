@@ -30,7 +30,7 @@ public abstract class BaseActivity extends FragmentActivity implements OnClickLi
         super.onCreate(savedInstanceState);
         mViewDataRefreshHandler = new Handler();
         createActivityImpl();
-        StatusBarCompat.setStatusBarColor(this, ContextCompat.getColor(this, R.color.project_color_basic_white_pure));
+        StatusBarCompat.setStatusBarColor(this, ContextCompat.getColor(this, R.color.project_color_general_hyperlink));
         initViews();
         initData();
         registerReceiver();
