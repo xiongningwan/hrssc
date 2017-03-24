@@ -15,11 +15,13 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 
 public class HrsscApplication extends Application {
+    private static HrsscApplication mInstance;
     private int mNetwork;
     private ActivityManager activityManager = null;
     @Override
     public void onCreate() {
         super.onCreate();
+        mInstance = this;
         // 初始化数据
         DataCenter.getInstance();
 
@@ -62,6 +64,9 @@ public class HrsscApplication extends Application {
     } 
     public void setActivityManager(ActivityManager activityManager) { 
         this.activityManager = activityManager; 
-    } 
+    }
+    public static HrsscApplication getInstance() {
+        return mInstance;
+    }
     
 }

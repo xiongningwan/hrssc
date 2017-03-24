@@ -140,4 +140,13 @@ public class HeadView extends RelativeLayout implements OnClickListener {
     public int getRightButtonId() {
         return rightButton.getId();
     }
+
+
+    /**
+     * 获取右部的文字控件
+     * @return
+     */
+    public TextView getRightButtonText() {
+        return rightButtonText;
+    }
 }

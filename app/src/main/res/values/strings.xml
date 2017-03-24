@@ -9,11 +9,10 @@
     <!-- 客户热线 -->
     <string name="phone_number">400&#8211;838&#8211;9911</string>
 
+
+    <!--首页模块-->
     <string name="daiwobanli_home_fragment">待我办理</string>
     <string name="shenqing_home_fragment">待我申请</string>
-
-
-
     <string name="btn_zhengmingbanli_home_fragment">证明办理</string>
     <string name="btn_shebao_home_fragment">社保</string>
     <string name="btn_gongjijing_home_fragment">公积金</string>
@@ -22,8 +21,13 @@
     <string name="btn_juzhuzbl_home_fragment">居住证办理</string>
     <string name="btn_xingyg_home_fragment">新员工</string>
     <string name="btn_more_home_fragment">更多</string>
-
     <string name="title_last_home_fragment">最新</string>
+    <string name="xzzm_bl_ZMBLActivity">薪资证明办理</string>
+    <string name="jhsyzm_bl_ZMBLActivity">计划生育证明办理</string>
+    <string name="xsbxzm_bl_ZMBLActivity">现实表现证明办理</string>
+    <string name="zzzm_bl_ZMBLActivity">在职证明办理</string>
+
+
     <!--权限-->
     <string name="permission_dialog_title">权限拒绝</string>
     <string name="permission_dialog_ok">好</string>
@@ -31,11 +35,6 @@
     <string name="permission_rationale_location">定位需要您提供定位的权限</string>
     <string name="permission_rationale_scan">浏览图片需要您提供浏览存储的权限</string>
     <string name="permission_rationale_write_storage">保存拍照图片需要您提供写存储权限</string>
-
-
-
-
-
 
 
     <!-- TODO: Remove or change this placeholder text -->

@@ -27,6 +27,7 @@ import com.amap.api.location.AMapLocationListener;
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.city.SelectCityActivity;
 import com.maiyu.hrssc.base.view.AdvertisementImageBanner;
+import com.maiyu.hrssc.home.activity.ZMBLActivity;
 import com.maiyu.hrssc.util.SharedPreferencesUtil;
 
 import butterknife.BindView;
@@ -335,6 +336,7 @@ public class HomeFragment extends Fragment {
             case R.id.shenqing_rl:
                 break;
             case R.id.btn_zmbl:
+                startActivity(new Intent(getActivity(), ZMBLActivity.class));
                 break;
             case R.id.btn_sb:
                 break;

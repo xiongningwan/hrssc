@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.maiyu.hrssc.home.activity.ZMBLActivity"
+    android:orientation="vertical">
+
+
+    <com.maiyu.hrssc.base.view.HeadView
+        android:id="@+id/head_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/project_head_view_hight">
+
+    </com.maiyu.hrssc.base.view.HeadView>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base200dp"/>
+
+
+
+    <include
+        layout="@layout/view_space_layout"/>
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="0,1"
+        >
+
+        <TableRow
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/xzzmbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@mipmap/icon_xzzm"
+                android:drawablePadding="@dimen/base5dp"
+                android:text="@string/xzzm_bl_ZMBLActivity"
+                android:gravity="center"/>
+            <TextView
+                android:id="@+id/jhsyzmbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/base5dp"
+                android:drawableTop="@mipmap/icon_jhsyzm"
+                android:text="@string/jhsyzm_bl_ZMBLActivity"
+                android:gravity="center"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/xsbxzmbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/base5dp"
+                android:drawableTop="@mipmap/icon_xsbxzm"
+                android:text="@string/xsbxzm_bl_ZMBLActivity"
+                android:gravity="center"/>
+            <TextView
+                android:id="@+id/zzzmbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/base5dp"
+                android:drawableTop="@mipmap/icon_zzzmbl"
+                android:text="@string/zzzm_bl_ZMBLActivity"
+                android:gravity="center"/>
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/title_left_button"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:paddingLeft="@dimen/activity_horizontal_margin" >
+        android:paddingLeft="@dimen/activity_horizontal_margin">
 
         <ImageView
             android:id="@+id/left_button_icon"
-            android:layout_width="@dimen/base19dp"
-            android:layout_height="@dimen/base19dp"
+            android:layout_width="@dimen/base16dp"
+            android:layout_height="@dimen/base16dp"
             android:layout_centerVertical="true"
 
-            android:src="@mipmap/icon_back" />
+            android:src="@mipmap/icon_back"/>
     </RelativeLayout>
 
     <TextView
@@ -30,23 +30,22 @@
         android:text="会员中心"
         android:textColor="@color/text_title_gray"
         android:textSize="@dimen/project_text_number_size_dp_19"
-         />
+        />
 
     <RelativeLayout
         android:id="@+id/title_right_button"
         android:layout_width="@dimen/base62dp"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:paddingLeft="10dp" >
+        >
 
         <TextView
             android:id="@+id/right_button_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-           android:text="草稿箱" />
+            android:layout_centerVertical="true"
+            android:text="右部文字"/>
     </RelativeLayout>
 
 </merge>
