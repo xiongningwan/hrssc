@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.maiyu.hrssc.home.activity.ChooseAddressActivity"
+    android:orientation="vertical"
+    android:background="@color/project_color_basic_white">
+
+
+
+    <com.maiyu.hrssc.base.view.HeadView
+        android:id="@+id/head_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/project_head_view_hight"/>
+
+
+
+
+    <include layout="@layout/view_space_layout"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/address_recycle_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/project_color_basic_white_pure">
+
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

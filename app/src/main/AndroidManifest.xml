@@ -24,6 +24,13 @@
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
 
+    <!-- 其中的com.easemob.helpdeskdemo需要换为自己的包名 -->
+    <permission
+        android:name="com.maiyu.hrssc.permission.MIPUSH_RECEIVE"
+        android:protectionLevel="signatureOrSystem"/>
+    <!-- 其中的com.easemob.helpdeskdemo需要换为自己的包名 -->
+    <uses-permission android:name="com.maiyu.hrssc.permission.MIPUSH_RECEIVE"/>
+
     <application
         android:name=".base.HrsscApplication"
         android:allowBackup="true"
@@ -61,10 +68,11 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".home.activity.XZZMBLActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait"
-                  android:windowSoftInputMode="stateHidden|adjustResize">
+        <activity
+            android:name=".home.activity.XZZMBLActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
 
         <!-- 图片选择配置activity start -->
@@ -77,6 +85,76 @@
             android:screenOrientation="portrait"
             android:theme="@style/NO_ACTIONBAR"/>
         <!-- 图片选择配置activity end -->
+
+        <activity
+            android:name=".home.activity.GetStyleActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".home.activity.ChooseAddressActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".home.activity.DeliveryAddressActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".home.activity.ChooseTempleActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".home.activity.WriteTempleActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".home.activity.SucceedActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".service.kefu.LoginActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".service.kefu.ChatActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".home.activity.JHSYBLActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".home.activity.XSBXZMBLActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".home.activity.ZZZMBLActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".home.activity.EtTextActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".home.activity.todo.TodoActivity"
+                  android:configChanges="orientation"
+                  android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".home.activity.todo.TodoDeitailActivity"
+                  android:configChanges="orientation"
+                  android:screenOrientation="portrait"
+                  android:windowSoftInputMode="stateHidden|adjustPan">
+        </activity>
     </application>
 
 </manifest>

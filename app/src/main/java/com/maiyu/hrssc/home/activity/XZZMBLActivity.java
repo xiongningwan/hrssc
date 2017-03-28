@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.activity.BaseActivity;
@@ -84,7 +83,8 @@ public class XZZMBLActivity extends BaseActivity {
         rightButtonText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(XZZMBLActivity.this, "提交", Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(XZZMBLActivity.this, "提交", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(XZZMBLActivity.this, SucceedActivity.class));
             }
         });
     }
@@ -103,14 +103,22 @@ public class XZZMBLActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.blsm_rl:
+
                 break;
             case R.id.get_style_rl:
+                startActivityForResult(new Intent(this, GetStyleActivity.class), 101);
+
                 break;
             case R.id.choose_mould_rl:
+                startActivityForResult(new Intent(this, ChooseTempleActivity.class), 102);
+
                 break;
             case R.id.choose_language_rl:
+                // startActivityForResult(new Intent(this, XZZMBLActivity.class), 102);
+
                 break;
             case R.id.simple_desc_rl:
+                startActivityForResult(new Intent(this, EtTextActivity.class), 104);
                 break;
         }
     }
@@ -119,13 +127,25 @@ public class XZZMBLActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PhotoPicker.REQUEST_SELECTED) {
-            if (resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == PhotoPicker.REQUEST_SELECTED) {
                 ArrayList<String> allSelectedPicture = data.getStringArrayListExtra(PhotoPicker.EXTRA_RESULT);
                 mPickImageView.updatePickImageView(allSelectedPicture);
+
+            } else if (requestCode == 101 && data != null) {
+                mGetStyleText.setText(data.getStringExtra("style"));
+
+            } else if (requestCode == 102) {
+
+
+            } else if (requestCode == 104) {
+                mSimpleDescText.setText(data!=null?data.getStringExtra(EtTextActivity.TEXT):"");
             }
-        }
+
     }
+
+
+}
 
     private void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M

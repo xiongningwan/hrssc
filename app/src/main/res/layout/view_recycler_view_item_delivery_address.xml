@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/dingwei"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:src="@mipmap/icon_dingwei"
+        android:layout_marginTop="@dimen/base6dp"/>
+
+    <TextView
+        android:id="@+id/address_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/dingwei"
+        android:text="中兴南山科研"
+        android:textColor="@color/text_title_gray"
+        android:layout_marginStart="@dimen/base5dp"
+        android:layout_marginTop="@dimen/base5dp"/>
+
+    <TextView
+        android:id="@+id/address_detial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/address_name"
+        android:layout_below="@id/address_name"
+        android:text="广东深圳南山区科研大楼"
+        android:layout_marginTop="@dimen/base5dp"
+        android:layout_marginBottom="@dimen/base5dp"
+        android:textSize="@dimen/project_text_size_dp_10"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_alignParentBottom="true"
+        android:background="@mipmap/line"/>
+
+</RelativeLayout>

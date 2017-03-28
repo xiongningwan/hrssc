@@ -37,6 +37,7 @@
         android:layout_width="@dimen/base62dp"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
         >
 
         <TextView

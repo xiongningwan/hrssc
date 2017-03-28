@@ -2,6 +2,8 @@ package com.maiyu.hrssc.base;
 
 import android.app.Application;
 
+import com.hyphenate.chat.ChatClient;
+import com.hyphenate.helpdesk.easeui.UIProvider;
 import com.maiyu.hrssc.base.bean.DataCenter;
 import com.maiyu.hrssc.util.ActivityManager;
 import com.maiyu.hrssc.util.ImageLoaderUtil;
@@ -48,7 +50,10 @@ public class HrsscApplication extends Application {
         CrashReport.initCrashReport(getApplicationContext(), "549197d60d", false);
 
 
-
+        //Kefu sdk 初始化简写方式：
+        ChatClient.getInstance().init(this, new ChatClient.Options().setAppkey("1122170327115434#kefuchannelapp28715").setTenantId("YXA6kKFdcBK-EeeAE99ULPSMug"));
+        // Kefu EaseUI的初始化
+        UIProvider.getInstance().init(this);
     }
 
     public int getmNetwork() {

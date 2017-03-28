@@ -28,6 +28,7 @@ import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.city.SelectCityActivity;
 import com.maiyu.hrssc.base.view.AdvertisementImageBanner;
 import com.maiyu.hrssc.home.activity.ZMBLActivity;
+import com.maiyu.hrssc.home.activity.todo.TodoActivity;
 import com.maiyu.hrssc.util.SharedPreferencesUtil;
 
 import butterknife.BindView;
@@ -332,6 +333,7 @@ public class HomeFragment extends Fragment {
             case R.id.msg_btn:
                 break;
             case R.id.hetong_rl:
+                startActivity(new Intent(getActivity(), TodoActivity.class));
                 break;
             case R.id.shenqing_rl:
                 break;

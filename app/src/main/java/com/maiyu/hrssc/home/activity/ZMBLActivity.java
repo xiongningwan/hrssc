@@ -56,15 +56,20 @@ public class ZMBLActivity extends BaseActivity {
             case R.id.head_view:
                 break;
             case R.id.imageView:
+
                 break;
             case R.id.xzzmbl:
                 startActivity(new Intent(this, XZZMBLActivity.class));
                 break;
             case R.id.jhsyzmbl:
+
+                startActivity(new Intent(this, JHSYBLActivity.class));
                 break;
             case R.id.xsbxzmbl:
+                startActivity(new Intent(this, XSBXZMBLActivity.class));
                 break;
             case R.id.zzzmbl:
+                startActivity(new Intent(this, ZZZMBLActivity.class));
                 break;
         }
     }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+    android:background="@color/project_color_basic_white_pure">
+
+
+    <TextView
+        android:id="@+id/address_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/base5dp"
+        android:text="收件地址"
+        android:textColor="@color/text_title_gray"/>
+
+    <ImageView
+        android:id="@+id/dingwei"
+        android:layout_width="@dimen/base54dp"
+        android:layout_height="@dimen/base54dp"
+        android:layout_marginTop="@dimen/base6dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/icon_upiantianjia"/>
+
+
+    <TextView
+        android:id="@+id/address_detial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/address_name"
+        android:layout_below="@id/address_name"
+        android:layout_marginBottom="@dimen/base5dp"
+        android:layout_marginTop="@dimen/base5dp"
+        android:text="点击选择/添加收件地址"
+        android:textColor="@color/text_title_sub_gray"
+        android:textSize="@dimen/project_text_size_dp_10"
+        android:layout_gravity="center_horizontal"/>
+
+
+</LinearLayout>

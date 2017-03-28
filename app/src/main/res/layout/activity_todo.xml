@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.maiyu.hrssc.home.activity.todo.TodoActivity"
+    android:orientation="vertical"
+    android:background="@color/project_color_basic_white">
+
+    <com.maiyu.hrssc.base.view.HeadView
+        android:id="@+id/head_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/project_head_view_hight"/>
+
+    <include layout="@layout/view_space_layout"/>
+
+
+    <android.support.design.widget.TabLayout
+        xmlns:tabLayout="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/project_color_basic_white_pure"
+        android:layout_gravity="center"
+        tabLayout:tabIndicatorColor="@color/project_color_general_hyperlink"
+        tabLayout:tabIndicatorHeight="2dp"
+        tabLayout:tabMode="fixed"
+        tabLayout:tabSelectedTextColor="@color/project_color_general_hyperlink"
+        tabLayout:tabTextColor="@color/text_title_gray"
+        tabLayout:tabTextAppearance="@style/TabLayoutTextStyle">
+
+    </android.support.design.widget.TabLayout>
+
+    <View
+        android:id="@+id/divide_line2"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="@dimen/base5dp"
+        android:background="@mipmap/line"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/project_color_basic_white_pure">
+
+    </android.support.v4.view.ViewPager>
+
+</LinearLayout>

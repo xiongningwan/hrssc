@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/project_color_basic_white_pure"
+    android:orientation="vertical"
+    tools:context="com.maiyu.hrssc.home.activity.todo.TodoDeitailActivity">
+
+    <com.maiyu.hrssc.base.view.HeadView
+        android:id="@+id/head_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/project_head_view_hight"/>
+
+    <include layout="@layout/view_space_layout"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base138dp">
+
+        <TextView
+            android:id="@+id/id_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/base10dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/base10dp"
+            android:text="NO.124"/>
+
+        <View
+            android:id="@+id/divier_line"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@id/id_number"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:background="@mipmap/line"/>
+
+        <ImageView
+            android:id="@+id/icon_xiangqing"
+            android:layout_width="@dimen/base74dp"
+            android:layout_height="@dimen/base74dp"
+            android:layout_below="@id/divier_line"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/base10dp"
+            android:src="@mipmap/icon_xiangqing"/>
+
+
+        <TextView
+            android:id="@+id/title_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/divier_line"
+            android:layout_marginStart="@dimen/base10dp"
+            android:layout_marginTop="@dimen/base10dp"
+            android:layout_toEndOf="@id/icon_xiangqing"
+            android:text="薪资证明办理"
+            android:textColor="@color/text_title_gray"
+            android:textSize="@dimen/project_text_size_dp_16"/>
+
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_name"
+            android:layout_marginStart="@dimen/base10dp"
+            android:layout_marginTop="@dimen/base30dp"
+            android:layout_toEndOf="@id/icon_xiangqing"
+            android:text="14:00"
+            android:textColor="@color/project_color_general_text_secondary"
+            android:textSize="@dimen/project_text_size_dp_12"/>
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/title_name"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/base30dp"
+            android:text="待签署"
+            android:textColor="@color/project_color_general_hyperlink"
+            android:textSize="@dimen/project_text_size_dp_16"
+            />
+    </RelativeLayout>
+
+    <include layout="@layout/view_space_layout"/>
+
+    <RelativeLayout
+        android:id="@+id/hetong_rl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base45dp">
+
+        <TextView
+            android:id="@+id/hetong_lable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:text="合同"/>
+
+        <ImageView
+            android:id="@+id/arrow_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:src="@mipmap/icon_xianghou"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/base5dp"
+            android:layout_toStartOf="@id/arrow_iv"
+            android:text="劳动合同"
+            android:textColor="@color/text_title_gray"
+            android:textSize="@dimen/project_text_size_dp_16"/>
+    </RelativeLayout>
+
+
+    <include layout="@layout/view_space_layout"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/base10dp"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/base10dp"
+        android:text="当面签署地址"/>
+
+    <View
+        android:id="@+id/divier_line_2"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:background="@mipmap/line"/>
+
+
+    <RelativeLayout
+        android:id="@+id/qianshu_address"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base45dp">
+
+        <ImageView
+            android:id="@+id/icon_dizhi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:src="@mipmap/icon_dingwei"/>
+
+        <TextView
+            android:id="@+id/address_detail_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/base5dp"
+            android:layout_toEndOf="@id/icon_dizhi"
+            android:text="广东省深圳市南山区科技南路55号"
+            android:textColor="@color/text_title_gray"/>
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:src="@mipmap/icon_xianghou"/>
+    </RelativeLayout>
+
+    <include layout="@layout/view_space_layout"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/base10dp"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/base10dp"
+        android:text="备注"/>
+
+    <View
+        android:id="@+id/divier_line_3"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:background="@mipmap/line"/>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@mipmap/line"/>
+
+
+    <EditText
+        android:id="@+id/beizhu_et"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base80dp"
+        android:gravity="start"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:textSize="@dimen/project_text_size_dp_12"
+        android:background="@color/transparent"
+        android:paddingTop="@dimen/base5dp"
+        android:hint="请填写备注"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@mipmap/line"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/project_color_basic_white">
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base47dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/project_color_basic_white_pure">
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentTop="true"
+                android:background="@mipmap/line"/>
+            <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:background="@mipmap/line"/>
+
+            <LinearLayout
+                android:id="@+id/qianming_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/dangmian_qianhsu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="当面签署"
+                    android:textColor="@color/project_color_general_hyperlink"
+                    android:textSize="@dimen/project_text_size_dp_16"/>
+
+                <TextView
+                    android:id="@+id/dianzi_qianhsu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="电子签署"
+                    android:textColor="@color/project_color_general_hyperlink"
+                    android:textSize="@dimen/project_text_size_dp_16"/>
+
+                <TextView
+                    android:id="@+id/youji_qianhsu"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="邮寄签署"
+                    android:textColor="@color/project_color_general_hyperlink"
+                    android:textSize="@dimen/project_text_size_dp_16"/>
+
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>

@@ -36,6 +36,16 @@
     <string name="permission_rationale_scan">浏览图片需要您提供浏览存储的权限</string>
     <string name="permission_rationale_write_storage">保存拍照图片需要您提供写存储权限</string>
 
+    <string name="system_is_regist">系统正在自动为您注册用户...</string>
+    <string name="is_contact_customer">正在联系客服，请稍等...</string>
+    <string name="is_contact_customer_failure_seconed">联系客服失败:</string>
+    <string name="leave_title">留言</string>
+    <string name="leave_name">姓名</string>
+    <string name="leave_phone">电话</string>
+    <string name="leave_email">邮箱</string>
+    <string name="leave_content">内容</string>
+    <string name="leave_sending">正在发送中...</string>
+    <string name="register_user_fail">register user failed!</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
