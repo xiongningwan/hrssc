@@ -28,6 +28,8 @@ import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.city.SelectCityActivity;
 import com.maiyu.hrssc.base.view.AdvertisementImageBanner;
 import com.maiyu.hrssc.home.activity.ZMBLActivity;
+import com.maiyu.hrssc.home.activity.applying.ApplyingActivity;
+import com.maiyu.hrssc.home.activity.information.InformationActivity;
 import com.maiyu.hrssc.home.activity.todo.TodoActivity;
 import com.maiyu.hrssc.util.SharedPreferencesUtil;
 
@@ -331,11 +333,14 @@ public class HomeFragment extends Fragment {
                 startActivityForResult(new Intent(getActivity(), SelectCityActivity.class), REQUEST_SELECT_CITY);
                 break;
             case R.id.msg_btn:
+                startActivity(new Intent(getActivity(), InformationActivity.class));
+
                 break;
             case R.id.hetong_rl:
                 startActivity(new Intent(getActivity(), TodoActivity.class));
                 break;
             case R.id.shenqing_rl:
+                startActivity(new Intent(getActivity(), ApplyingActivity.class));
                 break;
             case R.id.btn_zmbl:
                 startActivity(new Intent(getActivity(), ZMBLActivity.class));

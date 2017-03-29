@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/project_color_basic_white"
+    android:orientation="vertical"
+    tools:context="com.maiyu.hrssc.home.activity.information.InformationDetialActivity">
+
+
+    <com.maiyu.hrssc.base.view.HeadView
+        android:id="@+id/head_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/project_head_view_hight"
+        android:background="@color/project_color_basic_white_pure"/>
+
+    <include layout="@layout/view_space_layout"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <RelativeLayout
+            android:id="@+id/have_content_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/project_color_basic_white_pure"
+            android:visibility="gone">
+
+
+            <TextView
+                android:id="@+id/title_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/base10dp"
+                android:text="关于证明办理最新规则"/>
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title_name"
+                android:layout_marginBottom="@dimen/base10dp"
+                android:layout_marginTop="@dimen/base5dp"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:text="2017-2-14 14:22"
+                android:textSize="@dimen/project_text_size_dp_12"/>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:background="@mipmap/line"/>
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/have_no_content_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/icon_wenzhang"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/base160dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/base15dp"
+                android:gravity="center"
+                android:text="该文章已被管理员删除"
+                android:textColor="@color/project_color_general_text_secondary"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>

@@ -10,9 +10,9 @@
     <RelativeLayout
         android:id="@+id/title_rl"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/base49dp"
-        android:layout_marginTop="@dimen/base20dp"
-        android:layout_marginBottom="@dimen/base20dp">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/base10dp"
+        android:layout_marginTop="@dimen/base20dp">
 
         <TextView
             android:id="@+id/title"
@@ -22,7 +22,24 @@
             android:gravity="center"
             android:text="当前签署"
             android:textColor="@color/text_title_gray"
-            android:textSize="@dimen/project_text_size_dp_19" />
+            android:textSize="@dimen/project_text_size_dp_19"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/content_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/base2dp"
+        android:layout_marginBottom="@dimen/base15dp">
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text=""/>
     </RelativeLayout>
 
 

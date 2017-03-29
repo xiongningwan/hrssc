@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/project_color_basic_white_pure"
+    tools:context="com.maiyu.hrssc.home.activity.todo.SignActivity"
+    android:orientation="vertical">
+
+
+    <com.maiyu.hrssc.base.view.HeadView
+        android:id="@+id/head_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/project_head_view_hight"/>
+
+    <include
+        layout="@layout/view_space_layout"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/sign_iv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base100dp"
+            android:src="@mipmap/user_profile_image_default"
+            android:visibility="visible"/>
+
+
+        <LinearLayout
+            android:id="@+id/no_sign_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+           android:layout_marginTop="@dimen/base160dp"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/icon_qianming"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/base15dp"
+                android:gravity="center"
+                android:paddingEnd="@dimen/base12dp"
+                android:text="您还没有签名"
+                android:textColor="@color/project_color_general_text_secondary"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/base5dp"
+                android:gravity="center"
+                android:text="请到人事部门录入电子签名"
+                android:textColor="@color/project_color_general_text_secondary"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

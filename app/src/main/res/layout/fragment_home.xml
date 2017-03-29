@@ -128,12 +128,13 @@
                 android:gravity="center_vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/holo_red_light"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/view_point_red"
                     android:layout_marginEnd="@dimen/base5dp"
                     android:textSize="@dimen/project_text_size_dp_12"
-
+                    android:gravity="center"
+                    android:textColor="@color/project_color_basic_white_pure"
                     android:text="12" />
 
                 <ImageView
@@ -184,13 +185,14 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/base20dp"
+                    android:layout_height="@dimen/base20dp"
                     android:layout_marginEnd="@dimen/base5dp"
-                    android:background="@android:color/holo_red_light"
+                    android:background="@drawable/view_point_red"
                     android:gravity="center"
                     android:text="12"
-                    android:textSize="@dimen/project_text_size_dp_12"/>
+                    android:textSize="@dimen/project_text_size_dp_12"
+                    android:textColor="@color/project_color_basic_white_pure"/>
 
                 <ImageView
                     android:id="@+id/xianghou"

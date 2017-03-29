@@ -15,6 +15,7 @@ import com.maiyu.hrssc.R;
 public class ConfirmDialog {
     private CreateBaseDialog mTipDialog;
     private TextView mTitle;
+    private TextView mContent;
     private TextView mCancleBtn;
     private TextView mConfirmBtn;
 
@@ -30,6 +31,7 @@ public class ConfirmDialog {
         mTipDialog = new CreateBaseDialog(context, R.style.TipDialog);
         mTipDialog.setContentView(R.layout.view_ordinary);
         mTitle = (TextView) mTipDialog.findViewById(R.id.title);
+        mContent = (TextView) mTipDialog.findViewById(R.id.content);
         mCancleBtn = (TextView) mTipDialog.findViewById(R.id.cancle_btn);
         mConfirmBtn = (TextView) mTipDialog.findViewById(R.id.confirm_btn);
 
@@ -64,6 +66,14 @@ public class ConfirmDialog {
 
     public void setTitleText(String title) {
         mTitle.setText(title);
+    }
+
+    public void setContentText(String content) {
+        mContent.setText(content);
+    }
+
+    public void show() {
+        mTipDialog.show();
     }
 
 

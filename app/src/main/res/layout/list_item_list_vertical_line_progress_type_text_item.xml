@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/project_color_basic_white_pure">
+
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/base26dp">
+
+        <View
+            android:id="@+id/point"
+            android:layout_width="@dimen/base10dp"
+            android:layout_height="@dimen/base10dp"
+            android:layout_marginTop="@dimen/base10dp"
+            android:layout_centerHorizontal="true"
+            android:background="@mipmap/icon_dian"/>
+
+
+
+
+        <View
+            android:layout_width="@dimen/base8dp"
+            android:layout_height="match_parent"
+            android:layout_below="@id/point"
+            android:layout_centerHorizontal="true"
+            android:background="@color/project_color_general_hyperlink"/>
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/base40dp"
+        android:layout_marginTop="@dimen/base5dp"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:background="@drawable/corner_view_unclick_dialog">
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明"
+        android:textColor="@color/text_title_gray"/>
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/content"
+        android:text="2016-12-12 18:56"
+        android:layout_marginTop="@dimen/base5dp"
+        android:textSize="@dimen/project_text_size_dp_12"/>
+
+        </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/project_color_basic_white_pure">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/base8dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="劳动合同"
+            android:textColor="@color/text_title_gray"/>
+
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/base8dp"
+            android:gravity="center"
+            android:text="2017-01-22 14:00"
+            android:textColor="@color/project_color_general_text_secondary"
+            android:textSize="@dimen/project_text_size_dp_12"/>
+
+
+        <RelativeLayout
+            android:id="@+id/btn_status_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:layout_marginBottom="@dimen/base8dp"
+            android:layout_marginTop="@dimen/base8dp">
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:text="待签署"
+                android:textColor="@color/project_color_general_hyperlink"/>
+
+
+            <Button
+                android:id="@+id/btn_item"
+                android:layout_width="@dimen/base73dp"
+                android:layout_height="@dimen/base33dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:background="@drawable/corner_view_selector_btn_red"
+                android:text="确认领取"
+                android:textColor="@color/project_color_basic_white_pure"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/reason"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base45dp"
+            android:layout_below="@id/btn_status_rl"
+            android:layout_marginBottom="@dimen/base10dp"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:ellipsize="end"
+            android:lines="3"
+            android:text="驳回理由文本..................驳回理由文本.........驳回理由文本........."
+            android:textSize="@dimen/project_text_size_dp_12"
+            android:visibility="gone"/>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@mipmap/line"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/del_bg_btn_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/translucent_background"
+        android:visibility="gone">
+
+
+        <Button
+            android:id="@+id/btn_del"
+            android:layout_width="@dimen/base61dp"
+            android:layout_height="@dimen/base61dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/base28dp"
+            android:layout_toStartOf="@+id/btn_recommit"
+            android:text="删除"
+            android:textColor="@color/project_color_general_hyperlink"
+            android:background="@drawable/view_point_white"/>
+
+        <Button
+            android:id="@+id/btn_recommit"
+            android:layout_width="@dimen/base61dp"
+            android:layout_height="@dimen/base61dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:text="重新提交"
+            android:textColor="@color/project_color_basic_white_pure"
+            android:background="@drawable/view_point_blue"/>
+
+    </RelativeLayout>
+</FrameLayout>

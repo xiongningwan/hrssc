@@ -1,4 +1,4 @@
-package com.maiyu.hrssc.home.activity.todo;
+package com.maiyu.hrssc.home.activity.applying;
 
 import android.content.Context;
 import android.support.design.widget.TabLayout;
@@ -16,9 +16,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 待办
+ * 申请
  */
-public class TodoActivity extends BaseActivity {
+public class ApplyingActivity extends BaseActivity {
 
     @BindView(R.id.head_view)
     HeadView mHeadView;
@@ -28,27 +28,32 @@ public class TodoActivity extends BaseActivity {
     View mDivideLine2;
     @BindView(R.id.viewPager)
     ViewPager mViewPager;
-    private TodoFragmentPageAdapter mTodoFragmentPageAdapter;
-    private TodoFragment[] fragments = new TodoFragment[3];
+    private ApplyingFragmentPageAdapter mApplyingFragmentPageAdapter;
+
+    private  final int COUNT = 6;
+    private Fragment[] fragments = new Fragment[COUNT];
 
     @Override
     public void createActivityImpl() {
-        setContentView(R.layout.activity_todo);
+        setContentView(R.layout.activity_applying);
         ButterKnife.bind(this);
     }
 
     @Override
     public void initViews() {
-        fragments[0] = TodoFragment.newInstance(1);
-        fragments[1] = TodoFragment.newInstance(2);
-        fragments[2] = TodoFragment.newInstance(3);
+        fragments[0] = DQSFragment.newInstance(1);
+        fragments[1] = DBLFragment.newInstance(2);
+        fragments[2] = DLQFragment.newInstance(3);
+        fragments[3] = DPJFragment.newInstance(4);
+        fragments[4] = YWCFragment.newInstance(5);
+        fragments[5] = BHFragment.newInstance(6);
     }
 
     @Override
     public void initData() {
-        mHeadView.setTitle("合同签署", true, false);
-        mTodoFragmentPageAdapter = new TodoFragmentPageAdapter(getSupportFragmentManager(), this);
-        mViewPager.setAdapter(mTodoFragmentPageAdapter);
+        mHeadView.setTitle("我的申请", true, false);
+        mApplyingFragmentPageAdapter = new ApplyingFragmentPageAdapter(getSupportFragmentManager(), this);
+        mViewPager.setAdapter(mApplyingFragmentPageAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
         mViewPager.setCurrentItem(0, true);
     }
@@ -58,12 +63,12 @@ public class TodoActivity extends BaseActivity {
 
     }
 
-    class TodoFragmentPageAdapter extends FragmentPagerAdapter {
-        final int PAGE_COUNT = 3;
-        private String tabTitles[] = new String[]{"待签署", "待盖章", "已完成"};
+    class ApplyingFragmentPageAdapter extends FragmentPagerAdapter {
+        final int PAGE_COUNT = COUNT;
+        private String tabTitles[] = new String[]{"待签署", "待办理", "待领取", "待评价", "已完成", "已驳回"};
         private Context context;
 
-        public TodoFragmentPageAdapter(FragmentManager fm, Context context) {
+        public ApplyingFragmentPageAdapter(FragmentManager fm, Context context) {
             super(fm);
             this.context = context;
         }

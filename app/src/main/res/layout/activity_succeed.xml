@@ -13,7 +13,9 @@
 
    <RelativeLayout
        android:layout_width="match_parent"
-       android:layout_height="@dimen/project_head_view_hight">
+       android:layout_height="@dimen/project_head_view_hight"
+       android:background="@color/project_color_basic_white_pure">
+
        <RelativeLayout
            android:id="@+id/Left_button_rl"
            android:layout_width="wrap_content"
@@ -55,7 +57,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="提交审核成功"
+        android:text="提交成功"
         android:textColor="@color/text_title_gray"
         android:layout_marginTop="@dimen/base20dp"
         android:layout_gravity="center_horizontal"/>.

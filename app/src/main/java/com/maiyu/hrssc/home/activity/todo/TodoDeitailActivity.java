@@ -1,5 +1,6 @@
 package com.maiyu.hrssc.home.activity.todo;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -95,15 +96,24 @@ public class TodoDeitailActivity extends BaseActivity {
                         HintUitl.toastShort(TodoDeitailActivity.this, "确认");
                     }
                 });
-                dialog.getDialog().setTitle("确认当面签署？");
-                dialog.getDialog().show();
+                dialog.setTitleText("确认当面签署？");
+                dialog.setContentText("");
+                dialog.show();
 
                 break;
             case R.id.dianzi_qianhsu:
-
+                    startActivity(new Intent(this, SignActivity.class));
                 break;
             case R.id.youji_qianhsu:
-
+                ConfirmDialog dialog1 = new ConfirmDialog(this, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        HintUitl.toastShort(TodoDeitailActivity.this, "确认");
+                    }
+                });
+                dialog1.setTitleText("确认邮寄签署？");
+                dialog1.setContentText("请在web端下载文档打印后邮寄回公司？");
+                dialog1.show();
                 break;
         }
     }
