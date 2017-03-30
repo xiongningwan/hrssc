@@ -13,7 +13,11 @@ import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.activity.BaseActivity;
 import com.maiyu.hrssc.base.view.HeadView;
 import com.maiyu.hrssc.home.activity.applying.adapter.ProgressAdapter;
+import com.maiyu.hrssc.home.activity.applying.bean.TypeText;
 import com.maiyu.hrssc.util.HintUitl;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -79,6 +83,7 @@ public class ApplyingDetialActivity extends BaseActivity {
     RelativeLayout mQianshuAddress;
     @BindView(R.id.vertivcal_content)
     RecyclerView mVertivcalContent;
+    private ProgressAdapter mAdapter;
 
     @Override
     public void createActivityImpl() {
@@ -104,7 +109,7 @@ public class ApplyingDetialActivity extends BaseActivity {
 
 
         // 设置列表
-        ProgressAdapter mAdapter = new ProgressAdapter(this);
+        mAdapter = new ProgressAdapter(this);
         mVertivcalContent.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mVertivcalContent.setItemAnimator(new DefaultItemAnimator());
         mVertivcalContent.setAdapter(mAdapter);
@@ -112,7 +117,15 @@ public class ApplyingDetialActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        List<TypeText> list = new ArrayList<>();
+        list.add(new TypeText("办理说明文字办理说明文字办理说明文字办理说明文字办理说明字办理说明文字办理说明字办理说明文字办理说明字办理说明文字办理说明文字办理说明文字","2017-02-14 14：22"));
+        list.add(new TypeText("字办理说明文字办理说明字办理说明文字办理说明字字办理说明文字办理说明办理说明文字办理说明字办理说明文字办理说明办理说明","2017-02-14 14：22"));
+        list.add(new TypeText("字办理说明文字办理说明字办理说明文字办理说字办理说明文字办理说明明","2017-02-14 14：22"));
+        list.add(new TypeText("字办理说明文字办理说明","2017-02-14 14：22"));
+        list.add(new TypeText("字办理说明文字办理说明字办理说明文字办理说明","2017-02-14 14：22"));
 
+
+        mAdapter.setData(list);
     }
 
     @Override

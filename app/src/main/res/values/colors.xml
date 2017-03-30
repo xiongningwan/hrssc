@@ -20,4 +20,5 @@
     <color name="project_color_general_hyperlink">#35a4f2</color>
     <!-- 用于辅助、次要的文字信息 -->
     <color name="project_color_general_text_secondary">#999999</color>
+    <color name="project_color_general_text_secondary2">#dddddd</color>
 </resources>

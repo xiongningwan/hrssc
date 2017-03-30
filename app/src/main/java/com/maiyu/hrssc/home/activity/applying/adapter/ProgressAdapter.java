@@ -4,9 +4,11 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
-import com.maiyu.hrssc.home.activity.applying.bean.Apply;
+import com.maiyu.hrssc.home.activity.applying.bean.TypeText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +18,9 @@ import java.util.List;
  * 申请进度
  */
 
-public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.TodoPageViewHolder> {
+public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.ProgressViewHolder> {
 
-    private List<Apply> mList = new ArrayList();
+    private List<TypeText> mList = new ArrayList();
     private final Context mContext;
 
     public ProgressAdapter(Context context) {
@@ -39,35 +41,73 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.TodoPa
 
 
     @Override
-    public TodoPageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ProgressViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = View.inflate(mContext, R.layout.list_item_list_vertical_line_progress_type_text_item, null);
-        return new TodoPageViewHolder(view);
+        return new ProgressViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(TodoPageViewHolder holder, int position) {
+    public void onBindViewHolder(ProgressViewHolder holder, int position) {
         holder.onBindView();
     }
 
     @Override
     public int getItemCount() {
-       // return mList.size();
-        return 5;
+         return mList.size();
     }
 
 
-    class TodoPageViewHolder extends RecyclerView.ViewHolder {
+    class ProgressViewHolder extends RecyclerView.ViewHolder {
 
-        public TodoPageViewHolder(View itemView) {
+        private final View point;
+        private final View line;
+        private final View line3;
+        private final RelativeLayout ll;
+        private final RelativeLayout ll_line2;
+        private final RelativeLayout rl;
+        private final TextView content;
+        private final TextView time;
+
+        public ProgressViewHolder(View itemView) {
             super(itemView);
+            ll = (RelativeLayout)itemView.findViewById(R.id.ll);
+            ll_line2 = (RelativeLayout)itemView.findViewById(R.id.ll_line2);
+            rl = (RelativeLayout)itemView.findViewById(R.id.rl);
+            point = (View)itemView.findViewById(R.id.point);
+            line = (View)itemView.findViewById(R.id.line);
+            line3 = (View)itemView.findViewById(R.id.line3);
+            content = (TextView)itemView.findViewById(R.id.content);
+            time = (TextView)itemView.findViewById(R.id.time);
         }
 
 
         void onBindView() {
-           /* final Apply apply = (Apply) mList.get(getAdapterPosition());
-            if (apply == null) {
+            final TypeText typeText = (TypeText) mList.get(getAdapterPosition());
+            if (typeText == null) {
                 return;
-            }*/
+            }
+
+            line3.setVisibility(View.VISIBLE);
+            line.setVisibility(View.VISIBLE);
+            ll.setVisibility(View.VISIBLE);
+            ll_line2.setVisibility(View.VISIBLE);
+
+
+            if(0 == getAdapterPosition()) {
+                // 取消顶部线条
+                line3.setVisibility(View.GONE);
+                point.setBackgroundResource(R.mipmap.icon_dian);
+            } else if(mList.size()-1 == getAdapterPosition()) {
+                // 取消中部和下部线条
+                line.setVisibility(View.GONE);
+                ll_line2.setVisibility(View.GONE);
+            }
+
+
+
+
+            content.setText(typeText.getContent());
+            time.setText(typeText.getTime());
         }
     }
 

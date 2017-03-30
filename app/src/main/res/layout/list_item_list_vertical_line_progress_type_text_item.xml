@@ -6,60 +6,145 @@
     android:background="@color/project_color_basic_white_pure">
 
 
-
     <RelativeLayout
+        android:id="@+id/ll"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginStart="@dimen/base26dp">
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/rl"
+        android:layout_alignTop="@+id/rl"
+        android:layout_marginStart="26dp"
+        android:orientation="vertical">
+
 
         <View
             android:id="@+id/point"
             android:layout_width="@dimen/base10dp"
             android:layout_height="@dimen/base10dp"
-            android:layout_marginTop="@dimen/base10dp"
             android:layout_centerHorizontal="true"
-            android:background="@mipmap/icon_dian"/>
-
-
-
+            android:background="@drawable/view_point_gray"/>
 
         <View
-            android:layout_width="@dimen/base8dp"
+            android:id="@+id/line"
+            android:layout_width="@dimen/base2dp"
             android:layout_height="match_parent"
-            android:layout_below="@id/point"
             android:layout_centerHorizontal="true"
-            android:background="@color/project_color_general_hyperlink"/>
+            android:layout_marginTop="@dimen/base10dp"
+            android:background="@color/project_color_general_text_secondary2"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ll_line2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll"
+        android:layout_marginStart="26dp"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/point2"
+            android:layout_width="@dimen/base10dp"
+            android:layout_height="@dimen/base10dp"
+            android:layout_centerHorizontal="true"/>
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="@dimen/base2dp"
+            android:layout_height="@dimen/base10dp"
+            android:layout_centerHorizontal="true"
+            android:background="@color/project_color_general_text_secondary2"/>
 
     </RelativeLayout>
 
 
 
+    <View
+        android:id="@+id/line3"
+        android:layout_width="@dimen/base2dp"
+        android:layout_height="@dimen/base5dp"
+        android:layout_above="@id/ll"
+        android:layout_marginStart="30dp"
+        android:background="@color/project_color_general_text_secondary2"/>
+
+
+   <!-- <RelativeLayout
+        android:id="@+id/ll_line3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ll"
+        android:layout_marginStart="26dp"
+        android:orientation="vertical"
+        android:background="@color/project_color_basic_white_pure">
+
+        <View
+            android:id="@+id/point3"
+            android:layout_width="@dimen/base10dp"
+            android:layout_height="@dimen/base10dp"
+            android:layout_centerHorizontal="true"/>
+
+        <View
+            android:id="@+id/line3"
+            android:layout_width="@dimen/base2dp"
+            android:layout_height="@dimen/base5dp"
+            android:layout_centerHorizontal="true"
+            android:background="@color/project_color_general_hyperlink"/>
+
+    </RelativeLayout>-->
+
+
+
     <RelativeLayout
+        android:id="@+id/rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:layout_marginStart="@dimen/base40dp"
         android:layout_marginTop="@dimen/base5dp"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:background="@drawable/corner_view_unclick_dialog">
 
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明"
-        android:textColor="@color/text_title_gray"/>
 
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/content"
-        android:text="2016-12-12 18:56"
-        android:layout_marginTop="@dimen/base5dp"
-        android:textSize="@dimen/project_text_size_dp_12"/>
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明"
+            android:textColor="@color/text_title_gray"/>
 
-        </RelativeLayout>
+        <!--图片-->
+
+        <GridView
+            android:id="@+id/grid_view"
+            android:layout_width="fill_parent"
+            android:layout_height="200dp"
+            android:horizontalSpacing="2dp"
+            android:verticalSpacing="5dp"
+            android:scrollbars="none"
+            android:listSelector="#00000000"
+            android:numColumns="3" >
+        </GridView>
+
+        <!--文件-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/file_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base1000dp"
+            android:layout_marginTop="@dimen/base20dp"
+            android:layout_marginBottom="@dimen/base20dp">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/content"
+            android:layout_marginTop="@dimen/base5dp"
+            android:text="2016-12-12 18:56"
+            android:textSize="@dimen/project_text_size_dp_12"/>
+
+    </RelativeLayout>
 
 
 </RelativeLayout>
