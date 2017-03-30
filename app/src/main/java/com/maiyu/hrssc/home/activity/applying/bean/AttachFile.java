@@ -5,7 +5,6 @@ package com.maiyu.hrssc.home.activity.applying.bean;
  */
 
 public class AttachFile {
-    private String type;
     private String url;
     private String desc;
 
@@ -13,19 +12,11 @@ public class AttachFile {
     public AttachFile() {
     }
 
-    public AttachFile(String type, String url, String desc) {
-        this.type = type;
+    public AttachFile(String url, String desc) {
         this.url = url;
         this.desc = desc;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public String getUrl() {
         return url;

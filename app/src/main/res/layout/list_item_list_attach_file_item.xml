@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+    android:layout_marginStart="@dimen/base5dp"
+    android:layout_marginTop="@dimen/base5dp"
+    android:background="@drawable/corner_view_unclick_dialog">
+
+    <ImageView
+        android:id="@+id/icon_fujain_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/base5dp"
+        android:src="@mipmap/icon_fujian"/>
+
+    <TextView
+        android:id="@+id/attach_file_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/icon_fujain_iv"
+        android:layout_marginStart="@dimen/base5dp"
+        android:text="薪资证明说明.pdf"/>
+</RelativeLayout>

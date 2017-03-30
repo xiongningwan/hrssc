@@ -67,29 +67,6 @@
         android:background="@color/project_color_general_text_secondary2"/>
 
 
-   <!-- <RelativeLayout
-        android:id="@+id/ll_line3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/ll"
-        android:layout_marginStart="26dp"
-        android:orientation="vertical"
-        android:background="@color/project_color_basic_white_pure">
-
-        <View
-            android:id="@+id/point3"
-            android:layout_width="@dimen/base10dp"
-            android:layout_height="@dimen/base10dp"
-            android:layout_centerHorizontal="true"/>
-
-        <View
-            android:id="@+id/line3"
-            android:layout_width="@dimen/base2dp"
-            android:layout_height="@dimen/base5dp"
-            android:layout_centerHorizontal="true"
-            android:background="@color/project_color_general_hyperlink"/>
-
-    </RelativeLayout>-->
 
 
 
@@ -110,7 +87,7 @@
             android:text="办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明"
             android:textColor="@color/text_title_gray"/>
 
-        <!--图片-->
+       <!-- &lt;!&ndash;图片&ndash;&gt;
 
         <GridView
             android:id="@+id/grid_view"
@@ -124,7 +101,7 @@
             android:layout_below="@id/content">
         </GridView>
 
-        <!--文件-->
+        &lt;!&ndash;文件&ndash;&gt;
         <android.support.v7.widget.RecyclerView
             android:id="@+id/file_recyclerView"
             android:layout_width="match_parent"
@@ -132,14 +109,14 @@
             android:layout_below="@id/grid_view">
 
         </android.support.v7.widget.RecyclerView>
-
+-->
 
 
         <TextView
             android:id="@+id/time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/file_recyclerView"
+            android:layout_below="@id/content"
             android:layout_marginTop="@dimen/base5dp"
             android:text="2016-12-12 18:56"
             android:textSize="@dimen/project_text_size_dp_12"/>

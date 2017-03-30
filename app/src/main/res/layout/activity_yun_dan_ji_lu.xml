@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/project_color_basic_white"
+    tools:context="com.maiyu.hrssc.home.activity.todo.TodoDeitailActivity"
+    android:orientation="vertical">
+
+
+    <com.maiyu.hrssc.base.view.HeadView
+        android:id="@+id/head_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/project_head_view_hight"
+        android:background="@color/project_color_basic_white_pure"/>
+
+    <include layout="@layout/view_space_layout"/>
+
+
+
+    <RelativeLayout
+        android:id="@+id/no_rl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base34dp"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:background="@color/project_color_basic_white_pure">
+
+        <TextView
+            android:id="@+id/no_lable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="运单号:"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/no_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/no_lable"
+            android:layout_marginStart="@dimen/base8dp"
+            android:text="3457987631"
+            android:layout_centerVertical="true"/>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:background="@mipmap/line"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/direction_rl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base103dp"
+        android:background="@color/project_color_basic_white_pure">
+
+        <LinearLayout
+            android:id="@+id/from_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:layout_toStartOf="@+id/jiantou_iv">
+
+            <TextView
+                android:id="@+id/direction_zh__city_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="深圳"
+                android:textColor="@color/text_title_gray"
+                android:textSize="@dimen/project_text_size_dp_16"/>
+
+            <TextView
+                android:id="@+id/direction_en_city_from"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sylvia"
+                android:textColor="@color/text_title_gray"
+                android:textSize="@dimen/project_text_size_dp_16"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/jiantou_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/icon_jiantou"/>
+
+        <LinearLayout
+            android:id="@+id/to_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/jiantou_iv">
+
+            <TextView
+                android:id="@+id/direction_zh__city_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="成都"
+                android:textColor="@color/text_title_gray"
+                android:textSize="@dimen/project_text_size_dp_16"/>
+
+            <TextView
+                android:id="@+id/direction_en_city_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alen"
+                android:textColor="@color/text_title_gray"
+                android:textSize="@dimen/project_text_size_dp_16"/>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <include layout="@layout/view_space_layout"/>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/vertivcal_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

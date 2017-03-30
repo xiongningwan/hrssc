@@ -147,7 +147,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:text="云淡记录"/>
+            android:text="运单记录"/>
 
         <ImageView
             android:id="@+id/yundanjilv_arrow_iv"
@@ -308,17 +308,20 @@
 
     <include layout="@layout/view_space_layout"/>
 
-
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="blocksDescendants">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/vertivcal_content"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/base1000dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/base20dp"
                 android:layout_marginBottom="@dimen/base20dp">
 
             </android.support.v7.widget.RecyclerView>
-
+</RelativeLayout>
 
     </LinearLayout>
 </ScrollView>
