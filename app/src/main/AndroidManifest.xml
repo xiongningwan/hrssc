@@ -167,25 +167,57 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".home.activity.information.InformationDetialActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".home.activity.information.InformationDetialActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".home.activity.applying.ApplyingActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".home.activity.applying.ApplyingActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".home.activity.applying.ApplyingDetialActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".home.activity.applying.ApplyingDetialActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".home.activity.applying.ContentDetialActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".home.activity.applying.ContentDetialActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".home.activity.applying.YDJLActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".home.activity.applying.YDJLActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".home.activity.applying.EvaluationActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".home.activity.applying.DraftActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".home.activity.socialsecurity.SocialSecurityActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".home.activity.socialsecurity.SSDetailActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".home.activity.socialsecurity.SSHistoryDetailActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".home.activity.socialsecurity.SSHistoryActivity">
         </activity>
     </application>
 

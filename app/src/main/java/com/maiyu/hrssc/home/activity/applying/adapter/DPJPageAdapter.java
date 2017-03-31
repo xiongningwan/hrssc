@@ -1,6 +1,7 @@
 package com.maiyu.hrssc.home.activity.applying.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.home.activity.applying.EvaluationActivity;
 import com.maiyu.hrssc.home.activity.applying.bean.Apply;
 
 import java.util.ArrayList;
@@ -85,14 +87,25 @@ public class DPJPageAdapter extends RecyclerView.Adapter<DPJPageAdapter.TodoPage
 
             btn.setVisibility(View.VISIBLE);
             btn.setBackgroundResource(R.drawable.corner_view_selector);
+            btn.setText("去评价");
             reason.setVisibility(View.GONE);
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                     Intent intent = new Intent(mContext, EvaluationActivity.class);
+                    //  intent.putExtra("title", info.getTitle());
+                    mContext.startActivity(intent);
+                }
+            });
+
+
 
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //  Intent intent = new Intent(mContext, InformationDetialActivity.class);
+                     // Intent intent = new Intent(mContext, InformationDetialActivity.class);
                     //  intent.putExtra("title", info.getTitle());
                     //  mContext.startActivity(intent);
                 }

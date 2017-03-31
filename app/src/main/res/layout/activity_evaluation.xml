@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.maiyu.hrssc.home.activity.applying.EvaluationActivity"
+    android:orientation="vertical"
+    android:background="@color/project_color_basic_white_pure">
+
+
+    <com.maiyu.hrssc.base.view.HeadView
+        android:id="@+id/head_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/project_head_view_hight"
+        android:background="@color/project_color_basic_white_pure"/>
+
+    <include layout="@layout/view_space_layout"/>
+
+    <TextView
+        android:id="@+id/no_value"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/base34dp"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:text="NO.124"
+        android:gravity="center"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:background="@mipmap/line"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base102dp">
+
+        <ImageView
+            android:id="@+id/icon_xiangqing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_xiangqing"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/title_name"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/base34dp"
+            android:layout_marginStart="@dimen/base14dp"
+            android:layout_marginTop="@dimen/base16dp"
+            android:text="薪资证明办理"
+            android:layout_toEndOf="@id/icon_xiangqing"
+            android:gravity="center"
+            android:textColor="@color/text_title_gray"/>
+<!--
+        <LinearLayout
+            android:id="@+id/shenqing_star_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/icon_xiangqing"
+            android:layout_below="@id/title_name"
+            android:layout_marginTop="@dimen/base1dp"
+            android:layout_marginStart="@dimen/base14dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/shenqing_star_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/view_evaluation_star_selector"/>
+            <ImageView
+                android:id="@+id/shenqing_star_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/base5dp"
+                android:src="@drawable/view_evaluation_star_selector"/>
+            <ImageView
+                android:id="@+id/shenqing_star_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/base5dp"
+                android:src="@drawable/view_evaluation_star_selector"/>
+            <ImageView
+                android:id="@+id/shenqing_star_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/base5dp"
+                android:src="@drawable/view_evaluation_star_selector"/>
+            <ImageView
+                android:id="@+id/shenqing_star_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/base5dp"
+                android:src="@drawable/view_evaluation_star_selector"/>
+        </LinearLayout>-->
+
+        <LinearLayout
+            android:id="@+id/shenqing_star_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/icon_xiangqing"
+            android:layout_below="@id/title_name"
+            android:layout_marginTop="@dimen/base1dp"
+            android:layout_marginStart="@dimen/base14dp"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/shenqing_star_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/view_evaluation_star_selector"/>
+            <CheckBox
+                android:id="@+id/shenqing_star_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/base5dp"
+                android:button="@drawable/view_evaluation_star_selector"/>
+            <CheckBox
+                android:id="@+id/shenqing_star_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/base5dp"
+                android:button="@drawable/view_evaluation_star_selector"/>
+            <CheckBox
+                android:id="@+id/shenqing_star_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/base5dp"
+                android:button="@drawable/view_evaluation_star_selector"/>
+            <CheckBox
+                android:id="@+id/shenqing_star_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/base5dp"
+                android:button="@drawable/view_evaluation_star_selector"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:background="@mipmap/line"/>
+
+    <EditText
+        android:id="@+id/evaluation_to_shenqing_et"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base80dp"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:padding="@dimen/base5dp"
+        android:background="@drawable/view_et_gray_blue_selector"
+        android:hint="请输入你的意见(选填)"
+        android:gravity="start"
+        android:textSize="@dimen/project_text_size_dp_12"/>
+
+    <include layout="@layout/view_space_layout"/>
+
+    <TextView
+        android:id="@+id/biz_person_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/base34dp"
+        android:text="对业务员评价"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:textColor="@color/text_title_gray"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:background="@mipmap/line"/>
+
+
+    <LinearLayout
+        android:id="@+id/person_star_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/base31dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/person_star_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/view_evaluation_star_selector"/>
+        <CheckBox
+            android:id="@+id/person_star_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base5dp"
+            android:button="@drawable/view_evaluation_star_selector"/>
+        <CheckBox
+            android:id="@+id/person_star_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base5dp"
+            android:button="@drawable/view_evaluation_star_selector"/>
+        <CheckBox
+            android:id="@+id/person_star_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base5dp"
+            android:button="@drawable/view_evaluation_star_selector"/>
+        <CheckBox
+            android:id="@+id/person_star_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base5dp"
+            android:button="@drawable/view_evaluation_star_selector"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/base20dp">
+
+
+        <Button
+            android:id="@+id/fuwutaidu_btn"
+            android:layout_width="@dimen/base86dp"
+            android:layout_height="@dimen/base31dp"
+            android:background="@drawable/corner_view_btn_white_blue_selector"
+            android:text="服务态度+1"
+            android:textColor="@color/activity_evaluation_btn_text_selector"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+
+        <Button
+            android:id="@+id/yirongtaidu_btn"
+            android:layout_width="@dimen/base86dp"
+            android:layout_height="@dimen/base31dp"
+            android:background="@drawable/corner_view_btn_white_blue_selector"
+            android:text="仪容态度+1"
+            android:textColor="@color/activity_evaluation_btn_text_selector"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_toEndOf="@id/fuwutaidu_btn"/>
+
+        <Button
+            android:id="@+id/yewushuliandu_btn"
+            android:layout_width="@dimen/base86dp"
+            android:layout_height="@dimen/base31dp"
+            android:background="@drawable/corner_view_btn_white_blue_selector"
+            android:text="业务熟练度+1"
+            android:textColor="@color/activity_evaluation_btn_text_selector"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_toEndOf="@id/yirongtaidu_btn"/>
+        <Button
+            android:id="@+id/lijialiyi_btn"
+            android:layout_width="@dimen/base86dp"
+            android:layout_height="@dimen/base31dp"
+            android:background="@drawable/corner_view_btn_white_blue_selector"
+            android:text="礼仪礼节+1"
+            android:layout_marginTop="@dimen/base10dp"
+            android:textColor="@color/activity_evaluation_btn_text_selector"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_below="@id/fuwutaidu_btn"/>
+
+    </RelativeLayout>
+
+
+    <EditText
+        android:id="@+id/evaluation_to_person_et"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base80dp"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/base15dp"
+        android:padding="@dimen/base5dp"
+        android:background="@drawable/view_et_gray_blue_selector"
+        android:hint="请输入你的意见(选填)"
+        android:gravity="start"
+        android:textSize="@dimen/project_text_size_dp_12"/>
+</LinearLayout>

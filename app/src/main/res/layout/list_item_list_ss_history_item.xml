@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/project_color_basic_white_pure">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base45dp"
+        android:background="@color/project_color_basic_white_pure">
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:text="2016-12-01"
+        android:textColor="@color/text_content_gray"/>
+
+
+    <TextView
+        android:id="@+id/money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/jiantou_iv"
+        android:layout_centerVertical="true"
+       android:layout_marginEnd="@dimen/base5dp"
+        android:text="500.00元"
+        android:textColor="@color/project_color_general_hyperlink"
+        android:textSize="@dimen/project_text_size_dp_12"/>
+
+    <ImageView
+        android:id="@+id/jiantou_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/icon_xianghou"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_alignParentEnd="true"/>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentBottom="true"
+        android:background="@mipmap/line"/>
+
+        </RelativeLayout>
+</RelativeLayout>

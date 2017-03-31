@@ -30,6 +30,7 @@ import com.maiyu.hrssc.base.view.AdvertisementImageBanner;
 import com.maiyu.hrssc.home.activity.ZMBLActivity;
 import com.maiyu.hrssc.home.activity.applying.ApplyingActivity;
 import com.maiyu.hrssc.home.activity.information.InformationActivity;
+import com.maiyu.hrssc.home.activity.socialsecurity.SocialSecurityActivity;
 import com.maiyu.hrssc.home.activity.todo.TodoActivity;
 import com.maiyu.hrssc.util.SharedPreferencesUtil;
 
@@ -346,6 +347,7 @@ public class HomeFragment extends Fragment {
                 startActivity(new Intent(getActivity(), ZMBLActivity.class));
                 break;
             case R.id.btn_sb:
+                startActivity(new Intent(getActivity(), SocialSecurityActivity.class));
                 break;
             case R.id.btn_gjj:
                 break;

@@ -1,6 +1,7 @@
 package com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.header;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -55,6 +56,7 @@ public class TwitterRefreshHeaderView extends SwipeRefreshHeaderLayout {
         tvRefresh = (TextView) findViewById(R.id.tvRefresh);
         ivArrow = (ImageView) findViewById(R.id.ivArrow);
         ivSuccess = (ImageView) findViewById(R.id.ivSuccess);
+        ivSuccess.setImageResource(R.mipmap.icon_xuanze_duigou);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
     }
 
@@ -65,6 +67,7 @@ public class TwitterRefreshHeaderView extends SwipeRefreshHeaderLayout {
         ivArrow.setVisibility(GONE);
         progressBar.setVisibility(VISIBLE);
         tvRefresh.setText("加载中...");
+        tvRefresh.setTextColor(Color.parseColor("#35a4f2"));
     }
 
     @Override

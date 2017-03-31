@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/project_color_basic_white_pure"
+    android:orientation="vertical"
+    tools:context="com.maiyu.hrssc.home.activity.applying.DraftActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/project_head_view_hight">
+
+        <RelativeLayout
+            android:id="@+id/title_left_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/activity_horizontal_margin">
+
+            <ImageView
+                android:id="@+id/left_button_icon"
+                android:layout_width="@dimen/base16dp"
+                android:layout_height="@dimen/base16dp"
+                android:layout_centerVertical="true"
+
+                android:src="@mipmap/icon_back"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:paddingLeft="@dimen/base80dp"
+            android:paddingRight="@dimen/base80dp"
+            android:text="草稿箱"
+            android:textColor="@color/text_title_gray"
+            android:textSize="@dimen/project_text_number_size_dp_19"/>
+
+        <RelativeLayout
+            android:id="@+id/title_right_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            >
+
+            <TextView
+                android:id="@+id/delete_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="删除"
+                android:textColor="@color/color_general_text_red"/>
+
+            <TextView
+                android:id="@+id/cancle_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@+id/confirm_delete_btn"
+                android:layout_marginEnd="@dimen/base10dp"
+                android:layout_centerVertical="true"
+                android:text="取消"/>
+
+            <TextView
+                android:id="@+id/confirm_delete_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="确认删除"
+                android:textColor="@color/project_color_general_hyperlink"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <include layout="@layout/view_space_layout"/>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/draft_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+
+</LinearLayout>

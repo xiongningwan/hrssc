@@ -1,12 +1,14 @@
 package com.maiyu.hrssc.home.activity.applying;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.activity.BaseActivity;
@@ -32,6 +34,7 @@ public class ApplyingActivity extends BaseActivity {
 
     private  final int COUNT = 6;
     private Fragment[] fragments = new Fragment[COUNT];
+    private TextView mRightButtonText;
 
     @Override
     public void createActivityImpl() {
@@ -51,7 +54,17 @@ public class ApplyingActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        mHeadView.setTitle("我的申请", true, false);
+        mHeadView.setTitle("我的申请", true, true);
+        mRightButtonText = mHeadView.getRightButtonText();
+        mRightButtonText.setText("草稿箱(0)");
+        mRightButtonText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ApplyingActivity.this, DraftActivity.class));
+            }
+        });
+
+
         mApplyingFragmentPageAdapter = new ApplyingFragmentPageAdapter(getSupportFragmentManager(), this);
         mViewPager.setAdapter(mApplyingFragmentPageAdapter);
         mTabLayout.setupWithViewPager(mViewPager);

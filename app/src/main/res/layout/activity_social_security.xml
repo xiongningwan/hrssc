@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.maiyu.hrssc.home.activity.ZMBLActivity"
+    android:orientation="vertical">
+
+
+
+
+
+    <com.maiyu.hrssc.base.view.HeadView
+        android:id="@+id/head_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/project_head_view_hight">
+
+    </com.maiyu.hrssc.base.view.HeadView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@mipmap/line"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base200dp"/>
+
+
+
+    <include
+        layout="@layout/view_space_layout"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/base29dp">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center_horizontal">
+            <LinearLayout
+                android:id="@+id/chaxun_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+                <ImageView
+                    android:layout_width="@dimen/base46dp"
+                    android:layout_height="@dimen/base46dp"
+                    android:src="@mipmap/icon_sbjjcx"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="社保缴交查询"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/shebaozhuanru_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+                <ImageView
+                    android:layout_width="@dimen/base46dp"
+                    android:layout_height="@dimen/base46dp"
+                    android:src="@mipmap/icon_sbzy"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="社保转移(转入)"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/shebaobaoxiao_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+                <ImageView
+                    android:layout_width="@dimen/base46dp"
+                    android:layout_height="@dimen/base46dp"
+                    android:src="@mipmap/icon_sbbx"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="社保报销"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center_horizontal">
+            <LinearLayout
+                android:id="@+id/shebaobiangeng_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+                <ImageView
+                    android:layout_width="@dimen/base46dp"
+                    android:layout_height="@dimen/base46dp"
+                    android:src="@mipmap/icon_sbbg"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="社保变更"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/shebaozhuanchu_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+                <ImageView
+                    android:layout_width="@dimen/base46dp"
+                    android:layout_height="@dimen/base46dp"
+                    android:src="@mipmap/icon_sbzyc"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="社保转移(转出)"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/shebaocanbaozm_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+                <ImageView
+                    android:layout_width="@dimen/base46dp"
+                    android:layout_height="@dimen/base46dp"
+                    android:src="@mipmap/icon_sbcbzm"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="社保参保证明"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:gravity="center_horizontal">
+            <LinearLayout
+                android:id="@+id/shebaoyibaokabanli_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+                <ImageView
+                    android:layout_width="@dimen/base46dp"
+                    android:layout_height="@dimen/base46dp"
+                    android:src="@mipmap/icon_sbyb"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="社保/医保卡办理"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/yiliaobeian_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+                <ImageView
+                    android:layout_width="@dimen/base46dp"
+                    android:layout_height="@dimen/base46dp"
+                    android:src="@mipmap/icon_ylba"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="医疗备案"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/wu_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:visibility="invisible">
+                <ImageView
+                    android:layout_width="@dimen/base46dp"
+                    android:layout_height="@dimen/base46dp"
+                    android:src="@mipmap/icon_sbjjcx"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="无"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+</LinearLayout>
