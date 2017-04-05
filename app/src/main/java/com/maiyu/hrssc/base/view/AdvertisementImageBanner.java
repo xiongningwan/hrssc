@@ -125,9 +125,9 @@ public class AdvertisementImageBanner extends RelativeLayout implements OnPageCh
                 iconView = new View(mContext);
 
                 if (i == 0) {
-                    iconView.setBackgroundResource(R.mipmap.selected_circle);
+                    iconView.setBackgroundResource(R.mipmap.yuan_lan);
                 } else {
-                    iconView.setBackgroundResource(R.mipmap.unselected_circle);
+                    iconView.setBackgroundResource(R.mipmap.yuan_bai);
                 }
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
                 params.setMargins(widthGap, 0, 0, 0);
@@ -362,11 +362,11 @@ public class AdvertisementImageBanner extends RelativeLayout implements OnPageCh
         // 设置当前位置图片指示器
         for (int i = 0; i < mBannnerIndicatorIconView.getChildCount(); i++) {
             View view = mBannnerIndicatorIconView.getChildAt(i);
-            view.setBackgroundResource(R.mipmap.unselected_circle);
+            view.setBackgroundResource(R.mipmap.yuan_bai);
         }
         if (mBannnerIndicatorIconView.getChildCount() > 1) {
             position = position % mPictureAddresses.size();
-            mBannnerIndicatorIconView.getChildAt(position).setBackgroundResource(R.mipmap.selected_circle);
+            mBannnerIndicatorIconView.getChildAt(position).setBackgroundResource(R.mipmap.yuan_lan);
         }
 
         if (mTitle.size() > 0) {

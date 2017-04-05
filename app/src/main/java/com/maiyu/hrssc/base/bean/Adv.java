@@ -18,6 +18,20 @@ public class Adv {
     /** 是否分享  1:是 0:否*/
     private String shareable;
 
+    public Adv() {
+    }
+
+    public Adv(long id, String image, String place, String title, String activityUrl, String shareUrl, String adDesc, String shareable) {
+        this.id = id;
+        this.image = image;
+        this.place = place;
+        this.title = title;
+        this.activityUrl = activityUrl;
+        this.shareUrl = shareUrl;
+        this.adDesc = adDesc;
+        this.shareable = shareable;
+    }
+
     public long getId() {
         return id;
     }
@@ -81,4 +95,7 @@ public class Adv {
     public void setShareable(String shareable) {
         this.shareable = shareable;
     }
+
+
+
 }

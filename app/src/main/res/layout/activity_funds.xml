@@ -4,10 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/project_color_basic_white"
     android:orientation="vertical"
-    tools:context="com.maiyu.hrssc.home.activity.ZMBLActivity">
-
+    tools:context="com.maiyu.hrssc.home.activity.funds.FundsActivity">
 
     <com.maiyu.hrssc.base.view.HeadView
         android:id="@+id/head_view"
@@ -32,58 +30,68 @@
         layout="@layout/view_space_layout"/>
 
 
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:stretchColumns="0,1"
-        >
+        android:orientation="vertical">
 
-        <TableRow
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center">
+            android:gravity="center_vertical">
 
             <TextView
-                android:id="@+id/xzzmbl"
-                android:layout_width="wrap_content"
+                android:id="@+id/gjjcx_btn"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:drawablePadding="@dimen/base5dp"
-                android:drawableTop="@mipmap/icon_xzzm"
+                android:drawableTop="@mipmap/icon_gjjchaxun"
                 android:gravity="center"
-                android:text="@string/xzzm_bl_ZMBLActivity"/>
+                android:text="公积金查询"/>
 
             <TextView
-                android:id="@+id/jhsyzmbl"
-                android:layout_width="wrap_content"
+                android:id="@+id/zfgjjbg_btn"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:drawablePadding="@dimen/base5dp"
-                android:drawableTop="@mipmap/icon_jhsyzm"
+                android:drawableTop="@mipmap/icon_gjjbiangeng"
                 android:gravity="center"
-                android:text="@string/jhsyzm_bl_ZMBLActivity"/>
-        </TableRow>
+                android:text="住房公积金变更"/>
 
-        <TableRow
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center">
+            android:gravity="center_vertical">
 
             <TextView
-                android:id="@+id/xsbxzmbl"
-                android:layout_width="wrap_content"
+                android:id="@+id/zfgjjlmk_btn"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:drawablePadding="@dimen/base5dp"
-                android:drawableTop="@mipmap/icon_xsbxzm"
+                android:drawableTop="@mipmap/icon_gjjlianmingka"
                 android:gravity="center"
-                android:text="@string/xsbxzm_bl_ZMBLActivity"/>
+                android:text="住房公积金联名卡"/>
 
             <TextView
-                android:id="@+id/zzzmbl"
-                android:layout_width="wrap_content"
+                android:id="@+id/zfgjjzm_btn"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:drawablePadding="@dimen/base5dp"
-                android:drawableTop="@mipmap/icon_zzzmbl"
+                android:drawableTop="@mipmap/icon_ggjzhengming"
                 android:gravity="center"
-                android:text="@string/zzzm_bl_ZMBLActivity"/>
-        </TableRow>
-    </TableLayout>
+                android:text="住房公积金证明"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
 </LinearLayout>

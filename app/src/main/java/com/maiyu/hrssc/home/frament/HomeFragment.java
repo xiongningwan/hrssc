@@ -29,7 +29,11 @@ import com.maiyu.hrssc.base.city.SelectCityActivity;
 import com.maiyu.hrssc.base.view.AdvertisementImageBanner;
 import com.maiyu.hrssc.home.activity.ZMBLActivity;
 import com.maiyu.hrssc.home.activity.applying.ApplyingActivity;
+import com.maiyu.hrssc.home.activity.employee.EmployeeActivity;
+import com.maiyu.hrssc.home.activity.files.FilesBorrowActivity;
+import com.maiyu.hrssc.home.activity.funds.FundsActivity;
 import com.maiyu.hrssc.home.activity.information.InformationActivity;
+import com.maiyu.hrssc.home.activity.residence.ResidenceActivity;
 import com.maiyu.hrssc.home.activity.socialsecurity.SocialSecurityActivity;
 import com.maiyu.hrssc.home.activity.todo.TodoActivity;
 import com.maiyu.hrssc.util.SharedPreferencesUtil;
@@ -350,14 +354,23 @@ public class HomeFragment extends Fragment {
                 startActivity(new Intent(getActivity(), SocialSecurityActivity.class));
                 break;
             case R.id.btn_gjj:
+                startActivity(new Intent(getActivity(), FundsActivity.class));
                 break;
             case R.id.btn_dajy:
+                // 档案借阅
+                startActivity(new Intent(getActivity(), FilesBorrowActivity.class));
                 break;
             case R.id.btn_hkbl2:
+                // 户口办理
+                startActivity(new Intent(getActivity(), ResidenceActivity.class));
                 break;
             case R.id.btn_jzzbl:
+                // 居住证办理
+                startActivity(new Intent(getActivity(), EmployeeActivity.class));
                 break;
             case R.id.btn_xyg:
+                // 新员工
+                startActivity(new Intent(getActivity(), EmployeeActivity.class));
                 break;
             case R.id.btn_more:
                 break;

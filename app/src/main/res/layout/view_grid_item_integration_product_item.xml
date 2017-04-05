@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    >
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/view_et_gray_blue_selector">
+
+        <ImageView
+            android:id="@+id/product_iv"
+            android:layout_width="@dimen/base160dp"
+            android:layout_height="@dimen/base160dp"
+            android:scaleType="centerCrop"
+            android:padding="@dimen/base1dp"/>
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignEnd="@id/product_iv"
+            android:layout_alignStart="@id/product_iv"
+            android:layout_below="@id/product_iv"
+            android:background="@mipmap/line"/>
+
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@id/product_iv"
+            android:layout_alignStart="@id/product_iv"
+            android:layout_below="@id/line"
+            android:ellipsize="end"
+            android:lines="2"
+            android:padding="@dimen/base5dp"
+            android:text="兑换商品/iphone 6兑换商品/iphone 6兑换商品/iphone 6"
+            android:textColor="@color/text_title_gray"/>
+
+
+        <TextView
+            android:id="@+id/product_jifen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@id/product_iv"
+            android:layout_alignStart="@id/product_iv"
+            android:layout_below="@id/product_name"
+            android:paddingEnd="@dimen/base5dp"
+            android:paddingStart="@dimen/base5dp"
+            android:paddingBottom="@dimen/base5dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="300积分"
+            android:textColor="@color/color_general_text_red"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.maiyu.hrssc.home.activity.funds.FundsDetailActivity"
+    android:orientation="vertical"
+    android:background="@color/project_color_basic_white">
+
+
+
+    <com.maiyu.hrssc.base.view.HeadView
+        android:id="@+id/head_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/project_head_view_hight"
+        android:background="@color/project_color_basic_white_pure">
+
+    </com.maiyu.hrssc.base.view.HeadView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@mipmap/line"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base220dp">
+
+        <RelativeLayout
+            android:layout_width="@dimen/base140dp"
+            android:layout_height="@dimen/base140dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/view_point_blue">
+
+            <View
+                android:id="@+id/point"
+                android:layout_width="1px"
+                android:layout_height="1px"
+                android:layout_centerInParent="true"/>
+
+            <TextView
+                android:id="@+id/heji_lable_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/point"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="缴费金额"
+                android:textColor="@color/project_color_basic_white_pure"/>
+
+            <TextView
+                android:id="@+id/heji_value_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/point"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:text="200.00元"
+                android:textColor="@color/project_color_basic_white_pure"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:shrinkColumns="0,1"
+        android:background="@color/project_color_basic_white_pure">
+
+        <TableRow
+            android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/base5dp"
+            android:layout_marginBottom="@dimen/base5dp">
+
+            <TextView
+                android:id="@+id/lable_jfd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="缴费地"
+                android:textColor="@color/text_title_gray"/>
+
+            <TextView
+                android:layout_width="@dimen/base75dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_title_gray"
+                android:visibility="invisible"/>
+
+
+            <TextView
+                android:id="@+id/value_jfd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="深圳"
+                android:textColor="@color/text_title_gray"/>
+
+        </TableRow>
+
+        <TableRow
+            android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/base5dp"
+            android:layout_marginBottom="@dimen/base5dp">
+
+            <TextView
+                android:id="@+id/lable_jnyf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="缴纳月份"
+                android:textColor="@color/text_title_gray"/>
+
+            <TextView
+                android:layout_width="@dimen/base75dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_title_gray"
+                android:visibility="invisible"/>
+
+
+            <TextView
+                android:id="@+id/value_jnyf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="11"
+                android:textColor="@color/text_title_gray"/>
+
+        </TableRow>
+
+        <TableRow
+            android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/base5dp"
+            android:layout_marginBottom="@dimen/base5dp">
+
+            <TextView
+                android:id="@+id/lable_jfjs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="缴费基数"
+                android:textColor="@color/text_title_gray"/>
+
+            <TextView
+                android:layout_width="@dimen/base75dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_title_gray"
+                android:visibility="invisible"/>
+
+
+            <TextView
+                android:id="@+id/value_jfjs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5000.00"
+                android:textColor="@color/text_title_gray"/>
+
+        </TableRow>
+
+        <TableRow
+            android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/base5dp"
+            android:layout_marginBottom="@dimen/base5dp">
+
+            <TextView
+                android:id="@+id/lable_dwbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="单位比例"
+                android:textColor="@color/text_title_gray"/>
+
+            <TextView
+                android:layout_width="@dimen/base75dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_title_gray"
+                android:visibility="invisible"/>
+
+
+            <TextView
+                android:id="@+id/value_dwbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10"
+                android:textColor="@color/text_title_gray"/>
+
+        </TableRow>
+
+        <TableRow
+            android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/base5dp"
+            android:layout_marginBottom="@dimen/base5dp">
+
+            <TextView
+                android:id="@+id/lable_grbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="个人比例"
+                android:textColor="@color/text_title_gray"/>
+
+            <TextView
+                android:layout_width="@dimen/base75dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_title_gray"
+                android:visibility="invisible"/>
+
+
+            <TextView
+                android:id="@+id/value_grbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5"
+                android:textColor="@color/text_title_gray"/>
+
+        </TableRow>
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/chakan_lishi_jilu_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="查看历史记录"
+        android:layout_marginTop="@dimen/base20dp"
+        android:textColor="@color/project_color_general_hyperlink"/>
+
+    <TextView
+        android:id="@+id/wangzhi_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/base30dp"
+        android:text="官方查询网站:www.szsb.gov"
+        android:textColor="@color/project_color_general_hyperlink"/>
+
+
+
+</LinearLayout>

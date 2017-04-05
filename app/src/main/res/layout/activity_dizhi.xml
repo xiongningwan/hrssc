@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/project_color_basic_white"
+    android:orientation="vertical"
+    tools:context="com.maiyu.hrssc.home.activity.employee.DizhiActivity">
+
+
+    <com.maiyu.hrssc.base.view.HeadView
+        android:id="@+id/head_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/project_head_view_hight"
+        android:background="@color/project_color_basic_white_pure">
+
+    </com.maiyu.hrssc.base.view.HeadView>
+
+
+    <include
+        layout="@layout/view_space_layout"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+
+
+        <RelativeLayout
+            android:id="@+id/daohang_rl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base90dp"
+            android:background="@color/project_color_basic_white_pure"
+            android:layout_alignParentBottom="true"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/address_tv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/base90dp"
+                android:layout_toStartOf="@+id/daohang_btn"
+                android:text="广东省深圳市南山区科技南路55号"
+                android:layout_centerVertical="true"
+                android:gravity="center"/>
+
+            <Button
+                android:id="@+id/daohang_btn"
+                android:layout_width="@dimen/base53dp"
+                android:layout_height="@dimen/base43dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:text="导航"
+                android:layout_centerVertical="true"
+                android:background="@drawable/corner_view_selector"
+                android:textColor="@color/project_color_basic_white_pure"/>
+        </RelativeLayout>
+
+        <com.amap.api.maps.MapView
+            android:id="@+id/map_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/daohang_rl"/>
+
+    </RelativeLayout>
+</LinearLayout>
