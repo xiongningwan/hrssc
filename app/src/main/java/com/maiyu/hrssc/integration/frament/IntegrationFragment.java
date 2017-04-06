@@ -1,5 +1,6 @@
 package com.maiyu.hrssc.integration.frament;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.view.AdvertisementImageBanner;
+import com.maiyu.hrssc.integration.activity.DuihuanRecordActivity;
 import com.maiyu.hrssc.integration.adapter.INtegrationGridAdapter;
 import com.maiyu.hrssc.integration.bean.IngegrationProduct;
 
@@ -121,6 +123,7 @@ public class IntegrationFragment extends Fragment {
             case R.id.msg_btn:
                 break;
             case R.id.jifen_rl:
+                startActivity(new Intent(getActivity(), DuihuanRecordActivity.class));
                 break;
         }
     }

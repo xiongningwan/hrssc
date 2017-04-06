@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/project_color_basic_white_pure"
+              android:orientation="vertical">
+
+    <include layout="@layout/view_space_layout"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/activity_horizontal_margin">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_ren"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base8dp"
+            android:text="收货姓名:"/>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base8dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="张三"
+            android:textColor="@color/text_title_gray"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/activity_horizontal_margin">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/shouji"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base8dp"
+            android:text="手机号码:"/>
+
+        <TextView
+            android:id="@+id/tel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base8dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="15273965455"
+            android:textColor="@color/text_title_gray"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base45dp"
+        android:paddingStart="@dimen/activity_horizontal_margin">
+
+        <ImageView
+            android:id="@+id/dingwei_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/icon_dingwei"/>
+
+        <TextView
+            android:id="@+id/dizhi_lable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/base8dp"
+            android:layout_toEndOf="@id/dingwei_iv"
+            android:text="详细地址:"/>
+
+        <TextView
+            android:id="@+id/address_detail_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/dizhi_lable"
+            android:layout_marginStart="@dimen/base8dp"
+            android:layout_toEndOf="@id/dizhi_lable"
+            android:ellipsize="end"
+            android:lines="2"
+            android:text="广东广州越秀区某某路某某街道某某栋写字楼-124号-124"
+            android:textColor="@color/text_title_gray"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/base10dp"
+        android:background="@mipmap/line"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/base12dp"
+        android:layout_marginTop="@dimen/base12dp">
+
+        <CheckBox
+            android:id="@+id/moren_xuanze"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:button="@drawable/view_check_box_xuanze_selector"
+            android:paddingLeft="@dimen/base8dp"
+            android:text="默认地址"
+            android:textColor="@color/activity_address_manage_check_box_gray_red_text_selector"/>
+
+
+        <TextView
+            android:id="@+id/shanchu_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:drawableLeft="@mipmap/icon_shanchu_btn"
+            android:drawablePadding="@dimen/base5dp"
+            android:text="删除"/>
+
+        <TextView
+            android:id="@+id/bianji_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/base15dp"
+            android:layout_toStartOf="@id/shanchu_tv"
+            android:drawableLeft="@mipmap/icon_bianji"
+            android:drawablePadding="@dimen/base5dp"
+            android:text="编辑"/>
+    </RelativeLayout>
+
+
+</LinearLayout>

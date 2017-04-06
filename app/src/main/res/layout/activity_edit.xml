@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/project_color_basic_white"
+    android:orientation="vertical"
+    tools:context="com.maiyu.hrssc.base.activity.EditActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/project_head_view_hight">
+
+        <RelativeLayout
+            android:id="@+id/title_left_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/activity_horizontal_margin">
+
+            <ImageView
+                android:id="@+id/left_button_icon"
+                android:layout_width="@dimen/base16dp"
+                android:layout_height="@dimen/base16dp"
+                android:layout_centerVertical="true"
+
+                android:src="@mipmap/icon_back"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:paddingLeft="@dimen/base80dp"
+            android:paddingRight="@dimen/base80dp"
+            android:singleLine="true"
+            android:text="会员中心"
+            android:textColor="@color/text_title_gray"
+            android:textSize="@dimen/project_text_number_size_dp_19"
+            />
+
+        <RelativeLayout
+            android:id="@+id/title_right_button"
+            android:layout_width="@dimen/base62dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/right_button_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="右部文字"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+    <include layout="@layout/view_space_layout"/>
+
+    <RelativeLayout
+        android:id="@+id/zzdy_rl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base45dp"
+        android:background="@color/project_color_basic_white_pure"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin">
+
+
+        <EditText
+            android:id="@+id/name_et"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/base5dp"
+            android:layout_marginTop="@dimen/base5dp"
+            android:background="@drawable/view_et_gray_blue_selector"
+            android:hint="请填写"
+            android:paddingLeft="@dimen/base5dp"
+            android:paddingRight="@dimen/base8dp"
+            android:textSize="@dimen/project_text_size_dp_12"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentBottom="true"
+        android:background="@mipmap/line"/>
+
+</LinearLayout>

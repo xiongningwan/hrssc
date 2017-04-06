@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/project_color_basic_white"
+    android:orientation="vertical"
+    tools:context="com.maiyu.hrssc.integration.activity.DuihuanActivity">
+
+
+    <include layout="@layout/view_space_layout" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base130dp"
+        android:background="@color/project_color_basic_white_pure">
+
+        <ImageView
+            android:id="@+id/product_iv"
+            android:layout_width="@dimen/base100dp"
+            android:layout_height="@dimen/base100dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+
+        <TextView
+            android:id="@+id/product_desc_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/base14dp"
+            android:layout_marginTop="@dimen/base16dp"
+            android:layout_toEndOf="@id/product_iv"
+            android:text="中兴手机中兴手机-天机7中兴手机-天机7"
+            android:textColor="@color/text_title_gray"/>
+
+
+        <RelativeLayout
+            android:id="@+id/product_jifen_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/product_desc_tv"
+            android:layout_marginStart="@dimen/base14dp"
+            android:layout_marginTop="@dimen/base10dp"
+            android:layout_toEndOf="@id/product_iv">
+
+            <TextView
+                android:id="@+id/product_jifen_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="积分"
+                android:textSize="@dimen/project_text_size_dp_12"/>
+
+            <TextView
+                android:id="@+id/product_jifen_value_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/base8dp"
+                android:layout_toEndOf="@id/product_jifen_tv"
+                android:text="300"
+                android:textColor="@color/color_general_text_red"
+                android:textSize="@dimen/project_text_size_dp_12"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/product_number_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/product_jifen_rl"
+            android:layout_marginStart="@dimen/base14dp"
+            android:layout_marginTop="@dimen/base5dp"
+            android:layout_toEndOf="@id/product_iv">
+
+            <TextView
+                android:id="@+id/product_number_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="数量"
+                android:textSize="@dimen/project_text_size_dp_12"/>
+
+            <TextView
+                android:id="@+id/product_number_value_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/base8dp"
+                android:layout_toEndOf="@id/product_number_tv"
+                android:text="×1"
+                android:textColor="@color/color_general_text_red"
+                android:textSize="@dimen/project_text_size_dp_12"/>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/product_number_rl"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/base14dp"
+            android:layout_marginTop="@dimen/base5dp"
+            android:layout_toEndOf="@id/product_iv">
+
+            <TextView
+                android:id="@+id/label_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="兑换时间:"
+                android:textSize="@dimen/project_text_size_dp_12"/>
+
+            <TextView
+                android:id="@+id/time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/base5dp"
+                android:layout_toEndOf="@id/label_time_tv"
+                android:text="2017-02-12 12:14"
+                android:textSize="@dimen/project_text_size_dp_12"/>
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>
+

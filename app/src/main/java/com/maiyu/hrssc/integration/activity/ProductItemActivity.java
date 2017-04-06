@@ -1,7 +1,10 @@
 package com.maiyu.hrssc.integration.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
@@ -20,8 +23,8 @@ public class ProductItemActivity extends BaseActivity {
 
     @BindView(R.id.ads)
     AdvertisementImageBanner mAds;
-    @BindView(R.id.back_btn)
-    ImageButton mBackBtn;
+    @BindView(R.id.back_btn_1)
+    ImageButton mBackBtn1;
     @BindView(R.id.name)
     TextView mName;
     @BindView(R.id.jifen)
@@ -32,6 +35,15 @@ public class ProductItemActivity extends BaseActivity {
     TextView mJiazhi;
     @BindView(R.id.duihuan_btn)
     TextView mDuihuanBtn;
+
+    @BindView(R.id.shangjia_ll)
+    LinearLayout mShangjiaLL;
+
+    @BindView(R.id.shanchu_rl)
+    RelativeLayout mShanchuRL;
+
+    @BindView(R.id.back_btn_2)
+    ImageButton mBackBtn2;
 
 
     @Override
@@ -66,14 +78,21 @@ public class ProductItemActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.back_btn, R.id.duihuan_btn})
+    @OnClick({R.id.back_btn_1, R.id.back_btn_2, R.id.duihuan_btn})
     public void onClick(View view) {
 
         switch (view.getId()) {
-            case R.id.back_btn:
+            case R.id.back_btn_1:
                 finish();
+                
+                break;
+
+            case R.id.back_btn_2:
+                finish();
+
                 break;
             case R.id.duihuan_btn:
+                startActivity(new Intent(this, DuihuanActivity.class));
                 break;
         }
 

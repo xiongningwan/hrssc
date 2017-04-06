@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/project_color_basic_white"
+    android:orientation="vertical"
+    tools:context="com.maiyu.hrssc.base.activity.AddAddressActivity">
+
+    <com.maiyu.hrssc.base.view.HeadView
+        android:id="@+id/head_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/project_head_view_hight"
+        android:background="@color/project_color_basic_white_pure"/>
+
+    <include layout="@layout/view_space_layout"/>
+
+    <LinearLayout
+        android:id="@+id/name_ll"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base40dp"
+        android:background="@color/project_color_basic_white_pure"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:text="收货姓名:"/>
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base8dp"
+            android:text="张三"
+            android:textColor="@color/text_title_gray"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:background="@mipmap/line"/>
+
+    <LinearLayout
+        android:id="@+id/tel_ll"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base40dp"
+        android:background="@color/project_color_basic_white_pure"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:text="手机号码:"/>
+
+        <TextView
+            android:id="@+id/tel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base8dp"
+            android:text="15271025987"
+            android:textColor="@color/text_title_gray"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:background="@mipmap/line"/>
+
+
+    <RelativeLayout
+        android:id="@+id/city_rl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base40dp"
+        android:background="@color/project_color_basic_white_pure"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/lable_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:text="选择城市:"/>
+
+        <TextView
+            android:id="@+id/city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/base8dp"
+            android:layout_toEndOf="@id/lable_city"
+            android:text="广东广州越秀区"
+            android:textColor="@color/text_title_gray"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:src="@mipmap/icon_xianghou"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:background="@mipmap/line"/>
+
+    <RelativeLayout
+        android:id="@+id/address_rl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base45dp"
+        android:background="@color/project_color_basic_white_pure"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lable_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:text="详细地址:"/>
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/lable_address"
+            android:layout_marginStart="@dimen/base8dp"
+            android:layout_toEndOf="@id/lable_address"
+            android:text="广东广州越秀区某某路某某街道某某栋写字楼-124号-124"
+            android:textColor="@color/text_title_gray"
+            android:textSize="@dimen/project_text_size_dp_12"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:background="@mipmap/line"/>
+
+
+    <Button
+        android:id="@+id/confirm_btn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base44dp"
+        android:layout_marginEnd="@dimen/base30dp"
+        android:layout_marginStart="@dimen/base30dp"
+        android:layout_marginTop="@dimen/base35dp"
+        android:background="@drawable/corner_view_selector"
+        android:text="保存"
+        android:textColor="@color/project_color_basic_white_pure"
+        android:textSize="@dimen/project_text_size_dp_16"/>
+</LinearLayout>

@@ -217,53 +217,77 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".home.activity.socialsecurity.SSHistoryActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".home.activity.socialsecurity.SSHistoryActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".home.activity.funds.FundsActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".home.activity.funds.FundsActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".home.activity.funds.FundsDetailActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".home.activity.funds.FundsDetailActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".home.activity.funds.FundsHistoryActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".home.activity.funds.FundsHistoryActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".home.activity.files.FilesBorrowActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".home.activity.files.FilesBorrowActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".home.activity.residence.ResidenceActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".home.activity.residence.ResidenceActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".home.activity.employee.EmployeeActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".home.activity.employee.EmployeeActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".home.activity.employee.TijianActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".home.activity.employee.TijianActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".home.activity.employee.DizhiActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".home.activity.employee.DizhiActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".base.activity.CheckPermissionsActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".base.activity.CheckPermissionsActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".integration.activity.ProductItemActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".integration.activity.ProductItemActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".base.activity.WebActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".base.activity.WebActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".base.activity.AddressManageActivity">
+        </activity>
+        <activity android:name=".integration.activity.DuihuanActivity">
+        </activity>
+        <activity android:name=".base.activity.AddAddressActivity">
+        </activity>
+        <activity android:name=".base.activity.EditActivity">
+        </activity>
+        <activity android:name=".integration.activity.DuihuanSuccessActivity">
+        </activity>
+        <activity android:name=".integration.activity.DuihuanRecordActivity">
         </activity>
     </application>
 
