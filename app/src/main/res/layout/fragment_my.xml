@@ -122,6 +122,8 @@
             android:layout_toEndOf="@id/gonghao_label_tv"
             android:text="37859"/>
 
+        
+
 
         <Button
             android:id="@+id/qiandao_btn"
@@ -130,10 +132,20 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:background="@drawable/corner_view_selector"
+            android:background="@drawable/corner_view_blue_gray_selector"
             android:text="签到"
             android:textColor="@color/project_color_basic_white_pure"
             android:textSize="@dimen/project_text_size_dp_16"/>
+
+        <ImageView
+            android:id="@+id/jiayi_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_jiayi"
+            android:layout_toStartOf="@id/qiandao_btn"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/base8dp"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 
@@ -154,7 +166,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:src="@mipmap/icon_xiugaimima"/>
+            android:src="@mipmap/icon_bianji"/>
 
         <TextView
             android:layout_width="wrap_content"

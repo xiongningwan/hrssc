@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/project_color_basic_white"
+    android:orientation="vertical"
+    tools:context="com.maiyu.hrssc.my.activity.PersonalInfoActivity">
+
+    <com.maiyu.hrssc.base.view.HeadView
+        android:id="@+id/head_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/project_head_view_hight"
+        android:background="@color/project_color_basic_white_pure"/>
+
+    <include layout="@layout/view_space_layout"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base98dp"
+        android:background="@color/project_color_basic_white_pure">
+
+        <ImageView
+            android:id="@+id/xiecheng_logo_iv"
+            android:layout_width="@dimen/base75dp"
+            android:layout_height="@dimen/base75dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/base10dp"
+            android:src="@mipmap/icon_xiecheng"/>
+
+        <View
+            android:id="@+id/xiecheng_point"
+            android:layout_width="1px"
+            android:layout_height="1px"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/xiecheng_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="携程"
+            android:layout_marginBottom="@dimen/base5dp"
+            android:textColor="@color/text_title_gray"
+            android:layout_above="@+id/xiecheng_point"
+            android:layout_alignStart="@+id/xiecheng_desc_tv"/>
+
+        <TextView
+            android:id="@+id/xiecheng_desc_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/xiecheng_point"
+            android:layout_marginStart="@dimen/base8dp"
+            android:layout_toEndOf="@id/xiecheng_logo_iv"
+            android:layout_marginTop="@dimen/base5dp"
+            android:text="酒店、机票、休闲度假预定APP"
+            android:textColor="@color/project_color_general_text_secondary"
+            android:textSize="@dimen/project_text_size_dp_12"/>
+
+        <Button
+            android:id="@+id/xiecheng_goto_btn"
+            android:layout_width="@dimen/base62dp"
+            android:layout_height="@dimen/base33dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:background="@drawable/corner_view_btn_fast_service_bg"
+            android:text="查看"
+            android:textColor="@color/project_color_general_hyperlink"/>
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@mipmap/line"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base98dp"
+        android:background="@color/project_color_basic_white_pure">
+
+        <ImageView
+            android:id="@+id/qunaer_logo_iv"
+            android:layout_width="@dimen/base75dp"
+            android:layout_height="@dimen/base75dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/base10dp"
+            android:src="@mipmap/icon_qunaer"/>
+
+        <View
+            android:id="@+id/qunaer_point"
+            android:layout_width="1px"
+            android:layout_height="1px"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/qunaer_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/qunaer_point"
+            android:layout_marginStart="@dimen/base8dp"
+            android:layout_marginBottom="@dimen/base5dp"
+            android:layout_toEndOf="@id/qunaer_logo_iv"
+            android:text="携程"
+            android:textColor="@color/text_title_gray"/>
+
+        <TextView
+            android:id="@+id/qunaer_desc_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/qunaer_point"
+            android:layout_marginStart="@dimen/base8dp"
+            android:layout_marginTop="@dimen/base5dp"
+            android:layout_toEndOf="@id/qunaer_logo_iv"
+            android:text="酒店、机票、休闲度假预定APP"
+            android:textColor="@color/project_color_general_text_secondary"
+            android:textSize="@dimen/project_text_size_dp_12"/>
+
+        <Button
+            android:id="@+id/qunaer__goto_btn"
+            android:layout_width="@dimen/base62dp"
+            android:layout_height="@dimen/base33dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:background="@drawable/corner_view_btn_fast_service_bg"
+            android:text="查看"
+            android:textColor="@color/project_color_general_hyperlink"/>
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@mipmap/line"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base98dp"
+        android:background="@color/project_color_basic_white_pure">
+
+        <ImageView
+            android:id="@+id/damai_logo_iv"
+            android:layout_width="@dimen/base75dp"
+            android:layout_height="@dimen/base75dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/base10dp"
+            android:src="@mipmap/icon_damai"/>
+
+        <View
+            android:id="@+id/damai_point"
+            android:layout_width="1px"
+            android:layout_height="1px"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/damai_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/damai_point"
+            android:layout_marginBottom="@dimen/base5dp"
+            android:layout_marginStart="@dimen/base8dp"
+            android:layout_toEndOf="@id/damai_logo_iv"
+            android:text="携程"
+            android:textColor="@color/text_title_gray"/>
+
+        <TextView
+            android:id="@+id/damai_desc_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/damai_point"
+            android:layout_marginStart="@dimen/base8dp"
+            android:layout_toEndOf="@id/damai_logo_iv"
+            android:layout_marginTop="@dimen/base5dp"
+            android:text="演唱会、话剧、娱乐活动预定APP"
+            android:textColor="@color/project_color_general_text_secondary"
+            android:textSize="@dimen/project_text_size_dp_12"/>
+
+        <Button
+            android:id="@+id/damai__goto_btn"
+            android:layout_width="@dimen/base62dp"
+            android:layout_height="@dimen/base33dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:background="@drawable/corner_view_btn_fast_service_bg"
+            android:text="查看"
+            android:textColor="@color/project_color_general_hyperlink"/>
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@mipmap/line"/>
+
+</LinearLayout>

@@ -76,8 +76,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/base10dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/base10dp"
             android:text="我们将尽快完成兑换工作"/>
 
 
@@ -106,7 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/base14dp"
+            android:layout_marginStart="@dimen/base15dp"
             android:layout_marginTop="@dimen/base28dp"
             android:layout_toEndOf="@id/product_iv"
             android:text="中兴手机中兴手机-天机7中兴手机-天机7"
@@ -119,7 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/product_desc_tv"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/base14dp"
+            android:layout_marginStart="@dimen/base15dp"
             android:layout_marginTop="@dimen/base15dp"
             android:layout_toEndOf="@id/product_iv">
 
@@ -146,7 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/product_jifen_rl"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/base14dp"
+            android:layout_marginStart="@dimen/base15dp"
             android:layout_marginTop="@dimen/base10dp"
             android:layout_toEndOf="@id/product_iv">
 
@@ -162,15 +162,20 @@
                 android:id="@+id/time_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/label_time_tv"
                 android:layout_centerVertical="true"
-                android:text="2017-02-12 12:14"
                 android:layout_marginStart="@dimen/base5dp"
+                android:layout_toEndOf="@id/label_time_tv"
+                android:text="2017-02-12 12:14"
                 android:textSize="@dimen/project_text_size_dp_12"/>
         </RelativeLayout>
 
 
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@mipmap/line"/>
 
 
     <Button

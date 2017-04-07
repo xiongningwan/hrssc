@@ -28,9 +28,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/base5dp"
+            android:layout_marginBottom="@dimen/base8dp"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/base5dp"
+            android:layout_marginTop="@dimen/base8dp"
             android:text="收件地址"
             android:textColor="@color/text_title_gray"/>
 
@@ -55,7 +55,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/base5dp"
             android:layout_marginTop="@dimen/base15dp"
-            android:text="点击选择/添加收件地址"/>
+            android:text="点击选择/添加收件地址"
+            android:textColor="@color/project_color_general_text_secondary"/>
 
     </LinearLayout>
 
@@ -200,7 +201,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/base14dp"
+            android:layout_marginStart="@dimen/base15dp"
             android:layout_marginTop="@dimen/base28dp"
             android:layout_toEndOf="@id/product_iv"
             android:text="中兴手机中兴手机-天机7中兴手机-天机7"
@@ -212,7 +213,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/product_desc_tv"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/base14dp"
+            android:layout_marginStart="@dimen/base15dp"
             android:layout_marginTop="@dimen/base25dp"
             android:layout_toEndOf="@id/product_iv">
 

@@ -289,6 +289,18 @@
         </activity>
         <activity android:name=".integration.activity.DuihuanRecordActivity">
         </activity>
+        <activity android:name=".my.activity.PersonalInfoActivity">
+        </activity>
+        <activity android:name=".my.activity.ModifyActivity">
+        </activity>
+        <activity android:name=".my.activity.FastServiceActivity">
+        </activity>
+        <activity android:name=".my.activity.HelpCenterActivity">
+        </activity>
+        <activity android:name=".my.activity.FeedBackActivity">
+        </activity>
+        <activity android:name=".my.activity.SettingActivity">
+        </activity>
     </application>
 
 </manifest>
