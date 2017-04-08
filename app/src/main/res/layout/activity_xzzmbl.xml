@@ -268,11 +268,17 @@
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_marginTop="@dimen/base10dp"
-            android:background="@color/transparent"
+            android:background="@drawable/view_et_gray_blue_selector"
+            android:gravity="start"
             android:text="备注内容"
+            android:padding="@dimen/base5dp"
             android:textColor="@color/text_title_gray"
             android:textSize="@dimen/base12dp"/>
 
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base20dp"/>
 
     </LinearLayout>
 </ScrollView>

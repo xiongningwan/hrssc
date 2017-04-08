@@ -106,7 +106,7 @@ public class PickImageView extends RelativeLayout {
             if (position == allSelectedPictures.size()) {
                 holder.image.setImageBitmap(
                         BitmapFactory.decodeResource(convertView.getResources(),
-                                R.mipmap.icon_add_pic_unfocused));
+                                R.mipmap.icon_upiantianjia));
 
                 holder.delete.setVisibility(View.GONE);
 

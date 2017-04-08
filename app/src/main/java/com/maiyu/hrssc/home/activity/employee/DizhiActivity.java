@@ -59,6 +59,26 @@ public class DizhiActivity extends CheckPermissionsActivity {
         });
     }
 
+    @Override
+    public void createActivityImpl() {
+
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void initOnClick(View v) {
+
+    }
+
     /**
      * 初始化AMap对象
      */

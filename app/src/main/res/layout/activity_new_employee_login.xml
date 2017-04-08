@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/project_color_basic_white_pure"
     android:orientation="vertical"
-    tools:context="com.maiyu.hrssc.my.activity.PersonalInfoActivity">
+    tools:context="com.maiyu.hrssc.base.activity.LoginActivity">
+
 
     <com.maiyu.hrssc.base.view.HeadView
         android:id="@+id/head_view"
@@ -25,22 +26,22 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/base30dp"
         android:layout_marginStart="@dimen/base30dp"
-        android:layout_marginTop="@dimen/base55dp"
-        android:orientation="vertical"
-        android:background="@drawable/view_stroke_gray_bg">
+        android:layout_marginTop="@dimen/base56dp"
+        android:background="@drawable/view_stroke_gray_bg"
+        android:orientation="vertical">
 
 
         <EditText
-            android:id="@+id/old_pwd_et"
+            android:id="@+id/work_no_et"
             android:layout_width="match_parent"
             android:layout_height="@dimen/base43dp"
-            android:drawableLeft="@mipmap/icon_mimasuo"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:drawablePadding="@dimen/base10dp"
-            android:hint="请输入原始密码"
-            android:textSize="@dimen/project_text_size_dp_14"
             android:background="@color/transparent"
-            android:textColorHint="@color/project_color_general_text_secondary"/>
+            android:drawableLeft="@mipmap/icon_ren_gray"
+            android:drawablePadding="@dimen/base5dp"
+            android:hint="请输入账号"
+            android:textColorHint="@color/project_color_general_text_secondary"
+            android:textSize="@dimen/project_text_size_dp_14"/>
 
         <View
             android:layout_width="match_parent"
@@ -48,38 +49,19 @@
             android:background="@mipmap/line"/>
 
         <EditText
-            android:id="@+id/new_pwd_et"
+            android:id="@+id/pwd_et"
             android:layout_width="match_parent"
             android:layout_height="@dimen/base43dp"
-            android:drawableLeft="@mipmap/icon_mimasuo"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:drawablePadding="@dimen/base10dp"
-            android:hint="请输入新密码，6-16位数字、字母、字符"
-            android:textSize="@dimen/project_text_size_dp_14"
             android:background="@color/transparent"
-            android:textColorHint="@color/project_color_general_text_secondary"/>
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@mipmap/line"/>
-
-        <EditText
-            android:id="@+id/new_pwd_confirm_et"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/base43dp"
             android:drawableLeft="@mipmap/icon_mimasuo"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:drawablePadding="@dimen/base10dp"
-            android:hint="请再次输入新密码"
-            android:textSize="@dimen/project_text_size_dp_14"
-            android:background="@color/transparent"
-            android:textColorHint="@color/project_color_general_text_secondary"/>
+            android:drawablePadding="@dimen/base5dp"
+            android:hint="请输入密码"
+            android:textColorHint="@color/project_color_general_text_secondary"
+            android:textSize="@dimen/project_text_size_dp_14"/>
 
 
     </LinearLayout>
-
 
 
     <Button
@@ -90,7 +72,9 @@
         android:layout_marginStart="@dimen/base30dp"
         android:layout_marginTop="@dimen/base46dp"
         android:background="@drawable/corner_view_selector"
-        android:text="确认修改"
-        android:textSize="@dimen/project_text_size_dp_16"
-        android:textColor="@color/project_color_basic_white_pure"/>
+        android:text="登录"
+        android:textColor="@color/project_color_basic_white_pure"
+        android:textSize="@dimen/project_text_size_dp_16"/>
+
+
 </LinearLayout>

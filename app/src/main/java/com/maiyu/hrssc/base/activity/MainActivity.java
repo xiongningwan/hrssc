@@ -19,7 +19,7 @@ import com.maiyu.hrssc.util.HintUitl;
 import com.maiyu.hrssc.util.PackageInfoUtil;
 
 import java.util.ArrayList;
-public class MainActivity extends BaseActivity {
+public class MainActivity extends CheckPermissionsActivity {
     private static final String TAG = "MainActivity";
     private CustomViewPager mContentView;
     private RelativeLayout mTabHomeView;

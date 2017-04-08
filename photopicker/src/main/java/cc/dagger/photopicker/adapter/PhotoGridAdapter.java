@@ -95,6 +95,8 @@ public class PhotoGridAdapter extends SelectableAdapter {
             if(showSelectIndicator){
                 holder.indicator.setImageResource(selected ? R.drawable.btn_selected
                         : R.drawable.btn_unselected);
+                holder.indicator.setImageResource(selected ? R.drawable.icon_xuanze_duigou
+                        : R.drawable.icon_xuanze_wxz);
             }
             // 显示图片
             if(imageLoader != null) {

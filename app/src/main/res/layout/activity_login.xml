@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/project_color_basic_white_pure"
+    android:orientation="vertical"
+    tools:context="com.maiyu.hrssc.base.activity.LoginActivity">
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/base89dp"
+        android:text="ZTE中兴"
+        android:textColor="@color/project_color_general_hyperlink"
+        android:textSize="46dp"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/base30dp"
+        android:layout_marginStart="@dimen/base30dp"
+        android:layout_marginTop="@dimen/base89dp"
+        android:background="@drawable/view_stroke_gray_bg"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/work_no_et"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base43dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:background="@color/transparent"
+            android:drawableLeft="@mipmap/icon_ren_gray"
+            android:drawablePadding="@dimen/base10dp"
+            android:hint="请输入工号"
+            android:textColorHint="@color/project_color_general_text_secondary"
+            android:textSize="@dimen/project_text_size_dp_14"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@mipmap/line"/>
+
+        <EditText
+            android:id="@+id/pwd_et"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base43dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:background="@color/transparent"
+            android:drawableLeft="@mipmap/icon_mimasuo"
+            android:drawablePadding="@dimen/base10dp"
+            android:hint="请输入密码"
+            android:textColorHint="@color/project_color_general_text_secondary"
+            android:textSize="@dimen/project_text_size_dp_14"
+            android:inputType="textPassword"/>
+
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/confirm_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base44dp"
+            android:layout_marginEnd="@dimen/base30dp"
+            android:layout_marginStart="@dimen/base30dp"
+            android:layout_marginTop="@dimen/base46dp"
+            android:background="@drawable/corner_view_selector"
+            android:text="登录"
+            android:textColor="@color/project_color_basic_white_pure"
+            android:textSize="@dimen/project_text_size_dp_16"/>
+
+
+        <View
+            android:id="@+id/point"
+            android:layout_width="1px"
+            android:layout_height="1px"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/new_employee_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/confirm_btn"
+            android:layout_marginTop="@dimen/base20dp"
+            android:layout_toStartOf="@id/point"
+            android:layout_marginEnd="@dimen/base10dp"
+            android:text="新员工登录入口"
+            android:textSize="@dimen/project_text_size_dp_12"/>
+
+        <TextView
+            android:id="@+id/forget_pwd_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/point"
+            android:layout_marginStart="@dimen/base10dp"
+            android:layout_below="@id/confirm_btn"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/base20dp"
+            android:text="忘记密码"
+            android:textColor="@color/project_color_general_hyperlink"
+            android:textSize="@dimen/project_text_size_dp_12"/>
+    </RelativeLayout>
+
+
+</LinearLayout>

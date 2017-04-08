@@ -21,9 +21,9 @@
 
     <ImageView
         android:id="@+id/child_delete"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_alignEnd="@id/child_iv"
-        android:src="@mipmap/btn_unselected" />
+        android:src="@mipmap/icon_xuanze_cha" />
 
 </RelativeLayout>
