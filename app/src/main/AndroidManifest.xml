@@ -39,11 +39,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".base.activity.LoginActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -278,69 +278,87 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".base.activity.AddressManageActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".base.activity.AddressManageActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".integration.activity.DuihuanActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".integration.activity.DuihuanActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".base.activity.AddAddressActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".base.activity.AddAddressActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".base.activity.EditActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".base.activity.EditActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".integration.activity.DuihuanSuccessActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".integration.activity.DuihuanSuccessActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".integration.activity.DuihuanRecordActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".integration.activity.DuihuanRecordActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".my.activity.PersonalInfoActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".my.activity.PersonalInfoActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".my.activity.ModifyActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".my.activity.ModifyActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".my.activity.FastServiceActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".my.activity.FastServiceActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".my.activity.HelpCenterActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".my.activity.HelpCenterActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".my.activity.FeedBackActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".my.activity.FeedBackActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".my.activity.SettingActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".my.activity.SettingActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".base.activity.MainActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".base.activity.MainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".base.activity.ForgetPwdActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".base.activity.ForgetPwdActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".base.activity.ForgetPwd2Activity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".base.activity.ForgetPwd2Activity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".base.activity.NewEmployeeLoginActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".base.activity.NewEmployeeLoginActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".base.activity.CitysActivity">
         </activity>
     </application>
 

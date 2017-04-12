@@ -7,8 +7,6 @@ import android.content.SharedPreferences.Editor;
 import com.maiyu.hrssc.base.bean.User;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class SharedPreferencesUtil {
 
@@ -27,6 +25,7 @@ public class SharedPreferencesUtil {
 
     /**
      * 保存弹窗时间
+     *
      * @param context
      * @param time
      */
@@ -39,6 +38,7 @@ public class SharedPreferencesUtil {
 
     /**
      * 得到保存的弹窗时间
+     *
      * @param context
      * @return
      */
@@ -48,61 +48,77 @@ public class SharedPreferencesUtil {
     }
 
 
-
     /**
      * 保存用户基本信息
+     *
      * @param context
      * @param user
-     * @param activeTime
      */
-    public static void saveUserBaseInfo(Context context, User user, long activeTime) {
+    public static void saveUserBaseInfo(Context context, User user) {
         SharedPreferences perfer = context.getSharedPreferences("user_info_vp", Context.MODE_PRIVATE);
         Editor editor = perfer.edit();
-        editor.putLong("userId", user.getId());
-        editor.putString("mobile", user.getMobile());
+        editor.putLong("id", user.getId());
+        editor.putString("name", user.getName());
+        editor.putString("signature", user.getSignature());
+        editor.putString("head", user.getHead());
+        editor.putString("password", user.getPassword());
+        editor.putString("status", user.getStatus());
+        editor.putString("sex", user.getSex());
+        editor.putString("birthday", user.getBirthday());
+        editor.putString("marry", user.getMarry());
+        editor.putString("minority", user.getMinority());
+        editor.putString("id_card", user.getId_card());
+        editor.putString("amount", user.getAmount());
+        editor.putString("phone", user.getPhone());
+        editor.putString("email", user.getEmail());
+        editor.putString("login_time", user.getLogin_time());
+        editor.putString("create_time", user.getCreate_time());
         editor.putString("token", user.getToken());
+        editor.putString("last_loginTime", user.getLast_loginTime());
+        editor.putString("last_loginIp", user.getLast_loginIp());
+        editor.putString("signed", user.getSigned());
 
-        editor.putString("level", user.getLevel());
-        editor.putString("realityName", user.getRealityName());
-        editor.putString("code", user.getCode());
-        editor.putInt("incomeSpace", user.getIncomeSpace());
-        editor.putInt("incomeSpace", user.getIncomeSpace());
-        editor.putInt("isAssess", user.getIsAssess());
-        editor.putInt("isIdCard", user.getIsIdCard());
-        editor.putLong("activeTime", activeTime);
         editor.commit();
 
     }
 
     /**
      * 用户基本信息
+     *
      * @param context
      * @return
      */
-    public static Map<String, Object> getUserBaseInfo(Context context) {
+    public static User getUserBaseInfo(Context context) {
         SharedPreferences perfer = context.getSharedPreferences("user_info_vp", Context.MODE_PRIVATE);
-        Map<String, Object> map = new HashMap<String, Object>();
         User u = new User();
-        u.setId(perfer.getLong("userId", -1));
-        u.setMobile(perfer.getString("mobile", null));
+        u.setId(perfer.getLong("id", -1));
+        u.setName(perfer.getString("name", null));
+        u.setSignature(perfer.getString("signature", null));
+        u.setHead(perfer.getString("head", null));
+        u.setPassword(perfer.getString("password", null));
+        u.setStatus(perfer.getString("status", null));
+        u.setSex(perfer.getString("sex", null));
+        u.setBirthday(perfer.getString("birthday", null));
+        u.setMarry(perfer.getString("marry", null));
+        u.setMinority(perfer.getString("minority", null));
+        u.setId_card(perfer.getString("id_card", null));
+        u.setAmount(perfer.getString("amount", null));
+        u.setPhone(perfer.getString("phone", null));
+        u.setEmail(perfer.getString("email", null));
+        u.setLogin_time(perfer.getString("login_time", null));
+        u.setCreate_time(perfer.getString("create_time", null));
         u.setToken(perfer.getString("token", null));
+        u.setLast_loginTime(perfer.getString("last_loginTime", null));
+        u.setLast_loginIp(perfer.getString("last_loginIp", null));
+        u.setSigned(perfer.getString("signed", null));
 
-        u.setLevel(perfer.getString("level", null));
-        u.setRealityName(perfer.getString("realityName", null));
-        u.setCode(perfer.getString("code", null));
-        u.setIncomeSpace(perfer.getInt("incomeSpace", 1));
-        u.setIsAssess(perfer.getInt("isAssess", 0));
-        u.setIsIdCard(perfer.getInt("isIdCard", 0));
-        long activeTime = perfer.getLong("activeTime", 0);
-
-        map.put("user", u);
-        map.put("activeTime", activeTime);
-        return map;
+        return u;
     }
 
 
     /**
      * 保存最新版本
+     *
      * @param context
      * @param lastVersion
      */
@@ -115,6 +131,7 @@ public class SharedPreferencesUtil {
 
     /**
      * 获取最新版本
+     *
      * @param context
      * @return
      */
@@ -125,9 +142,9 @@ public class SharedPreferencesUtil {
     }
 
 
-
     /**
      * 保存城市名称
+     *
      * @param context
      * @param city
      */
@@ -140,6 +157,7 @@ public class SharedPreferencesUtil {
 
     /**
      * 获取城市名称
+     *
      * @param context
      * @return
      */
@@ -150,4 +168,29 @@ public class SharedPreferencesUtil {
     }
 
 
+    /**
+     * 保存登录帐号
+     *
+     * @param context
+     * @param loginName
+     */
+    public static void saveLoginName(Context context, String loginName) {
+        SharedPreferences perfer = context.getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        Editor editor = perfer.edit();
+        editor.putString("loginName", loginName);
+        editor.commit();
+    }
+
+
+    /**
+     * 获取保存的登录帐号
+     *
+     * @param context
+     * @return
+     */
+    public static String getLoginName(Context context) {
+        SharedPreferences perfer = context.getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        String loginName = perfer.getString("loginName", "");
+        return loginName;
+    }
 }

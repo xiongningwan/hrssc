@@ -7,31 +7,27 @@ import java.util.ArrayList;
  * 1.个人信息
  * 2.需要上传的图片
  * 3.
- * @author Jack
  *
+ * @author Jack
  */
 public class DataCenter {
     public static final int TYPE_USER_INFO = 1;
     public static final int TYPE_UPLOADING_PHOTOS = 2;
-    /**账户信息回调类型*/
+    /**
+     * 账户信息回调类型
+     */
     public static final int TYPE_ACCOUNT_INFO = 3;
-    /**账户未登录广告*/
-    public static final int TYPE_ACCOUNT_UNLOGIN_AD = 5;
-    /**登出回调*/
-    public static final int TYPE_LOGOUT_DATA_CHANGE = 6;
-    /**转到短期产品列表 */
-    public static final int TYPE_GO_TO_SHORT_PRODUCT = 7;
-    /**产品单条刷新 */
-    public static final int TYPE_PRODUCT_UPDATE_SIGLE_ROW = 8;
-    /**合伙人提现数据更新 */
-    public static final int TYPE_PARTER_DATA_CHANGE = 9;
 
-    /**个人信息*/
+    /**
+     * 个人信息
+     */
     private User mUser;
     /**上传中的图片*/
     //  private HashMap<String, UploadableFile> mUploadingPhotos;
 
-    /**数据观察者列表*/
+    /**
+     * 数据观察者列表
+     */
     private ArrayList<DataObserver> dataObserverList;
 
     /**
@@ -43,8 +39,8 @@ public class DataCenter {
 
     /**
      * 利用 classLoader 实现线程安全的懒加载单例模式
+     *
      * @author Jack
-     * 
      */
     private static class DataCenterHolder {
         private static final DataCenter INSTANCE = new DataCenter();
@@ -61,19 +57,31 @@ public class DataCenter {
 
     /**
      * 设置用户信息
+     *
      * @param user
      */
     public void setUser(User user) {
         mUser.setId(user.getId());
-        mUser.setMobile(user.getMobile());
+        mUser.setName(user.getName());
+        mUser.setSignature(user.getSignature());
+        mUser.setHead(user.getHead());
+        mUser.setPassword(user.getPassword());
+        mUser.setStatus(user.getStatus());
+        mUser.setSex(user.getSex());
+        mUser.setBirthday(user.getBirthday());
+        mUser.setMarry(user.getMarry());
+        mUser.setMinority(user.getMinority());
+        mUser.setId_card(user.getId_card());
+        mUser.setAmount(user.getAmount());
+        mUser.setPhone(user.getPhone());
+        mUser.setEmail(user.getEmail());
+        mUser.setLogin_time(user.getLogin_time());
+        mUser.setCreate_time(user.getCreate_time());
         mUser.setToken(user.getToken());
-        mUser.setLevel(user.getLevel());
-        mUser.setRealityName(user.getRealityName());
-        mUser.setCode(user.getCode());
-        mUser.setIncomeSpace(user.getIncomeSpace());
-      //  mUser.setCanGoRewards(user.getCanGoRewards());
-        mUser.setIsAssess(user.getIsAssess());
-        mUser.setIsIdCard(user.getIsIdCard());
+        mUser.setLast_loginTime(user.getLast_loginTime());
+        mUser.setLast_loginIp(user.getLast_loginIp());
+        mUser.setSigned(user.getSigned());
+
         notifyObserver(TYPE_USER_INFO);
     }
 
@@ -81,36 +89,6 @@ public class DataCenter {
         notifyObserver(TYPE_ACCOUNT_INFO);
     }
 
-    public void notifyLogoutDataChange() {
-        notifyObserver(TYPE_LOGOUT_DATA_CHANGE);
-    }
-
-    /**
-     * 账户未登录广告通知
-     */
-    public void notifyAccountUnloginAdChange() {
-        notifyObserver(TYPE_ACCOUNT_UNLOGIN_AD);
-    }
-
-    /**
-     * 跳转到短期产品列表
-     */
-    public void notifyGotoShortProduct() {
-        notifyObserver(TYPE_GO_TO_SHORT_PRODUCT);
-    }
-
-    /**
-     * 主页单条数据更新
-     */
-    public void notifyHomeDataChange() {
-        notifyObserver(TYPE_PRODUCT_UPDATE_SIGLE_ROW);
-    }
-    /**
-     *  合伙人提现数据更新
-     */
-    public void notifyParterDataChange() {
-        notifyObserver(TYPE_PARTER_DATA_CHANGE);
-    }
 
     /**
      * 获取用户信息, 只能使用用户信息, 禁止修改字段，修改用户信息请使用 setuser(user)
@@ -121,16 +99,15 @@ public class DataCenter {
 
     /**
      * 获取用户信息, 只能使用用户信息, 禁止修改字段，修改用户信息请使用 setuser(user)
-     * @param user
      */
-    /*public boolean isLogin() {
-        return mUser.getUserId() != -1;
-    }*/
+    public boolean isLogin() {
+        return mUser.getId() != -1;
+    }
 
     /*  *//**
-                        * 添加上传文件
-                        * @param uri
-                        */
+     * 添加上传文件
+     * @param uri
+     */
     /*
     public void addUploadingFile(UploadableFile file) {
      mUploadingPhotos.put(file.getLocalAddressUri().getPath(), file);
@@ -138,9 +115,9 @@ public class DataCenter {
     }
 
     *//**
-      * 更新上传文件的信息
-      * @param uri
-      */
+     * 更新上传文件的信息
+     * @param uri
+     */
     /*
     public void modifyUploadingFile(UploadableFile file) {
      UploadableFile uploadableFile = mUploadingPhotos.get(file.getLocalAddressUri().getPath());
@@ -153,6 +130,7 @@ public class DataCenter {
 
     /**
      * 通知所有观察者
+     *
      * @param type
      */
     private void notifyObserver(int type, Object... data) {
@@ -177,12 +155,13 @@ public class DataCenter {
 
     /**
      * 数据观察者接口
-     * @author Jack
      *
+     * @author Jack
      */
     public static interface DataObserver {
         /**
          * 响应数据改变的监听函数
+         *
          * @param type 改变的数据的类型, 各个观察者根据自己观察的数据类型进行响应
          * @param data
          */

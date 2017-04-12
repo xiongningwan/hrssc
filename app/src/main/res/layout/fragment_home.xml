@@ -3,7 +3,8 @@
                                               android:layout_width="match_parent"
                                               android:layout_height="match_parent"
                                               android:background="@color/project_color_basic_white_pure"
-                                              tools:context="com.maiyu.hrssc.home.frament.HomeFragment">
+                                              tools:context="com.maiyu.hrssc.home.frament.HomeFragment"
+    android:id="@+id/swipe_reshresh_layout">
 
     <ScrollView
         android:layout_width="match_parent"
