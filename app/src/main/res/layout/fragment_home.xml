@@ -69,8 +69,20 @@
                         android:layout_centerVertical="true"
                         android:layout_gravity="end"
                         android:layout_marginRight="@dimen/base7dp"
-                        android:layout_marginTop="@dimen/base22dp"
                         android:src="@mipmap/icon_xiaoxi"/>
+
+
+                    <View
+                        android:id="@+id/msg_point"
+                        android:layout_width="@dimen/base5dp"
+                        android:layout_height="@dimen/base5dp"
+                        android:background="@drawable/view_point_red"
+                        android:layout_alignTop="@id/msg_iv"
+                        android:layout_toEndOf="@id/msg_iv"
+                        android:layout_marginStart="-14dp"
+                        android:layout_marginTop="@dimen/base1dp"
+                        android:visibility="gone"/>
+
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -124,12 +136,13 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/myTransaction_tv"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginEnd="@dimen/base5dp"
                         android:background="@drawable/view_point_red"
                         android:gravity="center"
-                        android:text="12"
+                        android:text="0"
                         android:textColor="@color/project_color_basic_white_pure"
                         android:textSize="@dimen/project_text_size_dp_12"/>
 
@@ -181,12 +194,13 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/myApply_tv"
                         android:layout_width="@dimen/base20dp"
                         android:layout_height="@dimen/base20dp"
                         android:layout_marginEnd="@dimen/base5dp"
                         android:background="@drawable/view_point_red"
                         android:gravity="center"
-                        android:text="12"
+                        android:text="0"
                         android:textColor="@color/project_color_basic_white_pure"
                         android:textSize="@dimen/project_text_size_dp_12"/>
 
@@ -388,141 +402,12 @@
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:background="@mipmap/line"/>
 
-            <RelativeLayout
-                android:id="@+id/line_1_rl"
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/news_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/base8dp"
-                android:layout_marginTop="@dimen/base8dp"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:paddingStart="@dimen/activity_horizontal_margin">
+                android:layout_height="match_parent"/>
 
-                <RelativeLayout
-                    android:id="@+id/line_1_content_rl"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/line_1_point"
-                        android:layout_width="@dimen/base5dp"
-                        android:layout_height="@dimen/base5dp"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/view_point_blue"/>
-
-                    <TextView
-                        android:id="@+id/line_1_content"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/base5dp"
-                        android:layout_toEndOf="@id/line_1_point"
-                        android:drawableStart="@drawable/view_point_blue"
-                        android:text="关于证明办理最新规则"/>
-
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/line_1_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/line_1_content_rl"
-                    android:layout_marginStart="@dimen/base11dp"
-                    android:layout_marginTop="@dimen/base5dp"
-                    android:text="2017-2-14"
-                    android:textColor="@color/project_color_general_hyperlink"
-                    android:textSize="@dimen/project_text_size_dp_12"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/line_2_rl"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/base8dp"
-                android:layout_marginTop="@dimen/base8dp"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:paddingStart="@dimen/activity_horizontal_margin">
-
-                <RelativeLayout
-                    android:id="@+id/line_2_content_rl"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/line_2_point"
-                        android:layout_width="@dimen/base5dp"
-                        android:layout_height="@dimen/base5dp"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/view_point_blue"/>
-
-                    <TextView
-                        android:id="@+id/line_2_content"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/base5dp"
-                        android:layout_toEndOf="@id/line_2_point"
-                        android:text="关于证明办理最新规则"/>
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/line_2_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/line_2_content_rl"
-                    android:layout_marginStart="@dimen/base11dp"
-                    android:layout_marginTop="@dimen/base5dp"
-                    android:text="2017-3-14"
-                    android:textColor="@color/project_color_general_hyperlink"
-                    android:textSize="@dimen/project_text_size_dp_12"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/line_3_rl"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/base8dp"
-                android:layout_marginTop="@dimen/base8dp"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:paddingStart="@dimen/activity_horizontal_margin">
-
-                <RelativeLayout
-                    android:id="@+id/line_3_content_rl"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/line_3_point"
-                        android:layout_width="@dimen/base5dp"
-                        android:layout_height="@dimen/base5dp"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/view_point_blue"/>
-
-                    <TextView
-                        android:id="@+id/line_3_content"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/base5dp"
-                        android:layout_toEndOf="@id/line_3_point"
-                        android:text="关于证明办理最新规则"/>
-
-                </RelativeLayout>
-
-
-                <TextView
-                    android:id="@+id/line_3_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/line_3_content_rl"
-                    android:layout_marginStart="@dimen/base11dp"
-                    android:layout_marginTop="@dimen/base8dp"
-                    android:text="2017-2-14"
-                    android:textColor="@color/project_color_general_hyperlink"
-                    android:textSize="@dimen/project_text_size_dp_12"/>
-
-            </RelativeLayout>
 
             <include layout="@layout/view_space_layout"/>
         </LinearLayout>

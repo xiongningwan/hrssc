@@ -10,31 +10,37 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.base.bean.DataCenter;
+import com.maiyu.hrssc.base.bean.News;
+import com.maiyu.hrssc.base.engine.IUserEngine;
+import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.maiyu.hrssc.home.activity.information.adapter.InfoPageAdapter;
-import com.maiyu.hrssc.home.activity.information.bean.Info;
+import com.maiyu.hrssc.util.BaseAsyncTask;
+import com.maiyu.hrssc.util.EngineFactory;
+import com.maiyu.hrssc.util.SharedPreferencesUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 待签署 盖章 完成
+ * 资讯page
  */
 public class InfoPageFragment extends Fragment implements OnRefreshListener, OnLoadMoreListener {
     // TODO: Rename parameter arguments, choose names that match
     private static final String ARG_PARAM1 = "param1";
 
     // TODO: Rename and change types of parameters
-    private int mParam1;
+    private String mParam1;
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
     @BindView(R.id.refreshLayout)
     SwipeToLoadLayout mRefreshLayout;
+    private int mCount = 10;
     private int mPage = 1;
     private final int init = 1;
     private final int isRefreshing = 2;
@@ -46,10 +52,10 @@ public class InfoPageFragment extends Fragment implements OnRefreshListener, OnL
         // Required empty public constructor
     }
 
-    public static InfoPageFragment newInstance(int param1) {
+    public static InfoPageFragment newInstance(String param1) {
         InfoPageFragment fragment = new InfoPageFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -58,7 +64,7 @@ public class InfoPageFragment extends Fragment implements OnRefreshListener, OnL
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getInt(ARG_PARAM1);
+            mParam1 = getArguments().getString(ARG_PARAM1);
         }
     }
 
@@ -89,30 +95,10 @@ public class InfoPageFragment extends Fragment implements OnRefreshListener, OnL
     }
 
     private void initData() {
-        List list = new ArrayList();
+        String token = DataCenter.getInstance().getuser().getToken();
 
-        if (1 == mParam1) {
-            list.add(new Info("关于证明办理最新规则", "2017-2-22"));
-            list.add(new Info("档案借阅规则", "2017-2-22"));
-            list.add(new Info("关于证明办理最新规则", "2017-2-22"));
-            mAdapter.setData(list);
-        } else if (2 == mParam1) {
-            list.add(new Info("新闻1", "2017-2-22"));
-            list.add(new Info("新闻2", "2017-2-22"));
-            list.add(new Info("新闻3", "2017-2-22"));
-            mAdapter.setData(list);
-
-        } else if (3 == mParam1) {
-            list.add(new Info("公告1", "2017-2-22"));
-            list.add(new Info("公告2", "2017-2-22"));
-            list.add(new Info("公告3", "2017-2-22"));
-            mAdapter.setData(list);
-        }else if (3 == mParam1) {
-            list.add(new Info("通知1", "2017-2-22"));
-            list.add(new Info("通知2", "2017-2-22"));
-            list.add(new Info("通知3", "2017-2-22"));
-            mAdapter.setData(list);
-        }
+        String city = SharedPreferencesUtil.getCityName(getActivity());
+        new NewsListAsyncTask(token, mParam1, city, String.valueOf(mPage), String.valueOf(mCount)).execute();
     }
 
     @Override
@@ -120,6 +106,7 @@ public class InfoPageFragment extends Fragment implements OnRefreshListener, OnL
         mPage++;
         status = isLoadMoreing;
         initData();
+        refreshOrLoadMoreComplete();
     }
 
     @Override
@@ -127,6 +114,7 @@ public class InfoPageFragment extends Fragment implements OnRefreshListener, OnL
         mPage = 1;
         status = isRefreshing;
         initData();
+        refreshOrLoadMoreComplete();
     }
 
 
@@ -139,6 +127,67 @@ public class InfoPageFragment extends Fragment implements OnRefreshListener, OnL
         }
         if (mRefreshLayout.isLoadingMore()) {
             mRefreshLayout.setLoadingMore(false);
+        }
+    }
+
+    /**
+     * 获取资讯列表
+     */
+    class NewsListAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String token;
+        private String cid;
+        private String city;
+        private String page;
+        private String rows;
+        private List<News> list;
+
+        public NewsListAsyncTask(String token, String cid, String city, String page, String rows) {
+            super();
+
+            this.token = token;
+            this.cid = cid;
+            this.city = city;
+            this.page = page;
+            this.rows = rows;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            IUserEngine engine = EngineFactory.get(IUserEngine.class);
+            try {
+                list = engine.getNewsList(getActivity(), token, cid, city, page, rows);
+            } catch (NetException e) {
+                exception = e;
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            if (checkException(getActivity())) {
+                return;
+            }
+            if (list != null) {
+                setData(list);
+            }
+
+            super.onPostExecute(result);
+        }
+    }
+
+    private void setData(List<News> list) {
+        if (status == init) {
+            mAdapter.setData(list);
+        } else if (status == isRefreshing) {
+            mAdapter.setData(list);
+        } else if (status == isLoadMoreing) {
+            mAdapter.loadMoreData(list);
         }
     }
 }

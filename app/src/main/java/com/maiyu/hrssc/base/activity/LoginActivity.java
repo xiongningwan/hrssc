@@ -52,6 +52,8 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        String loginName = SharedPreferencesUtil.getLoginName(this);
+        mWorkNoEt.setText(loginName);
 
     }
 
@@ -92,7 +94,7 @@ public class LoginActivity extends BaseActivity {
 
         String type = "1";
         String userId = mWorkNo;
-       // String password = AppUtil.md5(mPwd);
+        // String password = AppUtil.md5(mPwd);
         String password = mPwd;
         String mac = AppUtil.getMac(LoginActivity.this);
         String version = PackageInfoUtil.getVersionName(this);

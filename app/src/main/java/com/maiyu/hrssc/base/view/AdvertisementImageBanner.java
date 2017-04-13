@@ -21,6 +21,7 @@ import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.ConstantValue;
 import com.maiyu.hrssc.base.activity.WebActivity;
 import com.maiyu.hrssc.base.bean.Adv;
+import com.maiyu.hrssc.base.bean.Banners;
 import com.maiyu.hrssc.util.ImageLoaderUtil;
 
 import java.util.ArrayList;
@@ -47,8 +48,6 @@ public class AdvertisementImageBanner extends RelativeLayout implements OnPageCh
     List<String> mTitle = new ArrayList<String>();
     List<String> mURl = new ArrayList<String>();
 
-    List<String> mShareable  = new ArrayList<String>();
-    List<String> mShareUrl  = new ArrayList<String>();
     List<String> mAdDesc  = new ArrayList<String>();
 
 
@@ -97,21 +96,17 @@ public class AdvertisementImageBanner extends RelativeLayout implements OnPageCh
         mBannnerIndicatorTitleTextView = (TextView) findViewById(R.id.ad_language_2);
     }
 
-    public void setViewData(ArrayList<Adv> arrayList) {
+    public void setViewData(ArrayList<Banners> arrayList) {
         mPictureAddresses.clear();
         mTitle.clear();
         mURl.clear();
-        mShareable.clear();
-        mShareUrl.clear();
-        mAdDesc.clear();
+       // mAdDesc.clear();
 
 
         mPictureAddresses.addAll(transformImageData(arrayList));
         mTitle.addAll(transformTitleData(arrayList));
         mURl.addAll(transformURLData(arrayList));
-        mShareable.addAll(transformShareableData(arrayList));
-        mShareUrl.addAll(transformShareUrlData(arrayList));
-        mAdDesc.addAll(transformAdDescData(arrayList));
+      //  mAdDesc.addAll(transformAdDescData(arrayList));
 
 
         mBannnerIndicatorIconView.removeAllViews();
@@ -380,12 +375,12 @@ public class AdvertisementImageBanner extends RelativeLayout implements OnPageCh
      * @param arrayList
      * @return
      */
-    private List<String> transformImageData(ArrayList<Adv> arrayList) {
+    private List<String> transformImageData(ArrayList<Banners> arrayList) {
         //  ImageComparator comparator = new ImageComparator();
         //   Collections.sort(arrayList, comparator);
 
         ArrayList<String> list = new ArrayList<String>();
-        for (Adv ad : arrayList) {
+        for (Banners ad : arrayList) {
             list.add(ad.getImage());
         }
         return list;
@@ -396,13 +391,13 @@ public class AdvertisementImageBanner extends RelativeLayout implements OnPageCh
      * @param arrayList
      * @return
      */
-    private List<String> transformURLData(ArrayList<Adv> arrayList) {
+    private List<String> transformURLData(ArrayList<Banners> arrayList) {
         // ImageComparator comparator = new ImageComparator();
         //  Collections.sort(arrayList, comparator);
 
         ArrayList<String> list = new ArrayList<String>();
-        for (Adv ad : arrayList) {
-            list.add(ad.getActivityUrl());
+        for (Banners ad : arrayList) {
+            list.add(ad.getLink());
         }
         return list;
     }
@@ -412,48 +407,18 @@ public class AdvertisementImageBanner extends RelativeLayout implements OnPageCh
      * @param arrayList
      * @return
      */
-    private List<String> transformTitleData(ArrayList<Adv> arrayList) {
+    private List<String> transformTitleData(ArrayList<Banners> arrayList) {
         //  ImageComparator comparator = new ImageComparator();
         //  Collections.sort(arrayList, comparator);
 
         ArrayList<String> list = new ArrayList<String>();
-        for (Adv ad : arrayList) {
-            list.add(ad.getTitle());
+        for (Banners ad : arrayList) {
+            list.add(ad.getName());
         }
         return list;
     }
 
-    private List<String> transformShareableData(ArrayList<Adv> arrayList) {
-        //  ImageComparator comparator = new ImageComparator();
-        //  Collections.sort(arrayList, comparator);
 
-        ArrayList<String> list = new ArrayList<String>();
-        for (Adv ad : arrayList) {
-            list.add(ad.getShareable());
-        }
-        return list;
-    }
-    private List<String> transformShareUrlData(ArrayList<Adv> arrayList) {
-        //  ImageComparator comparator = new ImageComparator();
-        //  Collections.sort(arrayList, comparator);
-
-        ArrayList<String> list = new ArrayList<String>();
-        for (Adv ad : arrayList) {
-            list.add(ad.getShareUrl());
-        }
-        return list;
-    }
-
-    private List<String> transformAdDescData(ArrayList<Adv> arrayList) {
-        //  ImageComparator comparator = new ImageComparator();
-        //  Collections.sort(arrayList, comparator);
-
-        ArrayList<String> list = new ArrayList<String>();
-        for (Adv ad : arrayList) {
-            list.add(ad.getAdDesc());
-        }
-        return list;
-    }
 
     /**
      * 按照 image id 比较大小

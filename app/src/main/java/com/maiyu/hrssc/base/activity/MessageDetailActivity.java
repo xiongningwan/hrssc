@@ -1,15 +1,13 @@
-package com.maiyu.hrssc.home.activity.information;
+package com.maiyu.hrssc.base.activity;
 
 import android.text.Html;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
-import com.maiyu.hrssc.base.activity.BaseActivity;
 import com.maiyu.hrssc.base.bean.DataCenter;
-import com.maiyu.hrssc.base.bean.News;
+import com.maiyu.hrssc.base.bean.Messages;
 import com.maiyu.hrssc.base.engine.IUserEngine;
 import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.base.view.HeadView;
@@ -20,43 +18,47 @@ import com.maiyu.hrssc.util.EngineFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class InformationDetialActivity extends BaseActivity {
+import static com.maiyu.hrssc.base.activity.MessagesActivity.MESSAGE_ITEM_ID;
 
+/**
+ * 消息详情
+ */
+public class MessageDetailActivity extends BaseActivity {
     @BindView(R.id.head_view)
     HeadView mHeadView;
     @BindView(R.id.title)
     TextView mTitle;
-    @BindView(R.id.time)
-    TextView mTime;
     @BindView(R.id.content)
     TextView mContent;
-    @BindView(R.id.have_content_rl)
-    RelativeLayout mHaveContentRl;
-    @BindView(R.id.have_no_content_iv)
-    ImageView mHaveNoContentIv;
+    @BindView(R.id.time)
+    TextView mTime;
+    @BindView(R.id.content_rl)
+    RelativeLayout mContentRl;
+    @BindView(R.id.no_content)
+    RelativeLayout mNOcontent;
     private LoadingDialog mLoadingDialog;
     private String mToken;
 
-
     @Override
     public void createActivityImpl() {
-        setContentView(R.layout.activity_information_detial);
+        setContentView(R.layout.activity_message_detail);
         ButterKnife.bind(this);
     }
 
     @Override
     public void initViews() {
-        mHeadView.setTitle("资讯详情", true, false);
+        mHeadView.setTitle("消息", true, false);
         mLoadingDialog = new LoadingDialog(this);
 
         mToken = DataCenter.getInstance().getuser().getToken();
     }
 
+
     @Override
     public void initData() {
-        String nid = getIntent().getStringExtra("nid");
-        if(nid != null) {
-            new InfoDetailAsyncTask(mToken, nid).execute();
+        String mid = getIntent().getStringExtra(MESSAGE_ITEM_ID);
+        if(mid != null) {
+            new MessagesListAsyncTask(mToken, mid).execute();
         }
     }
 
@@ -67,18 +69,18 @@ public class InformationDetialActivity extends BaseActivity {
 
 
     /**
-     * 获取资讯详情
+     * 获取消息列表
      */
-    class InfoDetailAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+    class MessagesListAsyncTask extends BaseAsyncTask<Void, Void, Void> {
         private String token;
-        private String nid;
-        private News news;
+        private String mid;
+        private Messages messages;
 
-        public InfoDetailAsyncTask(String token, String nid) {
+        public MessagesListAsyncTask(String token, String mid) {
             super();
 
             this.token = token;
-            this.nid = nid;
+            this.mid = mid;
         }
 
         @Override
@@ -91,7 +93,7 @@ public class InformationDetialActivity extends BaseActivity {
         protected Void doInBackground(Void... params) {
             IUserEngine engine = EngineFactory.get(IUserEngine.class);
             try {
-                news = engine.getInfoDetail(InformationDetialActivity.this, token, nid);
+                messages = engine.getMessageDetial(MessageDetailActivity.this, token, mid);
             } catch (NetException e) {
                 exception = e;
                 e.printStackTrace();
@@ -102,23 +104,23 @@ public class InformationDetialActivity extends BaseActivity {
         @Override
         protected void onPostExecute(Void result) {
             mLoadingDialog.getDialog().dismiss();
-            if (checkException(InformationDetialActivity.this)) {
+            if (checkException(MessageDetailActivity.this)) {
                 return;
             }
-            if (news != null) {
-                setData(news);
+            if (messages != null ) {
+                setData(messages);
             } else {
-                mHaveContentRl.setVisibility(View.GONE);
-                mHaveNoContentIv.setVisibility(View.VISIBLE);
+                mContentRl.setVisibility(View.GONE);
+                mNOcontent.setVisibility(View.VISIBLE);
             }
 
             super.onPostExecute(result);
         }
     }
 
-    private void setData(News news) {
-        mTitle.setText(news.getTitle());
-        mContent.setText(Html.fromHtml(news.getContent()));
-        mTime.setText(news.getCreate_time());
+    private void setData(Messages messages) {
+        mTitle.setText(messages.getTitle());
+        mContent.setText(Html.fromHtml(messages.getContent()));
+        mTime.setText(messages.getCreate_time());
     }
 }

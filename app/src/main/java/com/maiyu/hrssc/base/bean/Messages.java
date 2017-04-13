@@ -12,6 +12,19 @@ public class Messages {
     private String create_time;//2017-03-12 14;//36;//16, //时间
     private String sender;//}]  //发送者名称 ，已处理为为空
 
+    public Messages() {
+    }
+
+
+    public Messages(String id, String content, String status, String title, String create_time, String sender) {
+        this.id = id;
+        this.content = content;
+        this.status = status;
+        this.title = title;
+        this.create_time = create_time;
+        this.sender = sender;
+    }
+
     public String getId() {
         return id;
     }

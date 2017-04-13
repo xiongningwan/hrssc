@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -13,6 +14,10 @@ import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.activity.AddressManageActivity;
+import com.maiyu.hrssc.base.bean.DataCenter;
+import com.maiyu.hrssc.base.bean.User;
+import com.maiyu.hrssc.base.engine.IUserEngine;
+import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.home.activity.todo.SignActivity;
 import com.maiyu.hrssc.my.activity.FastServiceActivity;
 import com.maiyu.hrssc.my.activity.FeedBackActivity;
@@ -20,6 +25,10 @@ import com.maiyu.hrssc.my.activity.HelpCenterActivity;
 import com.maiyu.hrssc.my.activity.ModifyActivity;
 import com.maiyu.hrssc.my.activity.PersonalInfoActivity;
 import com.maiyu.hrssc.my.activity.SettingActivity;
+import com.maiyu.hrssc.util.BaseAsyncTask;
+import com.maiyu.hrssc.util.EngineFactory;
+import com.maiyu.hrssc.util.HintUitl;
+import com.maiyu.hrssc.util.ImageLoaderUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -89,6 +98,7 @@ public class MyFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private User mUser;
 
 
     public MyFragment() {
@@ -111,7 +121,24 @@ public class MyFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my, container, false);
         unbinder = ButterKnife.bind(this, view);
+        initView();
+        initData();
         return view;
+    }
+
+    private void initView() {
+        mUser = DataCenter.getInstance().getuser();
+        if (mUser.getHead() != null) {
+            ImageLoaderUtil.loadImage(mHeadImgView, mUser.getHead(), R.mipmap.timg);
+        }
+
+        mNameTv.setText(mUser.getName());
+        mGonghaoValueTv.setText("" + mUser.getId());
+
+    }
+
+    private void initData() {
+
     }
 
 
@@ -143,11 +170,19 @@ public class MyFragment extends Fragment {
                 if (mQiandaoBtn.isSelected()) {
                     mQiandaoBtn.setSelected(false);
                     mJiayi.setVisibility(View.GONE);
+
                 } else {
                     mQiandaoBtn.setSelected(true);
                     mJiayi.setVisibility(View.VISIBLE);
-                    mQiandaoBtn.setClickable(false);
+
+                    AlphaAnimation animation = new AlphaAnimation(1, 0);
+                    animation.setDuration(3000);//设置动画时间
+                    animation.setFillAfter(true);
+                    // animation.setStartOffset(1000);
+                    // animation.setStartTime(2000);
+                    mJiayi.setAnimation(animation);
                 }
+                new SignAsyncTask(mUser.getToken()).execute();
 
 
                 break;
@@ -174,4 +209,48 @@ public class MyFragment extends Fragment {
                 break;
         }
     }
+
+    /**
+     * 签到
+     */
+    class SignAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String token;
+        private String str;
+
+        public SignAsyncTask(String token) {
+            super();
+            this.token = token;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            IUserEngine engine = EngineFactory.get(IUserEngine.class);
+            try {
+                str = engine.sign(getActivity(), token);
+            } catch (NetException e) {
+                exception = e;
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            if (checkException(getActivity())) {
+                return;
+            }
+            if (str != null && !str.equals("")) {
+                HintUitl.toastShort(getActivity(), "获得积分：" + str);
+            }
+
+            super.onPostExecute(result);
+        }
+    }
+
+
 }

@@ -48,6 +48,34 @@ public interface ConstantValue {
      * 首页信息
      */
     String path_fragment_home_get_page_data = "/hrsscHomePageController/getBannerAndNews";
+    /**
+     * 消息列表
+     */
+    String path_activity_message_list = "/hrsscMessageController/getMessages";
+    /**
+     * 消息详情
+     */
+    String path_activity_message_detail = "/hrsscMessageController/getMessageDetail";
+    /**
+     * 删除一条消息
+     */
+    String path_activity_message_delete_item = "/hrsscMessageController/deleteMessage";
+    /**
+     * 资讯分类
+     */
+    String path_activity_information_get_news_class = "/hrsscNewsController/getNewClass";
+    /**
+     * 资讯列表
+     */
+    String path_fragment_information_page_get_news_list = "/hrsscNewsController/getNewsByClass";
+    /**
+     * 资讯详情
+     */
+    String path_activity_information_detail= "/hrsscNewsController/getNewsById";
+    /**
+     * 签到
+     */
+    String path_fragment_my_sign= "/hrsscUserController/sign";
 
 
 

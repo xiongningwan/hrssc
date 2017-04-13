@@ -8,20 +8,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.base.bean.News;
 import com.maiyu.hrssc.home.activity.information.InformationDetialActivity;
-import com.maiyu.hrssc.home.activity.information.bean.Info;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 /**
- * Created by Administrator on 2017/3/28.
+ * 资讯列表适配
  */
 
 public class InfoPageAdapter extends RecyclerView.Adapter<InfoPageAdapter.TodoPageViewHolder>{
 
-    private List<Info> mList = new ArrayList();
+    private List<News> mList = new ArrayList();
     private final Context mContext;
 
     public InfoPageAdapter(Context context) {
@@ -70,19 +70,19 @@ public class InfoPageAdapter extends RecyclerView.Adapter<InfoPageAdapter.TodoPa
 
 
         void onBindView() {
-            final Info info = (Info) mList.get(getAdapterPosition());
-            if(info == null) {
+            final News news = (News) mList.get(getAdapterPosition());
+            if(news == null) {
                 return;
             }
-            title.setText(info.getTitleName());
-            time.setText(info.getTime());
+            title.setText(news.getTitle());
+            time.setText(news.getCreate_time());
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, InformationDetialActivity.class);
-                  //  intent.putExtra("title", info.getTitle());
+                    intent.putExtra("nid", String.valueOf(news.getId()));
                     mContext.startActivity(intent);
                 }
             });

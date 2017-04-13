@@ -11,6 +11,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +30,9 @@ import com.amap.api.location.AMapLocationClientOption.AMapLocationProtocol;
 import com.amap.api.location.AMapLocationListener;
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.activity.CitysActivity;
+import com.maiyu.hrssc.base.activity.MessagesActivity;
+import com.maiyu.hrssc.base.adapter.HomeFragmentNewsAdapter;
+import com.maiyu.hrssc.base.bean.Banners;
 import com.maiyu.hrssc.base.bean.City;
 import com.maiyu.hrssc.base.bean.DataCenter;
 import com.maiyu.hrssc.base.bean.HomeData;
@@ -107,30 +113,27 @@ public class HomeFragment extends Fragment {
     TextView mBtnMore;
     @BindView(R.id.more_next_btn)
     LinearLayout mMoreNextBtn;
-    @BindView(R.id.line_1_content)
-    TextView mLine1Content;
-    @BindView(R.id.line_1_time)
-    TextView mLine1Time;
-    @BindView(R.id.line_1_rl)
-    RelativeLayout mLine1Rl;
-    @BindView(R.id.line_2_content)
-    TextView mLine2Content;
-    @BindView(R.id.line_2_time)
-    TextView mLine2Time;
-    @BindView(R.id.line_2_rl)
-    RelativeLayout mLine2Rl;
-    @BindView(R.id.line_3_content)
-    TextView mLine3Content;
-    @BindView(R.id.line_3_time)
-    TextView mLine3Time;
-    @BindView(R.id.line_3_rl)
-    RelativeLayout mLine3Rl;
+
+    @BindView(R.id.news_recycler_view)
+    RecyclerView mNewRecyclerView;
+    @BindView(R.id.myTransaction_tv)
+    TextView myTransactionTv;
+    @BindView(R.id.myApply_tv)
+    TextView myApplyTv;
+    @BindView(R.id.msg_point)
+    View mMsgPoint;
+
+
+
+
+
     Unbinder unbinder;
     private AMapLocationClient locationClient = null;
     private RelativeLayout mCityRL;
     private LoadingDialog mLoadingDialog;
     private List<City> mCitys;
     private String mToken;
+    private HomeFragmentNewsAdapter mNewsAdapter;
     // TODO: Rename and change types of parameters
 
 
@@ -171,6 +174,13 @@ public class HomeFragment extends Fragment {
             }
         });
         mLoadingDialog = new LoadingDialog(getActivity());
+
+        mNewsAdapter = new HomeFragmentNewsAdapter(getActivity());
+        mNewRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        mNewRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mNewRecyclerView.setAdapter(mNewsAdapter);
+
+
         mToken = DataCenter.getInstance().getuser().getToken();
         new GetCitysAsyncTask("1", "10000", mToken).execute();
     }
@@ -381,7 +391,7 @@ public class HomeFragment extends Fragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.address_btn, R.id.msg_btn, R.id.hetong_rl, R.id.shenqing_rl, R.id.btn_zmbl, R.id.btn_sb, R.id.btn_gjj, R.id.btn_dajy, R.id.btn_hkbl2, R.id.btn_jzzbl, R.id.btn_xyg, R.id.btn_more, R.id.more_next_btn, R.id.line_1_rl, R.id.line_2_rl, R.id.line_3_rl})
+    @OnClick({R.id.address_btn, R.id.msg_btn, R.id.hetong_rl, R.id.shenqing_rl, R.id.btn_zmbl, R.id.btn_sb, R.id.btn_gjj, R.id.btn_dajy, R.id.btn_hkbl2, R.id.btn_jzzbl, R.id.btn_xyg, R.id.btn_more, R.id.more_next_btn})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.address_btn:
@@ -393,8 +403,15 @@ public class HomeFragment extends Fragment {
 
                 break;
             case R.id.msg_btn:
-                startActivity(new Intent(getActivity(), InformationActivity.class));
+                // 消息系统
+               // startActivity(new Intent(getActivity(), InformationActivity.class));
+                startActivity(new Intent(getActivity(), MessagesActivity.class));
 
+
+
+                if(mMsgPoint.getVisibility() == View.VISIBLE) {
+                    mMsgPoint.setVisibility(View.GONE);
+                }
                 break;
             case R.id.hetong_rl:
                 startActivity(new Intent(getActivity(), TodoActivity.class));
@@ -430,12 +447,7 @@ public class HomeFragment extends Fragment {
             case R.id.btn_more:
                 break;
             case R.id.more_next_btn:
-                break;
-            case R.id.line_1_rl:
-                break;
-            case R.id.line_2_rl:
-                break;
-            case R.id.line_3_rl:
+                 startActivity(new Intent(getActivity(), InformationActivity.class));
                 break;
         }
     }
@@ -556,10 +568,36 @@ public class HomeFragment extends Fragment {
                 return;
             }
             if (homeData != null) {
+
+                setHomeData(homeData);
+
             }
 
             super.onPostExecute(result);
         }
+    }
+
+    private void setHomeData(HomeData homeData) {
+        myTransactionTv.setText(homeData.getMyTransaction());
+        myApplyTv.setText(homeData.getMyApply());
+
+        if(homeData.getMyMessage() != null
+                && !homeData.getMyMessage().equals("0")
+                && !homeData.getMyMessage().equals("")) {
+            mMsgPoint.setVisibility(View.VISIBLE);
+        } else {
+            mMsgPoint.setVisibility(View.GONE);
+        }
+
+
+        mActivityMainAds.setViewData((ArrayList<Banners>) homeData.getBanners());
+
+
+        if(homeData.getNews() != null) {
+            mNewsAdapter.setData(homeData.getNews());
+        }
+
+
     }
 
 
