@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.JavascriptInterface;
@@ -112,7 +113,6 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
         if (mType == ConstantValue.TYPE_ORDINARY) {// 普通url
             url = getIntent().getStringExtra("url");
             mTitleName = getIntent().getStringExtra("titleName");
-
         }
 
 

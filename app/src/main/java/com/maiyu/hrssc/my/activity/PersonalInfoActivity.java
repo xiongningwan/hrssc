@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.base.ConstantValue;
 import com.maiyu.hrssc.base.activity.BaseActivity;
 import com.maiyu.hrssc.base.bean.DataCenter;
 import com.maiyu.hrssc.base.bean.User;
@@ -82,9 +83,8 @@ public class PersonalInfoActivity extends BaseActivity {
         mDate.setText(sdf.format(Long.parseLong(user.getCreate_time())));
 
 
-
         if (user.getHead() != null) {
-            ImageLoaderUtil.loadImage(mHeadIconView, user.getHead(), R.mipmap.timg);
+            ImageLoaderUtil.loadImage(mHeadIconView, ConstantValue.FILE_SERVER_URI + user.getHead(), R.mipmap.timg);
         }
     }
 

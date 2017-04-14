@@ -6,7 +6,13 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.base.engine.IUserEngine;
+import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.base.view.HeadView;
+import com.maiyu.hrssc.base.view.dialog.LoadingDialog;
+import com.maiyu.hrssc.util.BaseAsyncTask;
+import com.maiyu.hrssc.util.EngineFactory;
+import com.maiyu.hrssc.util.HintUitl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,6 +29,7 @@ public class ForgetPwdActivity extends BaseActivity {
     EditText mPwdEt;
     @BindView(R.id.confirm_btn)
     Button mConfirmBtn;
+    private LoadingDialog mLoadingDialog;
 
     @Override
     public void createActivityImpl() {
@@ -33,6 +40,7 @@ public class ForgetPwdActivity extends BaseActivity {
     @Override
     public void initViews() {
         mHeadView.setTitle("忘记密码", true, false);
+        mLoadingDialog = new LoadingDialog(this);
     }
 
     @Override
@@ -48,6 +56,76 @@ public class ForgetPwdActivity extends BaseActivity {
 
     @OnClick(R.id.confirm_btn)
     public void onClick() {
-        startActivity(new Intent(this, ForgetPwd2Activity.class));
+        doFindBackPWdFirstStep();
+
+    }
+
+    private void doFindBackPWdFirstStep() {
+        String mWorkNo = mWorkNoEt.getText().toString(); // 帐号
+        String mPwd = mPwdEt.getText().toString(); // 手机号
+
+        if (mWorkNo == null || "".equals(mWorkNo) || mPwd == null || "".equals(mPwd)) {
+            HintUitl.toastShort(this, "输入框不能为空");
+            return;
+        }
+
+        if (mPwd.length() < 6 || mPwd.length() > 16) {
+            HintUitl.toastShort(this, "密码长度应为6-16位");
+            return;
+        }
+
+        String userId = mWorkNo;
+        String password = mPwd;
+
+        new OneStepAsyncTask(userId, password).execute();
+    }
+
+    class OneStepAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String userId;
+        private String password;
+        private String str;
+
+        public OneStepAsyncTask(String userId, String password) {
+            super();
+
+            this.userId = userId;
+            this.password = password;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            mLoadingDialog.getDialog().show();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            IUserEngine engine = EngineFactory.get(IUserEngine.class);
+            try {
+                str = engine.findBackPwd1(ForgetPwdActivity.this, userId, password);
+            } catch (NetException e) {
+                exception = e;
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            mLoadingDialog.getDialog().dismiss();
+            if (checkException(ForgetPwdActivity.this)) {
+                return;
+            }
+            if (str != null && "操作成功".equals(str)) {
+                // 进入下一步
+                Intent intent = new Intent(ForgetPwdActivity.this, ForgetPwd2Activity.class);
+                intent.putExtra("idCard", userId);
+                intent.putExtra("phone", password);
+                startActivity(intent);
+                finish();
+            }
+
+            super.onPostExecute(result);
+        }
     }
 }

@@ -21,16 +21,11 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/address_recycle_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/llybuttom">
-
-
-        </android.support.v7.widget.RecyclerView>
+        <include
+            layout="@layout/layout_recirclerview_fresh_to_toad"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_above="@+id/llybuttom"/>
 
         <LinearLayout
             android:id="@+id/llybuttom"

@@ -55,90 +55,9 @@
 
     <include layout="@layout/view_space_layout"/>
 
-    <RelativeLayout
-        android:id="@+id/wentifenlei_rl"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/base48dp"
-       android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:background="@color/project_color_basic_white_pure">
+    <include
+        layout="@layout/layout_recirclerview_fresh_to_toad"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="问题分类"
-            android:textColor="@color/text_title_gray"/>
-
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/icon_xianghou"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@mipmap/line"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/gongzilei_rl"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/base48dp"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:background="@color/project_color_basic_white_pure">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="工资类"
-            android:textColor="@color/text_title_gray"/>
-
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/icon_xianghou"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@mipmap/line"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/zhengmingbanlilei_rl"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/base48dp"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:background="@color/project_color_basic_white_pure">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="证明办理类"
-            android:textColor="@color/text_title_gray"/>
-
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/icon_xianghou"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@mipmap/line"/>
-    </RelativeLayout>
 </LinearLayout>

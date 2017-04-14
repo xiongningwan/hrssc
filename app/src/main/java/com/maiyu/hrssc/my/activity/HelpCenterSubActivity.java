@@ -1,4 +1,4 @@
-package com.maiyu.hrssc.base.activity;
+package com.maiyu.hrssc.my.activity;
 
 import android.content.Intent;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -7,19 +7,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.maiyu.hrssc.R;
-import com.maiyu.hrssc.base.adapter.messageAdapter;
+import com.maiyu.hrssc.base.activity.BaseActivity;
 import com.maiyu.hrssc.base.bean.DataCenter;
-import com.maiyu.hrssc.base.bean.Messages;
-import com.maiyu.hrssc.base.engine.IUserEngine;
+import com.maiyu.hrssc.base.engine.ISpecialEngine;
 import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.base.view.HeadView;
 import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.maiyu.hrssc.base.view.dialog.LoadingDialog;
+import com.maiyu.hrssc.my.activity.adapter.QuestionClassSubAdapter;
+import com.maiyu.hrssc.my.activity.bean.Question;
 import com.maiyu.hrssc.util.BaseAsyncTask;
 import com.maiyu.hrssc.util.EngineFactory;
-import com.maiyu.hrssc.util.HintUitl;
 
 import java.util.List;
 
@@ -27,9 +27,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 消息系统
+ * 帮助中心下级菜单
  */
-public class MessagesActivity extends BaseActivity implements OnRefreshListener, OnLoadMoreListener {
+public class HelpCenterSubActivity extends BaseActivity implements OnRefreshListener, OnLoadMoreListener {
     @BindView(R.id.head_view)
     HeadView mHeadView;
     @BindView(R.id.recyclerView)
@@ -42,20 +42,20 @@ public class MessagesActivity extends BaseActivity implements OnRefreshListener,
     private final int isRefreshing = 2;
     private final int isLoadMoreing = 3;
     private int status = init;
-    private messageAdapter mMessageAdapter;
+    private QuestionClassSubAdapter mAdapter;
     private LoadingDialog mLoadingDialog;
     private String mToken;
-    public static final String MESSAGE_ITEM_ID = "message_item_id";
+    public static final String QID = "qid";
 
     @Override
     public void createActivityImpl() {
-        setContentView(R.layout.activity_messages);
+        setContentView(R.layout.activity_help_center_sub);
         ButterKnife.bind(this);
     }
 
     @Override
     public void initViews() {
-        mHeadView.setTitle("消息", true, false);
+        mHeadView.setTitle("问题分类", true, false);
         mLoadingDialog = new LoadingDialog(this);
 
         // 设置刷新加载
@@ -65,20 +65,24 @@ public class MessagesActivity extends BaseActivity implements OnRefreshListener,
         mRefreshLayout.setOnRefreshListener(this);
 
         // 设置列表
-        mMessageAdapter = new messageAdapter(this, new MessageOnclickLister(), new DeleteMessageItemOnclickLister());
+        mAdapter = new QuestionClassSubAdapter(this, new MessageOnclickLister());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setAdapter(mMessageAdapter);
+        mRecyclerView.setAdapter(mAdapter);
 
         mToken = DataCenter.getInstance().getuser().getToken();
     }
 
-
     @Override
     public void initData() {
+        String cid = getIntent().getStringExtra(HelpCenterActivity.CID);
+        String search = getIntent().getStringExtra(HelpCenterActivity.SEARCH);
 
-        new MessagesListAsyncTask(mToken, String.valueOf(mPage), String.valueOf(mCount)).execute();
-
+        if (cid == null && search != null) {
+            new QuestionClassSubListAsyncTask(mToken, "", search, String.valueOf(mPage), String.valueOf(mCount)).execute();
+        } else if (cid != null && search == null) {
+            new QuestionClassSubListAsyncTask(mToken, cid, "", String.valueOf(mPage), String.valueOf(mCount)).execute();
+        }
     }
 
     @Override
@@ -88,35 +92,19 @@ public class MessagesActivity extends BaseActivity implements OnRefreshListener,
 
 
     /**
-     * 进入消息详情
+     * 进入详情
      */
     class MessageOnclickLister implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-            Messages messages = (Messages) v.getTag(R.id.key_tag_item_data);
-            Intent intent = new Intent(MessagesActivity.this, MessageDetailActivity.class);
-            intent.putExtra(MESSAGE_ITEM_ID, messages.getId());
+            Question question = (Question) v.getTag(R.id.key_tag_item_data);
+
+            Intent intent = new Intent(HelpCenterSubActivity.this, QuestionDetailActivity.class);
+            intent.putExtra(QID, question.getId());
             startActivity(intent);
         }
     }
-
-
-    /**
-     * 删除消息
-     */
-    class DeleteMessageItemOnclickLister implements View.OnClickListener {
-
-        @Override
-        public void onClick(View v) {
-            Messages messages = (Messages) v.getTag(R.id.key_tag_item_data);
-            int position = mMessageAdapter.getPosition(messages);
-            mMessageAdapter.removeItem(position);
-            // 执行请求
-            new DeleteMessagesItemAsyncTask(mToken, messages.getId()).execute();
-        }
-    }
-
 
     @Override
     public void onLoadMore() {
@@ -148,22 +136,25 @@ public class MessagesActivity extends BaseActivity implements OnRefreshListener,
         }
     }
 
-
     /**
-     * 获取消息列表
+     * 获取问题子分类列表
      */
-    class MessagesListAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+    class QuestionClassSubListAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String token;
+        private String cid;
+        private String search;
         private String page;
         private String rows;
-        private String token;
-        private List<Messages> list;
+        private List<Question> list;
 
-        public MessagesListAsyncTask(String token, String page, String rows) {
+        public QuestionClassSubListAsyncTask(String token, String cid, String search, String page, String rows) {
             super();
 
+            this.token = token;
+            this.cid = cid;
+            this.search = search;
             this.page = page;
             this.rows = rows;
-            this.token = token;
         }
 
         @Override
@@ -174,9 +165,9 @@ public class MessagesActivity extends BaseActivity implements OnRefreshListener,
 
         @Override
         protected Void doInBackground(Void... params) {
-            IUserEngine engine = EngineFactory.get(IUserEngine.class);
+            ISpecialEngine engine = EngineFactory.get(ISpecialEngine.class);
             try {
-                list = engine.getMessageList(MessagesActivity.this, token, page, rows);
+                list = engine.getSubQuestionList(HelpCenterSubActivity.this, token, cid, search, page, rows);
             } catch (NetException e) {
                 exception = e;
                 e.printStackTrace();
@@ -187,7 +178,7 @@ public class MessagesActivity extends BaseActivity implements OnRefreshListener,
         @Override
         protected void onPostExecute(Void result) {
             mLoadingDialog.getDialog().dismiss();
-            if (checkException(MessagesActivity.this)) {
+            if (checkException(HelpCenterSubActivity.this)) {
                 return;
             }
             if (list != null) {
@@ -198,61 +189,13 @@ public class MessagesActivity extends BaseActivity implements OnRefreshListener,
         }
     }
 
-    private void setData(List<Messages> list) {
+    private void setData(List<Question> list) {
         if (status == init) {
-            mMessageAdapter.setData(list);
+            mAdapter.setData(list);
         } else if (status == isRefreshing) {
-            mMessageAdapter.setData(list);
+            mAdapter.setData(list);
         } else if (status == isLoadMoreing) {
-            mMessageAdapter.loadMoreData(list);
-        }
-    }
-
-
-    /**
-     * 删除消息
-     */
-    class DeleteMessagesItemAsyncTask extends BaseAsyncTask<Void, Void, Void> {
-        private String token;
-        private String mid;
-        private String str;
-
-        public DeleteMessagesItemAsyncTask(String token, String mid) {
-            super();
-
-            this.token = token;
-            this.mid = mid;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            mLoadingDialog.getDialog().show();
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            IUserEngine engine = EngineFactory.get(IUserEngine.class);
-            try {
-                str = engine.deleteMessageItem(MessagesActivity.this, token, mid);
-            } catch (NetException e) {
-                exception = e;
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            mLoadingDialog.getDialog().dismiss();
-            if (checkException(MessagesActivity.this)) {
-                return;
-            }
-            if (str != null && !str.equals("")) {
-                HintUitl.toastShort(MessagesActivity.this, str);
-            }
-
-            super.onPostExecute(result);
+            mAdapter.loadMoreData(list);
         }
     }
 

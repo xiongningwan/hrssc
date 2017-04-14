@@ -71,6 +71,7 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.new_employee_tv:
                 startActivity(new Intent(this, NewEmployeeLoginActivity.class));
+                finish();
                 break;
             case R.id.forget_pwd_tv:
                 startActivity(new Intent(this, ForgetPwdActivity.class));
@@ -87,10 +88,10 @@ public class LoginActivity extends BaseActivity {
             return;
         }
 
-        if (mPwd.length() < 6 || mPwd.length() > 16) {
+       /* if (mPwd.length() < 6 || mPwd.length() > 16) {
             HintUitl.toastShort(this, "密码长度应为6-16位");
             return;
-        }
+        }*/
 
         String type = "1";
         String userId = mWorkNo;
@@ -121,7 +122,6 @@ public class LoginActivity extends BaseActivity {
             this.mac = mac;
             this.version = version;
             this.login_way = login_way;
-            this.password = password;
         }
 
         @Override

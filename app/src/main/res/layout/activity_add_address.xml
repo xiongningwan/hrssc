@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/base8dp"
-            android:text="张三"
+            android:text=""
             android:textColor="@color/text_title_gray"/>
     </LinearLayout>
 
@@ -64,7 +64,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/base8dp"
-            android:text="15271025987"
             android:textColor="@color/text_title_gray"/>
     </LinearLayout>
 
@@ -87,6 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_centerVertical="true"
             android:text="选择城市:"/>
 
         <TextView
@@ -95,13 +95,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/base8dp"
             android:layout_toEndOf="@id/lable_city"
-            android:text="广东广州越秀区"
+            android:layout_centerVertical="true"
             android:textColor="@color/text_title_gray"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:src="@mipmap/icon_xianghou"/>
     </RelativeLayout>
@@ -134,7 +135,6 @@
             android:layout_alignTop="@id/lable_address"
             android:layout_marginStart="@dimen/base8dp"
             android:layout_toEndOf="@id/lable_address"
-            android:text="广东广州越秀区某某路某某街道某某栋写字楼-124号-124"
             android:textColor="@color/text_title_gray"
             android:textSize="@dimen/project_text_size_dp_12"/>
     </RelativeLayout>

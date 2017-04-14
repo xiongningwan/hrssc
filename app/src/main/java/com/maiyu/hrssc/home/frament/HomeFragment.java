@@ -29,6 +29,7 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationClientOption.AMapLocationProtocol;
 import com.amap.api.location.AMapLocationListener;
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.base.ConstantValue;
 import com.maiyu.hrssc.base.activity.CitysActivity;
 import com.maiyu.hrssc.base.activity.MessagesActivity;
 import com.maiyu.hrssc.base.adapter.HomeFragmentNewsAdapter;
@@ -122,9 +123,6 @@ public class HomeFragment extends Fragment {
     TextView myApplyTv;
     @BindView(R.id.msg_point)
     View mMsgPoint;
-
-
-
 
 
     Unbinder unbinder;
@@ -404,12 +402,11 @@ public class HomeFragment extends Fragment {
                 break;
             case R.id.msg_btn:
                 // 消息系统
-               // startActivity(new Intent(getActivity(), InformationActivity.class));
+                // startActivity(new Intent(getActivity(), InformationActivity.class));
                 startActivity(new Intent(getActivity(), MessagesActivity.class));
 
 
-
-                if(mMsgPoint.getVisibility() == View.VISIBLE) {
+                if (mMsgPoint.getVisibility() == View.VISIBLE) {
                     mMsgPoint.setVisibility(View.GONE);
                 }
                 break;
@@ -447,7 +444,7 @@ public class HomeFragment extends Fragment {
             case R.id.btn_more:
                 break;
             case R.id.more_next_btn:
-                 startActivity(new Intent(getActivity(), InformationActivity.class));
+                startActivity(new Intent(getActivity(), InformationActivity.class));
                 break;
         }
     }
@@ -581,7 +578,7 @@ public class HomeFragment extends Fragment {
         myTransactionTv.setText(homeData.getMyTransaction());
         myApplyTv.setText(homeData.getMyApply());
 
-        if(homeData.getMyMessage() != null
+        if (homeData.getMyMessage() != null
                 && !homeData.getMyMessage().equals("0")
                 && !homeData.getMyMessage().equals("")) {
             mMsgPoint.setVisibility(View.VISIBLE);
@@ -589,15 +586,24 @@ public class HomeFragment extends Fragment {
             mMsgPoint.setVisibility(View.GONE);
         }
 
+        ArrayList<Banners> banners = (ArrayList<Banners>) homeData.getBanners();
+        mActivityMainAds.setViewData(addImageServerData(banners));
+        mActivityMainAds.setAutoScroll(true);
 
-        mActivityMainAds.setViewData((ArrayList<Banners>) homeData.getBanners());
-
-
-        if(homeData.getNews() != null) {
+        if (homeData.getNews() != null) {
             mNewsAdapter.setData(homeData.getNews());
         }
 
 
+    }
+
+    private ArrayList<Banners> addImageServerData(ArrayList<Banners> arrayList) {
+        ArrayList<Banners> list = new ArrayList<Banners>();
+        for (Banners ad : arrayList) {
+            ad.setImage(ConstantValue.FILE_SERVER_URI + ad.getImage());
+            list.add(ad);
+        }
+        return list;
     }
 
 

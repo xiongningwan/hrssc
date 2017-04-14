@@ -326,7 +326,8 @@
         <activity
             android:name=".my.activity.HelpCenterActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
         </activity>
         <activity
             android:name=".my.activity.FeedBackActivity"
@@ -358,11 +359,25 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".base.activity.CitysActivity">
+        <activity android:name=".base.activity.CitysActivity"
+                  android:configChanges="orientation"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".base.activity.MessagesActivity">
+        <activity android:name=".base.activity.MessagesActivity"
+                  android:configChanges="orientation"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".base.activity.MessageDetailActivity">
+        <activity android:name=".base.activity.MessageDetailActivity"
+                  android:configChanges="orientation"
+                  android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".my.activity.HelpCenterSubActivity"
+                  android:configChanges="orientation"
+                  android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".my.activity.QuestionDetailActivity"
+                  android:configChanges="orientation"
+                  android:screenOrientation="portrait">
         </activity>
     </application>
 

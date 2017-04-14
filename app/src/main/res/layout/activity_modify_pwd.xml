@@ -40,7 +40,8 @@
             android:hint="请输入原始密码"
             android:textSize="@dimen/project_text_size_dp_14"
             android:background="@color/transparent"
-            android:textColorHint="@color/project_color_general_text_secondary"/>
+            android:textColorHint="@color/project_color_general_text_secondary"
+            android:inputType="textPassword"/>
 
         <View
             android:layout_width="match_parent"
@@ -57,7 +58,8 @@
             android:hint="请输入新密码，6-16位数字、字母、字符"
             android:textSize="@dimen/project_text_size_dp_14"
             android:background="@color/transparent"
-            android:textColorHint="@color/project_color_general_text_secondary"/>
+            android:textColorHint="@color/project_color_general_text_secondary"
+            android:inputType="textPassword"/>
 
 
         <View
@@ -75,7 +77,8 @@
             android:hint="请再次输入新密码"
             android:textSize="@dimen/project_text_size_dp_14"
             android:background="@color/transparent"
-            android:textColorHint="@color/project_color_general_text_secondary"/>
+            android:textColorHint="@color/project_color_general_text_secondary"
+            android:inputType="textPassword"/>
 
 
     </LinearLayout>

@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.base.ConstantValue;
 import com.maiyu.hrssc.base.activity.AddressManageActivity;
 import com.maiyu.hrssc.base.bean.DataCenter;
 import com.maiyu.hrssc.base.bean.User;
@@ -129,7 +130,7 @@ public class MyFragment extends Fragment {
     private void initView() {
         mUser = DataCenter.getInstance().getuser();
         if (mUser.getHead() != null) {
-            ImageLoaderUtil.loadImage(mHeadImgView, mUser.getHead(), R.mipmap.timg);
+            ImageLoaderUtil.loadImage(mHeadImgView, ConstantValue.FILE_SERVER_URI + mUser.getHead(), R.mipmap.timg);
         }
 
         mNameTv.setText(mUser.getName());

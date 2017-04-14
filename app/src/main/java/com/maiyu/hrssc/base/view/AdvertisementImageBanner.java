@@ -312,6 +312,7 @@ public class AdvertisementImageBanner extends RelativeLayout implements OnPageCh
                             intent.putExtra("url", mURl.get(currentPositon));
                             intent.putExtra("titleName", mTitle.get(currentPositon));
                             intent.putExtra("type", ConstantValue.TYPE_ORDINARY);
+
                             mContext.startActivity(intent);
 
 

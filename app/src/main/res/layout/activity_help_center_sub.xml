@@ -16,10 +16,12 @@
 
     <include layout="@layout/view_space_layout"/>
 
+
+    <include layout="@layout/view_space_layout"/>
+
     <include
         layout="@layout/layout_recirclerview_fresh_to_toad"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"/>
-
 
 </LinearLayout>

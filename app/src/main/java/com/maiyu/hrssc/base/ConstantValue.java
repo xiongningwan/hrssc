@@ -21,13 +21,15 @@ public interface ConstantValue {
     /**
      * 服务器端口
      */
-     String port = "8080"; // 开发
+    String port = "8080"; // 开发
+
 
     /**
      * 服务器地址
      */
     // String SERVER_URI = "http://" + HOST + ":" + port + CONTEXT;
-     String SERVER_URI = "http://hrssctest.trydo.online";
+    String SERVER_URI = "http://hrssctest.trydo.online";
+    String FILE_SERVER_URI = "http://hrsscadmin.trydo.online";//测试
     // String SERVER_URI = "http://api.huijialicai.cn" + CONTEXT;//发布
 
     /**
@@ -71,12 +73,67 @@ public interface ConstantValue {
     /**
      * 资讯详情
      */
-    String path_activity_information_detail= "/hrsscNewsController/getNewsById";
+    String path_activity_information_detail = "/hrsscNewsController/getNewsById";
     /**
      * 签到
      */
-    String path_fragment_my_sign= "/hrsscUserController/sign";
-
+    String path_fragment_my_sign = "/hrsscUserController/sign";
+    /**
+     * 修改密码
+     */
+    String path_activity_modify_pwd = "/hrsscLoginController/updatePassword";
+    /**
+     * 反馈
+     */
+    String path_activity_feedback = "/hrsscInfoController/feedback";
+    /**
+     * 地址管理列表
+     */
+    String path_activity_manage_address_get_list = "/hrsscInfoController/getMyAddress";
+    /**
+     * 添加收件地址
+     */
+    String path_activity_add_address = "/hrsscInfoController/addAddress";
+    /**
+     * 编辑收件地址
+     */
+    String path_activity_edit_address = "/hrsscInfoController/editAddress";
+    /**
+     * 设置默认收件地址
+     */
+    String path_activity_manage_set_default_address = "/hrsscInfoController/setDefaultAddress";
+    /**
+     * 删除收件地址
+     */
+    String path_activity_manage_del_address = "/hrsscInfoController/deleteAddress";
+    /**
+     * 快捷服务
+     */
+    String path_activity_fast_service_list = "/hrsscInfoController/getAllServices";
+    /**
+     * 问题分类
+     */
+    String path_activity_problem_class_list = "/hrsscHelpController/getHelpClass";
+    /**
+     * 根据分类/关键词   获取问题列表  已经按照创建时间倒序排列
+     */
+    String path_activity_problem_class_sub_list = "/hrsscHelpController/getQuestions";
+    /**
+     * 根据id查询问题详情
+     */
+    String path_activity_problem_class_sub_get_question_detail = "/hrsscHelpController/getQuestionDetail";
+    /**
+     * 找回密码第一步
+     */
+    String path_activity_forget_pwd_1 = "/hrsscLoginController/forgetPassword1";
+    /**
+     * 找回密码第二步
+     */
+    String path_activity_forget_pwd_2 = "/hrsscLoginController/forgetPassword2";
+    /**
+     * 发短信验证码
+     */
+    String path_activity_forget_pwd_2_get_msg_code = "/hrsscBasicController/sendAuthCode";
 
 
     /**
@@ -99,9 +156,7 @@ public interface ConstantValue {
      **/
     public static final int MSG_CODE_TYPE_REGISTER_MODULE = 0;
     /**
-
-
-    /**
+     * /**
      * 客户端类型 0安卓1iso
      */
     final String CLIENT_TYPE_ANDROID = "android";

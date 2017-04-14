@@ -5,6 +5,7 @@ import android.content.Context;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.maiyu.hrssc.base.ConstantValue;
+import com.maiyu.hrssc.base.bean.AddressManage;
 import com.maiyu.hrssc.base.bean.City;
 import com.maiyu.hrssc.base.bean.HomeData;
 import com.maiyu.hrssc.base.bean.Messages;
@@ -389,6 +390,365 @@ public class UserEngine extends BaseEngine implements IUserEngine {
             // data = JSON.parseObject(json, Messages.class);
 
 
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
+    public String updatePwd(Context context, String token, String oldPassword, String newPassword) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_activity_modify_pwd;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("oldPassword", oldPassword);
+        params.put("newPassword", newPassword);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        String data = null;
+        try {
+            //json = parseObject(json).getString("msg");
+            data = parseObject(json).getString("msg");
+            // data = JSON.parseObject(json, Messages.class);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
+    public String feedBack(Context context, String token, String title, String content) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_activity_feedback;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("title", title);
+        params.put("content", content);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        String data = null;
+        try {
+            //json = parseObject(json).getString("msg");
+            data = parseObject(json).getString("msg");
+            // data = JSON.parseObject(json, Messages.class);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
+    public List<AddressManage> getManageAddressList(Context context, String token, String page, String rows) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_activity_manage_address_get_list;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("page", page);
+        params.put("rows", rows);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        List<AddressManage> list = null;
+        try {
+            json = parseObject(json).getString("data");
+            json = parseObject(json).getString("addrs");
+            list = JSON.parseArray(json, AddressManage.class);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public String addAddress(Context context, String token, String name, String phone, String prov, String city, String area, String addr) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_activity_add_address;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("name", name);
+        params.put("phone", phone);
+        params.put("prov", prov);
+        params.put("city", city);
+        params.put("area", area);
+        params.put("addr", addr);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        String data = null;
+        try {
+            //json = parseObject(json).getString("msg");
+            data = parseObject(json).getString("msg");
+            // data = JSON.parseObject(json, Messages.class);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
+    public String editAddress(Context context, String token, String aid, String name, String phone, String prov, String city, String area, String addr) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_activity_edit_address;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("aid", aid);
+        params.put("name", name);
+        params.put("phone", phone);
+        params.put("prov", prov);
+        params.put("city", city);
+        params.put("area", area);
+        params.put("addr", addr);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        String data = null;
+        try {
+            //json = parseObject(json).getString("msg");
+            data = parseObject(json).getString("msg");
+            // data = JSON.parseObject(json, Messages.class);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
+    public String setDefaultAddress(Context context, String token, String aid) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_activity_manage_set_default_address;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("aid", aid);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        String data = null;
+        try {
+            data = parseObject(json).getString("msg");
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
+    public String delAddress(Context context, String token, String aid) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_activity_manage_del_address;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("aid", aid);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        String data = null;
+        try {
+            data = parseObject(json).getString("msg");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
+    public String findBackPwd1(Context context, String userId, String phone) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_activity_forget_pwd_1;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("userId", userId);
+        params.put("phone", phone);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        String data = null;
+        try {
+            data = parseObject(json).getString("msg");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
+    public String findBackPwd2(Context context, String userId, String code, String newPassword, String phone) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_activity_forget_pwd_2;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("userId", userId);
+        params.put("code", code);
+        params.put("newPassword", newPassword);
+        params.put("phone", phone);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        String data = null;
+        try {
+            data = parseObject(json).getString("msg");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
+    public String getMsgCode(Context context, String phone, String token) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_activity_forget_pwd_2_get_msg_code;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("phone", phone);
+        params.put("token", token);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        String data = null;
+        try {
+            data = parseObject(json).getString("msg");
         } catch (JSONException e) {
             e.printStackTrace();
         }

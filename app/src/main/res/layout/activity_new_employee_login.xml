@@ -58,7 +58,8 @@
             android:drawablePadding="@dimen/base5dp"
             android:hint="请输入密码"
             android:textColorHint="@color/project_color_general_text_secondary"
-            android:textSize="@dimen/project_text_size_dp_14"/>
+            android:textSize="@dimen/project_text_size_dp_14"
+            android:inputType="textPassword"/>
 
 
     </LinearLayout>

@@ -1,4 +1,4 @@
-package com.maiyu.hrssc.base.activity;
+package com.maiyu.hrssc.my.activity;
 
 import android.text.Html;
 import android.view.View;
@@ -6,24 +6,23 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.base.activity.BaseActivity;
 import com.maiyu.hrssc.base.bean.DataCenter;
-import com.maiyu.hrssc.base.bean.Messages;
-import com.maiyu.hrssc.base.engine.IUserEngine;
+import com.maiyu.hrssc.base.engine.ISpecialEngine;
 import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.base.view.HeadView;
 import com.maiyu.hrssc.base.view.dialog.LoadingDialog;
+import com.maiyu.hrssc.my.activity.bean.Question;
 import com.maiyu.hrssc.util.BaseAsyncTask;
 import com.maiyu.hrssc.util.EngineFactory;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.maiyu.hrssc.base.activity.MessagesActivity.MESSAGE_ITEM_ID;
-
 /**
- * 消息详情
+ * 问题详情详情
  */
-public class MessageDetailActivity extends BaseActivity {
+public class QuestionDetailActivity extends BaseActivity {
     @BindView(R.id.head_view)
     HeadView mHeadView;
     @BindView(R.id.title)
@@ -41,13 +40,13 @@ public class MessageDetailActivity extends BaseActivity {
 
     @Override
     public void createActivityImpl() {
-        setContentView(R.layout.activity_message_detail);
+        setContentView(R.layout.activity_question_detail);
         ButterKnife.bind(this);
     }
 
     @Override
     public void initViews() {
-        mHeadView.setTitle("消息", true, false);
+        mHeadView.setTitle("问题详情", true, false);
         mLoadingDialog = new LoadingDialog(this);
         mToken = DataCenter.getInstance().getuser().getToken();
     }
@@ -55,9 +54,9 @@ public class MessageDetailActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        String mid = getIntent().getStringExtra(MESSAGE_ITEM_ID);
-        if(mid != null) {
-            new MessagesListAsyncTask(mToken, mid).execute();
+        String qid = getIntent().getStringExtra(HelpCenterSubActivity.QID);
+        if (qid != null) {
+            new QuestionDetailAsyncTask(mToken, qid).execute();
         }
     }
 
@@ -68,18 +67,18 @@ public class MessageDetailActivity extends BaseActivity {
 
 
     /**
-     * 获取消息列表
+     * 获取问题详情
      */
-    class MessagesListAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+    class QuestionDetailAsyncTask extends BaseAsyncTask<Void, Void, Void> {
         private String token;
-        private String mid;
-        private Messages messages;
+        private String qid;
+        private Question question;
 
-        public MessagesListAsyncTask(String token, String mid) {
+        public QuestionDetailAsyncTask(String token, String qid) {
             super();
 
             this.token = token;
-            this.mid = mid;
+            this.qid = qid;
         }
 
         @Override
@@ -90,9 +89,9 @@ public class MessageDetailActivity extends BaseActivity {
 
         @Override
         protected Void doInBackground(Void... params) {
-            IUserEngine engine = EngineFactory.get(IUserEngine.class);
+            ISpecialEngine engine = EngineFactory.get(ISpecialEngine.class);
             try {
-                messages = engine.getMessageDetial(MessageDetailActivity.this, token, mid);
+                question = engine.getQuestiontDetail(QuestionDetailActivity.this, token, qid);
             } catch (NetException e) {
                 exception = e;
                 e.printStackTrace();
@@ -103,11 +102,11 @@ public class MessageDetailActivity extends BaseActivity {
         @Override
         protected void onPostExecute(Void result) {
             mLoadingDialog.getDialog().dismiss();
-            if (checkException(MessageDetailActivity.this)) {
+            if (checkException(QuestionDetailActivity.this)) {
                 return;
             }
-            if (messages != null ) {
-                setData(messages);
+            if (question != null) {
+                setData(question);
             } else {
                 mContentRl.setVisibility(View.GONE);
                 mNOcontent.setVisibility(View.VISIBLE);
@@ -117,9 +116,9 @@ public class MessageDetailActivity extends BaseActivity {
         }
     }
 
-    private void setData(Messages messages) {
-        mTitle.setText(messages.getTitle());
-        mContent.setText(Html.fromHtml(messages.getContent()));
-        mTime.setText(messages.getCreate_time());
+    private void setData(Question question) {
+        mTitle.setText(question.getTitle());
+        mContent.setText(Html.fromHtml(question.getContent()));
+        mTime.setText(question.getCreate_time());
     }
 }

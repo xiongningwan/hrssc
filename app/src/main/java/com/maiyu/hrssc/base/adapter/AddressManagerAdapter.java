@@ -24,7 +24,10 @@ public class AddressManagerAdapter extends RecyclerView.Adapter<BaseViewHolder> 
     private final LayoutInflater mInflater;
     private final Context mContext;
     private final View.OnClickListener mListener;
+    private final CompoundButton.OnCheckedChangeListener mCheckedListener;
+    private final View.OnClickListener mDelListener;
     private List mList = new ArrayList<>();
+    private List<CheckBox> mChooseList = new ArrayList<>();
 
     public void setData(List list) {
         mList.clear();
@@ -32,11 +35,19 @@ public class AddressManagerAdapter extends RecyclerView.Adapter<BaseViewHolder> 
         notifyDataSetChanged();
     }
 
+    public void loadMoreData(List list) {
+        mList.addAll(list);
+        notifyDataSetChanged();
+    }
 
-    public AddressManagerAdapter(Context context, View.OnClickListener listener) {
+
+    public AddressManagerAdapter(Context context, View.OnClickListener listener,
+                                 CompoundButton.OnCheckedChangeListener onCheckedChangeListener, View.OnClickListener delListener) {
         mInflater = LayoutInflater.from(context);
         mContext = context;
         mListener = listener;
+        mCheckedListener = onCheckedChangeListener;
+        mDelListener = delListener;
     }
 
     @Override
@@ -81,40 +92,56 @@ public class AddressManagerAdapter extends RecyclerView.Adapter<BaseViewHolder> 
             AddressManage addressManage = (AddressManage) mList.get(getAdapterPosition());
 
 
-
-
             name.setText(addressManage.getName());
-            tel.setText(addressManage.getTel());
-            address.setText(addressManage.getAddress());
-            choose.setChecked(addressManage.isSelect());
+            tel.setText(addressManage.getPhone());
+            address.setText(addressManage.getAddr());
+
+            if ("1".equals(addressManage.getIs_default())) {
+                choose.setChecked(true);
+            } else {
+                choose.setChecked(false);
+            }
 
 
-            del.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // 删除
-                }
-            });
-
-            edit.setOnClickListener(mListener);
+            // 编辑
             edit.setTag(R.id.key_tag_item_data, addressManage);
+            edit.setOnClickListener(mListener);
 
-            choose.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    // 选中默认
+            // 删除
+            del.setTag(R.id.key_tag_item_data, addressManage);
+            del.setOnClickListener(mDelListener);
 
-
-                }
-            });
-
+            // 选默认
+            choose.setTag(R.id.key_tag_item_data, addressManage);
+            choose.setOnCheckedChangeListener(mCheckedListener);
+            mChooseList.add(choose);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   // HintUitl.toastShort(mContext, mList.get(getAdapterPosition()).toString());
+                    // HintUitl.toastShort(mContext, mList.get(getAdapterPosition()).toString());
                 }
             });
         }
     }
+
+    public void removeItem(int position) {
+        mList.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public int getPosition(Object b) {
+        int position = mList.indexOf(b);
+        return position;
+    }
+
+    /**
+     * 让所有项都设为
+     */
+    public void setALlNoChecked() {
+        for (int i = 0; i < mChooseList.size(); i++) {
+            mChooseList.get(i).setChecked(false);
+        }
+    }
+
 }
