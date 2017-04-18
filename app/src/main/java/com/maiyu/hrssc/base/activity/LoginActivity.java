@@ -94,30 +94,30 @@ public class LoginActivity extends BaseActivity {
         }*/
 
         String type = "1";
-        String userId = mWorkNo;
+        String account = mWorkNo;
         // String password = AppUtil.md5(mPwd);
         String password = mPwd;
         String mac = AppUtil.getMac(LoginActivity.this);
         String version = PackageInfoUtil.getVersionName(this);
         String login_way = ConstantValue.CLIENT_TYPE_ANDROID;
-        new LoginAsyncTask(type, userId, password, mac, version, login_way).execute();
+        new LoginAsyncTask(type, account, password, mac, version, login_way).execute();
     }
 
 
     class LoginAsyncTask extends BaseAsyncTask<Void, Void, Void> {
         private String type;
-        private String userId;
+        private String account;
         private String password;
         private String mac;
         private String version;
         private String login_way;
         private User user;
 
-        public LoginAsyncTask(String type, String userId, String password, String mac, String version, String login_way) {
+        public LoginAsyncTask(String type, String account, String password, String mac, String version, String login_way) {
             super();
 
             this.type = type;
-            this.userId = userId;
+            this.account = account;
             this.password = password;
             this.mac = mac;
             this.version = version;
@@ -134,7 +134,7 @@ public class LoginActivity extends BaseActivity {
         protected Void doInBackground(Void... params) {
             IUserEngine engine = EngineFactory.get(IUserEngine.class);
             try {
-                user = engine.login(LoginActivity.this, type, userId, password, mac, version, login_way);
+                user = engine.login(LoginActivity.this, type, account, password, mac, version, login_way);
             } catch (NetException e) {
                 exception = e;
                 e.printStackTrace();
@@ -150,7 +150,7 @@ public class LoginActivity extends BaseActivity {
             }
             if (user != null) {
                 // 保存帐号
-                SharedPreferencesUtil.saveLoginName(LoginActivity.this, userId);
+                SharedPreferencesUtil.saveLoginName(LoginActivity.this, account);
                 // 将数据存入数据中心
                 DataCenter.getInstance().setUser(user);
                 // 将数据存入缓存

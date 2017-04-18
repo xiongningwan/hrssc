@@ -71,7 +71,6 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:text="Alen"
             android:textColor="@color/text_title_gray"/>
 
 
@@ -97,7 +96,6 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:text="14412758"
             android:textColor="@color/text_title_gray"/>
 
     </RelativeLayout>
@@ -122,7 +120,6 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:text="15855667788"
             android:textColor="@color/text_title_gray"/>
 
     </RelativeLayout>
@@ -147,7 +144,6 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:text="P1"
             android:textColor="@color/text_title_gray"/>
 
     </RelativeLayout>
@@ -172,7 +168,6 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:text="广州-深圳"
             android:textColor="@color/text_title_gray"/>
     </RelativeLayout>
 
@@ -196,7 +191,6 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:text="15199887766"
             android:textColor="@color/text_title_gray"/>
     </RelativeLayout>
 
@@ -220,7 +214,6 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:text="alen@google.com"
             android:textColor="@color/text_title_gray"/>
     </RelativeLayout>
 
@@ -244,7 +237,6 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:text="男"
             android:textColor="@color/text_title_gray"/>
     </RelativeLayout>
 
@@ -268,7 +260,6 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:text="51122158978414"
             android:textColor="@color/text_title_gray"/>
 
     </RelativeLayout>
@@ -294,7 +285,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:text="1997-03-25"
+            android:text=""
             android:textColor="@color/text_title_gray"/>
     </RelativeLayout>
 

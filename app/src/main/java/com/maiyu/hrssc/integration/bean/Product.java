@@ -1,16 +1,18 @@
 package com.maiyu.hrssc.integration.bean;
 
 /**
- * 积分产品
+ * 产品
  */
 
-public class IngegrationProduct {
+public class Product {
     private String id;//123456 ,              //商品id
     private String name;//"商品名称"   ,     //商品名称
     private String price;//100，              //价格
-    private String worth;//120，             //价值多少积分，这个值一般大于实际价格
+    private String worth;//120，             //价值
     private String lefts;//50，               //剩余数量
-    private String img_url; //"/2017/02/sss.png" //商品图片
+    private String brief;//"商品简介",         //商品简介
+    private String description;//"详情"，      //商品详情。图文
+    private String create_time;//"2017-03-07 01;//01;//10"  //发布时间
 
 
     public String getId() {
@@ -53,24 +55,27 @@ public class IngegrationProduct {
         this.lefts = lefts;
     }
 
-    public String getImg_url() {
-        return img_url;
+    public String getBrief() {
+        return brief;
     }
 
-    public void setImg_url(String img_url) {
-        this.img_url = img_url;
+    public void setBrief(String brief) {
+        this.brief = brief;
     }
 
+    public String getDescription() {
+        return description;
+    }
 
-    @Override
-    public String toString() {
-        return "IngegrationProduct{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", price='" + price + '\'' +
-                ", worth='" + worth + '\'' +
-                ", lefts='" + lefts + '\'' +
-                ", img_url='" + img_url + '\'' +
-                '}';
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(String create_time) {
+        this.create_time = create_time;
     }
 }

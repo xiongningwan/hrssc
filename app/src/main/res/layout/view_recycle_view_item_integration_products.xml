@@ -18,7 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toStartOf="@id/point"
-        android:background="@drawable/view_image_view_gray_bg">
+        android:background="@drawable/view_image_view_gray_bg"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/product_iv_1"
@@ -46,7 +47,7 @@
             android:ellipsize="end"
             android:lines="2"
             android:padding="@dimen/base5dp"
-            android:text="兑换商品/iphone 6兑换商品/iphone 6兑换商品/iphone 6"
+            android:text=""
             android:textColor="@color/text_title_gray"/>
 
 
@@ -62,7 +63,7 @@
             android:paddingBottom="@dimen/base5dp"
             android:paddingEnd="@dimen/base5dp"
             android:paddingStart="@dimen/base5dp"
-            android:text="300积分"
+            android:text=""
             android:textColor="@color/color_general_text_red"/>
     </RelativeLayout>
 
@@ -70,8 +71,10 @@
         android:id="@+id/product_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/point"
-        android:background="@drawable/view_image_view_gray_bg">
+        android:background="@drawable/view_image_view_gray_bg"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/point"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/product_iv_2"
@@ -99,7 +102,7 @@
             android:ellipsize="end"
             android:lines="2"
             android:padding="@dimen/base5dp"
-            android:text="兑换商品/iphone 6兑换商品/iphone 6兑换商品/iphone 6"
+            android:text=""
             android:textColor="@color/text_title_gray"/>
 
 
@@ -115,7 +118,7 @@
             android:paddingBottom="@dimen/base5dp"
             android:paddingEnd="@dimen/base5dp"
             android:paddingStart="@dimen/base5dp"
-            android:text="300积分"
+            android:text=""
             android:textColor="@color/color_general_text_red"/>
     </RelativeLayout>
 

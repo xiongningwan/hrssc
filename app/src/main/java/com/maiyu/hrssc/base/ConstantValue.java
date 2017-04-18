@@ -79,6 +79,10 @@ public interface ConstantValue {
      */
     String path_fragment_my_sign = "/hrsscUserController/sign";
     /**
+     * 查询是否已经签到
+     */
+    String path_fragment_my_signOrNot = "/hrsscUserController/signOrNot";
+    /**
      * 修改密码
      */
     String path_activity_modify_pwd = "/hrsscLoginController/updatePassword";
@@ -134,6 +138,26 @@ public interface ConstantValue {
      * 发短信验证码
      */
     String path_activity_forget_pwd_2_get_msg_code = "/hrsscBasicController/sendAuthCode";
+    /**
+     * 查询个人资料信息
+     */
+    String path_activity_personal_info = "/hrsscUserController/getMyInfo";
+    /**
+     * 获取用户积分兑换的商品列表
+     */
+    String path_fragment_integration = "/hrsscProductController/getProducts";
+    /**
+     * 查询商品详情
+     */
+    String path_activity_product_item = "/hrsscProductController/getProductById";
+    /**
+     * 获取我的兑换记录   按照下单时间倒序排列
+     */
+    String path_activity_product_order = "/hrsscProductController/getMyProductOrder";
+    /**
+     * 获取订单详情
+     */
+    String path_activity_product_order_detail = "/hrsscProductController/getOrderDetail";
 
 
     /**

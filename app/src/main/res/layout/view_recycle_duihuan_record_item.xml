@@ -31,6 +31,8 @@
             android:layout_marginStart="@dimen/base14dp"
             android:layout_marginTop="@dimen/base16dp"
             android:layout_toEndOf="@id/product_iv"
+            android:lines="2"
+            android:ellipsize="end"
             android:text="中兴手机中兴手机-天机7中兴手机-天机7"
             android:textColor="@color/text_title_gray"/>
 

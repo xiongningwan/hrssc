@@ -9,7 +9,6 @@
     tools:context="com.maiyu.hrssc.base.activity.LoginActivity">
 
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,7 +37,7 @@
             android:background="@color/transparent"
             android:drawableLeft="@mipmap/icon_ren_gray"
             android:drawablePadding="@dimen/base10dp"
-            android:hint="请输入工号"
+            android:hint="请输入帐号"
             android:textColorHint="@color/project_color_general_text_secondary"
             android:textSize="@dimen/project_text_size_dp_14"/>
 
@@ -56,9 +55,9 @@
             android:drawableLeft="@mipmap/icon_mimasuo"
             android:drawablePadding="@dimen/base10dp"
             android:hint="请输入密码"
+            android:inputType="textPassword"
             android:textColorHint="@color/project_color_general_text_secondary"
-            android:textSize="@dimen/project_text_size_dp_14"
-            android:inputType="textPassword"/>
+            android:textSize="@dimen/project_text_size_dp_14"/>
 
 
     </LinearLayout>
@@ -92,9 +91,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/confirm_btn"
+            android:layout_marginEnd="@dimen/base10dp"
             android:layout_marginTop="@dimen/base20dp"
             android:layout_toStartOf="@id/point"
-            android:layout_marginEnd="@dimen/base10dp"
             android:text="新员工登录入口"
             android:textSize="@dimen/project_text_size_dp_12"/>
 
@@ -102,11 +101,11 @@
             android:id="@+id/forget_pwd_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/point"
-            android:layout_marginStart="@dimen/base10dp"
             android:layout_below="@id/confirm_btn"
             android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/base10dp"
             android:layout_marginTop="@dimen/base20dp"
+            android:layout_toEndOf="@id/point"
             android:text="忘记密码"
             android:textColor="@color/project_color_general_hyperlink"
             android:textSize="@dimen/project_text_size_dp_12"/>

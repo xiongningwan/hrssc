@@ -9,9 +9,10 @@ public class User implements Parcelable {
      * 用户实体信息
      */
     private static final long serialVersionUID = 1L;
-
+    private String account;// “xiaoming”     //账号
+    private String uin;//:“1000”,//工号
     private String name;//小明,                 //姓名
-    private long id = -1;//1000,                      //工号
+    private long id = -1;//1000,
     private String signature; //http;//qiniu.ccvrzb.com//Desert.jpg,  //签名图片路径
     private String head; //http;//qiniu.ccvrzb.com//Desert.jpg,       //头像路径
     private String password; //***,              //密码已处理
@@ -30,6 +31,8 @@ public class User implements Parcelable {
     private String last_loginTime;//2017-01-01 04;02;02  //上一次登录时间，pc端使用
     private String last_loginIp;//192.168.1.1            //上一次登录ip，pc端使用
     private String signed;//1                              //0-未签到   1-已签到
+
+
 
 
     public static long getSerialVersionUID() {
@@ -197,57 +200,20 @@ public class User implements Parcelable {
     }
 
 
-    public User() {
+    public String getAccount() {
+        return account;
     }
 
-    public User(String name, long id, String signature, String head, String password, String status, String sex, String birthday, String marry, String minority, String id_card, String amount, String phone, String email, String login_time, String create_time, String token, String last_loginTime, String last_loginIp, String signed) {
-        this.name = name;
-        this.id = id;
-        this.signature = signature;
-        this.head = head;
-        this.password = password;
-        this.status = status;
-        this.sex = sex;
-        this.birthday = birthday;
-        this.marry = marry;
-        this.minority = minority;
-        this.id_card = id_card;
-        this.amount = amount;
-        this.phone = phone;
-        this.email = email;
-        this.login_time = login_time;
-        this.create_time = create_time;
-        this.token = token;
-        this.last_loginTime = last_loginTime;
-        this.last_loginIp = last_loginIp;
-        this.signed = signed;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
+    public String getUin() {
+        return uin;
+    }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "name='" + name + '\'' +
-                ", id=" + id +
-                ", signature='" + signature + '\'' +
-                ", head='" + head + '\'' +
-                ", password='" + password + '\'' +
-                ", status='" + status + '\'' +
-                ", sex='" + sex + '\'' +
-                ", birthday='" + birthday + '\'' +
-                ", marry='" + marry + '\'' +
-                ", minority='" + minority + '\'' +
-                ", id_card='" + id_card + '\'' +
-                ", amount='" + amount + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", login_time='" + login_time + '\'' +
-                ", create_time='" + create_time + '\'' +
-                ", token='" + token + '\'' +
-                ", last_loginTime='" + last_loginTime + '\'' +
-                ", last_loginIp='" + last_loginIp + '\'' +
-                ", signed='" + signed + '\'' +
-                '}';
+    public void setUin(String uin) {
+        this.uin = uin;
     }
 
     @Override
@@ -257,6 +223,8 @@ public class User implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.account);
+        dest.writeString(this.uin);
         dest.writeString(this.name);
         dest.writeLong(this.id);
         dest.writeString(this.signature);
@@ -279,7 +247,12 @@ public class User implements Parcelable {
         dest.writeString(this.signed);
     }
 
+    public User() {
+    }
+
     protected User(Parcel in) {
+        this.account = in.readString();
+        this.uin = in.readString();
         this.name = in.readString();
         this.id = in.readLong();
         this.signature = in.readString();
@@ -302,7 +275,7 @@ public class User implements Parcelable {
         this.signed = in.readString();
     }
 
-    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+    public static final Creator<User> CREATOR = new Creator<User>() {
         @Override
         public User createFromParcel(Parcel source) {
             return new User(source);

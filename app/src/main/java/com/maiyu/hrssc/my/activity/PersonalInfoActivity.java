@@ -7,11 +7,14 @@ import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.ConstantValue;
 import com.maiyu.hrssc.base.activity.BaseActivity;
 import com.maiyu.hrssc.base.bean.DataCenter;
-import com.maiyu.hrssc.base.bean.User;
+import com.maiyu.hrssc.base.engine.IUserEngine;
+import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.base.view.HeadView;
+import com.maiyu.hrssc.base.view.dialog.LoadingDialog;
+import com.maiyu.hrssc.my.activity.bean.MyInfo;
+import com.maiyu.hrssc.util.BaseAsyncTask;
+import com.maiyu.hrssc.util.EngineFactory;
 import com.maiyu.hrssc.util.ImageLoaderUtil;
-
-import java.text.SimpleDateFormat;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,6 +50,8 @@ public class PersonalInfoActivity extends BaseActivity {
     TextView mIdCard;
     @BindView(R.id.date)
     TextView mDate;
+    private LoadingDialog mLoadingDialog;
+    private String mToken;
 
     @Override
     public void createActivityImpl() {
@@ -61,36 +66,86 @@ public class PersonalInfoActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        User user = DataCenter.getInstance().getuser();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-HH-dd hh:mm:ss");
-
-
-        mName.setText(user.getName());
-        mNumber.setText("" + user.getId());
-        mTel.setText(user.getPhone());
-        mLevel.setText("");
-        mHukou.setText("");
-        mJinjiTel.setText("");
-        mEmail.setText(user.getEmail());
-
-        if ("0".equals(user.getSex())) {
-            mSex.setText("男");
-        } else {
-            mSex.setText("女");
-        }
-
-        mIdCard.setText(user.getId_card());
-        mDate.setText(sdf.format(Long.parseLong(user.getCreate_time())));
-
-
-        if (user.getHead() != null) {
-            ImageLoaderUtil.loadImage(mHeadIconView, ConstantValue.FILE_SERVER_URI + user.getHead(), R.mipmap.timg);
-        }
+        mLoadingDialog = new LoadingDialog(this);
+        mToken = DataCenter.getInstance().getuser().getToken();
+        new MyInfoAsyncTask(mToken).execute();
     }
 
     @Override
     public void initOnClick(View v) {
 
+    }
+
+
+    /**
+     * 查询个人资料信息
+     */
+    class MyInfoAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String token;
+        private MyInfo mInfo;
+
+        public MyInfoAsyncTask(String token) {
+            super();
+
+            this.token = token;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            mLoadingDialog.getDialog().show();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            IUserEngine engine = EngineFactory.get(IUserEngine.class);
+            try {
+                mInfo = engine.getMyInfo(PersonalInfoActivity.this, token);
+            } catch (NetException e) {
+                exception = e;
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            mLoadingDialog.getDialog().dismiss();
+            if (checkException(PersonalInfoActivity.this)) {
+                return;
+            }
+            if (mInfo != null) {
+                setData(mInfo);
+            }
+
+            super.onPostExecute(result);
+        }
+    }
+
+    private void setData(MyInfo info) {
+        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-HH-dd hh:mm:ss");
+
+        mName.setText(info.getName());
+        mNumber.setText(info.getUin());
+        mTel.setText(info.getPhone());
+        mLevel.setText(info.getLevel());
+        mHukou.setText(info.getHukou_prov() + info.getHukou_city());
+        mJinjiTel.setText(info.getEmergency_phone());
+        mEmail.setText(info.getEmail());
+
+        if ("0".equals(info.getSex())) {
+            mSex.setText("男");
+        } else {
+            mSex.setText("女");
+        }
+
+        mIdCard.setText(info.getId_card());
+        mDate.setText(info.getBirthday());
+
+
+        if (info.getHead() != null) {
+            ImageLoaderUtil.loadImage(mHeadIconView, ConstantValue.FILE_SERVER_URI + info.getHead(), R.mipmap.timg);
+        }
     }
 
 }

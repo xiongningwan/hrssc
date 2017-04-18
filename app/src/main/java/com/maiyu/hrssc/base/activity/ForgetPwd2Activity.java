@@ -37,7 +37,7 @@ public class ForgetPwd2Activity extends BaseActivity {
     private String mCode;
     private String mNewPwd;
     private String mConfirmPwd;
-    private String userId;
+    private String account;
     private String phone;
 
     @Override
@@ -54,7 +54,7 @@ public class ForgetPwd2Activity extends BaseActivity {
 
     @Override
     public void initData() {
-        userId = getIntent().getStringExtra("idCard");
+        account = getIntent().getStringExtra("account");
         phone = getIntent().getStringExtra("phone");
     }
 
@@ -80,7 +80,7 @@ public class ForgetPwd2Activity extends BaseActivity {
     private void doCode() {
         TimeCount time = new TimeCount(60000, 1000);//构造CountDownTimer对象
         time.start();//开始计时
-        new MsgCodeAsyncTask(userId, phone).execute();
+        new MsgCodeAsyncTask(phone).execute();
     }
 
 
@@ -108,7 +108,7 @@ public class ForgetPwd2Activity extends BaseActivity {
             return;
         }
 
-        new TwoStepAsyncTask(userId, mCode, mNewPwd, phone).execute();
+        new TwoStepAsyncTask(account, mCode, mNewPwd, phone).execute();
     }
 
     private boolean Validate() {
@@ -141,14 +141,12 @@ public class ForgetPwd2Activity extends BaseActivity {
      */
     class MsgCodeAsyncTask extends BaseAsyncTask<Void, Void, Void> {
         private String phone;
-        private String token;
         private String str;
 
-        public MsgCodeAsyncTask(String phone, String token) {
+        public MsgCodeAsyncTask(String phone) {
             super();
 
             this.phone = phone;
-            this.token = token;
         }
 
         @Override
@@ -161,7 +159,7 @@ public class ForgetPwd2Activity extends BaseActivity {
         protected Void doInBackground(Void... params) {
             IUserEngine engine = EngineFactory.get(IUserEngine.class);
             try {
-                str = engine.getMsgCode(ForgetPwd2Activity.this, phone, token);
+                str = engine.getMsgCode(ForgetPwd2Activity.this, phone);
             } catch (NetException e) {
                 exception = e;
                 e.printStackTrace();
@@ -189,16 +187,16 @@ public class ForgetPwd2Activity extends BaseActivity {
      * 找回密码
      */
     class TwoStepAsyncTask extends BaseAsyncTask<Void, Void, Void> {
-        private String userId;
+        private String account;
         private String code;
         private String newPassword;
         private String phone;
         private String str;
 
-        public TwoStepAsyncTask(String userId, String code, String newPassword, String phone) {
+        public TwoStepAsyncTask(String account, String code, String newPassword, String phone) {
             super();
 
-            this.userId = userId;
+            this.account = account;
             this.code = code;
             this.newPassword = newPassword;
             this.phone = phone;
@@ -214,7 +212,7 @@ public class ForgetPwd2Activity extends BaseActivity {
         protected Void doInBackground(Void... params) {
             IUserEngine engine = EngineFactory.get(IUserEngine.class);
             try {
-                str = engine.findBackPwd2(ForgetPwd2Activity.this, userId, code, newPassword, phone);
+                str = engine.findBackPwd2(ForgetPwd2Activity.this, account, code, newPassword, phone);
             } catch (NetException e) {
                 exception = e;
                 e.printStackTrace();

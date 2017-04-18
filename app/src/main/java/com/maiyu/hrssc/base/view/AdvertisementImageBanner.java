@@ -30,9 +30,10 @@ import java.util.List;
 
 /**
  * 广告轮播的显示view
- * @author xiongning
  *
- * 2015-8-31
+ * @author xiongning
+ *         <p>
+ *         2015-8-31
  */
 public class AdvertisementImageBanner extends RelativeLayout implements OnPageChangeListener {
     private Context mContext;
@@ -48,7 +49,7 @@ public class AdvertisementImageBanner extends RelativeLayout implements OnPageCh
     List<String> mTitle = new ArrayList<String>();
     List<String> mURl = new ArrayList<String>();
 
-    List<String> mAdDesc  = new ArrayList<String>();
+    List<String> mAdDesc = new ArrayList<String>();
 
 
     private List<ImageView> mCacheImageViews = new ArrayList<ImageView>();
@@ -100,13 +101,13 @@ public class AdvertisementImageBanner extends RelativeLayout implements OnPageCh
         mPictureAddresses.clear();
         mTitle.clear();
         mURl.clear();
-       // mAdDesc.clear();
+        // mAdDesc.clear();
 
 
         mPictureAddresses.addAll(transformImageData(arrayList));
         mTitle.addAll(transformTitleData(arrayList));
         mURl.addAll(transformURLData(arrayList));
-      //  mAdDesc.addAll(transformAdDescData(arrayList));
+        //  mAdDesc.addAll(transformAdDescData(arrayList));
 
 
         mBannnerIndicatorIconView.removeAllViews();
@@ -137,6 +138,7 @@ public class AdvertisementImageBanner extends RelativeLayout implements OnPageCh
 
     /**
      * 是否有指示器
+     *
      * @param b
      */
     public void setIsIndicator(boolean b) {
@@ -168,8 +170,8 @@ public class AdvertisementImageBanner extends RelativeLayout implements OnPageCh
 
     /**
      * 自动滚动的消息 handler
-     * @author Jack
      *
+     * @author Jack
      */
     public class ScrollHandler extends Handler {
 
@@ -191,7 +193,6 @@ public class AdvertisementImageBanner extends RelativeLayout implements OnPageCh
         int item = mBannerPagerView.getCurrentItem() + 1;
         mBannerPagerView.setCurrentItem(item, true);
     }
-
 
 
     @Override
@@ -275,7 +276,7 @@ public class AdvertisementImageBanner extends RelativeLayout implements OnPageCh
             if (position > 1) {
                 position = position % mPictureAddresses.size();
             }
-           // LogHelper.i(TAG, "remove position:" + position);
+            // LogHelper.i(TAG, "remove position:" + position);
             container.removeView((View) object);
             mCacheImageViews.add((ImageView) object);
         }
@@ -306,25 +307,28 @@ public class AdvertisementImageBanner extends RelativeLayout implements OnPageCh
 
                     @Override
                     public void onClick(View v) {
+
                         if (mURl.size() > 0) {
                             int currentPositon = mBannerPagerView.getCurrentItem() % mURl.size();
-                            Intent intent = new Intent(mContext, WebActivity.class);
-                            intent.putExtra("url", mURl.get(currentPositon));
-                            intent.putExtra("titleName", mTitle.get(currentPositon));
-                            intent.putExtra("type", ConstantValue.TYPE_ORDINARY);
 
-                            mContext.startActivity(intent);
+                            if (mURl.get(currentPositon) != null && !mURl.get(currentPositon).equals("")) {
 
+                                Intent intent = new Intent(mContext, WebActivity.class);
+                                intent.putExtra("url", mURl.get(currentPositon));
+                                intent.putExtra("titleName", mTitle.get(currentPositon));
+                                intent.putExtra("type", ConstantValue.TYPE_ORDINARY);
+                                mContext.startActivity(intent);
+                            }
 
                         }
 
                     }
                 });
 
-              //  LogHelper.i(TAG, "new imageview");
+                //  LogHelper.i(TAG, "new imageview");
             } else {
                 imageView = mCacheImageViews.remove(0);
-             //   LogHelper.i(TAG, "get imageview:" + imageView.toString());
+                //   LogHelper.i(TAG, "get imageview:" + imageView.toString());
             }
 
             if (mPictureAddresses.size() > 0) {
@@ -336,7 +340,7 @@ public class AdvertisementImageBanner extends RelativeLayout implements OnPageCh
             imageView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 
             //LogHelper.i(TAG, "add position:" + position);
-          //  LogHelper.i(TAG, "current position:" + mBannerPagerView.getCurrentItem());
+            //  LogHelper.i(TAG, "current position:" + mBannerPagerView.getCurrentItem());
 
             container.addView(imageView);
             return imageView;
@@ -373,6 +377,7 @@ public class AdvertisementImageBanner extends RelativeLayout implements OnPageCh
 
     /**
      * 转换 image 地址 list 的数据格式，并对 image 地址按照指定顺序排列
+     *
      * @param arrayList
      * @return
      */
@@ -389,6 +394,7 @@ public class AdvertisementImageBanner extends RelativeLayout implements OnPageCh
 
     /**
      * 转换成广告url地址，并根据id排序
+     *
      * @param arrayList
      * @return
      */
@@ -405,6 +411,7 @@ public class AdvertisementImageBanner extends RelativeLayout implements OnPageCh
 
     /**
      * 根据id排序，转换title
+     *
      * @param arrayList
      * @return
      */
@@ -420,11 +427,10 @@ public class AdvertisementImageBanner extends RelativeLayout implements OnPageCh
     }
 
 
-
     /**
      * 按照 image id 比较大小
-     * @author Jack
      *
+     * @author Jack
      */
     public class ImageComparator implements Comparator<Adv> {
 

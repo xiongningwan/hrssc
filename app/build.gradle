@@ -1,5 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
+apply plugin: 'bugly'
+
+bugly {
+    appId = '01a15896cd' // 注册时分配的App ID
+    appKey = '1a21d081-7aa4-494d-be32-5ff67942d27b' // 注册时分配的App Key
+    uploadMapping = 'true'
+    upload = 'true'
+    execute = 'true'
+}
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.1"
@@ -30,7 +39,6 @@ android {
 
     buildTypes {
         release {
-            debuggable true
             minifyEnabled true //启用Proguard
             shrinkResources true //是否清理无用资源,依赖于minifyEnabled
             zipAlignEnabled true //是否启用zipAlign压缩
@@ -39,8 +47,7 @@ android {
         }
 
         debug {
-            debuggable true
-            minifyEnabled false  //不启用Proguard
+            minifyEnabled true  //不启用Proguard
             shrinkResources false //是否清理无用资源,依赖于minifyEnabled
             zipAlignEnabled false //是否启用zipAlign压缩
             signingConfig signingConfigs.debugConfig
@@ -78,7 +85,7 @@ dependencies {
     compile 'com.alibaba:fastjson:latest.integration'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compile 'com.zhy:okhttputils:2.6.1'
-    compile 'com.tencent.bugly:crashreport:2.1.5'
+    //compile 'com.tencent.bugly:crashreport:2.1.5'
     compile 'com.jakewharton:butterknife:8.0.1'
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
     compile 'com.hyphenate:kefu-easeui-android:latest.release'
@@ -88,4 +95,5 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.0.1'
+    compile 'com.tencent.bugly:crashreport:latest.release' //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
 }

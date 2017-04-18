@@ -74,21 +74,21 @@ public class ForgetPwdActivity extends BaseActivity {
             return;
         }
 
-        String userId = mWorkNo;
+        String account = mWorkNo;
         String password = mPwd;
 
-        new OneStepAsyncTask(userId, password).execute();
+        new OneStepAsyncTask(account, password).execute();
     }
 
     class OneStepAsyncTask extends BaseAsyncTask<Void, Void, Void> {
-        private String userId;
+        private String account;
         private String password;
         private String str;
 
-        public OneStepAsyncTask(String userId, String password) {
+        public OneStepAsyncTask(String account, String password) {
             super();
 
-            this.userId = userId;
+            this.account = account;
             this.password = password;
         }
 
@@ -102,7 +102,7 @@ public class ForgetPwdActivity extends BaseActivity {
         protected Void doInBackground(Void... params) {
             IUserEngine engine = EngineFactory.get(IUserEngine.class);
             try {
-                str = engine.findBackPwd1(ForgetPwdActivity.this, userId, password);
+                str = engine.findBackPwd1(ForgetPwdActivity.this, account, password);
             } catch (NetException e) {
                 exception = e;
                 e.printStackTrace();
@@ -119,8 +119,8 @@ public class ForgetPwdActivity extends BaseActivity {
             if (str != null && "操作成功".equals(str)) {
                 // 进入下一步
                 Intent intent = new Intent(ForgetPwdActivity.this, ForgetPwd2Activity.class);
-                intent.putExtra("idCard", userId);
-                intent.putExtra("phone", password);
+                intent.putExtra("account", account);
+                intent.putExtra("phone", password); //  shoujihao
                 startActivity(intent);
                 finish();
             }

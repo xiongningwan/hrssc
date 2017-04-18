@@ -134,12 +134,13 @@ public class MyFragment extends Fragment {
         }
 
         mNameTv.setText(mUser.getName());
-        mGonghaoValueTv.setText("" + mUser.getId());
+        mGonghaoValueTv.setText("" + mUser.getUin());
 
     }
 
     private void initData() {
 
+        new SignOrNotAsyncTask(mUser.getToken()).execute();
     }
 
 
@@ -216,7 +217,7 @@ public class MyFragment extends Fragment {
      */
     class SignAsyncTask extends BaseAsyncTask<Void, Void, Void> {
         private String token;
-        private String str;
+        private int sign_integral;
 
         public SignAsyncTask(String token) {
             super();
@@ -232,7 +233,7 @@ public class MyFragment extends Fragment {
         protected Void doInBackground(Void... params) {
             IUserEngine engine = EngineFactory.get(IUserEngine.class);
             try {
-                str = engine.sign(getActivity(), token);
+                sign_integral = engine.sign(getActivity(), token);
             } catch (NetException e) {
                 exception = e;
                 e.printStackTrace();
@@ -245,8 +246,57 @@ public class MyFragment extends Fragment {
             if (checkException(getActivity())) {
                 return;
             }
-            if (str != null && !str.equals("")) {
-                HintUitl.toastShort(getActivity(), "获得积分：" + str);
+            if (sign_integral != 0) {
+                HintUitl.toastShort(getActivity(), "获得积分：" + sign_integral);
+                User user = DataCenter.getInstance().getuser();
+                int amount = Integer.parseInt(user.getAmount()) + sign_integral;
+                user.setAccount(String.valueOf(amount));
+                DataCenter.getInstance().notifyIntegralChange();
+
+            }
+
+            super.onPostExecute(result);
+        }
+    }
+
+    /**
+     * 检查是否签到
+     */
+    class SignOrNotAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String token;
+        private int signed;
+
+        public SignOrNotAsyncTask(String token) {
+            super();
+            this.token = token;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            IUserEngine engine = EngineFactory.get(IUserEngine.class);
+            try {
+                signed = engine.signOrNot(getActivity(), token);
+            } catch (NetException e) {
+                exception = e;
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            if (checkException(getActivity())) {
+                return;
+            }
+            if (signed == 1) { //0-未签到  1-已签到
+                mQiandaoBtn.setSelected(true);
+            } else {
+                mQiandaoBtn.setSelected(false);
             }
 
             super.onPostExecute(result);

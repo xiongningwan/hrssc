@@ -14,6 +14,7 @@ import com.maiyu.hrssc.base.bean.User;
 import com.maiyu.hrssc.base.engine.IUserEngine;
 import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.home.activity.information.bean.NewsClass;
+import com.maiyu.hrssc.my.activity.bean.MyInfo;
 import com.maiyu.hrssc.util.LogHelper;
 import com.zhy.http.okhttp.OkHttpUtils;
 
@@ -30,13 +31,13 @@ import static com.alibaba.fastjson.JSON.parseObject;
 public class UserEngine extends BaseEngine implements IUserEngine {
 
     @Override
-    public User login(Context context, String type, String userId, String password, String mac, String version, String login_way) throws NetException {
+    public User login(Context context, String type, String account, String password, String mac, String version, String login_way) throws NetException {
         // 发送请求地址到服务器
         String urlString = ConstantValue.SERVER_URI + ConstantValue.path_activity_login_user_login;
         // 添加参数
         Map<String, String> params = new HashMap<String, String>();
         params.put("type", type);
-        params.put("userId", userId);
+        params.put("account", account);
         params.put("password", password);
         params.put("mac", mac);
         params.put("version", version);
@@ -362,7 +363,7 @@ public class UserEngine extends BaseEngine implements IUserEngine {
     }
 
     @Override
-    public String sign(Context context, String token) throws NetException {
+    public int sign(Context context, String token) throws NetException {
         // 发送请求地址到服务器
         String urlString = ConstantValue.SERVER_URI + ConstantValue.path_fragment_my_sign;
         // 添加参数
@@ -383,10 +384,45 @@ public class UserEngine extends BaseEngine implements IUserEngine {
         dispatcherException(context, json);
 
         // 解析返回的数据并封装
-        String data = null;
+        int data = 0;
         try {
             json = parseObject(json).getString("msg");
-            data = parseObject(json).getString("sign_integral");
+            data = parseObject(json).getInteger("sign_integral");
+            // data = JSON.parseObject(json, Messages.class);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
+    public int signOrNot(Context context, String token) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_fragment_my_signOrNot;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        int data = 0;
+        try {
+            json = parseObject(json).getString("data");
+            data = parseObject(json).getInteger("signed");
             // data = JSON.parseObject(json, Messages.class);
 
 
@@ -658,12 +694,12 @@ public class UserEngine extends BaseEngine implements IUserEngine {
     }
 
     @Override
-    public String findBackPwd1(Context context, String userId, String phone) throws NetException {
+    public String findBackPwd1(Context context, String account, String phone) throws NetException {
         // 发送请求地址到服务器
         String urlString = ConstantValue.SERVER_URI + ConstantValue.path_activity_forget_pwd_1;
         // 添加参数
         Map<String, String> params = new HashMap<String, String>();
-        params.put("userId", userId);
+        params.put("account", account);
         params.put("phone", phone);
         Response response = null;
         String json = "";
@@ -690,12 +726,12 @@ public class UserEngine extends BaseEngine implements IUserEngine {
     }
 
     @Override
-    public String findBackPwd2(Context context, String userId, String code, String newPassword, String phone) throws NetException {
+    public String findBackPwd2(Context context, String account, String code, String newPassword, String phone) throws NetException {
         // 发送请求地址到服务器
         String urlString = ConstantValue.SERVER_URI + ConstantValue.path_activity_forget_pwd_2;
         // 添加参数
         Map<String, String> params = new HashMap<String, String>();
-        params.put("userId", userId);
+        params.put("account", account);
         params.put("code", code);
         params.put("newPassword", newPassword);
         params.put("phone", phone);
@@ -749,6 +785,71 @@ public class UserEngine extends BaseEngine implements IUserEngine {
         String data = null;
         try {
             data = parseObject(json).getString("msg");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
+    public String getMsgCode(Context context, String phone) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_activity_forget_pwd_2_get_msg_code;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("phone", phone);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        String data = null;
+        try {
+            data = parseObject(json).getString("msg");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
+    public MyInfo getMyInfo(Context context, String token) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_activity_personal_info;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        MyInfo data = null;
+        try {
+            json = parseObject(json).getString("data");
+            json = parseObject(json).getString("user");
+            data = parseObject(json, MyInfo.class);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

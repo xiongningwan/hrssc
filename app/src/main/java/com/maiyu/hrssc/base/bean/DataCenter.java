@@ -14,9 +14,9 @@ public class DataCenter {
     public static final int TYPE_USER_INFO = 1;
     public static final int TYPE_UPLOADING_PHOTOS = 2;
     /**
-     * 账户信息回调类型
+     * 积分改变回调类型
      */
-    public static final int TYPE_ACCOUNT_INFO = 3;
+    public static final int TYPE_INTEGTATION_INFO = 3;
 
     /**
      * 个人信息
@@ -61,6 +61,8 @@ public class DataCenter {
      * @param user
      */
     public void setUser(User user) {
+        mUser.setAccount(user.getAccount());
+        mUser.setUin(user.getUin());
         mUser.setId(user.getId());
         mUser.setName(user.getName());
         mUser.setSignature(user.getSignature());
@@ -85,8 +87,8 @@ public class DataCenter {
         notifyObserver(TYPE_USER_INFO);
     }
 
-    public void notifyAccountChange() {
-        notifyObserver(TYPE_ACCOUNT_INFO);
+    public void notifyIntegralChange() {
+        notifyObserver(TYPE_INTEGTATION_INFO);
     }
 
 

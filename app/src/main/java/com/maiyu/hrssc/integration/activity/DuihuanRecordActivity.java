@@ -7,14 +7,18 @@ import android.view.View;
 
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.activity.BaseActivity;
+import com.maiyu.hrssc.base.bean.DataCenter;
+import com.maiyu.hrssc.base.engine.IIntegrationEngine;
+import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.base.view.HeadView;
 import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.maiyu.hrssc.integration.adapter.DuihuanRecordAdapter;
 import com.maiyu.hrssc.integration.bean.Record;
+import com.maiyu.hrssc.util.BaseAsyncTask;
+import com.maiyu.hrssc.util.EngineFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -28,11 +32,13 @@ public class DuihuanRecordActivity extends BaseActivity implements OnRefreshList
     @BindView(R.id.refreshLayout)
     SwipeToLoadLayout mRefreshLayout;
     private int mPage = 1;
+    private int mCount = 10;
     private final int init = 1;
     private final int isRefreshing = 2;
     private final int isLoadMoreing = 3;
     private int status = init;
     private DuihuanRecordAdapter mAdapter;
+    private String mToken;
 
 
     @Override
@@ -57,21 +63,13 @@ public class DuihuanRecordActivity extends BaseActivity implements OnRefreshList
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(mAdapter);
+
+        mToken = DataCenter.getInstance().getuser().getToken();
     }
 
     @Override
     public void initData() {
-        List<Record> list = new ArrayList<>();
-        String url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491480554532&di=9c0b9ba9748490bc531cf222b8b09e30&imgtype=0&src=http%3A%2F%2Fjd.365jia.cn%2Fuploads%2Fnews%2Ffolder_1713554%2Fimages%2F7efe02190d84322e29c50296bc5048c1.jpg";
-        list.add(new Record("中兴手机中兴手机",url, "320", "24", "2016-12-14 23:12"));
-        list.add(new Record("中兴手机中兴手机",url, "320", "24", "2016-12-14 23:12"));
-        list.add(new Record("中兴手机中兴手机","", "320", "24", "2016-12-14 23:12"));
-        list.add(new Record("中兴手机中兴手机",url, "320", "24", "2016-12-14 23:12"));
-        list.add(new Record("中兴手机中兴手机",url, "320", "24", "2016-12-14 23:12"));
-        list.add(new Record("中兴手机中兴手机","", "320", "24", "2016-12-14 23:12"));
-        list.add(new Record("中兴手机中兴手机","", "320", "24", "2016-12-14 23:12"));
-        list.add(new Record("中兴手机中兴手机","", "320", "24", "2016-12-14 23:12"));
-        mAdapter.setData(list);
+        new RecordListAsyncTask(mToken, String.valueOf(mPage), String.valueOf(mCount)).execute();
     }
 
     @Override
@@ -84,6 +82,7 @@ public class DuihuanRecordActivity extends BaseActivity implements OnRefreshList
         mPage++;
         status = isLoadMoreing;
         initData();
+        refreshOrLoadMoreComplete();
     }
 
     @Override
@@ -91,6 +90,7 @@ public class DuihuanRecordActivity extends BaseActivity implements OnRefreshList
         mPage = 1;
         status = isRefreshing;
         initData();
+        refreshOrLoadMoreComplete();
     }
 
 
@@ -103,6 +103,64 @@ public class DuihuanRecordActivity extends BaseActivity implements OnRefreshList
         }
         if (mRefreshLayout.isLoadingMore()) {
             mRefreshLayout.setLoadingMore(false);
+        }
+    }
+
+    /**
+     * 兑换产品记录列表
+     */
+    class RecordListAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String token;
+        private String page;
+        private String rows;
+        private List<Record> list;
+
+        public RecordListAsyncTask(String token, String page, String rows) {
+            super();
+
+            this.token = token;
+            this.page = page;
+            this.rows = rows;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            IIntegrationEngine engine = EngineFactory.get(IIntegrationEngine.class);
+            try {
+                list = engine.getMyProductOrder(DuihuanRecordActivity.this, token, page, rows);
+            } catch (NetException e) {
+                exception = e;
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            if (checkException(DuihuanRecordActivity.this)) {
+                return;
+            }
+            if (list != null) {
+                setData(list);
+            }
+
+            super.onPostExecute(result);
+        }
+    }
+
+    private void setData(List<Record> list) {
+
+        if (status == init) {
+            mAdapter.setData(list);
+        } else if (status == isRefreshing) {
+            mAdapter.setData(list);
+        } else if (status == isLoadMoreing) {
+            mAdapter.loadMoreData(list);
         }
     }
 }

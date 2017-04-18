@@ -10,6 +10,7 @@ import com.maiyu.hrssc.base.bean.News;
 import com.maiyu.hrssc.base.bean.User;
 import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.home.activity.information.bean.NewsClass;
+import com.maiyu.hrssc.my.activity.bean.MyInfo;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public interface IUserEngine {
      *
      * @param context
      * @param type      1-正式员工登录入口  0-新/离职员工登录入口
-     * @param userId    工号
+     * @param account    帐号
      * @param password  前端校验长度6~16位
      * @param mac       Mac地址，如果获取不到给空
      * @param version   版本号，如1.2.1
@@ -29,7 +30,7 @@ public interface IUserEngine {
      * @return
      * @throws NetException
      */
-    public User login(Context context, String type, String userId, String password, String mac, String version, String login_way) throws NetException;
+    public User login(Context context, String type, String account, String password, String mac, String version, String login_way) throws NetException;
 
 
     /**
@@ -139,7 +140,16 @@ public interface IUserEngine {
      * @return
      * @throws NetException
      */
-    public String sign(Context context, String token) throws NetException;
+    public int sign(Context context, String token) throws NetException;
+
+    /**
+     * 检查是否签到
+     * @param context
+     * @param token
+     * @return
+     * @throws NetException
+     */
+    public int signOrNot(Context context, String token) throws NetException;
 
     /**
      * 修改密码
@@ -266,6 +276,23 @@ public interface IUserEngine {
      * @throws NetException
      */
     public String getMsgCode(Context context, String phone, String token) throws NetException;
+    /**
+     * 发送短信验证码
+     * @param context
+     * @param phone
+     * @return
+     * @throws NetException
+     */
+    public String getMsgCode(Context context, String phone) throws NetException;
+
+    /**
+     * 查询个人资料信息
+     * @param context
+     * @param token
+     * @return
+     * @throws NetException
+     */
+    public MyInfo getMyInfo(Context context,  String token) throws NetException;
 
 
 }

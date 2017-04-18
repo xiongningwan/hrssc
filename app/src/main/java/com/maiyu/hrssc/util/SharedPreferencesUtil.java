@@ -57,6 +57,8 @@ public class SharedPreferencesUtil {
     public static void saveUserBaseInfo(Context context, User user) {
         SharedPreferences perfer = context.getSharedPreferences("user_info_vp", Context.MODE_PRIVATE);
         Editor editor = perfer.edit();
+        editor.putString("account", user.getAccount());
+        editor.putString("uin", user.getUin());
         editor.putLong("id", user.getId());
         editor.putString("name", user.getName());
         editor.putString("signature", user.getSignature());
@@ -91,6 +93,8 @@ public class SharedPreferencesUtil {
     public static User getUserBaseInfo(Context context) {
         SharedPreferences perfer = context.getSharedPreferences("user_info_vp", Context.MODE_PRIVATE);
         User u = new User();
+        u.setAccount(perfer.getString("account", null));
+        u.setUin(perfer.getString("uin", null));
         u.setId(perfer.getLong("id", -1));
         u.setName(perfer.getString("name", null));
         u.setSignature(perfer.getString("signature", null));

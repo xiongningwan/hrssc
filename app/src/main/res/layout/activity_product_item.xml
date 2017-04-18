@@ -13,8 +13,8 @@
         android:id="@+id/shangjia_ll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@color/project_color_basic_white"
+        android:orientation="vertical"
         android:visibility="visible">
 
         <FrameLayout
@@ -28,7 +28,7 @@
                 android:background="@color/project_color_basic_white_pure"/>
 
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/back_btn_1"
                 android:layout_width="@dimen/base35dp"
                 android:layout_height="@dimen/base35dp"
@@ -53,12 +53,13 @@
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/base10dp"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="@dimen/base10dp"
                 android:ellipsize="end"
                 android:lines="2"
-                android:text="兑换商品/商品名称"/>
+                android:text="兑换商品/商品名称"
+                android:textSize="@dimen/project_text_size_dp_16"
+                android:textColor="@color/text_title_gray"/>
 
             <TextView
                 android:id="@+id/jifen"
@@ -67,10 +68,26 @@
                 android:layout_below="@id/name"
                 android:gravity="center"
                 android:lines="1"
+                android:layout_marginTop="@dimen/base8dp"
                 android:paddingBottom="@dimen/base5dp"
                 android:paddingStart="@dimen/activity_horizontal_margin"
-                android:text="300积分"
-                android:textColor="@color/color_general_text_red"/>
+                android:text="300"
+                android:textColor="@color/color_general_text_red"
+                android:textSize="@dimen/project_text_size_dp_19"/>
+
+            <TextView
+                android:id="@+id/jifen_lable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name"
+                android:gravity="center"
+                android:lines="1"
+                android:layout_marginTop="@dimen/base10dp"
+                android:layout_toEndOf="@id/jifen"
+                android:paddingBottom="@dimen/base5dp"
+                android:text="积分"
+                android:textColor="@color/color_general_text_red"
+                android:textSize="@dimen/project_text_size_dp_16"/>
 
             <TextView
                 android:id="@+id/shuliang"
@@ -79,6 +96,7 @@
                 android:layout_below="@id/name"
                 android:layout_marginEnd="@dimen/base5dp"
                 android:layout_toStartOf="@+id/jiazhi"
+                android:layout_marginTop="@dimen/base10dp"
                 android:ellipsize="end"
                 android:lines="1"
                 android:paddingBottom="@dimen/base5dp"
@@ -91,6 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@id/name"
+                android:layout_marginTop="@dimen/base10dp"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:lines="1"
                 android:paddingBottom="@dimen/base5dp"
@@ -125,13 +144,13 @@
                     android:id="@+id/duihuan_btn"
                     android:layout_width="@dimen/base85dp"
                     android:layout_height="@dimen/base39dp"
-                    android:background="@drawable/corner_view_blue_gray_selector"
-                    android:layout_marginTop="@dimen/base5dp"
-                    android:layout_marginBottom="@dimen/base10dp"
-                    android:text="兑换"
-                    android:textColor="@color/project_color_basic_white_pure"
+                    android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_marginBottom="@dimen/base10dp"
+                    android:layout_marginTop="@dimen/base5dp"
+                    android:background="@drawable/corner_view_blue_gray_selector"
+                    android:text="兑换"
+                    android:textColor="@color/project_color_basic_white_pure"/>
             </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>

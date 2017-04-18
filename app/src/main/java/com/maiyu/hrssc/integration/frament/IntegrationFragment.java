@@ -3,63 +3,48 @@ package com.maiyu.hrssc.integration.frament;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
-import com.maiyu.hrssc.base.view.AdvertisementImageBanner;
-import com.maiyu.hrssc.integration.activity.DuihuanRecordActivity;
-import com.maiyu.hrssc.integration.adapter.INtegrationGridAdapter;
+import com.maiyu.hrssc.base.bean.DataCenter;
+import com.maiyu.hrssc.base.engine.IIntegrationEngine;
+import com.maiyu.hrssc.base.exception.NetException;
+import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.OnLoadMoreListener;
+import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.OnRefreshListener;
+import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.SwipeToLoadLayout;
+import com.maiyu.hrssc.integration.activity.ProductItemActivity;
+import com.maiyu.hrssc.integration.adapter.IntegrationAdapter;
 import com.maiyu.hrssc.integration.bean.IngegrationProduct;
+import com.maiyu.hrssc.util.BaseAsyncTask;
+import com.maiyu.hrssc.util.EngineFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class IntegrationFragment extends Fragment {
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    @BindView(R.id.address_btn_text)
-    TextView mAddressBtnText;
-    @BindView(R.id.address_btn)
-    RelativeLayout mAddressBtn;
-    @BindView(R.id.home_title_name)
-    TextView mHomeTitleName;
-    @BindView(R.id.msg_iv)
-    ImageView mMsgIv;
-    @BindView(R.id.msg_btn)
-    RelativeLayout mMsgBtn;
-    @BindView(R.id.activity_main_ads)
-    AdvertisementImageBanner mActivityMainAds;
-    @BindView(R.id.dizhi_iv)
-    ImageView mDizhiIv;
-    @BindView(R.id.label_dangqianjf)
-    TextView mLabelDangqianjf;
-    @BindView(R.id.value_dangqianjf)
-    TextView mValueDangqianjf;
-    @BindView(R.id.jiantou_iv)
-    ImageView mJiantouIv;
-    @BindView(R.id.dizhi_tv)
-    TextView mDizhiTv;
-    @BindView(R.id.jifen_rl)
-    RelativeLayout mJifenRl;
-    @BindView(R.id.grid_view)
-    GridView mGridView;
+public class IntegrationFragment extends Fragment implements OnRefreshListener, OnLoadMoreListener {
+    @BindView(R.id.recyclerView)
+    RecyclerView mRecyclerView;
+    @BindView(R.id.refreshLayout)
+    SwipeToLoadLayout mRefreshLayout;
+    private int mPage = 1;
+    private int mCount = 10;
+    private final int init = 1;
+    private final int isRefreshing = 2;
+    private final int isLoadMoreing = 3;
+    private int status = init;
     Unbinder unbinder;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-    private INtegrationGridAdapter mGridAdapter;
+    private IntegrationAdapter mAdapter;
+    private String mToken;
+    private IntegrationDataObserver integrationObserver;
 
 
     public IntegrationFragment() {
@@ -83,29 +68,31 @@ public class IntegrationFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_jifen, container, false);
         unbinder = ButterKnife.bind(this, view);
         initView();
+        initData();
         return view;
     }
 
 
     private void initView() {
-        // 初始化gridview
-        // 设置gridview
-        mGridAdapter = new INtegrationGridAdapter(getActivity());
-        mGridView.setAdapter(mGridAdapter);
+        // 设置刷新加载
+        mRefreshLayout.setRefreshEnabled(false);
+        mRefreshLayout.setLoadMoreEnabled(true);
+        mRefreshLayout.setOnLoadMoreListener(this);
+        mRefreshLayout.setOnRefreshListener(this);
 
-        String url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1491392546064&di=dd13abae446ba1f5bc5e74b7793e3063&imgtype=jpg&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D1714026931%2C697146313%26fm%3D214%26gp%3D0.jpg";
-        List list = new ArrayList();
-        list.add(new IngegrationProduct(1, "兑换商品/iPhone 6 128G 玫瑰金", "400", url));
-        list.add(new IngegrationProduct(1, "兑换商品/iPhone 6 128G 玫瑰金", "400", url));
-        list.add(new IngegrationProduct(1, "兑换商品/iPhone 6 128G 玫瑰金", "400", url));
-        list.add(new IngegrationProduct(1, "兑换商品/iPhone 6 128G 玫瑰金", "400", url));
-        list.add(new IngegrationProduct(1, "兑换商品/iPhone 6 128G 玫瑰金", "400", url));
-        list.add(new IngegrationProduct(1, "兑换商品/iPhone 6 128G 玫瑰金", "400", url));
-        list.add(new IngegrationProduct(1, "兑换商品/iPhone 6 128G 玫瑰金", "400", url));
-        list.add(new IngegrationProduct(1, "兑换商品/iPhone 6 128G 玫瑰金", "400", url));
+        // 设置列表
+        mAdapter = new IntegrationAdapter(getActivity(), new OneProductOnclickLister());
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.setAdapter(mAdapter);
 
-        mGridAdapter.setViewData(list, mGridView);
+        mToken = DataCenter.getInstance().getuser().getToken();
+        integrationObserver = new IntegrationDataObserver();
+        DataCenter.getInstance().registerObserver(integrationObserver);
+    }
 
+    void initData() {
+        new ProductsListAsyncTask(mToken, String.valueOf(mPage), String.valueOf(mCount)).execute();
     }
 
 
@@ -113,18 +100,122 @@ public class IntegrationFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        DataCenter.getInstance().unregisterObserver(integrationObserver);
     }
 
-    @OnClick({R.id.address_btn, R.id.msg_btn, R.id.jifen_rl})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.address_btn:
-                break;
-            case R.id.msg_btn:
-                break;
-            case R.id.jifen_rl:
-                startActivity(new Intent(getActivity(), DuihuanRecordActivity.class));
-                break;
+    /**
+     * 积分数据观察者
+     */
+    public class IntegrationDataObserver implements DataCenter.DataObserver {
+
+        @Override
+        public void onDataChangedListener(int type, Object... data) {
+            if (type == DataCenter.TYPE_INTEGTATION_INFO) {
+                mAdapter.refreshIntegration();
+            }
+        }
+    }
+
+
+    /**
+     * 进入详情
+     */
+    class OneProductOnclickLister implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            IngegrationProduct product = (IngegrationProduct) v.getTag(R.id.key_tag_item_data);
+
+            Intent intent = new Intent(getActivity(), ProductItemActivity.class);
+            intent.putExtra("productId", product.getId());
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onLoadMore() {
+        //mPage++;
+        status = isLoadMoreing;
+        initData();
+        refreshOrLoadMoreComplete();
+    }
+
+    @Override
+    public void onRefresh() {
+        mPage = 1;
+        status = isRefreshing;
+        initData();
+
+        refreshOrLoadMoreComplete();
+    }
+
+    /**
+     * 刷新加载更多完成
+     */
+    private void refreshOrLoadMoreComplete() {
+        if (mRefreshLayout.isRefreshing()) {
+            mRefreshLayout.setRefreshing(false);
+        }
+        if (mRefreshLayout.isLoadingMore()) {
+            mRefreshLayout.setLoadingMore(false);
+        }
+    }
+
+    /**
+     * 获取产品列表
+     */
+    class ProductsListAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String token;
+        private String page;
+        private String rows;
+        private List<IngegrationProduct> list;
+
+        public ProductsListAsyncTask(String token, String page, String rows) {
+            super();
+
+            this.token = token;
+            this.page = page;
+            this.rows = rows;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            IIntegrationEngine engine = EngineFactory.get(IIntegrationEngine.class);
+            try {
+                list = engine.getProducts(getActivity(), token, page, rows);
+            } catch (NetException e) {
+                exception = e;
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            if (checkException(getActivity())) {
+                return;
+            }
+            if (list != null) {
+                setData(list);
+            }
+
+            super.onPostExecute(result);
+        }
+    }
+
+    private void setData(List<IngegrationProduct> list) {
+
+        if (status == init) {
+            mAdapter.setData(list);
+        } else if (status == isRefreshing) {
+            mAdapter.setData(list);
+        } else if (status == isLoadMoreing) {
+            mAdapter.loadMoreData(list);
         }
     }
 }

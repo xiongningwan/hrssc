@@ -47,13 +47,16 @@ public class HrsscApplication extends Application {
        //初始化自定义Activity管理器
         activityManager = ActivityManager.getScreenManager();
         
-        CrashReport.initCrashReport(getApplicationContext(), "549197d60d", false);
 
 
         //Kefu sdk 初始化简写方式：
         ChatClient.getInstance().init(this, new ChatClient.Options().setAppkey("1122170327115434#kefuchannelapp28715").setTenantId("YXA6kKFdcBK-EeeAE99ULPSMug"));
         // Kefu EaseUI的初始化
         UIProvider.getInstance().init(this);
+
+
+        // 初始化bugly
+        CrashReport.initCrashReport(getApplicationContext(), "01a15896cd", true);
     }
 
     public int getmNetwork() {
