@@ -11,6 +11,7 @@ import com.maiyu.hrssc.base.bean.DataCenter;
 import com.maiyu.hrssc.base.engine.IIntegrationEngine;
 import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.base.view.HeadView;
+import com.maiyu.hrssc.base.view.dialog.LoadingDialog;
 import com.maiyu.hrssc.integration.bean.RecordDetail;
 import com.maiyu.hrssc.util.BaseAsyncTask;
 import com.maiyu.hrssc.util.EngineFactory;
@@ -56,6 +57,7 @@ public class RecordDetailActivity extends BaseActivity {
     @BindView(R.id.have_address_ll)
     LinearLayout mHaveAddressLl;
     private String mToken;
+    private LoadingDialog mLoadingDialog;
 
     @Override
     public void createActivityImpl() {
@@ -67,9 +69,7 @@ public class RecordDetailActivity extends BaseActivity {
     @Override
     public void initViews() {
         mHeadView.setTitle("兑换记录", true, false);
-
-
-
+        mLoadingDialog = new LoadingDialog(this);
     }
 
     @Override
@@ -108,6 +108,7 @@ public class RecordDetailActivity extends BaseActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            mLoadingDialog.getDialog().show();
         }
 
         @Override
@@ -124,6 +125,7 @@ public class RecordDetailActivity extends BaseActivity {
 
         @Override
         protected void onPostExecute(Void result) {
+            mLoadingDialog.getDialog().dismiss();
             if (checkException(RecordDetailActivity.this)) {
                 return;
             }

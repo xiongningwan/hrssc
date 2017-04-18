@@ -58,5 +58,17 @@ public interface IIntegrationEngine {
      */
     public RecordDetail getRecordDetail(Context context, String token, String orderId) throws NetException;
 
+    /**
+     * 兑换商品
+     * @param context
+     * @param token
+     * @param count
+     * @param pid
+     * @param aid
+     * @return
+     * @throws NetException
+     */
+    public RecordDetail exchangeProduct(Context context, String token, String count, String pid, String aid) throws NetException;
+
 
 }

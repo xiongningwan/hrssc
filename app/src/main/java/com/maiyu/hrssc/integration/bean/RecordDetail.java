@@ -1,10 +1,13 @@
 package com.maiyu.hrssc.integration.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Administrator on 2017/4/18.
  */
 
-public class RecordDetail {
+public class RecordDetail implements Parcelable {
     private String address;//深圳                      //收货地址
     private String id;// 2                                //订单id
     private String count ;//  2                            //购买数量
@@ -168,4 +171,67 @@ public class RecordDetail {
     public void setPid(String pid) {
         this.pid = pid;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.address);
+        dest.writeString(this.id);
+        dest.writeString(this.count);
+        dest.writeString(this.logistics_no);
+        dest.writeString(this.deliver_time);
+        dest.writeString(this.deliver_user);
+        dest.writeString(this.status);
+        dest.writeString(this.create_time);
+        dest.writeString(this.order_no);
+        dest.writeString(this.pname);
+        dest.writeString(this.pimage);
+        dest.writeString(this.points);
+        dest.writeString(this.receiver);
+        dest.writeString(this.contact);
+        dest.writeString(this.lid);
+        dest.writeString(this.logistics);
+        dest.writeString(this.uid);
+        dest.writeString(this.pid);
+    }
+
+    public RecordDetail() {
+    }
+
+    protected RecordDetail(Parcel in) {
+        this.address = in.readString();
+        this.id = in.readString();
+        this.count = in.readString();
+        this.logistics_no = in.readString();
+        this.deliver_time = in.readString();
+        this.deliver_user = in.readString();
+        this.status = in.readString();
+        this.create_time = in.readString();
+        this.order_no = in.readString();
+        this.pname = in.readString();
+        this.pimage = in.readString();
+        this.points = in.readString();
+        this.receiver = in.readString();
+        this.contact = in.readString();
+        this.lid = in.readString();
+        this.logistics = in.readString();
+        this.uid = in.readString();
+        this.pid = in.readString();
+    }
+
+    public static final Parcelable.Creator<RecordDetail> CREATOR = new Parcelable.Creator<RecordDetail>() {
+        @Override
+        public RecordDetail createFromParcel(Parcel source) {
+            return new RecordDetail(source);
+        }
+
+        @Override
+        public RecordDetail[] newArray(int size) {
+            return new RecordDetail[size];
+        }
+    };
 }

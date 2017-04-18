@@ -140,6 +140,19 @@
                     android:layout_alignParentTop="true"
                     android:background="@mipmap/line"/>
 
+                <TextView
+                    android:id="@+id/yixiajia_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="@dimen/base10dp"
+                    android:layout_marginTop="@dimen/base5dp"
+                    android:text="已下架"
+                    android:textColor="@color/project_color_basic_white_pure"
+                    android:textSize="@dimen/project_text_size_dp_16"
+                    android:visibility="gone"/>
+
                 <Button
                     android:id="@+id/duihuan_btn"
                     android:layout_width="@dimen/base85dp"
@@ -150,7 +163,8 @@
                     android:layout_marginTop="@dimen/base5dp"
                     android:background="@drawable/corner_view_blue_gray_selector"
                     android:text="兑换"
-                    android:textColor="@color/project_color_basic_white_pure"/>
+                    android:textColor="@color/project_color_basic_white_pure"
+                    android:visibility="visible"/>
             </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>

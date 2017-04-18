@@ -175,4 +175,41 @@ public class IntegrationEngine extends BaseEngine implements IIntegrationEngine 
         }
         return data;
     }
+
+    @Override
+    public RecordDetail exchangeProduct(Context context, String token, String count, String pid, String aid) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_activity_duihuan;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("count", count);
+        params.put("pid", pid);
+        params.put("aid", aid);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        RecordDetail data = null;
+        try {
+            json = parseObject(json).getString("data");
+            json = parseObject(json).getString("order");
+            data = parseObject(json, RecordDetail.class);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
 }

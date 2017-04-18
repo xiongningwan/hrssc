@@ -13,7 +13,15 @@ public class Product {
     private String brief;//"商品简介",         //商品简介
     private String description;//"详情"，      //商品详情。图文
     private String create_time;//"2017-03-07 01;//01;//10"  //发布时间
+    private String status;// 0上架 1下架
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getId() {
         return id;

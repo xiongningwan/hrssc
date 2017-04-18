@@ -10,7 +10,14 @@ import android.widget.TextView;
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.activity.AddressManageActivity;
 import com.maiyu.hrssc.base.activity.BaseActivity;
+import com.maiyu.hrssc.base.bean.DataCenter;
+import com.maiyu.hrssc.base.engine.IIntegrationEngine;
+import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.base.view.HeadView;
+import com.maiyu.hrssc.base.view.dialog.LoadingDialog;
+import com.maiyu.hrssc.integration.bean.RecordDetail;
+import com.maiyu.hrssc.util.BaseAsyncTask;
+import com.maiyu.hrssc.util.EngineFactory;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,6 +54,8 @@ public class DuihuanActivity extends BaseActivity {
     TextView mProductNoTv;
     @BindView(R.id.confirm_btn)
     Button mConfirmBtn;
+    private LoadingDialog mLoadingDialog;
+    private String mToken;
 
     @Override
     public void createActivityImpl() {
@@ -57,10 +66,12 @@ public class DuihuanActivity extends BaseActivity {
     @Override
     public void initViews() {
         mHeadView.setTitle("兑换", true, false);
+        mLoadingDialog = new LoadingDialog(this);
     }
 
     @Override
     public void initData() {
+        mToken = DataCenter.getInstance().getuser().getToken();
 
     }
 
@@ -77,8 +88,64 @@ public class DuihuanActivity extends BaseActivity {
                 startActivity(new Intent(this, AddressManageActivity.class));
                 break;
             case R.id.confirm_btn:
-                startActivity(new Intent(this, DuihuanSuccessActivity.class));
+                new RecordDetialAsyncTask(mToken, count, pid, aid).execute();
                 break;
         }
+    }
+
+
+    /**
+     * 兑换产品详情
+     */
+    class RecordDetialAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String token;
+        private String count;
+        private String pid;
+        private String aid;
+        private RecordDetail mRecordDetail;
+
+        public RecordDetialAsyncTask(String token, String count, String pid, String aid) {
+            super();
+
+            this.token = token;
+            this.count = count;
+            this.pid = pid;
+            this.aid = aid;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mLoadingDialog.getDialog().show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            IIntegrationEngine engine = EngineFactory.get(IIntegrationEngine.class);
+            try {
+                mRecordDetail = engine.exchangeProduct(DuihuanActivity.this, token, count, pid, aid);
+            } catch (NetException e) {
+                exception = e;
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            mLoadingDialog.getDialog().dismiss();
+            if (checkException(DuihuanActivity.this)) {
+                return;
+            }
+            if (mRecordDetail != null) {
+                setData(mRecordDetail);
+            }
+
+            super.onPostExecute(result);
+        }
+    }
+
+    private void setData(RecordDetail recordDetail) {
+        startActivity(new Intent(this, DuihuanSuccessActivity.class));
     }
 }

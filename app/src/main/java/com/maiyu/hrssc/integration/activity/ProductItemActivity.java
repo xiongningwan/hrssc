@@ -31,6 +31,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.maiyu.hrssc.R.id.duihuan_btn;
+
 public class ProductItemActivity extends BaseActivity {
 
     @BindView(R.id.ads)
@@ -45,17 +47,23 @@ public class ProductItemActivity extends BaseActivity {
     TextView mShuliang;
     @BindView(R.id.jiazhi)
     TextView mJiazhi;
-    @BindView(R.id.duihuan_btn)
+    @BindView(duihuan_btn)
     TextView mDuihuanBtn;
 
     @BindView(R.id.shangjia_ll)
     LinearLayout mShangjiaLL;
+
+    @BindView(R.id.duihuan_rl)
+    RelativeLayout mDuihuanRl;
 
     @BindView(R.id.shanchu_rl)
     RelativeLayout mShanchuRL;
 
     @BindView(R.id.back_btn_2)
     ImageButton mBackBtn2;
+    @BindView(R.id.yixiajia_tv)
+    TextView mYixiajiatv;
+
     private LoadingDialog mLoadingDialog;
     private String mToken;
 
@@ -88,7 +96,7 @@ public class ProductItemActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.back_btn_1, R.id.back_btn_2, R.id.duihuan_btn})
+    @OnClick({R.id.back_btn_1, R.id.back_btn_2, duihuan_btn})
     public void onClick(View view) {
 
         switch (view.getId()) {
@@ -100,7 +108,7 @@ public class ProductItemActivity extends BaseActivity {
                 finish();
                 break;
 
-            case R.id.duihuan_btn:
+            case duihuan_btn:
                 startActivity(new Intent(this, DuihuanActivity.class));
                 break;
         }
@@ -174,7 +182,14 @@ public class ProductItemActivity extends BaseActivity {
             mJifen.setText(product.getWorth());
             mShuliang.setText("数量:" + product.getLefts());
             mJiazhi.setText("价值:" + product.getPrice());
+            if ("1".equals(product.getStatus())) {
+                mDuihuanRl.setBackgroundResource(R.color.project_color_general_text_secondary);
+                mDuihuanBtn.setVisibility(View.GONE);
+                mYixiajiatv.setVisibility(View.VISIBLE);
+            }
+
         }
+
 
     }
 

@@ -158,6 +158,10 @@ public interface ConstantValue {
      * 获取订单详情
      */
     String path_activity_product_order_detail = "/hrsscProductController/getOrderDetail";
+    /**
+     * 兑换商品
+     */
+    String path_activity_duihuan = "/hrsscProductController/exchangeProduct";
 
 
     /**
