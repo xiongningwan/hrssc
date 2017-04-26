@@ -2,9 +2,11 @@ package com.maiyu.hrssc.home.activity.socialsecurity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.activity.BaseActivity;
@@ -51,7 +53,17 @@ public class SocialSecurityActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        mHeadView.setTitle("社保", true, false);
+        mHeadView.setTitle("社保", true, true);
+        TextView rightBtnTv = mHeadView.getRightButtonText();
+        rightBtnTv.setText("历史");
+        rightBtnTv.setTextColor(ContextCompat.getColor(this, R.color.project_color_general_hyperlink));
+        rightBtnTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(SocialSecurityActivity.this, SSHistoryActivity.class));
+            }
+        });
     }
 
     @Override
