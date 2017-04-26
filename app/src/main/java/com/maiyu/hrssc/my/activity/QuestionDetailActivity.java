@@ -16,6 +16,10 @@ import com.maiyu.hrssc.my.activity.bean.Question;
 import com.maiyu.hrssc.util.BaseAsyncTask;
 import com.maiyu.hrssc.util.EngineFactory;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -37,7 +41,8 @@ public class QuestionDetailActivity extends BaseActivity {
     RelativeLayout mNOcontent;
     private LoadingDialog mLoadingDialog;
     private String mToken;
-
+    SimpleDateFormat msdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat msdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     @Override
     public void createActivityImpl() {
         setContentView(R.layout.activity_question_detail);
@@ -119,6 +124,11 @@ public class QuestionDetailActivity extends BaseActivity {
     private void setData(Question question) {
         mTitle.setText(question.getTitle());
         mContent.setText(Html.fromHtml(question.getContent()));
-        mTime.setText(question.getCreate_time());
+        try {
+            Date dateTime = msdf.parse(question.getCreate_time());
+            mTime.setText(msdf1.format(dateTime));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }

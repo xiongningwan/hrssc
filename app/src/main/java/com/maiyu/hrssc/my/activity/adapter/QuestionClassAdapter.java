@@ -2,6 +2,7 @@ package com.maiyu.hrssc.my.activity.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,11 @@ public class QuestionClassAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new AddressViewHolder(mInflater.inflate(R.layout.view_recycler_view_item_activity_help_center, parent, false));
+        View view = mInflater.inflate(R.layout.view_recycler_view_item_activity_help_center, parent, false);
+        TypedValue typedValue = new TypedValue();
+        mContext.getTheme().resolveAttribute(R.attr.selectableItemBackground, typedValue, true);
+        view.setBackgroundResource(typedValue.resourceId);
+        return new AddressViewHolder(view);
     }
 
     @Override

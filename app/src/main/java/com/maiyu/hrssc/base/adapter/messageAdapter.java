@@ -12,7 +12,10 @@ import android.widget.TextView;
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.bean.Messages;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -26,6 +29,8 @@ public class messageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private final View.OnClickListener mListener;
     private final View.OnClickListener mDelListener;
     private List mList = new ArrayList<>();
+    SimpleDateFormat msdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat msdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     public void setData(List list) {
         mList.clear();
@@ -37,7 +42,6 @@ public class messageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         mList.addAll(list);
         notifyDataSetChanged();
     }
-
 
 
     public messageAdapter(Context context, View.OnClickListener listener, View.OnClickListener delListener) {
@@ -86,8 +90,14 @@ public class messageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             Messages messages = (Messages) mList.get(getAdapterPosition());
 
             title.setText(messages.getTitle());
-            time.setText(messages.getCreate_time());
 
+
+            try {
+                Date dateTime = msdf.parse(messages.getCreate_time());
+                time.setText(msdf1.format(dateTime));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
             itemView.setTag(R.id.key_tag_item_data, messages);
             itemView.setOnClickListener(mListener);
@@ -107,7 +117,6 @@ public class messageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
 
-
     public void removeItem(int position) {
         mList.remove(position);
         notifyItemRemoved(position);
@@ -117,7 +126,6 @@ public class messageAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         int position = mList.indexOf(b);
         return position;
     }
-
 
 
 }

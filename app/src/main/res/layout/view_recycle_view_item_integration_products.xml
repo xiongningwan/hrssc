@@ -1,126 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <View
-        android:id="@+id/point"
-        android:layout_width="1px"
-        android:layout_height="1px"
-        android:layout_marginStart="@dimen/base5dp"
-        android:layout_marginEnd="@dimen/base5dp"
-        android:layout_centerHorizontal="true"/>
-
+    <include layout="@layout/view_space_layout"/>
 
     <RelativeLayout
-        android:id="@+id/product_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toStartOf="@id/point"
-        android:background="@drawable/view_image_view_gray_bg"
-        android:visibility="gone">
-
-        <ImageView
-            android:id="@+id/product_iv_1"
-            android:layout_width="@dimen/base160dp"
-            android:layout_height="@dimen/base160dp"
-            android:padding="@dimen/base1dp"
-            android:scaleType="centerCrop"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <View
-            android:id="@+id/line_1"
-            android:layout_width="match_parent"
+            android:id="@+id/point"
+            android:layout_width="1px"
             android:layout_height="1px"
-            android:layout_alignEnd="@id/product_iv_1"
-            android:layout_alignStart="@id/product_iv_1"
-            android:layout_below="@id/product_iv_1"
-            android:background="@mipmap/line"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="@dimen/base5dp"
+            android:layout_marginStart="@dimen/base5dp"/>
 
-        <TextView
-            android:id="@+id/product_name_1"
-            android:layout_width="match_parent"
+
+        <RelativeLayout
+            android:id="@+id/product_1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@id/product_iv_1"
-            android:layout_alignStart="@id/product_iv_1"
-            android:layout_below="@id/line_1"
-            android:ellipsize="end"
-            android:lines="2"
-            android:padding="@dimen/base5dp"
-            android:text=""
-            android:textColor="@color/text_title_gray"/>
+            android:layout_toStartOf="@id/point"
+            android:background="@drawable/view_image_view_gray_bg"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/product_iv_1"
+                android:layout_width="@dimen/base160dp"
+                android:layout_height="@dimen/base160dp"
+                android:padding="@dimen/base1dp"
+                android:scaleType="centerCrop"/>
+
+            <View
+                android:id="@+id/line_1"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignEnd="@id/product_iv_1"
+                android:layout_alignStart="@id/product_iv_1"
+                android:layout_below="@id/product_iv_1"
+                android:background="@mipmap/line"/>
+
+            <TextView
+                android:id="@+id/product_name_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/product_iv_1"
+                android:layout_alignStart="@id/product_iv_1"
+                android:layout_below="@id/line_1"
+                android:ellipsize="end"
+                android:lines="2"
+                android:padding="@dimen/base5dp"
+                android:text=""
+                android:textColor="@color/text_title_gray"/>
 
 
-        <TextView
-            android:id="@+id/product_jifen_1"
-            android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/product_jifen_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/product_iv_1"
+                android:layout_alignStart="@id/product_iv_1"
+                android:layout_below="@id/product_name_1"
+                android:ellipsize="end"
+                android:lines="1"
+                android:paddingBottom="@dimen/base5dp"
+                android:paddingEnd="@dimen/base5dp"
+                android:paddingStart="@dimen/base5dp"
+                android:text=""
+                android:textColor="@color/color_general_text_red"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/product_2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@id/product_iv_1"
-            android:layout_alignStart="@id/product_iv_1"
-            android:layout_below="@id/product_name_1"
-            android:ellipsize="end"
-            android:lines="1"
-            android:paddingBottom="@dimen/base5dp"
-            android:paddingEnd="@dimen/base5dp"
-            android:paddingStart="@dimen/base5dp"
-            android:text=""
-            android:textColor="@color/color_general_text_red"/>
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/point"
+            android:background="@drawable/view_image_view_gray_bg"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/product_iv_2"
+                android:layout_width="@dimen/base160dp"
+                android:layout_height="@dimen/base160dp"
+                android:padding="@dimen/base1dp"
+                android:scaleType="centerCrop"/>
+
+            <View
+                android:id="@+id/line_2"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignEnd="@id/product_iv_2"
+                android:layout_alignStart="@id/product_iv_2"
+                android:layout_below="@id/product_iv_2"
+                android:background="@mipmap/line"/>
+
+            <TextView
+                android:id="@+id/product_name_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/product_iv_2"
+                android:layout_alignStart="@id/product_iv_2"
+                android:layout_below="@id/line_2"
+                android:ellipsize="end"
+                android:lines="2"
+                android:padding="@dimen/base5dp"
+                android:text=""
+                android:textColor="@color/text_title_gray"/>
+
+
+            <TextView
+                android:id="@+id/product_jifen_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@id/product_iv_2"
+                android:layout_alignStart="@id/product_iv_2"
+                android:layout_below="@id/product_name_2"
+                android:ellipsize="end"
+                android:lines="1"
+                android:paddingBottom="@dimen/base5dp"
+                android:paddingEnd="@dimen/base5dp"
+                android:paddingStart="@dimen/base5dp"
+                android:text=""
+                android:textColor="@color/color_general_text_red"/>
+        </RelativeLayout>
+
     </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/product_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/view_image_view_gray_bg"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/point"
-        android:visibility="gone">
-
-        <ImageView
-            android:id="@+id/product_iv_2"
-            android:layout_width="@dimen/base160dp"
-            android:layout_height="@dimen/base160dp"
-            android:padding="@dimen/base1dp"
-            android:scaleType="centerCrop"/>
-
-        <View
-            android:id="@+id/line_2"
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_alignEnd="@id/product_iv_2"
-            android:layout_alignStart="@id/product_iv_2"
-            android:layout_below="@id/product_iv_2"
-            android:background="@mipmap/line"/>
-
-        <TextView
-            android:id="@+id/product_name_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@id/product_iv_2"
-            android:layout_alignStart="@id/product_iv_2"
-            android:layout_below="@id/line_2"
-            android:ellipsize="end"
-            android:lines="2"
-            android:padding="@dimen/base5dp"
-            android:text=""
-            android:textColor="@color/text_title_gray"/>
-
-
-        <TextView
-            android:id="@+id/product_jifen_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@id/product_iv_2"
-            android:layout_alignStart="@id/product_iv_2"
-            android:layout_below="@id/product_name_2"
-            android:ellipsize="end"
-            android:lines="1"
-            android:paddingBottom="@dimen/base5dp"
-            android:paddingEnd="@dimen/base5dp"
-            android:paddingStart="@dimen/base5dp"
-            android:text=""
-            android:textColor="@color/color_general_text_red"/>
-    </RelativeLayout>
-
-
-</RelativeLayout>
+    i
+</LinearLayout>

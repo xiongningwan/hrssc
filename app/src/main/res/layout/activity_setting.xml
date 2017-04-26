@@ -32,12 +32,26 @@
             android:textColor="@color/text_title_gray"/>
 
 
+
         <ImageView
+            android:id="@+id/arraw_iv2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:src="@mipmap/icon_xianghou"/>
+
+
+        <TextView
+            android:id="@+id/cache_hint_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/base5dp"
+            android:layout_toStartOf="@id/arraw_iv2"
+            android:text=""
+            android:textColor="@color/text_title_gray"
+            android:textSize="@dimen/project_text_size_dp_12"/>
 
     </RelativeLayout>
 
@@ -104,9 +118,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="有最新版本"
-            android:layout_toStartOf="@id/arraw_iv"
             android:layout_marginEnd="@dimen/base5dp"
+            android:layout_toStartOf="@id/arraw_iv"
+            android:text="有最新版本"
             android:textColor="@color/color_general_text_red"
             android:textSize="@dimen/project_text_size_dp_12"/>
     </RelativeLayout>

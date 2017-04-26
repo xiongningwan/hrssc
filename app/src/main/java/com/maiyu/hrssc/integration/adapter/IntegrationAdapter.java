@@ -177,16 +177,13 @@ public class IntegrationAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     private class HeaderViewHolder extends BaseViewHolder {
-        private final RelativeLayout headLeftBtn;
-        private final RelativeLayout msgBtn;
         private final AdvertisementImageBanner bannerView;
         private final TextView jifenTv;
         private final TextView recordBtn;
 
         public HeaderViewHolder(View view) {
             super(view);
-            headLeftBtn = (RelativeLayout) view.findViewById(R.id.address_btn);
-            msgBtn = (RelativeLayout) view.findViewById(R.id.msg_btn);
+
             bannerView = (AdvertisementImageBanner) view.findViewById(R.id.banner_view);
             jifenTv = (TextView) view.findViewById(R.id.value_dangqianjf);
             recordBtn = (TextView) view.findViewById(R.id.dizhi_tv);

@@ -162,6 +162,10 @@ public interface ConstantValue {
      * 兑换商品
      */
     String path_activity_duihuan = "/hrsscProductController/exchangeProduct";
+    /**
+     * 待我办理列表（即合同列表）
+     */
+    String path_activity_todo_findmycontract = "/hrsscContractController/findMyContract";
 
 
     /**

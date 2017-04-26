@@ -3,11 +3,11 @@
 
     <corners android:radius="10dp" />
 
-    <solid android:color="#008fd5" />
+    <solid android:color="@color/project_color_general_hyperlink" />
 
     <stroke
         android:width="1px"
-        android:color="#ffffff" />
+        android:color="#00ffffff" />
 
     <padding
         android:bottom="6dp"

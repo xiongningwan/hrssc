@@ -209,14 +209,14 @@ public class LoginActivity extends AppCompatActivity {
 
 				//此处演示设置技能组,如果后台设置的技能组名称为[shouqian|shouhou],这样指定即分配到技能组中.
 				//为null则不按照技能组分配,同理可以设置直接指定客服scheduleAgent
-				Intent intent = new IntentBuilder(LoginActivity.this)
+				/*Intent intent = new IntentBuilder(LoginActivity.this)
                         .setServiceIMNumber("kefuchannelimid_039309") //获取地址：kefu.easemob.com，“管理员模式 > 渠道管理 > 手机APP”页面的关联的“IM服务号”
 						.build();
 				startActivity(intent);
-				finish();
+				finish();*/
 
 				// 进入主页面
-				/*Intent intent = new IntentBuilder(LoginActivity.this)
+				Intent intent = new IntentBuilder(LoginActivity.this)
 						.setTargetClass(ChatActivity.class)
 						//.setVisitorInfo(MessageHelper.createVisitorInfo())
 						.setServiceIMNumber("kefuchannelimid_039309")
@@ -224,8 +224,8 @@ public class LoginActivity extends AppCompatActivity {
 						//.setShowUserNick(true)
 						//.setBundle(bundle)
 						.build();
-				startActivity(intent);*/
-				//finish();
+				startActivity(intent);
+				finish();
 
 			}
 		});

@@ -6,10 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.JavascriptInterface;
@@ -24,7 +21,7 @@ import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.ConstantValue;
 import com.maiyu.hrssc.base.bean.DataCenter;
 import com.maiyu.hrssc.base.bean.User;
-import com.maiyu.hrssc.base.view.WebHeadView;
+import com.maiyu.hrssc.base.view.HeadView;
 
 /**
  * 访问网页的公共activity
@@ -39,13 +36,12 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
     public static final int REQUEST_CODE_GO_TO_LOGIN = 1001;
     private WebView mWebView;
     private ProgressBar mProgressbar;
-    private WebHeadView mHeadView;
+    private HeadView mHeadView;
     private String mTitleName;
     private String productId;
     private String url;
     private WebSettings webSettings;
     private SwipeRefreshLayout mSwipeLayout;
-    private Handler mHandler;
     private JavaScriptInterface mJSIImp;
     private String mProductShareData;
     private int mType;
@@ -71,7 +67,7 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     public void initViews() {
-        mHeadView = (WebHeadView) findViewById(R.id.head_view);
+        mHeadView = (HeadView) findViewById(R.id.head_view);
         mWebView = (WebView) findViewById(R.id.webview);
         mProgressbar = (ProgressBar) findViewById(R.id.ad_webview_ProgressBar);
         mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.id_swipe_ly);
@@ -113,14 +109,17 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
         if (mType == ConstantValue.TYPE_ORDINARY) {// 普通url
             url = getIntent().getStringExtra("url");
             mTitleName = getIntent().getStringExtra("titleName");
+            mHeadView.setTitle(mTitleName, true, false);
+            mHeadView.setVisibility(View.GONE);
+        } else {
+            mHeadView.setTitle(mTitleName, true, false);
         }
 
 
-        mHeadView.setTitle("", true, false);
-       // mHeadView.setOnRightButtonClickListener(new OnRightButtonClickListner());
+        // mHeadView.setOnRightButtonClickListener(new OnRightButtonClickListner());
         mWebView.loadUrl(url);
 
-        mHandler = new Handler() {
+       /* mHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == 1) {
@@ -128,7 +127,7 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
                 }
                 super.handleMessage(msg);
             }
-        };
+        };*/
     }
 
 
@@ -154,24 +153,10 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
         }
 
 
-
         @JavascriptInterface
         public void closeThisActivity() {
             finish();
         }
-
-
-
-
-
-        @JavascriptInterface
-        public void setWebViewTitle(String title) {
-            Message msg = new Message();
-            msg.what = 1;
-            msg.obj = title;
-            mHandler.sendMessage(msg);
-        }
-
 
 
         /**
@@ -185,7 +170,6 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intent);
         }
-
 
 
     }
@@ -300,8 +284,8 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
-            String title = mWebView.getTitle();
-            mHeadView.setTitle(title, true, false);
+            // String title = mWebView.getTitle();
+            // mHeadView.setTitle(title, true, false);
            /* if ("产品购买".equals(title) || "收银台".equals(title)) {
                 mHeadView.setCloseTip(true);
             } else {
@@ -314,9 +298,6 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
         }
 
     }
-
-
-
 
 
     /**
@@ -359,7 +340,6 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
         }*/
         super.onActivityResult(requestCode, resultCode, data);
     }
-
 
 
 }

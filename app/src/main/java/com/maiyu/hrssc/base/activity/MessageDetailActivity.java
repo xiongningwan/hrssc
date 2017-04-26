@@ -15,6 +15,10 @@ import com.maiyu.hrssc.base.view.dialog.LoadingDialog;
 import com.maiyu.hrssc.util.BaseAsyncTask;
 import com.maiyu.hrssc.util.EngineFactory;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -38,6 +42,8 @@ public class MessageDetailActivity extends BaseActivity {
     RelativeLayout mNOcontent;
     private LoadingDialog mLoadingDialog;
     private String mToken;
+    SimpleDateFormat msdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat msdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     @Override
     public void createActivityImpl() {
@@ -47,7 +53,7 @@ public class MessageDetailActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        mHeadView.setTitle("消息", true, false);
+        mHeadView.setTitle("消息详情", true, false);
         mLoadingDialog = new LoadingDialog(this);
         mToken = DataCenter.getInstance().getuser().getToken();
     }
@@ -56,7 +62,7 @@ public class MessageDetailActivity extends BaseActivity {
     @Override
     public void initData() {
         String mid = getIntent().getStringExtra(MESSAGE_ITEM_ID);
-        if(mid != null) {
+        if (mid != null) {
             new MessagesListAsyncTask(mToken, mid).execute();
         }
     }
@@ -106,7 +112,7 @@ public class MessageDetailActivity extends BaseActivity {
             if (checkException(MessageDetailActivity.this)) {
                 return;
             }
-            if (messages != null ) {
+            if (messages != null) {
                 setData(messages);
             } else {
                 mContentRl.setVisibility(View.GONE);
@@ -120,6 +126,14 @@ public class MessageDetailActivity extends BaseActivity {
     private void setData(Messages messages) {
         mTitle.setText(messages.getTitle());
         mContent.setText(Html.fromHtml(messages.getContent()));
-        mTime.setText(messages.getCreate_time());
+
+
+        try {
+            Date dateTime = msdf.parse(messages.getCreate_time());
+            mTime.setText(msdf1.format(dateTime));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
     }
 }

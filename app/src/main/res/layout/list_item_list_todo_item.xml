@@ -41,6 +41,7 @@
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:gravity="center_vertical"
         android:text="待签署"
+        android:textSize="@dimen/project_text_size_dp_12"
         android:textColor="@color/project_color_general_hyperlink"/>
 
 

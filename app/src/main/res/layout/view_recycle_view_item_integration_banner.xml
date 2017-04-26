@@ -9,72 +9,7 @@
     tools:context="com.maiyu.hrssc.integration.activity.DuihuanActivity">
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/project_head_view_hight"
-        android:background="@color/project_color_basic_white_pure">
 
-
-        <RelativeLayout
-            android:id="@+id/address_btn"
-            android:layout_width="@dimen/base80dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/base16dp">
-
-            <TextView
-                android:id="@+id/address_btn_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="积分规则"
-                android:textColor="@color/project_color_general_hyperlink"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/base3dp"
-                android:layout_toEndOf="@id/address_btn_text"
-                android:src="@mipmap/icon_xialajian"
-                android:visibility="gone"/>
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/home_title_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="积分商城"
-            android:textColor="@color/text_title_gray"
-            android:textSize="@dimen/project_text_number_size_dp_19"
-            />
-
-        <RelativeLayout
-            android:id="@+id/msg_btn"
-            android:layout_width="@dimen/base50dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin">
-
-            <ImageView
-                android:id="@+id/msg_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="end"
-                android:layout_marginRight="@dimen/base7dp"
-                android:layout_marginTop="@dimen/base22dp"
-                android:src="@mipmap/icon_xiaoxi"/>
-        </RelativeLayout>
-
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@mipmap/line"/>
 
 
     <com.maiyu.hrssc.base.view.AdvertisementImageBanner

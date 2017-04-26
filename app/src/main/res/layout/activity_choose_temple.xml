@@ -13,7 +13,8 @@
     <com.maiyu.hrssc.base.view.HeadView
         android:id="@+id/head_view"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/project_head_view_hight"/>
+        android:layout_height="@dimen/project_head_view_hight"
+        android:background="@color/project_color_basic_white_pure"/>
 
 
 

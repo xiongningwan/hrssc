@@ -1,13 +1,14 @@
 <resources>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">@dimen/base16dp</dimen>
-    <dimen name="activity_vertical_margin">@dimen/base16dp</dimen>
+    <dimen name="activity_horizontal_margin">@dimen/base15dp</dimen>
+    <dimen name="activity_vertical_margin">@dimen/base15dp</dimen>
     <dimen name="project_text_size_dp_22">@dimen/base22dp</dimen>
     <!-- 用在少数重要标题， 如导航标题、按钮文字 -->
     <dimen name="project_text_size_dp_19">@dimen/base19dp</dimen>
     <!-- 用于大多数文字，如产品名称、列表标题等 -->
     <dimen name="project_text_size_dp_16">@dimen/base16dp</dimen>
+    <dimen name="project_text_size_dp_15">@dimen/base15dp</dimen>
     <!-- 用在少数文字 ，tab切换文字、板块标题 -->
     <dimen name="project_text_size_dp_14">@dimen/base14dp</dimen>
     <!-- 用于辅助性文字，如次要的提示文字、备注信息等 -->

@@ -27,7 +27,8 @@
             android:layout_marginStart="@dimen/base5dp"
             android:layout_toEndOf="@id/point"
             android:text="关于证明办理最新规则"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/project_text_size_dp_16"/>
     </RelativeLayout>
 
 

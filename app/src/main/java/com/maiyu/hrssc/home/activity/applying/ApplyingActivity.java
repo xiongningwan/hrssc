@@ -78,7 +78,7 @@ public class ApplyingActivity extends BaseActivity {
 
     class ApplyingFragmentPageAdapter extends FragmentPagerAdapter {
         final int PAGE_COUNT = COUNT;
-        private String tabTitles[] = new String[]{"待签署", "待办理", "待领取", "待评价", "已完成", "已驳回"};
+        private String tabTitles[] = new String[]{"待审核", "待办理", "待领取", "待评价", "已完成", "已驳回"};
         private Context context;
 
         public ApplyingFragmentPageAdapter(FragmentManager fm, Context context) {

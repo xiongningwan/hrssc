@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/project_color_basic_white"
-    android:orientation="vertical"
-    tools:context="com.maiyu.hrssc.my.activity.PersonalInfoActivity">
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -26,18 +24,18 @@
             android:id="@+id/search_et"
             android:layout_width="match_parent"
             android:layout_height="@dimen/base33dp"
+            android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_toEndOf="@id/back_iv"
-            android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/search_btn"
             android:background="@drawable/corner_view_search_et_bg"
             android:drawableLeft="@mipmap/icon_fangdajing"
             android:drawablePadding="@dimen/base8dp"
             android:hint="输入关键词搜索"
             android:text=""
-            android:textColorHint="@color/project_color_general_text_secondary"
             android:textColor="@color/text_title_gray"
+            android:textColorHint="@color/project_color_general_text_secondary"
             android:textSize="@dimen/base12dp"/>
 
         <TextView

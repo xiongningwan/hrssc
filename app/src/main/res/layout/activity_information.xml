@@ -14,7 +14,10 @@
         android:layout_height="@dimen/project_head_view_hight"
         android:background="@color/project_color_basic_white_pure"/>
 
-    <include layout="@layout/view_space_layout"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@mipmap/line"/>
 
 
     <android.support.design.widget.TabLayout
@@ -25,7 +28,7 @@
         android:background="@color/project_color_basic_white_pure"
         android:layout_gravity="center"
         tabLayout:tabIndicatorColor="@color/project_color_general_hyperlink"
-        tabLayout:tabIndicatorHeight="2dp"
+        tabLayout:tabIndicatorHeight="0dp"
         tabLayout:tabMode="fixed"
         tabLayout:tabSelectedTextColor="@color/project_color_general_hyperlink"
         tabLayout:tabTextColor="@color/text_title_gray"

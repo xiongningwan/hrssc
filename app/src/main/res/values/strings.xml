@@ -12,7 +12,7 @@
 
     <!--首页模块-->
     <string name="daiwobanli_home_fragment">待我办理</string>
-    <string name="shenqing_home_fragment">待我申请</string>
+    <string name="shenqing_home_fragment">我的申请</string>
     <string name="btn_zhengmingbanli_home_fragment">证明办理</string>
     <string name="btn_shebao_home_fragment">社保</string>
     <string name="btn_gongjijing_home_fragment">公积金</string>

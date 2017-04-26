@@ -12,7 +12,8 @@
     <com.maiyu.hrssc.base.view.HeadView
         android:id="@+id/head_view"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/project_head_view_hight"/>
+        android:layout_height="@dimen/project_head_view_hight"
+        android:background="@color/project_color_basic_white_pure"/>
 
 
     <include layout="@layout/view_space_layout"/>
@@ -33,7 +34,7 @@
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:paddingStart="@dimen/base5dp"
-            android:background="@android:drawable/edit_text"
+            android:background="@drawable/view_et_gray_blue_selector"
             android:hint="请填写"
             android:textSize="@dimen/project_text_size_dp_12"/>
 

@@ -3,96 +3,98 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/project_color_basic_white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/project_color_basic_white_pure">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/project_color_basic_white"
+        android:background="@color/project_color_basic_white_pure"
         android:orientation="vertical">
 
-    <com.maiyu.hrssc.base.view.HeadView
-        android:id="@+id/head_view"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/project_head_view_hight"
-        android:background="@color/project_color_basic_white_pure"/>
-
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@mipmap/line"/>
-
-
-    <RelativeLayout
-        android:id="@+id/content_rl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/base8dp"
-        android:layout_marginBottom="@dimen/base8dp"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:background="@drawable/corner_view_unclick_dialog"
-        android:visibility="visible">
-
-
-        <TextView
-            android:id="@+id/title"
+        <com.maiyu.hrssc.base.view.HeadView
+            android:id="@+id/head_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/base5dp"
-            android:ellipsize="end"
-            android:lines="1"
-            android:text=""/>
+            android:layout_height="@dimen/project_head_view_hight"
+            android:background="@color/project_color_basic_white_pure"/>
 
 
-        <TextView
-            android:id="@+id/time"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@mipmap/line"/>
+
+
+        <RelativeLayout
+            android:id="@+id/content_rl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/title"
-            android:layout_marginStart="@dimen/base5dp"
-            android:layout_marginTop="@dimen/base3dp"
-            android:text=""
-            android:textColor="@color/project_color_general_hyperlink"
-            android:textSize="@dimen/project_text_size_dp_12"/>
-
-        <TextView
-            android:id="@+id/content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/time"
+            android:layout_marginBottom="@dimen/base8dp"
             android:layout_marginTop="@dimen/base8dp"
-            android:layout_marginStart="@dimen/base5dp"
-            android:text=""
-            android:textSize="@dimen/project_text_size_dp_12"/>
+            android:paddingEnd="@dimen/activity_horizontal_margin"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:visibility="visible">
 
-    </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/no_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/base5dp"
+                android:textColor="@color/text_title_gray"/>
 
-        <ImageView
-            android:id="@+id/shanchu_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_shanchu"
-            android:layout_centerInParent="true"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="该文章已被管理员删除"
-            android:layout_below="@id/shanchu_iv"
-            android:layout_marginTop="@dimen/base10dp"
-            android:layout_centerHorizontal="true"/>
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title"
+                android:layout_marginStart="@dimen/base5dp"
+                android:layout_marginTop="@dimen/base3dp"
+                android:textColor="@color/project_color_general_text_secondary"
+                android:textSize="@dimen/project_text_size_dp_12"/>
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/time"
+                android:layout_marginStart="@dimen/base5dp"
+                android:layout_marginTop="@dimen/base8dp"
+                android:textSize="@dimen/project_text_size_dp_12"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@id/content"
+                android:layout_marginTop="@dimen/base8dp"
+                android:background="@mipmap/line"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/no_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/shanchu_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/icon_shanchu"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/shanchu_iv"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/base10dp"
+                android:text="该文章已被管理员删除"/>
+        </RelativeLayout>
 
     </LinearLayout>
 

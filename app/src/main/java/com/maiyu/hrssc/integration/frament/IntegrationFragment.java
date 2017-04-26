@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.bean.DataCenter;
@@ -34,6 +35,11 @@ public class IntegrationFragment extends Fragment implements OnRefreshListener, 
     RecyclerView mRecyclerView;
     @BindView(R.id.refreshLayout)
     SwipeToLoadLayout mRefreshLayout;
+    @BindView(R.id.address_btn)
+    RelativeLayout headLeftBtn;
+    @BindView(R.id.msg_btn)
+    RelativeLayout msgBtn;
+
     private int mPage = 1;
     private int mCount = 10;
     private final int init = 1;

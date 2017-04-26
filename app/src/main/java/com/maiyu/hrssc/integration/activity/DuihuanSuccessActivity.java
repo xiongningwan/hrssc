@@ -8,7 +8,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.base.ConstantValue;
 import com.maiyu.hrssc.base.activity.BaseActivity;
+import com.maiyu.hrssc.integration.bean.RecordDetail;
+import com.maiyu.hrssc.util.ImageLoaderUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,6 +55,17 @@ public class DuihuanSuccessActivity extends BaseActivity {
 
     @Override
     public void initViews() {
+        RecordDetail recordDetail = (RecordDetail) getIntent().getParcelableExtra("RecordDetail");
+        if (recordDetail != null) {
+            mProductDescTv.setText(recordDetail.getPname());
+            mProductJifenTv.setText(recordDetail.getPoints());
+            mProductNoTv.setText("×" + recordDetail.getCount());
+            mTimeTv.setText(recordDetail.getCreate_time());
+
+            if (recordDetail.getPimage() != null) { // 第一张图片
+                ImageLoaderUtil.loadImage(mProductIv, ConstantValue.FILE_SERVER_URI + recordDetail.getPimage(), R.mipmap.user_profile_image_default);
+            }
+        }
     }
 
     @Override

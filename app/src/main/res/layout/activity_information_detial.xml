@@ -22,7 +22,10 @@
         android:layout_height="@dimen/project_head_view_hight"
         android:background="@color/project_color_basic_white_pure"/>
 
-    <include layout="@layout/view_space_layout"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@mipmap/line"/>
 
 
     <RelativeLayout
@@ -60,7 +63,6 @@
                 android:layout_marginStart="@dimen/base5dp"
                 android:layout_marginTop="@dimen/base3dp"
                 android:text=""
-                android:textColor="@color/project_color_general_hyperlink"
                 android:textSize="@dimen/project_text_size_dp_12"/>
 
             <TextView

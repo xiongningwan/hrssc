@@ -9,9 +9,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/base40dp"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:layout_marginTop="@dimen/base12dp"
         android:paddingStart="@dimen/activity_horizontal_margin">
 
         <ImageView
@@ -38,9 +39,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/base40dp"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:layout_marginTop="@dimen/base8dp"
         android:paddingStart="@dimen/activity_horizontal_margin">
 
         <ImageView
@@ -67,21 +69,20 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/base45dp"
-        android:paddingStart="@dimen/activity_horizontal_margin">
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/base8dp">
 
         <ImageView
             android:id="@+id/dingwei_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:src="@mipmap/icon_dingwei"/>
 
         <TextView
             android:id="@+id/dizhi_lable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/base8dp"
             android:layout_toEndOf="@id/dingwei_iv"
             android:text="详细地址:"/>

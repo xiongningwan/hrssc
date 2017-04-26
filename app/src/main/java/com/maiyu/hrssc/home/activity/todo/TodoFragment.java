@@ -10,13 +10,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.base.bean.DataCenter;
+import com.maiyu.hrssc.base.engine.IBizEngine;
+import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.maiyu.hrssc.home.activity.todo.adapter.TodoPageAdapter;
 import com.maiyu.hrssc.home.activity.todo.bean.Todo;
+import com.maiyu.hrssc.util.BaseAsyncTask;
+import com.maiyu.hrssc.util.EngineFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -36,6 +40,7 @@ public class TodoFragment extends Fragment implements OnRefreshListener, OnLoadM
     @BindView(R.id.refreshLayout)
     SwipeToLoadLayout mRefreshLayout;
     private int mPage = 1;
+    private int mCount = 10;
     private final int init = 1;
     private final int isRefreshing = 2;
     private final int isLoadMoreing = 3;
@@ -74,7 +79,6 @@ public class TodoFragment extends Fragment implements OnRefreshListener, OnLoadM
     }
 
 
-
     private void initView() {
         // 设置刷新加载
         mRefreshLayout.setRefreshEnabled(true);
@@ -90,25 +94,20 @@ public class TodoFragment extends Fragment implements OnRefreshListener, OnLoadM
     }
 
     private void initData() {
-        List list = new ArrayList();
+        String token = DataCenter.getInstance().getuser().getToken();
 
-        if(1 == mParam1 ) {
-           list.add(new Todo("劳动合同", "待签署", "2017-2-22 14：12"));
-           list.add(new Todo("保密协议", "待签署", "2017-2-22 14：12"));
-           list.add(new Todo("薪资证明", "待签署", "2017-2-22 14：12"));
-                    mAdapter.setData(list);
-        } else if(2 == mParam1) {
-            list.add(new Todo("劳动合同", "待盖章", "2017-2-22 14：12"));
-            list.add(new Todo("保密协议", "待盖章", "2017-2-22 14：12"));
-            list.add(new Todo("薪资证明", "待盖章", "2017-2-22 14：12"));
-            mAdapter.setData(list);
+        switch (mParam1) {
+            case 0:
+                new ContractListAsyncTask(token, String.valueOf(mPage), String.valueOf(mCount), String.valueOf(mParam1)).execute();
+                break;
+            case 1:
+                new ContractListAsyncTask(token, String.valueOf(mPage), String.valueOf(mCount), String.valueOf(mParam1)).execute();
+                break;
+            case 3:
+                new ContractListAsyncTask(token, String.valueOf(mPage), String.valueOf(mCount), String.valueOf(mParam1)).execute();
+                break;
+        }
 
-            } else if(3 == mParam1) {
-            list.add(new Todo("劳动合同", "已完成", "2017-2-22 14：12"));
-            list.add(new Todo("保密协议", "已完成", "2017-2-22 14：12"));
-            list.add(new Todo("薪资证明", "已完成", "2017-2-22 14：12"));
-            mAdapter.setData(list);
-            }
     }
 
     @Override
@@ -116,6 +115,7 @@ public class TodoFragment extends Fragment implements OnRefreshListener, OnLoadM
         mPage++;
         status = isLoadMoreing;
         initData();
+        refreshOrLoadMoreComplete();
     }
 
     @Override
@@ -123,6 +123,7 @@ public class TodoFragment extends Fragment implements OnRefreshListener, OnLoadM
         mPage = 1;
         status = isRefreshing;
         initData();
+        refreshOrLoadMoreComplete();
     }
 
 
@@ -135,6 +136,65 @@ public class TodoFragment extends Fragment implements OnRefreshListener, OnLoadM
         }
         if (mRefreshLayout.isLoadingMore()) {
             mRefreshLayout.setLoadingMore(false);
+        }
+    }
+
+    /**
+     * 获取合同列表
+     */
+    class ContractListAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String token;
+        private String page;
+        private String rows;
+        private String status;
+        private List<Todo> list;
+
+        public ContractListAsyncTask(String token, String page, String rows, String status) {
+            super();
+
+            this.token = token;
+            this.page = page;
+            this.rows = rows;
+            this.status = status;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            IBizEngine engine = EngineFactory.get(IBizEngine.class);
+            try {
+                list = engine.findMyContract(getActivity(), token, page, rows, status);
+            } catch (NetException e) {
+                exception = e;
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            if (checkException(getActivity())) {
+                return;
+            }
+            if (list != null) {
+                setData(list);
+            }
+
+            super.onPostExecute(result);
+        }
+    }
+
+    private void setData(List<Todo> list) {
+        if (status == init) {
+            mAdapter.setData(list);
+        } else if (status == isRefreshing) {
+            mAdapter.setData(list);
+        } else if (status == isLoadMoreing) {
+            mAdapter.loadMoreData(list);
         }
     }
 }

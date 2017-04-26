@@ -18,9 +18,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
@@ -63,12 +65,13 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 import static android.app.Activity.RESULT_OK;
+import static com.maiyu.hrssc.R.id.swipe_reshresh_layout;
 
 public class HomeFragment extends Fragment {
     static final int REQUEST_ACCESS_FINE_LOCATION_PERMISSION = 101;
     static final int REQUEST_SELECT_CITY = 102;
     public static final String CITY_LIST = "city_list";
-    @BindView(R.id.swipe_reshresh_layout)
+    @BindView(swipe_reshresh_layout)
     SwipeRefreshLayout mSwipeReshreshLayout;
     @BindView(R.id.address_btn_text)
     TextView mAddressBtnText;
@@ -123,6 +126,8 @@ public class HomeFragment extends Fragment {
     TextView myApplyTv;
     @BindView(R.id.msg_point)
     View mMsgPoint;
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
 
 
     Unbinder unbinder;
@@ -181,6 +186,20 @@ public class HomeFragment extends Fragment {
 
         mToken = DataCenter.getInstance().getuser().getToken();
         new GetCitysAsyncTask("1", "10000", mToken).execute();
+        setScroll();
+    }
+
+    void setScroll() {
+        if (scrollView != null) {
+            scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+                @Override
+                public void onScrollChanged() {
+                    if (mSwipeReshreshLayout != null) {
+                        mSwipeReshreshLayout.setEnabled(scrollView.getScrollY() == 0);
+                    }
+                }
+            });
+        }
     }
 
 

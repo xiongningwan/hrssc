@@ -5,6 +5,6 @@
     <item android:state_checked="true" android:color="@color/project_color_general_hyperlink"/>
     <item android:state_selected="true" android:color="@color/project_color_general_hyperlink"/>
     <item android:state_focused="true" android:color="@color/project_color_general_hyperlink"/>
-    <item android:color="@color/MainActivity_bottom_text_gray"/>
+    <item android:color="@color/project_color_general_text_secondary"/>
 
 </selector>

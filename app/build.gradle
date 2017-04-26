@@ -43,11 +43,11 @@ android {
             shrinkResources true //是否清理无用资源,依赖于minifyEnabled
             zipAlignEnabled true //是否启用zipAlign压缩
             signingConfig signingConfigs.releaseConfig
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
         debug {
-            minifyEnabled true  //不启用Proguard
+            minifyEnabled false  //不启用Proguard
             shrinkResources false //是否清理无用资源,依赖于minifyEnabled
             zipAlignEnabled false //是否启用zipAlign压缩
             signingConfig signingConfigs.debugConfig
@@ -88,12 +88,14 @@ dependencies {
     //compile 'com.tencent.bugly:crashreport:2.1.5'
     compile 'com.jakewharton:butterknife:8.0.1'
     compile 'com.github.chrisbanes.photoview:library:1.2.4'
-    compile 'com.hyphenate:kefu-easeui-android:latest.release'
+    //compile 'com.hyphenate:kefu-easeui-android:latest.release'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.0.1'
-    compile 'com.tencent.bugly:crashreport:latest.release' //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
+    compile 'com.tencent.bugly:crashreport:latest.release'
+    //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
+    compile project(':kefu-easeui')
 }

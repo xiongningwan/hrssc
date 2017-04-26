@@ -8,16 +8,26 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.base.ConstantValue;
 import com.maiyu.hrssc.base.activity.AddressManageActivity;
 import com.maiyu.hrssc.base.activity.BaseActivity;
+import com.maiyu.hrssc.base.bean.AddressManage;
 import com.maiyu.hrssc.base.bean.DataCenter;
+import com.maiyu.hrssc.base.bean.User;
 import com.maiyu.hrssc.base.engine.IIntegrationEngine;
+import com.maiyu.hrssc.base.engine.IUserEngine;
 import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.base.view.HeadView;
 import com.maiyu.hrssc.base.view.dialog.LoadingDialog;
+import com.maiyu.hrssc.integration.bean.Image;
+import com.maiyu.hrssc.integration.bean.Product;
+import com.maiyu.hrssc.integration.bean.ProductDetail;
 import com.maiyu.hrssc.integration.bean.RecordDetail;
 import com.maiyu.hrssc.util.BaseAsyncTask;
 import com.maiyu.hrssc.util.EngineFactory;
+import com.maiyu.hrssc.util.ImageLoaderUtil;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,6 +66,9 @@ public class DuihuanActivity extends BaseActivity {
     Button mConfirmBtn;
     private LoadingDialog mLoadingDialog;
     private String mToken;
+    private String mPid;
+    private String mAid;
+    private String count = "1";
 
     @Override
     public void createActivityImpl() {
@@ -71,7 +84,30 @@ public class DuihuanActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        ProductDetail productDetail = (ProductDetail) getIntent().getParcelableExtra(ProductItemActivity.PRODUCT_DETAIIL);
+        initExchangeProductData(productDetail);
+
         mToken = DataCenter.getInstance().getuser().getToken();
+        new AddressListAsyncTask(mToken, "1", "1000").execute();
+    }
+
+    private void initExchangeProductData(ProductDetail productDetail) {
+        if (productDetail == null) {
+            return;
+        }
+        Product product = productDetail.getProduct();
+        List<Image> images = productDetail.getImages();
+
+        if (product != null) {
+            mPid = product.getId();
+            mProductDescTv.setText(product.getName());
+            mProductJifenTv.setText(product.getWorth());
+            mProductNoTv.setText("×" + product.getLefts());
+        }
+
+        if (images != null && images.size() > 0) { // 第一张图片
+            ImageLoaderUtil.loadImage(mProductIv, ConstantValue.FILE_SERVER_URI + images.get(0).getUrl(), R.mipmap.user_profile_image_default);
+        }
 
     }
 
@@ -88,8 +124,14 @@ public class DuihuanActivity extends BaseActivity {
                 startActivity(new Intent(this, AddressManageActivity.class));
                 break;
             case R.id.confirm_btn:
-                new RecordDetialAsyncTask(mToken, count, pid, aid).execute();
+                doExchange();
                 break;
+        }
+    }
+
+    private void doExchange() {
+        if (mPid != null && mAid != null) {
+            new RecordDetialAsyncTask(mToken, count, mPid, mAid).execute();
         }
     }
 
@@ -146,6 +188,82 @@ public class DuihuanActivity extends BaseActivity {
     }
 
     private void setData(RecordDetail recordDetail) {
-        startActivity(new Intent(this, DuihuanSuccessActivity.class));
+        User user = DataCenter.getInstance().getuser();
+        int amount = Integer.parseInt(user.getAmount()) - Integer.parseInt(recordDetail.getPoints());
+        user.setAmount(String.valueOf(amount));
+        DataCenter.getInstance().setUser(user);
+        DataCenter.getInstance().notifyIntegralChange();
+
+        Intent intent = new Intent(this, DuihuanSuccessActivity.class);
+        intent.putExtra("RecordDetail", recordDetail);
+        startActivity(intent);
+        finish();
+    }
+
+
+    /**
+     * 获取地址列表
+     */
+    class AddressListAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String page;
+        private String rows;
+        private String token;
+        private List<AddressManage> list;
+
+        public AddressListAsyncTask(String token, String page, String rows) {
+            super();
+
+            this.page = page;
+            this.rows = rows;
+            this.token = token;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            mLoadingDialog.getDialog().show();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            IUserEngine engine = EngineFactory.get(IUserEngine.class);
+            try {
+                list = engine.getManageAddressList(DuihuanActivity.this, token, page, rows);
+            } catch (NetException e) {
+                exception = e;
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            mLoadingDialog.getDialog().dismiss();
+            if (checkException(DuihuanActivity.this)) {
+                return;
+            }
+            if (list != null && list.size() > 0) {
+                mNoAddressLl.setVisibility(View.GONE);
+                mHaveAddressLl.setVisibility(View.VISIBLE);
+                setData(list);
+            } else {
+                mNoAddressLl.setVisibility(View.VISIBLE);
+                mHaveAddressLl.setVisibility(View.GONE);
+            }
+
+            super.onPostExecute(result);
+        }
+    }
+
+    private void setData(List<AddressManage> list) {
+        for (AddressManage am : list) {
+            if ("1".equals(am.getIs_default())) {
+                // 设置数据
+                mName.setText(am.getName());
+                mTel.setText(am.getPhone());
+                mAddressDetailTv.setText(am.getAddr());
+                mAid = am.getId();
+            }
+        }
     }
 }

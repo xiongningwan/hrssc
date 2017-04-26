@@ -359,29 +359,35 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".base.activity.CitysActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".base.activity.CitysActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".base.activity.MessagesActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".base.activity.MessagesActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".base.activity.MessageDetailActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".base.activity.MessageDetailActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".my.activity.HelpCenterSubActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".my.activity.HelpCenterSubActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".my.activity.QuestionDetailActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".my.activity.QuestionDetailActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".integration.activity.RecordDetailActivity"
-                  android:configChanges="orientation"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".integration.activity.RecordDetailActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

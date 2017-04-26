@@ -29,7 +29,7 @@ public class SignActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        mHeadView.setTitle("签名", true, false);
+        mHeadView.setTitle("我的签名", true, false);
     }
 
     @Override

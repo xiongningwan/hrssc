@@ -1,30 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/project_color_basic_white">
 
 
-
-    <LinearLayout
+    <View
         android:id="@+id/space"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <include
-            layout="@layout/view_space_layout"/>
-    </LinearLayout>
-
-
+        android:layout_height="@dimen/base8dp"/>
 
     <RelativeLayout
         android:id="@+id/content_rl"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/base61dp"
         android:layout_below="@id/space"
-        android:layout_marginTop="@dimen/base8dp"
         android:layout_marginBottom="@dimen/base8dp"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/base8dp"
         android:background="@drawable/corner_view_unclick_dialog">
 
 
@@ -35,7 +29,8 @@
             android:layout_marginStart="@dimen/base5dp"
             android:ellipsize="end"
             android:lines="1"
-            android:text="关于证明办理最新规"/>
+            android:text="关于证明办理最新规"
+            android:textColor="@color/text_title_gray"/>
 
         <TextView
             android:id="@+id/time"
@@ -45,7 +40,7 @@
             android:layout_marginStart="@dimen/base5dp"
             android:layout_marginTop="@dimen/base8dp"
             android:text="2017-2-14"
-            android:textColor="@color/project_color_general_hyperlink"
+            android:textColor="@color/project_color_general_text_secondary"
             android:textSize="@dimen/project_text_size_dp_12"/>
 
     </RelativeLayout>
@@ -55,12 +50,11 @@
         android:id="@+id/del_bg_btn_rl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignTop="@id/content_rl"
         android:layout_alignBottom="@id/content_rl"
-        android:background="@color/translucent_background"
+        android:layout_alignTop="@id/content_rl"
         android:layout_below="@id/space"
+        android:background="@color/translucent_background"
         android:visibility="gone">
-
 
 
         <Button
@@ -70,9 +64,9 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/base40dp"
+            android:background="@drawable/view_point_blue"
             android:text="删除"
-            android:textColor="@color/project_color_basic_white_pure"
-            android:background="@drawable/view_point_blue"/>
+            android:textColor="@color/project_color_basic_white_pure"/>
 
     </RelativeLayout>
 

@@ -30,10 +30,10 @@ public class ChatActivity extends BaseActivity {
         //IM服务号
         toChatUsername = getIntent().getExtras().getString(Config.EXTRA_SERVICE_IM_NUMBER);
         //可以直接new ChatFragment使用
-      //  chatFragment = new CustomChatFragment();
+        chatFragment = new ChatFragment();
         //传入参数
-    //    chatFragment.setArguments(getIntent().getExtras());
-      //  getSupportFragmentManager().beginTransaction().add(R.id.container, chatFragment).commit();
+        chatFragment.setArguments(getIntent().getExtras());
+        getSupportFragmentManager().beginTransaction().add(R.id.container, chatFragment).commit();
     //    sendOrderOrTrack();
     }
 

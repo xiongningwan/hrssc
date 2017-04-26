@@ -57,68 +57,66 @@
                 android:layout_marginTop="@dimen/base10dp"
                 android:ellipsize="end"
                 android:lines="2"
-                android:text="兑换商品/商品名称"
-                android:textSize="@dimen/project_text_size_dp_16"
-                android:textColor="@color/text_title_gray"/>
-
-            <TextView
-                android:id="@+id/jifen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/name"
-                android:gravity="center"
-                android:lines="1"
-                android:layout_marginTop="@dimen/base8dp"
-                android:paddingBottom="@dimen/base5dp"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:text="300"
-                android:textColor="@color/color_general_text_red"
-                android:textSize="@dimen/project_text_size_dp_19"/>
-
-            <TextView
-                android:id="@+id/jifen_lable"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/name"
-                android:gravity="center"
-                android:lines="1"
-                android:layout_marginTop="@dimen/base10dp"
-                android:layout_toEndOf="@id/jifen"
-                android:paddingBottom="@dimen/base5dp"
-                android:text="积分"
-                android:textColor="@color/color_general_text_red"
+                android:text="兑换商品/商品名称商"
+                android:textColor="@color/text_title_gray"
                 android:textSize="@dimen/project_text_size_dp_16"/>
 
-            <TextView
-                android:id="@+id/shuliang"
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/base40dp"
                 android:layout_below="@id/name"
-                android:layout_marginEnd="@dimen/base5dp"
-                android:layout_toStartOf="@+id/jiazhi"
                 android:layout_marginTop="@dimen/base10dp"
-                android:ellipsize="end"
-                android:lines="1"
-                android:paddingBottom="@dimen/base5dp"
-                android:paddingStart="@dimen/base5dp"
-                android:text="数量:300"/>
+                android:paddingStart="@dimen/activity_horizontal_margin">
 
-            <TextView
-                android:id="@+id/jiazhi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@id/name"
-                android:layout_marginTop="@dimen/base10dp"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:lines="1"
-                android:paddingBottom="@dimen/base5dp"
-                android:paddingStart="@dimen/base5dp"
-                android:text="价值:190.00"/>
+                <TextView
+                    android:id="@+id/jifen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:text="300"
+                    android:textColor="@color/color_general_text_red"
+                    android:textSize="@dimen/project_text_size_dp_19"/>
+
+                <TextView
+                    android:id="@+id/jifen_lable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/jifen"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:text="积分"
+                    android:textColor="@color/color_general_text_red"
+                    android:textSize="@dimen/project_text_size_dp_16"/>
+
+
+                <TextView
+                    android:id="@+id/shuliang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/base5dp"
+                    android:layout_toStartOf="@+id/jiazhi"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="数量:300"/>
+
+                <TextView
+                    android:id="@+id/jiazhi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:lines="1"
+                    android:text="价值:190.00"/>
+            </RelativeLayout>
+
 
         </RelativeLayout>
-
-        <include layout="@layout/view_space_layout"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -167,6 +165,9 @@
                     android:visibility="visible"/>
             </RelativeLayout>
         </RelativeLayout>
+
+        <include layout="@layout/view_space_layout"/>
+
     </LinearLayout>
 
     <RelativeLayout

@@ -2,17 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/base8dp"
-                android:layout_marginTop="@dimen/base8dp"
                 android:paddingEnd="@dimen/activity_horizontal_margin"
                 android:paddingStart="@dimen/activity_horizontal_margin">
-
 
 
     <RelativeLayout
         android:id="@+id/content_rl"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/base11dp">
 
         <ImageView
             android:id="@+id/point"
@@ -28,7 +26,9 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/base5dp"
             android:layout_toEndOf="@id/point"
-            android:text="关于证明办理最新规则"/>
+            android:text="关于证明办理最新规则"
+            android:textColor="@color/text_content_gray"
+            android:textSize="@dimen/project_text_size_dp_16"/>
 
     </RelativeLayout>
 
@@ -38,8 +38,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/content_rl"
+        android:layout_marginBottom="@dimen/base11dp"
         android:layout_marginStart="@dimen/base11dp"
-        android:layout_marginTop="@dimen/base8dp"
+        android:layout_marginTop="@dimen/base11dp"
         android:text="2017-2-14"
         android:textColor="@color/project_color_general_hyperlink"
         android:textSize="@dimen/project_text_size_dp_12"/>

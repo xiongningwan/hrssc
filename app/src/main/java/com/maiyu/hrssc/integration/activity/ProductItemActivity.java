@@ -22,7 +22,6 @@ import com.maiyu.hrssc.integration.bean.Product;
 import com.maiyu.hrssc.integration.bean.ProductDetail;
 import com.maiyu.hrssc.util.BaseAsyncTask;
 import com.maiyu.hrssc.util.EngineFactory;
-import com.maiyu.hrssc.util.StatusBarCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,8 +65,8 @@ public class ProductItemActivity extends BaseActivity {
 
     private LoadingDialog mLoadingDialog;
     private String mToken;
-
-
+    public static final String PRODUCT_DETAIIL = "ProductDetail";
+    private ProductDetail mProductDetail;
     @Override
     public void createActivityImpl() {
         setContentView(R.layout.activity_product_item);
@@ -76,7 +75,7 @@ public class ProductItemActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        StatusBarCompat.translucentStatusBar(this, false); // 状态栏半透明
+       // StatusBarCompat.translucentStatusBar(this, false); // 状态栏半透明
         //mAds.setViewData(list);
     }
 
@@ -109,7 +108,9 @@ public class ProductItemActivity extends BaseActivity {
                 break;
 
             case duihuan_btn:
-                startActivity(new Intent(this, DuihuanActivity.class));
+                Intent intent = new Intent(this, DuihuanActivity.class);
+                intent.putExtra(PRODUCT_DETAIIL, mProductDetail);
+                startActivity(intent);
                 break;
         }
     }
@@ -161,6 +162,7 @@ public class ProductItemActivity extends BaseActivity {
     }
 
     private void setData(ProductDetail productDetail) {
+        mProductDetail = productDetail;
 
         List<Image> images = productDetail.getImages();
         ArrayList bannerList = new ArrayList();

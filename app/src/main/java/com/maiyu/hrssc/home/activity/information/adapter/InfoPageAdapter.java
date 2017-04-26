@@ -11,7 +11,10 @@ import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.bean.News;
 import com.maiyu.hrssc.home.activity.information.InformationDetialActivity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -23,7 +26,8 @@ public class InfoPageAdapter extends RecyclerView.Adapter<InfoPageAdapter.TodoPa
 
     private List<News> mList = new ArrayList();
     private final Context mContext;
-
+    SimpleDateFormat msdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat msdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public InfoPageAdapter(Context context) {
         mContext = context;
     }
@@ -75,7 +79,15 @@ public class InfoPageAdapter extends RecyclerView.Adapter<InfoPageAdapter.TodoPa
                 return;
             }
             title.setText(news.getTitle());
-            time.setText(news.getCreate_time());
+
+            try {
+                Date dateTime = msdf.parse(news.getCreate_time());
+                time.setText(msdf1.format(dateTime));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
 
 
             itemView.setOnClickListener(new View.OnClickListener() {

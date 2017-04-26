@@ -32,23 +32,7 @@
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
 
 
-## ----------------------------------
-##      bugly
-## ----------------------------------
--dontwarn com.tencent.bugly.**
--keep public class com.tencent.bugly.**{*;}
--keepattributes SourceFile,LineNumberTable
--renamesourcefileattribute SourceFile
 
-
-
-#高德地图
--keepclass com.amap.api.location.**{*;}
--keepclass com.loc.**{*;}
--keepclass com.amap.api.fence.**{*;}
--keepclass com.autonavi.aps.amapapi.model.**{*;}
--keepclass com.amap.api.maps2d.**{*;}
--keepclass com.amap.api.mapcore2d.**{*;}
 
 
 ##反射
@@ -58,6 +42,14 @@
 -keep class com.maiyu.hrssc.base.bean.**{*;}
 -keep class com.maiyu.hrssc.util.EngineFactory{*;}
 -keep class com.maiyu.hrssc.base.engine.**{*;}
+-keep class com.maiyu.hrssc.integration.bean.**{*;}
+-keep class com.maiyu.hrssc.my.activity.bean.**{*;}
+-keep class com.maiyu.hrssc.home.bean.**{*;}
+-keep class com.maiyu.hrssc.home.activity.applying.bean.**{*;}
+-keep class com.maiyu.hrssc.home.activity.funds.bean.**{*;}
+-keep class com.maiyu.hrssc.home.activity.information.bean.**{*;}
+-keep class com.maiyu.hrssc.home.activity.socialsecurity.bean.**{*;}
+-keep class com.maiyu.hrssc.home.activity.todo.bean.**{*;}
 #-keep class com.maiyu.hrssc.activity.fragment.*{*;}
 
 
@@ -137,3 +129,61 @@ public static ** valueOf(java.lang.String);
 -dontwarn okhttp3.**
 -dontwarn okio.**
 
+
+## ----------------------------------
+##      bugly
+## ----------------------------------
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}
+-keepattributes SourceFile,LineNumberTable
+-renamesourcefileattribute SourceFile
+
+
+
+## ----------------------------------
+##      高德地图
+## ----------------------------------
+-keep class com.amap.api.**{*;}
+-keep class com.loc.**{*;}
+-keep class com.autonavi.**
+-dontwarn  com.amap.api.**
+-dontwarn  com.loc.**
+-dontwarn  com.autonavi.**
+
+## ----------------------------------
+##      retrofit2
+## ----------------------------------
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+
+
+
+
+
+## ----------------------------------
+##      环信部分混淆规则代码
+## ----------------------------------
+-dontwarn  com.easemob.**
+-keep class com.easemob.** {*;}
+-keep class org.xmlpull.** {*;}
+-keep class com.squareup.picasso.* {*;}
+-keep class com.hyphenate.* {*;}
+-keep class com.hyphenate.chat.** {*;}
+-keep class org.jivesoftware.** {*;}
+-keep class org.apache.** {*;}
+#如果使用easeui库，需要这么写
+-keep class com.hyphenate.easeui.utils.EaseSmileUtils {*;}
+#2.0.9后加入语音通话功能，如需使用此功能的api，加入以下keep
+-dontwarn ch.imvs.**
+-dontwarn org.slf4j.**
+-keep class org.ice4j.** {*;}
+-keep class net.java.sip.** {*;}
+-keep class org.webrtc.voiceengine.** {*;}
+-keep class org.bitlet.** {*;}
+-keep class org.slf4j.** {*;}
+-keep class ch.imvs.** {*;}
+-keep class com.easemob.** {*;}
+#环信3.0
+-keep class com.hyphenate.** {*;}
+-dontwarn  com.hyphenate.**
+-keep class com.superrtc.** {*;}

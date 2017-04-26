@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/project_color_basic_white_pure"
+    android:background="@color/project_color_basic_white"
     tools:context="com.maiyu.hrssc.home.activity.todo.SignActivity"
     android:orientation="vertical">
 
@@ -12,7 +12,8 @@
     <com.maiyu.hrssc.base.view.HeadView
         android:id="@+id/head_view"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/project_head_view_hight"/>
+        android:layout_height="@dimen/project_head_view_hight"
+        android:background="@color/project_color_basic_white_pure"/>
 
     <include
         layout="@layout/view_space_layout"/>
@@ -28,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/base100dp"
             android:src="@mipmap/user_profile_image_default"
-            android:visibility="visible"/>
+            android:visibility="gone"/>
 
 
         <LinearLayout

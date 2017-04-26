@@ -168,15 +168,15 @@ public class MyFragment extends Fragment {
                 startActivity(new Intent(getActivity(), PersonalInfoActivity.class));
                 break;
             case R.id.qiandao_btn:
-
                 if (mQiandaoBtn.isSelected()) {
-                    mQiandaoBtn.setSelected(false);
-                    mJiayi.setVisibility(View.GONE);
-
-                } else {
+                    // 已经签到，再次点击
                     mQiandaoBtn.setSelected(true);
+                    mJiayi.setVisibility(View.GONE);
+                } else {
+                    // 未有签到，点击
+                    mQiandaoBtn.setSelected(true);
+                    mQiandaoBtn.setText("今日已签");
                     mJiayi.setVisibility(View.VISIBLE);
-
                     AlphaAnimation animation = new AlphaAnimation(1, 0);
                     animation.setDuration(3000);//设置动画时间
                     animation.setFillAfter(true);
@@ -250,7 +250,8 @@ public class MyFragment extends Fragment {
                 HintUitl.toastShort(getActivity(), "获得积分：" + sign_integral);
                 User user = DataCenter.getInstance().getuser();
                 int amount = Integer.parseInt(user.getAmount()) + sign_integral;
-                user.setAccount(String.valueOf(amount));
+                user.setAmount(String.valueOf(amount));
+                DataCenter.getInstance().setUser(user);
                 DataCenter.getInstance().notifyIntegralChange();
 
             }
@@ -295,6 +296,7 @@ public class MyFragment extends Fragment {
             }
             if (signed == 1) { //0-未签到  1-已签到
                 mQiandaoBtn.setSelected(true);
+                mQiandaoBtn.setText("今日已签");
             } else {
                 mQiandaoBtn.setSelected(false);
             }

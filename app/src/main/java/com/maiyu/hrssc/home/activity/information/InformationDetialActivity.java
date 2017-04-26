@@ -17,6 +17,10 @@ import com.maiyu.hrssc.base.view.dialog.LoadingDialog;
 import com.maiyu.hrssc.util.BaseAsyncTask;
 import com.maiyu.hrssc.util.EngineFactory;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -36,7 +40,8 @@ public class InformationDetialActivity extends BaseActivity {
     ImageView mHaveNoContentIv;
     private LoadingDialog mLoadingDialog;
     private String mToken;
-
+    SimpleDateFormat msdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat msdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     @Override
     public void createActivityImpl() {
@@ -55,7 +60,7 @@ public class InformationDetialActivity extends BaseActivity {
     @Override
     public void initData() {
         String nid = getIntent().getStringExtra("nid");
-        if(nid != null) {
+        if (nid != null) {
             new InfoDetailAsyncTask(mToken, nid).execute();
         }
     }
@@ -119,6 +124,13 @@ public class InformationDetialActivity extends BaseActivity {
     private void setData(News news) {
         mTitle.setText(news.getTitle());
         mContent.setText(Html.fromHtml(news.getContent()));
-        mTime.setText(news.getCreate_time());
+
+        try {
+            Date time = msdf.parse(news.getCreate_time());
+            mTime.setText(msdf1.format(time));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
     }
 }
