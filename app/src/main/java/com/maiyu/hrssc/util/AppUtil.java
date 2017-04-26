@@ -4,6 +4,7 @@
 package com.maiyu.hrssc.util;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -11,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.provider.Settings.Secure;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -256,5 +258,38 @@ public class AppUtil {
             //System.out.println("已经安装");
             return true;
         }
+    }
+
+
+    /**
+     * 判断应用是否已经启动
+     * @param context 一个context
+     * @param packageName 要判断应用的包名
+     * @return boolean
+     */
+    public static boolean isAppAlive(Context context, String packageName) {
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> processInfos = activityManager.getRunningAppProcesses();
+        for (int i = 0; i < processInfos.size(); i++) {
+            if (processInfos.get(i).processName.equals(packageName)) {
+                Log.i("NotificationLaunch", String.format("the %s is running, isAppAlive return true", packageName));
+                return true;
+            }
+        }
+        Log.i("NotificationLaunch", String.format("the %s is not running, isAppAlive return false", packageName));
+        return false;
+    }
+
+
+    /**
+     * 判断型号是不是p8
+     * @return
+     */
+    public static boolean isHuaWeiGRAUL10() {
+        String model = android.os.Build.MODEL;
+        if ("HUAWEI GRA-UL10".equals(model)) {
+            return true;
+        }
+        return false;
     }
 }

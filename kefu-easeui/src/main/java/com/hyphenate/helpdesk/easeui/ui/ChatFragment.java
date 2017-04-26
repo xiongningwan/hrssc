@@ -188,6 +188,15 @@ public class ChatFragment extends BaseFragment implements ChatManager.MessageLis
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         // inputMenu.setCustomPrimaryMenu();
+
+        getView().findViewById(R.id.title_left_button).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (getActivity() != null) {
+                    getActivity().finish();
+                }
+            }
+        });
     }
 
     /**
