@@ -3,7 +3,6 @@ package com.maiyu.hrssc.base.receiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.maiyu.hrssc.base.activity.MainActivity;
@@ -26,7 +25,7 @@ public class MessageReceiver extends XGPushBaseReceiver {
     public static final String LogTag = "TPushReceiver";
 
     private void show(Context context, String text) {
-        Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
     }
 
     // 通知展示
@@ -50,7 +49,7 @@ public class MessageReceiver extends XGPushBaseReceiver {
         NotificationService.getInstance(context).save(notific);
         context.sendBroadcast(intent);
         Log.d("TPush", "您有1条新消息：" + notifiShowedRlt.toString());
-        //show(context, "您有1条新消息, " + "通知被展示 ， " + notifiShowedRlt.toString());
+        show(context, "您有1条新消息, " + "通知被展示 ， " + notifiShowedRlt.toString());
     }
 
     @Override
@@ -122,8 +121,8 @@ public class MessageReceiver extends XGPushBaseReceiver {
             // APP自己处理通知被清除后的相关动作
             text = "通知被清除 :" + message;
         }
-        Toast.makeText(context, "广播接收到通知被点击:" + message.toString(),
-                Toast.LENGTH_SHORT).show();
+       // Toast.makeText(context, "广播接收到通知被点击:" + message.toString(),
+        //        Toast.LENGTH_SHORT).show();
         // 获取自定义key-value
         String customContent = message.getCustomContent();
         if (customContent != null && customContent.length() != 0) {
@@ -141,7 +140,7 @@ public class MessageReceiver extends XGPushBaseReceiver {
         }
         // APP自主处理的过程。。。
         Log.d(LogTag, text);
-        //show(context, text);
+        show(context, text);
     }
 
     @Override

@@ -5,9 +5,14 @@ import android.content.Context;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.maiyu.hrssc.base.ConstantValue;
+import com.maiyu.hrssc.base.bean.Banners;
 import com.maiyu.hrssc.base.engine.IBizEngine;
 import com.maiyu.hrssc.base.exception.NetException;
+import com.maiyu.hrssc.home.activity.todo.bean.ContractFlow;
 import com.maiyu.hrssc.home.activity.todo.bean.Todo;
+import com.maiyu.hrssc.home.bean.Category1;
+import com.maiyu.hrssc.home.bean.Category2;
+import com.maiyu.hrssc.home.bean.FormData;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.io.IOException;
@@ -57,5 +62,221 @@ public class BizEngine extends BaseEngine implements IBizEngine {
             e.printStackTrace();
         }
         return list;
+    }
+
+    @Override
+    public Banners getBanner(Context context, String token, String location) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_activity_fragment_banner;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("location", location);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        Banners banners = null;
+        try {
+            json = JSON.parseObject(json).getString("data");
+            json = JSON.parseObject(json).getString("banner");
+            banners = JSON.parseObject(json, Banners.class);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return banners;
+    }
+
+    @Override
+    public ContractFlow getContractFlow(Context context, String token, String id) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_activity_toto_detail;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("id", id);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        ContractFlow contractFlow = null;
+        try {
+            json = JSON.parseObject(json).getString("data");
+            json = JSON.parseObject(json).getString("contractFlow");
+            contractFlow = JSON.parseObject(json, ContractFlow.class);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return contractFlow;
+    }
+
+    @Override
+    public String signContractFlow(Context context, String token, String id, String sign_way) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_activity_toto_detail_sign;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("id", id);
+        params.put("sign_way", sign_way);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        String str = null;
+        try {
+            str = JSON.parseObject(json).getString("msg");
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return str;
+    }
+
+    @Override
+    public List<Category1> getCategory1(Context context, String token) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_fragment_home_get_category_1;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        List<Category1> list = null;
+        try {
+            json = parseObject(json).getString("data");
+            json = parseObject(json).getString("category1List");
+            list = JSON.parseArray(json, Category1.class);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public List<Category2> getCategory2(Context context, String token, String cid, String city) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_business_get_category_2;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("cid", cid);
+        params.put("city", city);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        List<Category2> list = null;
+        try {
+            json = parseObject(json).getString("data");
+            json = parseObject(json).getString("category2List");
+            list = JSON.parseArray(json, Category2.class);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public FormData getTemplates(Context context, String token, String cid2, String city) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_business_get_getTemplates;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("cid2", cid2);
+        params.put("city", city);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        FormData data = null;
+        try {
+            json = JSON.parseObject(json).getString("data");
+            //json = parseObject(json).getString("category2List");
+            data = JSON.parseObject(json, FormData.class);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
     }
 }

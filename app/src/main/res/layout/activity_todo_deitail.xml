@@ -26,7 +26,7 @@
             android:layout_marginBottom="@dimen/base10dp"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_marginTop="@dimen/base10dp"
-            android:text="NO.124"/>
+            android:text="NO."/>
 
         <View
             android:id="@+id/divier_line"
@@ -50,13 +50,11 @@
             android:id="@+id/title_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/divier_line"
-            android:layout_marginStart="@dimen/base10dp"
-            android:layout_marginTop="@dimen/base10dp"
-            android:layout_toEndOf="@id/icon_xiangqing"
-            android:text="薪资证明办理"
+            android:text=""
             android:textColor="@color/text_title_gray"
-            android:textSize="@dimen/project_text_size_dp_16"/>
+            android:textSize="@dimen/project_text_size_dp_16"
+            android:layout_alignTop="@+id/icon_xiangqing"
+            android:layout_alignStart="@+id/time"/>
 
 
         <TextView
@@ -67,7 +65,7 @@
             android:layout_marginStart="@dimen/base10dp"
             android:layout_marginTop="@dimen/base30dp"
             android:layout_toEndOf="@id/icon_xiangqing"
-            android:text="14:00"
+            android:text=""
             android:textColor="@color/project_color_general_text_secondary"
             android:textSize="@dimen/project_text_size_dp_12"/>
 
@@ -110,12 +108,18 @@
             android:src="@mipmap/icon_xianghou"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/contract"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/base5dp"
+            android:layout_marginStart="@dimen/base8dp"
             android:layout_toStartOf="@id/arrow_iv"
-            android:text="劳动合同"
+            android:layout_toEndOf="@id/hetong_lable"
+            android:text=""
+            android:lines="1"
+            android:gravity="end"
+            android:ellipsize="end"
             android:textColor="@color/text_title_gray"
             android:textSize="@dimen/project_text_size_dp_16"/>
     </RelativeLayout>
@@ -157,9 +161,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/base5dp"
+            android:layout_marginStart="@dimen/base8dp"
             android:layout_toEndOf="@id/icon_dizhi"
-            android:text="广东省深圳市南山区科技南路55号"
+            android:text=""
             android:textColor="@color/text_title_gray"/>
 
 
@@ -197,7 +201,7 @@
         android:background="@mipmap/line"/>
 
 
-    <EditText
+    <TextView
         android:id="@+id/beizhu_et"
         android:layout_width="match_parent"
         android:layout_height="@dimen/base80dp"
@@ -206,8 +210,7 @@
         android:paddingStart="@dimen/activity_horizontal_margin"
         android:textSize="@dimen/project_text_size_dp_12"
         android:background="@color/transparent"
-        android:paddingTop="@dimen/base5dp"
-        android:hint="请填写备注"/>
+        android:paddingTop="@dimen/base5dp"/>
 
     <View
         android:layout_width="match_parent"

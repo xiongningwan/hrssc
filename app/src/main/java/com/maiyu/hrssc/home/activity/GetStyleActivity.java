@@ -7,6 +7,10 @@ import android.widget.RelativeLayout;
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.activity.BaseActivity;
 import com.maiyu.hrssc.base.view.HeadView;
+import com.maiyu.hrssc.home.bean.SelfAddress;
+import com.maiyu.hrssc.util.HintUitl;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,14 +60,21 @@ public class GetStyleActivity extends BaseActivity {
                 setResult(RESULT_OK, data);
 
                 break;
-            case R.id.zzlq_rl:
-                startActivityForResult(new Intent(this, ChooseAddressActivity.class), 111);
+            case R.id.zzlq_rl: {
+                ArrayList<SelfAddress> addrs = getIntent().getParcelableArrayListExtra("addres");
+                Intent intent = new Intent(this, ChooseAddressActivity.class);
+                intent.putParcelableArrayListExtra("addres", addrs);
+                startActivityForResult(intent, 111);
 
-                break;
-            case R.id.yj_rl:
-
+            }
+            break;
+            case R.id.yj_rl: {
+                Intent data2 = new Intent();
+                data2.putExtra("style", "邮寄");
+                setResult(RESULT_OK, data2);
                 startActivityForResult(new Intent(this, DeliveryAddressActivity.class), 112);
-                break;
+            }
+            break;
         }
     }
 
@@ -71,11 +82,15 @@ public class GetStyleActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case 111:
-
-                //    HintUitl.toastShort(this, data!=null?data.getStringExtra("address"):"未选取到地址");
+                    if (data != null) {
+                        SelfAddress selfAddress = (SelfAddress) data.getParcelableExtra("selfAddress");
+                        data.putExtra("style", "自助领取");
+                        setResult(RESULT_OK, data);
+                        HintUitl.toastShort(this, data != null ? selfAddress.getAddress() : "未选取到地址");
+                    }
                     break;
 
             }

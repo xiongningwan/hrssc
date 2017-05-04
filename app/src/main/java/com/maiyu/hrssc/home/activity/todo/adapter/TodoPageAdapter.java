@@ -123,6 +123,7 @@ public class TodoPageAdapter extends RecyclerView.Adapter<TodoPageAdapter.TodoPa
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, TodoDeitailActivity.class);
                     intent.putExtra("title", todo.getTpl_name());
+                    intent.putExtra("id", todo.getId());
                     mContext.startActivity(intent);
                 }
             });

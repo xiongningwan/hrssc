@@ -39,6 +39,7 @@ import com.maiyu.hrssc.base.bean.Banners;
 import com.maiyu.hrssc.base.bean.City;
 import com.maiyu.hrssc.base.bean.DataCenter;
 import com.maiyu.hrssc.base.bean.HomeData;
+import com.maiyu.hrssc.base.engine.IBizEngine;
 import com.maiyu.hrssc.base.engine.IUserEngine;
 import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.base.view.AdvertisementImageBanner;
@@ -52,6 +53,7 @@ import com.maiyu.hrssc.home.activity.information.InformationActivity;
 import com.maiyu.hrssc.home.activity.residence.ResidenceActivity;
 import com.maiyu.hrssc.home.activity.socialsecurity.SocialSecurityActivity;
 import com.maiyu.hrssc.home.activity.todo.TodoActivity;
+import com.maiyu.hrssc.home.bean.Category1;
 import com.maiyu.hrssc.util.BaseAsyncTask;
 import com.maiyu.hrssc.util.EngineFactory;
 import com.maiyu.hrssc.util.SharedPreferencesUtil;
@@ -137,6 +139,7 @@ public class HomeFragment extends Fragment {
     private List<City> mCitys;
     private String mToken;
     private HomeFragmentNewsAdapter mNewsAdapter;
+    private List<Category1> mCateGory1List;
     // TODO: Rename and change types of parameters
 
 
@@ -186,6 +189,7 @@ public class HomeFragment extends Fragment {
 
         mToken = DataCenter.getInstance().getuser().getToken();
         new GetCitysAsyncTask("1", "10000", mToken).execute();
+        new Category1AsyncTask(mToken).execute();
         setScroll();
     }
 
@@ -436,10 +440,15 @@ public class HomeFragment extends Fragment {
                 startActivity(new Intent(getActivity(), ApplyingActivity.class));
                 break;
             case R.id.btn_zmbl:
-                startActivity(new Intent(getActivity(), ZMBLActivity.class));
+                if (mCateGory1List != null) {
+                    startRequestActivity(0, mCateGory1List.get(0));
+                }
                 break;
             case R.id.btn_sb:
-                startActivity(new Intent(getActivity(), SocialSecurityActivity.class));
+               // startActivity(new Intent(getActivity(), SocialSecurityActivity.class));
+                if (mCateGory1List != null) {
+                    startRequestActivity(1, mCateGory1List.get(0));
+                }
                 break;
             case R.id.btn_gjj:
                 startActivity(new Intent(getActivity(), FundsActivity.class));
@@ -625,5 +634,100 @@ public class HomeFragment extends Fragment {
         return list;
     }
 
+
+    /**
+     * 获取全部一级业务
+     */
+    class Category1AsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String token;
+        private List<Category1> list;
+
+        public Category1AsyncTask(String token) {
+            super();
+
+            this.token = token;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            IBizEngine engine = EngineFactory.get(IBizEngine.class);
+            try {
+                list = engine.getCategory1(getActivity(), token);
+            } catch (NetException e) {
+                exception = e;
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            if (checkException(getActivity())) {
+                return;
+            }
+            if (list != null) {
+
+                setCatgory1(list);
+
+            }
+
+            super.onPostExecute(result);
+        }
+    }
+
+
+    void setCatgory1(List<Category1> list) {
+        mCateGory1List = list;
+
+        mBtnZmbl.setText(list.get(0).getName());
+        mBtnSb.setText(list.get(1).getName());
+        mBtnGjj.setText(list.get(2).getName());
+        mBtnDajy.setText(list.get(3).getName());
+        mBtnHkbl2.setText(list.get(4).getName());
+        mBtnJzzbl.setText(list.get(5).getName());
+        mBtnXyg.setText(list.get(6).getName());
+        mBtnMore.setText(list.get(7).getName());
+    }
+
+    void startRequestActivity(int location, Category1 category1) {
+        if (category1 != null) {
+            Intent intent = null;
+            switch (location) {
+                case 0:
+                    intent = new Intent(getActivity(), ZMBLActivity.class);
+                    break;
+                case 1:
+                    intent = new Intent(getActivity(), SocialSecurityActivity.class);
+                    break;
+                case 2:
+                    intent = new Intent(getActivity(), ZMBLActivity.class);
+                    break;
+                case 3:
+                    intent = new Intent(getActivity(), ZMBLActivity.class);
+                    break;
+                case 4:
+                    intent = new Intent(getActivity(), ZMBLActivity.class);
+                    break;
+                case 5:
+                    intent = new Intent(getActivity(), ZMBLActivity.class);
+                    break;
+                case 6:
+                    intent = new Intent(getActivity(), ZMBLActivity.class);
+                    break;
+                case 7:
+                    intent = new Intent(getActivity(), ZMBLActivity.class);
+                    break;
+            }
+
+            intent.putExtra("id", category1.getId());
+            intent.putExtra("name", category1.getName());
+            startActivity(intent);
+        }
+    }
 
 }

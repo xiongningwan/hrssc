@@ -1,5 +1,6 @@
 package com.maiyu.hrssc.home.activity;
 
+import android.content.Intent;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,10 +10,10 @@ import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.activity.BaseActivity;
 import com.maiyu.hrssc.base.view.HeadView;
 import com.maiyu.hrssc.home.adapter.AddressAdapter;
-import com.maiyu.hrssc.home.bean.Address;
+import com.maiyu.hrssc.home.bean.SelfAddress;
+import com.maiyu.hrssc.util.HintUitl;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,25 +40,36 @@ public class ChooseAddressActivity extends BaseActivity {
     @Override
     public void initViews() {
         mHeadView.setTitle("选择领取地址", true, false);
-        mAdapter = new AddressAdapter(this);
+        mAdapter = new AddressAdapter(this, new AddressItemOnclickListener());
         mAddressRecycleView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mAddressRecycleView.setItemAnimator(new DefaultItemAnimator());
-        //mRecyclerView.addItemDecoration(new RecyclerViewDivider(getActivity(), LinearLayoutManager.VERTICAL, R.drawable.input_bottom_line));
         mAddressRecycleView.setAdapter(mAdapter);
     }
 
     @Override
     public void initData() {
-        // 模拟数据
-        List<Address> datas = new ArrayList<>();
-        datas.add(new Address("中兴南山科研" , "广东深圳南山区科研大楼"));
-        datas.add(new Address("中兴南山科研" , "广东深圳南山区科研大楼"));
-        mAdapter.setData(datas);
+        ArrayList<SelfAddress> addrs = getIntent().getParcelableArrayListExtra("addres");
+        if (addrs != null) {
+            mAdapter.setData(addrs);
+        }
     }
 
     @Override
     public void initOnClick(View v) {
 
+    }
+
+
+    class AddressItemOnclickListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            SelfAddress selfAddress = (SelfAddress) v.getTag(R.id.key_tag_item_data);
+            HintUitl.toastShort(ChooseAddressActivity.this, selfAddress.getAddress_info());
+            Intent intent = new Intent();
+            intent.putExtra("selfAddress", selfAddress);
+            setResult(RESULT_OK, intent);
+        }
     }
 
     @OnClick({R.id.head_view, R.id.address_recycle_view})

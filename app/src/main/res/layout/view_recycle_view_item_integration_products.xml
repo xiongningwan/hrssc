@@ -3,9 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/project_color_basic_white">
 
-    <include layout="@layout/view_space_layout"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base8dp"
+        android:background="@color/project_color_basic_white"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -33,7 +37,8 @@
                 android:layout_width="@dimen/base160dp"
                 android:layout_height="@dimen/base160dp"
                 android:padding="@dimen/base1dp"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                android:background="@color/project_color_basic_white_pure"/>
 
             <View
                 android:id="@+id/line_1"
@@ -88,7 +93,8 @@
                 android:layout_width="@dimen/base160dp"
                 android:layout_height="@dimen/base160dp"
                 android:padding="@dimen/base1dp"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                android:background="@color/project_color_basic_white_pure"/>
 
             <View
                 android:id="@+id/line_2"

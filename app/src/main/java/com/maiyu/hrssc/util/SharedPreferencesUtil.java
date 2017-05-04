@@ -7,6 +7,8 @@ import android.content.SharedPreferences.Editor;
 import com.maiyu.hrssc.base.bean.User;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SharedPreferencesUtil {
 
@@ -173,28 +175,38 @@ public class SharedPreferencesUtil {
 
 
     /**
-     * 保存登录帐号
+     * 保存登录帐号和密码
      *
      * @param context
      * @param loginName
+     * @param loginPwd
+     * @param loginType
      */
-    public static void saveLoginName(Context context, String loginName) {
+    public static void saveLoginNamePwd(Context context, String loginName, String loginPwd, String loginType) {
         SharedPreferences perfer = context.getSharedPreferences("user_info", Context.MODE_PRIVATE);
         Editor editor = perfer.edit();
         editor.putString("loginName", loginName);
+        editor.putString("loginPwd", loginPwd);
+        editor.putString("loginType", loginType);
         editor.commit();
     }
 
 
     /**
-     * 获取保存的登录帐号
+     * 获取保存的登录帐号和密码
      *
      * @param context
      * @return
      */
-    public static String getLoginName(Context context) {
+    public static Map<String, String> getLoginNamePwd(Context context) {
         SharedPreferences perfer = context.getSharedPreferences("user_info", Context.MODE_PRIVATE);
         String loginName = perfer.getString("loginName", "");
-        return loginName;
+        String loginPwd = perfer.getString("loginPwd", "");
+        String loginType = perfer.getString("loginType", "");
+        Map<String, String> map = new HashMap<>();
+        map.put("loginName", loginName);
+        map.put("loginPwd", loginPwd);
+        map.put("loginType", loginType);
+        return map;
     }
 }

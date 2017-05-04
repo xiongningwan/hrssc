@@ -16,8 +16,8 @@
         android:paddingStart="@dimen/activity_horizontal_margin">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/base15dp"
+            android:layout_height="@dimen/base15dp"
             android:src="@mipmap/icon_ren"/>
 
         <TextView
@@ -46,8 +46,8 @@
         android:paddingStart="@dimen/activity_horizontal_margin">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/base15dp"
+            android:layout_height="@dimen/base15dp"
             android:src="@mipmap/shouji"/>
 
         <TextView
@@ -75,8 +75,9 @@
 
         <ImageView
             android:id="@+id/dingwei_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/base15dp"
+            android:layout_height="@dimen/base15dp"
+            android:layout_marginTop="@dimen/base2dp"
             android:src="@mipmap/icon_dingwei"/>
 
         <TextView
@@ -121,7 +122,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:button="@drawable/view_check_box_xuanze_selector"
-            android:paddingLeft="@dimen/base8dp"
+            android:paddingLeft="@dimen/base10dp"
             android:text="默认地址"
             android:textColor="@color/activity_address_manage_check_box_gray_red_text_selector"/>
 

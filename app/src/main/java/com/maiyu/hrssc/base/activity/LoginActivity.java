@@ -20,6 +20,8 @@ import com.maiyu.hrssc.util.HintUitl;
 import com.maiyu.hrssc.util.PackageInfoUtil;
 import com.maiyu.hrssc.util.SharedPreferencesUtil;
 
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -52,9 +54,11 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        String loginName = SharedPreferencesUtil.getLoginName(this);
+        Map<String, String> map = SharedPreferencesUtil.getLoginNamePwd(this);
+        String loginName = map.get("loginName");
         mWorkNoEt.setText(loginName);
-
+        // 自动登录
+        autoLogin();
     }
 
     @Override
@@ -150,11 +154,12 @@ public class LoginActivity extends BaseActivity {
             }
             if (user != null) {
                 // 保存帐号
-                SharedPreferencesUtil.saveLoginName(LoginActivity.this, account);
+                SharedPreferencesUtil.saveLoginNamePwd(LoginActivity.this, account, password, type);
                 // 将数据存入数据中心
                 DataCenter.getInstance().setUser(user);
                 // 将数据存入缓存
                 SharedPreferencesUtil.saveUserBaseInfo(LoginActivity.this, user);
+                // 保存登录帐号和密码
 
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
@@ -165,4 +170,20 @@ public class LoginActivity extends BaseActivity {
         }
     }
 
+
+    void autoLogin() {
+        Map<String, String> map = SharedPreferencesUtil.getLoginNamePwd(this);
+        String loginName = map.get("loginName");
+        String loginPwd = map.get("loginPwd");
+        String loginType = map.get("loginType");
+        if (loginName != null && loginPwd != null) {
+            // 登录
+            String type = loginType;
+            String mac = AppUtil.getMac(LoginActivity.this);
+            String version = PackageInfoUtil.getVersionName(this);
+            String login_way = ConstantValue.CLIENT_TYPE_ANDROID;
+            new LoginAsyncTask(type, loginName, loginPwd, mac, version, login_way).execute();
+        }
+
+    }
 }

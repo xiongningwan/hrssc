@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.base.bean.Banners;
 import com.maiyu.hrssc.base.bean.DataCenter;
+import com.maiyu.hrssc.base.engine.IBizEngine;
 import com.maiyu.hrssc.base.engine.IIntegrationEngine;
 import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.OnLoadMoreListener;
@@ -95,10 +97,13 @@ public class IntegrationFragment extends Fragment implements OnRefreshListener, 
         mToken = DataCenter.getInstance().getuser().getToken();
         integrationObserver = new IntegrationDataObserver();
         DataCenter.getInstance().registerObserver(integrationObserver);
+
+
     }
 
     void initData() {
         new ProductsListAsyncTask(mToken, String.valueOf(mPage), String.valueOf(mCount)).execute();
+        new BannerAsyncTask(mToken).execute();
     }
 
 
@@ -142,7 +147,8 @@ public class IntegrationFragment extends Fragment implements OnRefreshListener, 
     public void onLoadMore() {
         //mPage++;
         status = isLoadMoreing;
-        initData();
+        //  initData();
+        new ProductsListAsyncTask(mToken, String.valueOf(mPage), String.valueOf(mCount)).execute();
         refreshOrLoadMoreComplete();
     }
 
@@ -222,6 +228,50 @@ public class IntegrationFragment extends Fragment implements OnRefreshListener, 
             mAdapter.setData(list);
         } else if (status == isLoadMoreing) {
             mAdapter.loadMoreData(list);
+        }
+    }
+
+
+    /**
+     * 获取业务办理 、 商城的banner
+     */
+    class BannerAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String token;
+        private Banners mBanners;
+
+        public BannerAsyncTask(String token) {
+            super();
+
+            this.token = token;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            IBizEngine engine = EngineFactory.get(IBizEngine.class);
+            try {
+                mBanners = engine.getBanner(getActivity(), token, "1");
+            } catch (NetException e) {
+                exception = e;
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            if (checkException(getActivity())) {
+                return;
+            }
+            if (mBanners != null) {
+                mAdapter.setBanner(mBanners);
+            }
+
+            super.onPostExecute(result);
         }
     }
 }

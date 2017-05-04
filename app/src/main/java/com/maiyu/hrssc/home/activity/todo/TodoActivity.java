@@ -39,8 +39,8 @@ public class TodoActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        fragments[0] = TodoFragment.newInstance(1);
-        fragments[1] = TodoFragment.newInstance(2);
+        fragments[0] = TodoFragment.newInstance(0);
+        fragments[1] = TodoFragment.newInstance(1);
         fragments[2] = TodoFragment.newInstance(3);
     }
 

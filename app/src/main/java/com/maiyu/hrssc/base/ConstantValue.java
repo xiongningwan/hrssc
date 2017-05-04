@@ -166,6 +166,43 @@ public interface ConstantValue {
      * 待我办理列表（即合同列表）
      */
     String path_activity_todo_findmycontract = "/hrsscContractController/findMyContract";
+    /**
+     * 获取业务办理 、 商城的banner
+     */
+    String path_activity_fragment_banner = "/hrsscHomePageController/getBanner";
+    /**
+     * 查询合同详情
+     */
+    String path_activity_toto_detail = "/hrsscContractController/findContractFlowById";
+    /**
+     * 签署合同
+     */
+    String path_activity_toto_detail_sign = "/hrsscContractController/signContractFlow";
+
+    /**
+     * 一级业务
+     */
+    String path_fragment_home_get_category_1 = "/hrsscBusinessController/getCategory1";
+    /**
+     * 获取一级业务下的二级业务
+     */
+    String path_business_get_category_2 = "/hrsscBusinessController/getCategory2";
+    /**
+     * 1.获取该业务 可以使用的全部模板   2.获取该城市的全部自取地址
+     */
+    String path_business_get_getTemplates = "/hrsscBusinessController/getTemplates";
+    /**
+     * 获取某个二级业务的基础信息（官方网站，体检、报到地址，联系人，联系方式）
+     */
+    String path_business_get_getWebsite = "/hrsscBusinessController/getWebsite";
+    /**
+     * 获取某个二级业务的办理说明（适用学位证明、工卡照片、预约入职）
+     */
+    String path_business_get_getLink = "/hrsscBusinessController/getLink";
+    /**
+     * 提交申请（适用证明类、学位证明、工卡照片、预约入职）
+     */
+    String path_business_submitApply = "/hrsscBusinessController/submitApply";
 
 
     /**

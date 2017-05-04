@@ -137,7 +137,7 @@ public class NewEmployeeLoginActivity extends BaseActivity {
             }
             if (user != null) {
                 // 保存帐号
-                SharedPreferencesUtil.saveLoginName(NewEmployeeLoginActivity.this, account);
+                SharedPreferencesUtil.saveLoginNamePwd(NewEmployeeLoginActivity.this, account, password, type);
                 // 将数据存入数据中心
                 DataCenter.getInstance().setUser(user);
                 // 将数据存入缓存
@@ -151,4 +151,6 @@ public class NewEmployeeLoginActivity extends BaseActivity {
             super.onPostExecute(result);
         }
     }
+
+
 }

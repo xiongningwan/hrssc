@@ -246,7 +246,6 @@
                             android:drawablePadding="@dimen/base10dp"
                             android:drawableTop="@mipmap/icon_zmbl"
                             android:gravity="center"
-                            android:text="@string/btn_zhengmingbanli_home_fragment"
                             android:textColor="@color/text_title_gray"/>
 
                         <TextView
@@ -257,7 +256,6 @@
                             android:drawablePadding="@dimen/base10dp"
                             android:drawableTop="@mipmap/icon_sb"
                             android:gravity="center"
-                            android:text="@string/btn_shebao_home_fragment"
                             android:textColor="@color/text_title_gray"/>
 
                         <TextView
@@ -268,7 +266,6 @@
                             android:drawablePadding="@dimen/base10dp"
                             android:drawableTop="@mipmap/icon_gjj"
                             android:gravity="center"
-                            android:text="@string/btn_gongjijing_home_fragment"
                             android:textColor="@color/text_title_gray"/>
 
                         <TextView
@@ -279,7 +276,6 @@
                             android:drawablePadding="@dimen/base10dp"
                             android:drawableTop="@mipmap/icon_dajy"
                             android:gravity="center"
-                            android:text="@string/btn_danganjieyue_home_fragment"
                             android:textColor="@color/text_title_gray"/>
                     </LinearLayout>
 
@@ -300,7 +296,6 @@
                             android:drawablePadding="@dimen/base10dp"
                             android:drawableTop="@mipmap/icon_hkbl"
                             android:gravity="center"
-                            android:text="@string/btn_hukbl_home_fragment"
                             android:textColor="@color/text_title_gray"/>
 
 
@@ -312,7 +307,6 @@
                             android:drawablePadding="@dimen/base10dp"
                             android:drawableTop="@mipmap/icon_jzzbl"
                             android:gravity="center"
-                            android:text="@string/btn_juzhuzbl_home_fragment"
                             android:textColor="@color/text_title_gray"/>
 
                         <TextView
@@ -323,7 +317,6 @@
                             android:drawablePadding="@dimen/base10dp"
                             android:drawableTop="@mipmap/icon_xyg"
                             android:gravity="center"
-                            android:text="@string/btn_xingyg_home_fragment"
                             android:textColor="@color/text_title_gray"/>
 
                         <TextView
@@ -334,7 +327,6 @@
                             android:drawablePadding="@dimen/base10dp"
                             android:drawableTop="@mipmap/icon_more"
                             android:gravity="center"
-                            android:text="@string/btn_more_home_fragment"
                             android:textColor="@color/text_title_gray"/>
                     </LinearLayout>
                 </LinearLayout>

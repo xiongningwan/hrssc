@@ -12,7 +12,7 @@
 
 
 
-    <com.maiyu.hrssc.base.view.AdvertisementImageBanner
+    <ImageView
         android:id="@+id/banner_view"
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -26,13 +26,12 @@
         android:id="@+id/jifen_rl"
         android:layout_width="match_parent"
         android:layout_height="@dimen/base43dp"
-        android:layout_marginBottom="@dimen/base8dp"
         android:background="@color/project_color_basic_white_pure">
 
         <ImageView
             android:id="@+id/dizhi_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/base15dp"
+            android:layout_height="@dimen/base15dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:src="@mipmap/icon_jifen"/>

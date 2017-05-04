@@ -2,6 +2,7 @@ package com.maiyu.hrssc.home.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +10,10 @@ import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.adapter.BaseViewHolder;
-import com.maiyu.hrssc.util.HintUitl;
+import com.maiyu.hrssc.home.bean.SelfAddress;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 
 /**
@@ -24,6 +24,7 @@ import java.util.List;
 public class AddressAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private final LayoutInflater mInflater;
     private final Context mContext;
+    private final View.OnClickListener mListener;
     private List mList = new ArrayList<>();
 
     public void setData(List list) {
@@ -33,14 +34,19 @@ public class AddressAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
 
-    public AddressAdapter(Context context) {
+    public AddressAdapter(Context context, View.OnClickListener listener) {
         mInflater = LayoutInflater.from(context);
         mContext = context;
+        mListener = listener;
     }
 
     @Override
     public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new AddressViewHolder(mInflater.inflate(R.layout.view_recycler_view_item_choose_address, parent, false));
+        View view = mInflater.inflate(R.layout.view_recycler_view_item_choose_address, parent, false);
+        TypedValue typedValue = new TypedValue();
+        mContext.getTheme().resolveAttribute(R.attr.selectableItemBackground, typedValue, true);
+        view.setBackgroundResource(typedValue.resourceId);
+        return new AddressViewHolder(view);
     }
 
     @Override
@@ -56,7 +62,6 @@ public class AddressAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
 
-
     public class AddressViewHolder extends BaseViewHolder {
 
         private final TextView addressName;
@@ -64,18 +69,20 @@ public class AddressAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
         public AddressViewHolder(View itemView) {
             super(itemView);
-           addressName = (TextView) itemView.findViewById(R.id.address_name);
-           addressDetail = (TextView) itemView.findViewById(R.id.address_detial);
+            addressName = (TextView) itemView.findViewById(R.id.address_name);
+            addressDetail = (TextView) itemView.findViewById(R.id.address_detial);
         }
 
         @Override
         public void onBindView() {
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    HintUitl.toastShort(mContext, mList.get(getAdapterPosition()).toString());
-                }
-            });
+            SelfAddress selfAddress = (SelfAddress) mList.get(getAdapterPosition());
+            if (selfAddress != null) {
+                addressName.setText(selfAddress.getAddress());
+                addressDetail.setText(selfAddress.getAddress_info());
+            }
+
+            itemView.setTag(R.id.key_tag_item_data, selfAddress);
+            itemView.setOnClickListener(mListener);
         }
     }
 }

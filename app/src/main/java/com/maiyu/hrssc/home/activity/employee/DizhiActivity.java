@@ -89,6 +89,7 @@ public class DizhiActivity extends CheckPermissionsActivity {
             aMap = mMapView.getMap();
             aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 16));
             addMarkersToMap();// 往地图上添加marker
+
         }
     }
 

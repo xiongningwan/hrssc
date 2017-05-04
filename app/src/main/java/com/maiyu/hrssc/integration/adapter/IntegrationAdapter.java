@@ -13,8 +13,8 @@ import android.widget.TextView;
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.ConstantValue;
 import com.maiyu.hrssc.base.adapter.BaseViewHolder;
+import com.maiyu.hrssc.base.bean.Banners;
 import com.maiyu.hrssc.base.bean.DataCenter;
-import com.maiyu.hrssc.base.view.AdvertisementImageBanner;
 import com.maiyu.hrssc.integration.activity.DuihuanRecordActivity;
 import com.maiyu.hrssc.integration.bean.IngegrationProduct;
 import com.maiyu.hrssc.util.ImageLoaderUtil;
@@ -32,6 +32,7 @@ public class IntegrationAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     LayoutInflater mLayoutInflater = null;
     private final int TYPE_HEADER_ITEM = 0;
     private final int TYPE_LIST_ITEM = 1;
+    private Banners mBanners;
 
 
     public IntegrationAdapter(Context context, View.OnClickListener listener) {
@@ -57,6 +58,12 @@ public class IntegrationAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         int position = (int) (mList.size() / 2.0 + 0.5);
         mList.addAll(list);
         notifyItemRangeChanged(position, (int) (mList.size() / 2.0 + 0.5));
+    }
+
+
+    public void setBanner(Banners banner) {
+        mBanners = banner;
+        notifyItemChanged(0);
     }
 
 
@@ -177,14 +184,14 @@ public class IntegrationAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     private class HeaderViewHolder extends BaseViewHolder {
-        private final AdvertisementImageBanner bannerView;
+        private final ImageView bannerView;
         private final TextView jifenTv;
         private final TextView recordBtn;
 
         public HeaderViewHolder(View view) {
             super(view);
 
-            bannerView = (AdvertisementImageBanner) view.findViewById(R.id.banner_view);
+            bannerView = (ImageView) view.findViewById(R.id.banner_view);
             jifenTv = (TextView) view.findViewById(R.id.value_dangqianjf);
             recordBtn = (TextView) view.findViewById(R.id.dizhi_tv);
         }
@@ -193,6 +200,12 @@ public class IntegrationAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         public void onBindView() {
             String amount = DataCenter.getInstance().getuser().getAmount();
             jifenTv.setText(amount);
+
+
+            if (mBanners != null) {
+                ImageLoaderUtil.loadImage(bannerView, ConstantValue.FILE_SERVER_URI + mBanners.getImage(), R.mipmap.user_profile_image_default);
+            }
+
 
             recordBtn.setOnClickListener(new View.OnClickListener() {
                 @Override

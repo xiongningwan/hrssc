@@ -49,8 +49,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="@dimen/base5dp"
                 android:drawableTop="@mipmap/icon_xzzm"
-                android:gravity="center"
-                android:text="@string/xzzm_bl_ZMBLActivity"/>
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/jhsyzmbl"
@@ -58,8 +57,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="@dimen/base5dp"
                 android:drawableTop="@mipmap/icon_jhsyzm"
-                android:gravity="center"
-                android:text="@string/jhsyzm_bl_ZMBLActivity"/>
+                android:gravity="center"/>
         </TableRow>
 
         <TableRow
@@ -73,8 +71,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="@dimen/base5dp"
                 android:drawableTop="@mipmap/icon_xsbxzm"
-                android:gravity="center"
-                android:text="@string/xsbxzm_bl_ZMBLActivity"/>
+                android:gravity="center"/>
 
             <TextView
                 android:id="@+id/zzzmbl"
@@ -82,8 +79,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="@dimen/base5dp"
                 android:drawableTop="@mipmap/icon_zzzmbl"
-                android:gravity="center"
-                android:text="@string/zzzm_bl_ZMBLActivity"/>
+                android:gravity="center"/>
         </TableRow>
     </TableLayout>
 </LinearLayout>

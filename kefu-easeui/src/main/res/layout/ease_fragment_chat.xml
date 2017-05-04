@@ -43,7 +43,7 @@
             android:paddingLeft="80dp"
             android:paddingRight="80dp"
             android:singleLine="true"
-            android:text="会员中心"
+            android:text="在线客服"
             android:textColor="#333333"
             android:textSize="19dp"
             />

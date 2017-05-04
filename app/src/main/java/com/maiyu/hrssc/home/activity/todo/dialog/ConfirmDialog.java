@@ -46,6 +46,7 @@ public class ConfirmDialog {
             }
         });
         mConfirmBtn.setOnClickListener(listener);
+
     }
 
     public class CreateBaseDialog extends Dialog {
@@ -74,6 +75,10 @@ public class ConfirmDialog {
 
     public void show() {
         mTipDialog.show();
+    }
+
+    public void dissmiss() {
+        mTipDialog.dismiss();
     }
 
 

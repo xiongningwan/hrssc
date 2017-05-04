@@ -105,10 +105,10 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
 
         Intent intent = getIntent();
         mType = intent.getIntExtra("type", 0);
+        url = getIntent().getStringExtra("url");
+        mTitleName = getIntent().getStringExtra("titleName");
 
         if (mType == ConstantValue.TYPE_ORDINARY) {// 普通url
-            url = getIntent().getStringExtra("url");
-            mTitleName = getIntent().getStringExtra("titleName");
             mHeadView.setTitle(mTitleName, true, false);
             mHeadView.setVisibility(View.GONE);
         } else {

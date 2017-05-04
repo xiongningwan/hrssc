@@ -16,11 +16,11 @@
         android:orientation="vertical">
 
 
-    <com.maiyu.hrssc.base.view.HeadView
-        android:id="@+id/head_view"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/project_head_view_hight"
-        android:background="@color/project_color_basic_white_pure"/>
+        <com.maiyu.hrssc.base.view.HeadView
+            android:id="@+id/head_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/project_head_view_hight"
+            android:background="@color/project_color_basic_white_pure"/>
 
         <View
             android:layout_width="match_parent"
@@ -28,86 +28,87 @@
             android:background="@mipmap/line"/>
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-
         <RelativeLayout
-            android:id="@+id/have_content_rl"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/project_color_basic_white_pure"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingEnd="@dimen/activity_horizontal_margin"
-            android:visibility="visible">
+            android:layout_height="match_parent">
 
 
-            <TextView
-                android:id="@+id/title"
+            <RelativeLayout
+                android:id="@+id/have_content_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/base5dp"
-                android:ellipsize="end"
-                android:layout_marginTop="@dimen/base8dp"
-                android:lines="1"
-                android:text=""/>
+                android:background="@color/project_color_basic_white_pure"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:visibility="visible">
 
 
-            <TextView
-                android:id="@+id/time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/title"
-                android:layout_marginStart="@dimen/base5dp"
-                android:layout_marginTop="@dimen/base3dp"
-                android:text=""
-                android:textSize="@dimen/project_text_size_dp_12"/>
-
-            <TextView
-                android:id="@+id/content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/time"
-                android:layout_marginTop="@dimen/base8dp"
-                android:layout_marginStart="@dimen/base5dp"
-                android:text=""
-                android:textSize="@dimen/project_text_size_dp_12"/>
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/base5dp"
+                    android:layout_marginTop="@dimen/base8dp"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text=""
+                    android:textColor="@color/text_title_gray"
+                    android:textSize="@dimen/project_text_size_dp_16"/>
 
 
-            <View
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/title"
+                    android:layout_marginStart="@dimen/base5dp"
+                    android:layout_marginTop="@dimen/base3dp"
+                    android:text=""
+                    android:textSize="@dimen/project_text_size_dp_12"/>
+
+                <TextView
+                    android:id="@+id/content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/time"
+                    android:layout_marginStart="@dimen/base5dp"
+                    android:layout_marginTop="@dimen/base8dp"
+                    android:text=""
+                    android:textSize="@dimen/project_text_size_dp_12"/>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_alignParentBottom="true"
+                    android:background="@mipmap/line"/>
+            </RelativeLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_alignParentBottom="true"
-                android:background="@mipmap/line"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/have_no_content_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/base160dp"
+                    android:src="@mipmap/icon_wenzhang"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/base15dp"
+                    android:gravity="center"
+                    android:text="该文章已被管理员删除"
+                    android:textColor="@color/project_color_general_text_secondary"/>
+            </LinearLayout>
+
         </RelativeLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <ImageView
-                android:id="@+id/have_no_content_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/icon_wenzhang"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/base160dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/base15dp"
-                android:gravity="center"
-                android:text="该文章已被管理员删除"
-                android:textColor="@color/project_color_general_text_secondary"/>
-        </LinearLayout>
-
-    </RelativeLayout>
 
 
     </LinearLayout>
