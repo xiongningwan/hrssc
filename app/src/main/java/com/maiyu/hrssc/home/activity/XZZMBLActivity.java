@@ -144,8 +144,12 @@ public class XZZMBLActivity extends BaseActivity {
             }
             break;
             case R.id.choose_mould_rl:
-                startActivityForResult(new Intent(this, ChooseTempleActivity.class), 102);
-
+                //startActivityForResult(new Intent(this, ChooseTempleActivity.class), 102);
+                    if(mFormData.getTemplates() != null) {
+                        Intent intent = new Intent(this, ChooseTempleActivity.class);
+                        intent.putParcelableArrayListExtra("templates", (ArrayList<? extends Parcelable>) mFormData.getTemplates());
+                        startActivityForResult(intent, 102);
+                    }
                 break;
             case R.id.choose_language_rl:
                 // startActivityForResult(new Intent(this, XZZMBLActivity.class), 102);

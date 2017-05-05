@@ -18,128 +18,36 @@
 
     <include layout="@layout/view_space_layout"/>
 
-
-    <RelativeLayout
-        android:id="@+id/zzdy_rl"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/base45dp"
-        android:background="@color/project_color_basic_white_pure"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:paddingStart="@dimen/activity_horizontal_margin">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="姓名"
-            android:textColor="@color/text_title_gray"/>
-
-        <EditText
-            android:id="@+id/name_et"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/base5dp"
-            android:layout_marginBottom="@dimen/base5dp"
-            android:layout_marginLeft="@dimen/base8dp"
-            android:paddingRight="@dimen/base8dp"
-            android:background="@drawable/view_et_gray_blue_selector"
-            android:gravity="end|center"
-            android:layout_toEndOf="@id/name"
-            android:hint="请填写"
-            android:textSize="@dimen/project_text_size_dp_12"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"/>
-
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:background="@mipmap/line"/>
-
-
-    <RelativeLayout
-        android:id="@+id/zzlq_rl"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/base45dp"
-        android:background="@color/project_color_basic_white_pure"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:paddingStart="@dimen/activity_horizontal_margin">
-
-        <TextView
-            android:id="@+id/address"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="住址"
-            android:textColor="@color/text_title_gray"/>
+            android:background="@color/project_color_basic_white"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/temple_pattern"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/project_color_basic_white_pure"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/base8dp"/>
+
+            <include layout="@layout/view_space_layout"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/project_color_basic_white_pure">
+
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </ScrollView>
 
 
-        <EditText
-            android:id="@+id/address_et"
-            android:layout_width="@dimen/base200dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:paddingRight="@dimen/base8dp"
-            android:layout_marginBottom="@dimen/base5dp"
-            android:layout_marginLeft="@dimen/base8dp"
-            android:layout_marginTop="@dimen/base5dp"
-            android:layout_toEndOf="@id/address"
-            android:background="@drawable/view_et_gray_blue_selector"
-            android:gravity="end|center"
-            android:hint="请填写"
-            android:text=""
-            android:textSize="@dimen/project_text_size_dp_12"
-            />
-
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/yj_rl"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/base45dp"
-        android:background="@color/project_color_basic_white_pure"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:paddingStart="@dimen/activity_horizontal_margin">
-
-        <TextView
-            android:id="@+id/tel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="电话"
-            android:textColor="@color/text_title_gray"/>
-
-
-        <EditText
-            android:id="@+id/tel_et"
-            android:layout_width="@dimen/base200dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/view_et_gray_blue_selector"
-            android:gravity="end|center"
-            android:hint="请填写"
-            android:textSize="@dimen/project_text_size_dp_12"
-            android:layout_marginTop="@dimen/base5dp"
-            android:paddingRight="@dimen/base8dp"
-            android:layout_marginBottom="@dimen/base5dp"
-            android:layout_marginLeft="@dimen/base8dp"
-            android:layout_toEndOf="@id/tel"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"/>
-
-
-    </RelativeLayout>
-
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:background="@mipmap/line"/>
 </LinearLayout>

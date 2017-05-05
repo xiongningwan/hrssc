@@ -121,7 +121,8 @@
         <activity
             android:name=".home.activity.WriteTempleActivity"
             android:configChanges="orientation"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
         <activity
             android:name=".home.activity.SucceedActivity"

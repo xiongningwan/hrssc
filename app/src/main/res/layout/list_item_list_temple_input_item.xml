@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/base45dp"
+    android:background="@color/project_color_basic_white_pure"
+    android:paddingEnd="@dimen/activity_horizontal_margin"
+    android:paddingStart="@dimen/activity_horizontal_margin">
+
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="姓名"
+        android:textColor="@color/text_title_gray"
+        android:textSize="@dimen/project_text_size_dp_14"/>
+
+    <EditText
+        android:id="@+id/input_et"
+        android:layout_width="@dimen/base250dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="@dimen/base5dp"
+        android:layout_marginLeft="@dimen/base8dp"
+        android:layout_marginTop="@dimen/base5dp"
+        android:background="@drawable/view_et_gray_blue_selector"
+        android:gravity="end|center"
+        android:hint="请填写"
+        android:paddingRight="@dimen/base8dp"
+        android:textColor="@color/text_content_gray"
+        android:textSize="@dimen/project_text_size_dp_12"/>
+
+
+</RelativeLayout>

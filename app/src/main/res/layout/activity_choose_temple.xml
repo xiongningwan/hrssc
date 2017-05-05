@@ -23,97 +23,11 @@
 
 
 
-    <RelativeLayout
-        android:id="@+id/zzdy_rl"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle_view"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/base45dp"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:background="@color/project_color_basic_white_pure">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="招商银行模版"
-            android:layout_centerVertical="true"
-            android:textColor="@color/text_title_gray"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_xianghou"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"/>
-
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:background="@mipmap/line"/>
-
-    <RelativeLayout
-        android:id="@+id/zzlq_rl"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/base45dp"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:background="@color/project_color_basic_white_pure">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="中国银行模版"
-            android:layout_centerVertical="true"
-            android:textColor="@color/text_title_gray"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_xianghou"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"/>
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:background="@mipmap/line"/>
-
-
-    <RelativeLayout
-        android:id="@+id/yj_rl"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/base45dp"
-        android:paddingStart="@dimen/activity_horizontal_margin"
-        android:paddingEnd="@dimen/activity_horizontal_margin"
-        android:background="@color/project_color_basic_white_pure">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="工商银行模版"
-            android:layout_centerVertical="true"
-            android:textColor="@color/text_title_gray"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/icon_xianghou"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"/>
-
-
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:background="@mipmap/line"/>
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

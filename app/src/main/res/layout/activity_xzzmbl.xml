@@ -100,7 +100,6 @@
                 android:layout_marginEnd="@dimen/base5dp"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_toStartOf="@+id/xh"
-                android:text="自助打印"
                 android:textColor="@color/text_title_gray"/>
 
             <ImageView
@@ -137,7 +136,6 @@
                 android:layout_marginEnd="@dimen/base5dp"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_toStartOf="@+id/choose_mould_xh"
-                android:text="招商银行模版"
                 android:textColor="@color/text_title_gray"/>
 
             <ImageView
@@ -174,7 +172,6 @@
                 android:layout_marginEnd="@dimen/base5dp"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_toStartOf="@+id/choose_language_xh"
-                android:text="中文"
                 android:textColor="@color/text_title_gray"/>
 
             <ImageView

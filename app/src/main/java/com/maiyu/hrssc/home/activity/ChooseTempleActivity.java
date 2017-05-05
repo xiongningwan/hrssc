@@ -1,16 +1,23 @@
 package com.maiyu.hrssc.home.activity;
 
 import android.content.Intent;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.RelativeLayout;
 
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.activity.BaseActivity;
 import com.maiyu.hrssc.base.view.HeadView;
+import com.maiyu.hrssc.home.adapter.TempleAdapter;
+import com.maiyu.hrssc.home.bean.SelfAddress;
+import com.maiyu.hrssc.home.bean.Template;
+import com.maiyu.hrssc.util.HintUitl;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * 选择模版
@@ -19,12 +26,9 @@ public class ChooseTempleActivity extends BaseActivity {
 
     @BindView(R.id.head_view)
     HeadView mHeadView;
-    @BindView(R.id.zzdy_rl)
-    RelativeLayout mZzdyRl;
-    @BindView(R.id.zzlq_rl)
-    RelativeLayout mZzlqRl;
-    @BindView(R.id.yj_rl)
-    RelativeLayout mYjRl;
+    @BindView(R.id.recycle_view)
+    RecyclerView mAddressRecycleView;
+    private TempleAdapter mAdapter;
 
 
     @Override
@@ -36,11 +40,19 @@ public class ChooseTempleActivity extends BaseActivity {
     @Override
     public void initViews() {
         mHeadView.setTitle("模版选择", true, false);
+
+        mAdapter = new TempleAdapter(this, new AddressItemOnclickListener());
+        mAddressRecycleView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        mAddressRecycleView.setItemAnimator(new DefaultItemAnimator());
+        mAddressRecycleView.setAdapter(mAdapter);
     }
 
     @Override
     public void initData() {
-
+        ArrayList<SelfAddress> addrs = getIntent().getParcelableArrayListExtra("templates");
+        if (addrs != null) {
+            mAdapter.setData(addrs);
+        }
     }
 
     @Override
@@ -48,29 +60,19 @@ public class ChooseTempleActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.head_view, R.id.zzdy_rl, R.id.zzlq_rl, R.id.yj_rl})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.head_view:
-                break;
-            case R.id.zzdy_rl:
-                Intent intent = new Intent(this, WriteTempleActivity.class);
-                intent.putExtra("title_name","招商银行模版");
-                startActivity(intent);
+    class AddressItemOnclickListener implements View.OnClickListener {
 
-                break;
-            case R.id.zzlq_rl:
-                Intent intent2 = new Intent(this, WriteTempleActivity.class);
-                intent2.putExtra("title_name","中国银行模版");
-                startActivity(intent2);
+        @Override
+        public void onClick(View v) {
+            Template template = (Template) v.getTag(R.id.key_tag_item_data);
+            HintUitl.toastShort(ChooseTempleActivity.this, template.getName());
+           /* Intent intent = new Intent();
+            intent.putExtra("template", template);
+            setResult(RESULT_OK, intent);*/
 
-                break;
-            case R.id.yj_rl:
-
-                Intent intent3 = new Intent(this, WriteTempleActivity.class);
-                intent3.putExtra("title_name","工商银行模版");
-                startActivity(intent3);
-                break;
+            Intent intent = new Intent(ChooseTempleActivity.this, WriteTempleActivity.class);
+            intent.putExtra("template", template);
+            startActivityForResult(intent, 111);
         }
     }
 
@@ -78,11 +80,11 @@ public class ChooseTempleActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case 111:
 
-                //    HintUitl.toastShort(this, data!=null?data.getStringExtra("address"):"未选取到地址");
+                    //    HintUitl.toastShort(this, data!=null?data.getStringExtra("address"):"未选取到地址");
                     break;
 
             }
