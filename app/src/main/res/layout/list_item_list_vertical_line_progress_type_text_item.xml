@@ -142,7 +142,8 @@
             android:layout_below="@id/file_recyclerView"
             android:layout_marginTop="@dimen/base5dp"
             android:text="2016-12-12 18:56"
-            android:textSize="@dimen/project_text_size_dp_12"/>
+            android:textSize="@dimen/project_text_size_dp_12"
+            android:textColor="@color/project_color_general_text_secondary"/>
 
     </RelativeLayout>
 

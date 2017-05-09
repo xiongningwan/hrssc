@@ -11,6 +11,11 @@
         android:layout_height="@dimen/project_head_view_hight"
         android:background="@color/project_color_basic_white_pure" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@mipmap/line"/>
+
     <ProgressBar
         android:id="@+id/ad_webview_ProgressBar"
         style="?android:attr/progressBarStyleHorizontal"

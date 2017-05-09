@@ -51,7 +51,7 @@
             android:layout_width="@dimen/base50dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin">
+            android:layout_marginEnd="@dimen/base8dp">
 
             <ImageView
                 android:id="@+id/msg_iv"
@@ -61,6 +61,19 @@
                 android:layout_centerVertical="true"
                 android:layout_gravity="end"
                 android:src="@mipmap/icon_xiaoxi"/>
+
+
+            <View
+                android:id="@+id/msg_point"
+                android:layout_width="@dimen/base5dp"
+                android:layout_height="@dimen/base5dp"
+                android:layout_alignTop="@id/msg_iv"
+                android:layout_marginStart="-7dp"
+                android:layout_marginTop="@dimen/base1dp"
+                android:layout_toEndOf="@id/msg_iv"
+                android:background="@drawable/view_point_red"
+                android:visibility="visible"/>
+
         </RelativeLayout>
 
     </RelativeLayout>

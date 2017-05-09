@@ -11,9 +11,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
@@ -78,6 +80,9 @@ public class XZZMBLActivity extends BaseActivity {
     EditText mEditText;
     @BindView(R.id.pcik_image_view)
     PickImageView mPickImageView;
+    @BindView(R.id.spinnsr_view)
+    Spinner mSpinner;
+
     private String mId;
     private String mTitle;
     private LoadingDialog mLoadingDialog;
@@ -109,6 +114,11 @@ public class XZZMBLActivity extends BaseActivity {
                 startActivity(new Intent(XZZMBLActivity.this, SucceedActivity.class));
             }
         });
+
+
+        String[] languages = getResources().getStringArray(R.array.languages);
+        ArrayAdapter<String>   mSpinnerAdapter = new ArrayAdapter<String>(this, R.layout.custom_simple_spinner_item, languages);
+        mSpinner.setAdapter(mSpinnerAdapter);
     }
 
     @Override

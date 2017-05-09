@@ -32,7 +32,6 @@
             android:textColor="@color/text_title_gray"/>
 
 
-
         <ImageView
             android:id="@+id/arraw_iv2"
             android:layout_width="wrap_content"
@@ -123,6 +122,31 @@
             android:text="有最新版本"
             android:textColor="@color/color_general_text_red"
             android:textSize="@dimen/project_text_size_dp_12"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@mipmap/line"/>
+
+
+    <RelativeLayout
+        android:id="@+id/logout_rl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base48dp"
+        android:background="@color/project_color_basic_white_pure"
+        android:paddingEnd="@dimen/activity_horizontal_margin"
+        android:paddingStart="@dimen/activity_horizontal_margin">
+
+        <TextView
+            android:id="@+id/logout_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="退出"
+            android:textColor="@color/text_title_gray"/>
+
+
     </RelativeLayout>
 
     <View

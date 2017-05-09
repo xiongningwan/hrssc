@@ -3,6 +3,7 @@ package com.maiyu.hrssc.base.engine;
 import android.content.Context;
 
 import com.maiyu.hrssc.base.bean.Banners;
+import com.maiyu.hrssc.base.bean.GetWebsiteData;
 import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.home.activity.todo.bean.ContractFlow;
 import com.maiyu.hrssc.home.activity.todo.bean.Todo;
@@ -85,6 +86,7 @@ public interface IBizEngine {
 
     /**
      * 获取该业务 可以使用的全部模板   2.获取该城市的全部自取地址
+     *
      * @param context
      * @param token
      * @param cid2
@@ -93,4 +95,52 @@ public interface IBizEngine {
      * @throws NetException
      */
     FormData getTemplates(Context context, String token, String cid2, String city) throws NetException;
+
+
+    /**
+     * 获取某个二级业务的基础信息（官方网站，体检、报到地址，联系人，联系方式）
+     *
+     * @param context
+     * @param token
+     * @param cid2
+     * @param city
+     * @return
+     * @throws NetException
+     */
+    GetWebsiteData getWebsite(Context context, String token, String cid2, String city) throws NetException;
+
+    /**
+     * 获取某个二级业务的办理说明（适用学位证明、工卡照片、预约入职）
+     * @param context
+     * @param token
+     * @param cid2
+     * @return
+     * @throws NetException
+     */
+    String getLink(Context context, String token, String cid2) throws NetException;
+
+    /**
+     * 提交申请（适用证明类、学位证明、工卡照片、预约入职）
+     * @param context
+     * @param token
+     * @param type
+     * @param city
+     * @param cid2
+     * @param get_way
+     * @param address
+     * @param address_info
+     * @param recipient
+     * @param tpl_tid
+     * @param tpl_form
+     * @param brief
+     * @param comment
+     * @param language
+     * @param images
+     * @param attachs
+     * @return
+     * @throws NetException
+     */
+    String submitApply(Context context, String token, String type, String city, String cid2, String get_way,
+                       String address, String address_info, String recipient, String tpl_tid, String tpl_form,
+                       String brief, String comment, String language, String images, String attachs) throws NetException;
 }

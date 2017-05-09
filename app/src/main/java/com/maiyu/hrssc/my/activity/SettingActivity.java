@@ -36,6 +36,8 @@ public class SettingActivity extends BaseActivity {
     TextView mCacheHintTv;
     @BindView(R.id.update_rl)
     RelativeLayout mUpdateRl;
+    @BindView(R.id.logout_rl)
+    RelativeLayout mLogoutRL;
     private LoadingDialog mLoadingDialog;
 
 
@@ -69,7 +71,7 @@ public class SettingActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.clear_cache_rl, R.id.about_us_rl, R.id.update_rl})
+    @OnClick({R.id.clear_cache_rl, R.id.about_us_rl, R.id.update_rl, R.id.logout_rl})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.clear_cache_rl:
@@ -78,6 +80,8 @@ public class SettingActivity extends BaseActivity {
             case R.id.about_us_rl:
                 break;
             case R.id.update_rl:
+                break;
+            case R.id.logout_rl:
                 break;
         }
     }

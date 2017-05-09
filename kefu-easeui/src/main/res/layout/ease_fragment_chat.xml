@@ -50,14 +50,17 @@
     </RelativeLayout>
 
     <View
+        android:id="@+id/line_divider"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="#f5f5f5"/>
+        android:background="#f5f5f5"
+        android:layout_below="@id/head_view"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/line_divider"
+        android:layout_above="@+id/input_menu"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 

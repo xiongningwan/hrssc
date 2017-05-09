@@ -20,161 +20,197 @@
     <include
         layout="@layout/view_space_layout"/>
 
-    <RelativeLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/base83dp"
-        android:background="@color/project_color_basic_white_pure">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/city_name_icon"
-            android:layout_width="@dimen/base73dp"
-            android:layout_height="@dimen/base73dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:src="@mipmap/icon_city"/>
 
-        <TextView
-            android:id="@+id/city_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/base16dp"
-            android:layout_marginTop="@dimen/base18dp"
-            android:layout_toEndOf="@id/city_name_icon"
-            android:text="深圳"
-            android:textColor="@color/text_title_gray"
-            android:textSize="@dimen/project_text_size_dp_16"/>
-
-        <View
-            android:id="@+id/line_divider"
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginTop="@dimen/base10dp"
-            android:layout_alignStart="@id/city_name"
-            android:layout_below="@id/city_name"
-            android:background="@mipmap/line"/>
-
-        <RelativeLayout
-            android:id="@+id/shuoming_ll"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@id/city_name"
-            android:layout_below="@id/line_divider"
-            android:layout_marginTop="@dimen/base10dp"
-            android:layout_toEndOf="@id/city_name_icon">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/shuoming_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="体检说明"
-                android:layout_centerVertical="true"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/base83dp"
+                android:background="@color/project_color_basic_white_pure">
+
+                <ImageView
+                    android:id="@+id/city_name_icon"
+                    android:layout_width="@dimen/base73dp"
+                    android:layout_height="@dimen/base73dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:src="@mipmap/icon_city"/>
+
+                <TextView
+                    android:id="@+id/city_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/base16dp"
+                    android:layout_marginTop="@dimen/base18dp"
+                    android:layout_toEndOf="@id/city_name_icon"
+                    android:text="深圳"
+                    android:textColor="@color/text_title_gray"
+                    android:textSize="@dimen/project_text_size_dp_16"/>
+
+                <View
+                    android:id="@+id/line_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_alignStart="@id/city_name"
+                    android:layout_below="@id/city_name"
+                    android:layout_marginTop="@dimen/base10dp"
+                    android:background="@mipmap/line"/>
+
+                <RelativeLayout
+                    android:id="@+id/shuoming_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/city_name"
+                    android:layout_below="@id/line_divider"
+                    android:layout_marginTop="@dimen/base10dp"
+                    android:layout_toEndOf="@id/city_name_icon">
+
+                    <TextView
+                        android:id="@+id/shuoming_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="体检说明"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:src="@mipmap/icon_xianghou"/>
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@mipmap/line"/>
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:id="@+id/ditu_iv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/base83dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@mipmap/line"/>
+
+            <RelativeLayout
+                android:id="@+id/dizhi_rl"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/base45dp"
+                android:background="@color/project_color_basic_white_pure">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:text="体检地址"/>
+
+
+                <ImageView
+                    android:id="@+id/jiantou_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:src="@mipmap/icon_xianghou"/>
+
+
+                <TextView
+                    android:id="@+id/dizhi_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/base5dp"
+                    android:layout_toStartOf="@id/jiantou_iv"
+                    android:text="广东省深圳市南山区科技南路55号"
+                    android:textColor="@color/text_title_gray"/>
+            </RelativeLayout>
+
+            <include
+                layout="@layout/view_space_layout"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:src="@mipmap/icon_xianghou"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"/>
-        </RelativeLayout>
-    </RelativeLayout>
+                android:background="@color/project_color_basic_white_pure"
+                android:orientation="vertical">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@mipmap/line"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/base8dp"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/base8dp"
+                    android:text="体检结果"/>
 
-    <ImageView
-        android:id="@+id/ditu_iv"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/base83dp"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:background="@mipmap/line"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@mipmap/line"/>
-
-    <RelativeLayout
-        android:id="@+id/dizhi_rl"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/base45dp"
-        android:background="@color/project_color_basic_white_pure">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="体检地址"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+                <TextView
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/base8dp"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/base8dp"
+                    android:text="办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明"
+                    android:textColor="@color/project_color_general_text_secondary"/>
 
 
-
-        <ImageView
-            android:id="@+id/jiantou_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/icon_xianghou"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"/>
-
-
-        <TextView
-            android:id="@+id/dizhi_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="广东省深圳市南山区科技南路55号"
-            android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/jiantou_iv"
-            android:layout_marginEnd="@dimen/base5dp"
-            android:textColor="@color/text_title_gray"/>
-    </RelativeLayout>
-
-    <include
-        layout="@layout/view_space_layout"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/project_color_basic_white_pure"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:text="体检结果"
-            android:layout_marginTop="@dimen/base5dp"
-            android:layout_marginBottom="@dimen/base5dp"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:background="@mipmap/line"/>
-
-        <TextView
-            android:id="@+id/no_result_tv"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/base150dp"
-            android:background="@drawable/view_et_gray_blue_selector"
-            android:padding="@dimen/base5dp"
-            android:textSize="@dimen/project_text_size_dp_12"
-            android:gravity="center"
-            android:text="暂未上传体检结果"
-            android:visibility="gone"/>
+                <TextView
+                    android:id="@+id/no_result_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base150dp"
+                    android:background="@drawable/view_et_gray_blue_selector"
+                    android:gravity="center"
+                    android:padding="@dimen/base5dp"
+                    android:text="暂未上传体检结果"
+                    android:textSize="@dimen/project_text_size_dp_12"
+                    android:visibility="gone"/>
 
 
-        <GridView
-            android:id="@+id/grid_view"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:horizontalSpacing="2dp"
-            android:verticalSpacing="5dp"
-            android:scrollbars="none"
-            android:listSelector="#00000000"
-            android:numColumns="3"
-            android:layout_marginStart="@dimen/activity_horizontal_margin">
-        </GridView>
-    </LinearLayout>
+                <GridView
+                    android:id="@+id/grid_view"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:horizontalSpacing="2dp"
+                    android:listSelector="#00000000"
+                    android:numColumns="3"
+                    android:scrollbars="none"
+                    android:verticalSpacing="5dp">
+                </GridView>
+
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/base8dp"
+                    android:text="2016-12-12 18:56"
+                    android:textColor="@color/project_color_general_text_secondary"
+                    android:textSize="@dimen/project_text_size_dp_12"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

@@ -15,10 +15,8 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/base61dp"
         android:layout_below="@id/space"
-        android:layout_marginBottom="@dimen/base8dp"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/base8dp"
         android:background="@drawable/corner_view_unclick_dialog">
 
 

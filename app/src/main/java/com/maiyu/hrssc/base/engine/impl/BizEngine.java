@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.maiyu.hrssc.base.ConstantValue;
 import com.maiyu.hrssc.base.bean.Banners;
+import com.maiyu.hrssc.base.bean.GetWebsiteData;
 import com.maiyu.hrssc.base.engine.IBizEngine;
 import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.home.activity.todo.bean.ContractFlow;
@@ -274,6 +275,126 @@ public class BizEngine extends BaseEngine implements IBizEngine {
             data = JSON.parseObject(json, FormData.class);
 
 
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
+    public GetWebsiteData getWebsite(Context context, String token, String cid2, String city) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_business_get_getWebsite;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("cid2", cid2);
+        params.put("city", city);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        GetWebsiteData data = null;
+        try {
+            json = JSON.parseObject(json).getString("data");
+            //json = parseObject(json).getString("category2List");
+            data = JSON.parseObject(json, GetWebsiteData.class);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
+    public String getLink(Context context, String token, String cid2) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_business_get_getLink;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("cid2", cid2);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        String data = null;
+        try {
+            json = JSON.parseObject(json).getString("data");
+            json = JSON.parseObject(json).getString("link");
+            //json = parseObject(json).getString("category2List");
+            // data = JSON.parseObject(json, GetWebsiteData.class);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
+    public String submitApply(Context context, String token, String type, String city, String cid2, String get_way, String address, String address_info,
+                              String recipient, String tpl_tid, String tpl_form, String brief, String comment, String language, String images, String attachs) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_business_submitApply;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("type", type);
+        params.put("city", city);
+        params.put("cid2", cid2);
+        params.put("get_way", get_way);
+        params.put("address", address);
+        params.put("address_info", address_info);
+        params.put("recipient", recipient);
+        params.put("tpl_tid", tpl_tid);
+        params.put("tpl_form", tpl_form);
+        params.put("brief", brief);
+        params.put("comment", comment);
+        params.put("language", language);
+        params.put("images", images);
+        params.put("attachs", attachs);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        String data = null;
+        try {
+            data = JSON.parseObject(json).getString("msg");
         } catch (JSONException e) {
             e.printStackTrace();
         }
