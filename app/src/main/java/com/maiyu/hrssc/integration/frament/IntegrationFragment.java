@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.base.activity.MessagesActivity;
 import com.maiyu.hrssc.base.bean.Banners;
 import com.maiyu.hrssc.base.bean.DataCenter;
 import com.maiyu.hrssc.base.engine.IBizEngine;
@@ -25,6 +26,7 @@ import com.maiyu.hrssc.integration.adapter.IntegrationAdapter;
 import com.maiyu.hrssc.integration.bean.IngegrationProduct;
 import com.maiyu.hrssc.util.BaseAsyncTask;
 import com.maiyu.hrssc.util.EngineFactory;
+import com.maiyu.hrssc.util.SharedPreferencesUtil;
 
 import java.util.List;
 
@@ -41,7 +43,8 @@ public class IntegrationFragment extends Fragment implements OnRefreshListener, 
     RelativeLayout headLeftBtn;
     @BindView(R.id.msg_btn)
     RelativeLayout msgBtn;
-
+    @BindView(R.id.msg_point)
+    View mMsgPoint;
     private int mPage = 1;
     private int mCount = 10;
     private final int init = 1;
@@ -99,6 +102,19 @@ public class IntegrationFragment extends Fragment implements OnRefreshListener, 
         DataCenter.getInstance().registerObserver(integrationObserver);
 
 
+        Boolean msgPointisVisiable = SharedPreferencesUtil.getIsPointViewVisibility(getActivity());
+        if (msgPointisVisiable) {
+            mMsgPoint.setVisibility(View.VISIBLE);
+        } else {
+            mMsgPoint.setVisibility(View.GONE);
+        }
+
+        msgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), MessagesActivity.class));
+            }
+        });
     }
 
     void initData() {

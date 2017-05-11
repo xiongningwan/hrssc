@@ -26,7 +26,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ZMBLActivity extends BaseActivity {
+/**
+ * 居住证办理
+ */
+public class JZZBLActivity extends BaseActivity {
 
     @BindView(R.id.head_view)
     HeadView mHeadView;
@@ -49,7 +52,7 @@ public class ZMBLActivity extends BaseActivity {
 
     @Override
     public void createActivityImpl() {
-        setContentView(R.layout.activity_zmbl);
+        setContentView(R.layout.activity_jzzbl);
         ButterKnife.bind(this);
     }
 
@@ -88,22 +91,8 @@ public class ZMBLActivity extends BaseActivity {
 
                 break;
             case R.id.xzzmbl:
-                // 薪资证明办理
-                // startActivity(new Intent(this, XZZMBLActivity.class));
+                // 居住证办理
                 startRequestActivity(0, mCateGory2List.get(0));
-                break;
-            case R.id.jhsyzmbl:
-                // 计划生育证明办理
-                // startActivity(new Intent(this, JHSYBLActivity.class));
-                startRequestActivity(1, mCateGory2List.get(1));
-                break;
-            case R.id.xsbxzmbl:
-                // startActivity(new Intent(this, XSBXZMBLActivity.class));
-                startRequestActivity(1, mCateGory2List.get(2));
-                break;
-            case R.id.zzzmbl:
-                //  startActivity(new Intent(this, ZZZMBLActivity.class));
-                startRequestActivity(1, mCateGory2List.get(3));
                 break;
         }
     }
@@ -131,7 +120,7 @@ public class ZMBLActivity extends BaseActivity {
         protected Void doInBackground(Void... params) {
             IBizEngine engine = EngineFactory.get(IBizEngine.class);
             try {
-                mBanners = engine.getBanner(ZMBLActivity.this, token, "2");
+                mBanners = engine.getBanner(JZZBLActivity.this, token, "2");
             } catch (NetException e) {
                 exception = e;
                 e.printStackTrace();
@@ -141,12 +130,12 @@ public class ZMBLActivity extends BaseActivity {
 
         @Override
         protected void onPostExecute(Void result) {
-            if (checkException(ZMBLActivity.this)) {
+            if (checkException(JZZBLActivity.this)) {
                 return;
             }
             if (mBanners != null) {
                 if (mBanners.getImage() != null) {
-                    ImageLoaderUtil.loadImage(mImageView, ConstantValue.FILE_SERVER_URI + mBanners.getImage(), R.mipmap.banner_zmbl);
+                    ImageLoaderUtil.loadImage(mImageView, ConstantValue.FILE_SERVER_URI + mBanners.getImage(), R.mipmap.banner_hukou);
                 }
             }
 
@@ -181,7 +170,7 @@ public class ZMBLActivity extends BaseActivity {
         protected Void doInBackground(Void... params) {
             IBizEngine engine = EngineFactory.get(IBizEngine.class);
             try {
-                list = engine.getCategory2(ZMBLActivity.this, token, cid, city);
+                list = engine.getCategory2(JZZBLActivity.this, token, cid, city);
             } catch (NetException e) {
                 exception = e;
                 e.printStackTrace();
@@ -192,7 +181,7 @@ public class ZMBLActivity extends BaseActivity {
         @Override
         protected void onPostExecute(Void result) {
             mLoadingDialog.getDialog().dismiss();
-            if (checkException(ZMBLActivity.this)) {
+            if (checkException(JZZBLActivity.this)) {
                 return;
             }
             if (list != null) {
@@ -207,29 +196,14 @@ public class ZMBLActivity extends BaseActivity {
 
 
     void setCatgory1(List<Category2> list) {
-        if (list.size() < 4) {
+        if (list.size() < 1) {
             return;
         }
         mCateGory2List = list;
         Category2 item0 = list.get(0);
-        Category2 item1 = list.get(1);
-        Category2 item2 = list.get(2);
-        Category2 item3 = list.get(3);
         if (item0 != null) {
             mXzzmbl.setText(item0.getName());
             mXzzmbl.setVisibility("0".equals(item0.getStatus()) ? View.VISIBLE : View.GONE);
-        }
-        if (item1 != null) {
-            mJhsyzmbl.setText(item1.getName());
-            mJhsyzmbl.setVisibility("0".equals(item1.getStatus()) ? View.VISIBLE : View.GONE);
-        }
-        if (item2 != null) {
-            mXsbxzmbl.setText(item2.getName());
-            mXsbxzmbl.setVisibility("0".equals(item2.getStatus()) ? View.VISIBLE : View.GONE);
-        }
-        if (item3 != null) {
-            mZzzmbl.setText(item3.getName());
-            mZzzmbl.setVisibility("0".equals(item3.getStatus()) ? View.VISIBLE : View.GONE);
         }
     }
 
@@ -239,16 +213,6 @@ public class ZMBLActivity extends BaseActivity {
             Intent intent = null;
             switch (location) {
                 case 0:
-                    intent = new Intent(this, XZZMBLActivity.class);
-                    break;
-                case 1:
-                    //   intent = new Intent(this, SocialSecurityActivity.class);
-                    intent = new Intent(this, XZZMBLActivity.class);
-                    break;
-                case 2:
-                    intent = new Intent(this, XZZMBLActivity.class);
-                    break;
-                case 3:
                     intent = new Intent(this, XZZMBLActivity.class);
                     break;
             }

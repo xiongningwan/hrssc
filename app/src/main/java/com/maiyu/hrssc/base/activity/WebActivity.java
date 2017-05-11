@@ -18,7 +18,6 @@ import android.webkit.WebView;
 import android.widget.ProgressBar;
 
 import com.maiyu.hrssc.R;
-import com.maiyu.hrssc.base.ConstantValue;
 import com.maiyu.hrssc.base.bean.DataCenter;
 import com.maiyu.hrssc.base.bean.User;
 import com.maiyu.hrssc.base.view.HeadView;
@@ -31,23 +30,15 @@ import com.maiyu.hrssc.base.view.HeadView;
  *         2015-8-31
  */
 public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
-
-
-    public static final int REQUEST_CODE_GO_TO_LOGIN = 1001;
     private WebView mWebView;
     private ProgressBar mProgressbar;
     private HeadView mHeadView;
     private String mTitleName;
-    private String productId;
     private String url;
     private WebSettings webSettings;
     private SwipeRefreshLayout mSwipeLayout;
-    private JavaScriptInterface mJSIImp;
-    private String mProductShareData;
     private int mType;
-    private boolean mIsShowShareGuide;
-    private String mShareJSON;
-    private String mShareArrayJSON;
+    private JavaScriptInterface mJSIImp;
 
     @Override
     public void createActivityImpl() {
@@ -106,14 +97,17 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
         Intent intent = getIntent();
         mType = intent.getIntExtra("type", 0);
         url = getIntent().getStringExtra("url");
+        if (!url.contains("http://")) {
+            url = "http://" + url;
+        }
         mTitleName = getIntent().getStringExtra("titleName");
 
-        if (mType == ConstantValue.TYPE_ORDINARY) {// 普通url
+       /* if (mType == ConstantValue.TYPE_ORDINARY) {// 普通url
             mHeadView.setTitle(mTitleName, true, false);
             mHeadView.setVisibility(View.GONE);
         } else {
             mHeadView.setTitle(mTitleName, true, false);
-        }
+        }*/
 
 
         // mHeadView.setOnRightButtonClickListener(new OnRightButtonClickListner());
@@ -284,8 +278,15 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
-            // String title = mWebView.getTitle();
-            // mHeadView.setTitle(title, true, false);
+            String title = mWebView.getTitle();
+            if (title != null && !title.equals("")) {
+               // mHeadView.setTitle(title, true, false);
+                mHeadView.setVisibility(View.GONE);
+            } else {
+                mHeadView.setTitle(title, true, false);
+            }
+
+
            /* if ("产品购买".equals(title) || "收银台".equals(title)) {
                 mHeadView.setCloseTip(true);
             } else {

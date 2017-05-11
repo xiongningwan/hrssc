@@ -106,7 +106,7 @@ public class SSDetailActivity extends BaseActivity {
             case R.id.danweijiaona_btn:
                 break;
             case R.id.gerenjiaona_btn:
-                startActivity(new Intent(this, SSHistoryActivity.class));
+                //startActivity(new Intent(this, SSHistoryActivity.class));
                 break;
             case R.id.chakan_lishi_jilu_tv:
                 startActivity(new Intent(this, SSHistoryActivity.class));

@@ -24,6 +24,8 @@ public class TempleInputAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     private final LayoutInflater mInflater;
     private final Context mContext;
     private List mList = new ArrayList<>();
+    private List<EditText> mListView = new ArrayList<EditText>();
+    private List<TextView> mListTextView = new ArrayList<TextView>();
 
     public void setData(List list) {
         mList.clear();
@@ -75,8 +77,16 @@ public class TempleInputAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             String lable = (String) mList.get(getAdapterPosition());
             if (lable != null) {
                 name.setText(lable);
+                mListTextView.add(name);
+                mListView.add(input);
             }
-
         }
+    }
+
+    public List<EditText> getInputListView() {
+        return mListView;
+    }
+    public List<TextView> getTextViewListView() {
+        return mListTextView;
     }
 }

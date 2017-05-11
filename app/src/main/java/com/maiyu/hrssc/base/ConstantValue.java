@@ -203,6 +203,14 @@ public interface ConstantValue {
      * 提交申请（适用证明类、学位证明、工卡照片、预约入职）
      */
     String path_business_submitApply = "/hrsscBusinessController/submitApply";
+    /**
+     * 上传图片的统一调用此接口
+     */
+    String path_uploadPicture = "/hrsscBasicController/uploadPicture";
+    /**
+     * 用于上传文件，如压缩包，文档，mp3等其他文件（图片除外）
+     */
+    String path_uploadFile = "/hrsscBasicController/uploadFile";
 
 
     /**

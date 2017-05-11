@@ -173,6 +173,31 @@ public class SharedPreferencesUtil {
         return city;
     }
 
+    /**
+     * 保存是否显示小紅小点
+     *
+     * @param context
+     * @param b
+     */
+    public static void saveIsPointViewVisibility(Context context, Boolean b) {
+        SharedPreferences perfer = context.getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        Editor editor = perfer.edit();
+        editor.putBoolean("IsPointViewVisibility", b);
+        editor.commit();
+    }
+
+    /**
+     * 获取小红点显示与否
+     *
+     * @param context
+     * @return
+     */
+    public static Boolean getIsPointViewVisibility(Context context) {
+        SharedPreferences perfer = context.getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        Boolean isPVVB = perfer.getBoolean("IsPointViewVisibility", false);
+        return isPVVB;
+    }
+
 
     /**
      * 保存登录帐号和密码
@@ -208,5 +233,52 @@ public class SharedPreferencesUtil {
         map.put("loginPwd", loginPwd);
         map.put("loginType", loginType);
         return map;
+    }
+
+
+    /**
+     * 保存特殊参数说明设置
+     * 1 户口卡借用：
+     * 借用事由：          brief
+     * 是否使用集体户：comment   是/否
+     * 2 市内户口迁入：
+     * 申请说明：           brief
+     * 3 户口迁出至市内：
+     * 申请说明：            brief
+     * 4 市外户口迁入：
+     * 申请说明：           brief
+     * 5 学位验证：
+     * 验证指引 ：这个和办理说明重复，去掉。
+     * 6 工卡照片：
+     * 无特殊字段
+     * 7 预约入职：
+     * 预约入职日期 ：     brief
+     * (格式：yyyy-MM-dd HH:mm:ss)
+     * <p>
+     * 8 居住证办理：
+     * 申请说明：     brief
+     * 9 档案借阅：
+     * 申请说明 ：    brief
+     *
+     * @param context
+     * @param i
+     */
+    public static void saveSpecialParamSet(Context context, int i) {
+        SharedPreferences perfer = context.getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        Editor editor = perfer.edit();
+        editor.putInt("SpecialParamSet", i);
+        editor.commit();
+    }
+
+    /**
+     * 获取特殊参数说明设置
+     *
+     * @param context
+     * @return
+     */
+    public static int getSpecialParamSet(Context context) {
+        SharedPreferences perfer = context.getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        int i = perfer.getInt("SpecialParamSet", 0);
+        return i;
     }
 }

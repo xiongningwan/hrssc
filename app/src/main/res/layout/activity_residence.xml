@@ -49,7 +49,7 @@
                 android:drawablePadding="@dimen/base5dp"
                 android:drawableTop="@mipmap/icon_hkk_jieyong"
                 android:gravity="center"
-                android:text="户口卡借用"/>
+                android:text=""/>
 
             <TextView
                 android:id="@+id/zfgjjbg_btn"
@@ -59,7 +59,7 @@
                 android:drawablePadding="@dimen/base5dp"
                 android:drawableTop="@mipmap/icon_hk_qianru"
                 android:gravity="center"
-                android:text="市内户口迁入"/>
+                android:text=""/>
 
 
         </LinearLayout>
@@ -78,7 +78,7 @@
                 android:drawablePadding="@dimen/base5dp"
                 android:drawableTop="@mipmap/icon_gjjlianmingka"
                 android:gravity="center"
-                android:text="户口迁出至市内"/>
+                android:text=""/>
 
             <TextView
                 android:id="@+id/zfgjjzm_btn"
@@ -88,7 +88,7 @@
                 android:drawablePadding="@dimen/base5dp"
                 android:drawableTop="@mipmap/icon_hk_qianr"
                 android:gravity="center"
-                android:text="市外户口迁入"/>
+                android:text=""/>
 
 
         </LinearLayout>

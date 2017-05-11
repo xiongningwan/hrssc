@@ -71,6 +71,7 @@ public class ChooseTempleActivity extends BaseActivity {
             setResult(RESULT_OK, intent);*/
 
             Intent intent = new Intent(ChooseTempleActivity.this, WriteTempleActivity.class);
+            intent.putExtra("title_name", template.getName());
             intent.putExtra("template", template);
             startActivityForResult(intent, 111);
         }
@@ -83,7 +84,7 @@ public class ChooseTempleActivity extends BaseActivity {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case 111:
-
+                    setResult(RESULT_OK, data);
                     //    HintUitl.toastShort(this, data!=null?data.getStringExtra("address"):"未选取到地址");
                     break;
 

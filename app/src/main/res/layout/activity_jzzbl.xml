@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/project_color_basic_white"
     android:orientation="vertical"
-    tools:context="com.maiyu.hrssc.home.activity.funds.FundsActivity">
+    tools:context="com.maiyu.hrssc.home.activity.ZMBLActivity">
+
 
     <com.maiyu.hrssc.base.view.HeadView
         android:id="@+id/head_view"
@@ -30,68 +32,57 @@
         layout="@layout/view_space_layout"/>
 
 
-    <LinearLayout
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:stretchColumns="0,1"
+        >
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TableRow
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center_vertical">
+            android:gravity="center">
 
             <TextView
-                android:id="@+id/gjjcx_btn"
-                android:layout_width="0dp"
+                android:id="@+id/xzzmbl"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:drawablePadding="@dimen/base5dp"
-                android:drawableTop="@mipmap/icon_gjjchaxun"
-                android:gravity="center"
-                android:text=""/>
+                android:drawableTop="@mipmap/icon_xzzm"
+                android:gravity="center"/>
 
             <TextView
-                android:id="@+id/zfgjjbg_btn"
-                android:layout_width="0dp"
+                android:id="@+id/jhsyzmbl"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:drawablePadding="@dimen/base5dp"
-                android:drawableTop="@mipmap/icon_gjjbiangeng"
+                android:drawableTop="@mipmap/icon_jhsyzm"
                 android:gravity="center"
-                android:text=""/>
+                android:visibility="invisible"/>
+        </TableRow>
 
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TableRow
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center_vertical">
+            android:gravity="center">
 
             <TextView
-                android:id="@+id/zfgjjlmk_btn"
-                android:layout_width="0dp"
+                android:id="@+id/xsbxzmbl"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:drawablePadding="@dimen/base5dp"
-                android:drawableTop="@mipmap/icon_gjjlianmingka"
+                android:drawableTop="@mipmap/icon_xsbxzm"
                 android:gravity="center"
-                android:text=""/>
+                android:visibility="invisible"/>
 
             <TextView
-                android:id="@+id/zfgjjzm_btn"
-                android:layout_width="0dp"
+                android:id="@+id/zzzmbl"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:drawablePadding="@dimen/base5dp"
-                android:drawableTop="@mipmap/icon_ggjzhengming"
+                android:drawableTop="@mipmap/icon_zzzmbl"
                 android:gravity="center"
-                android:text=""/>
-
-
-        </LinearLayout>
-
-    </LinearLayout>
+                android:visibility="invisible"/>
+        </TableRow>
+    </TableLayout>
 </LinearLayout>

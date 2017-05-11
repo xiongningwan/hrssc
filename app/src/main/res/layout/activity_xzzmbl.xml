@@ -8,6 +8,16 @@
     android:orientation="vertical"
     tools:context="com.maiyu.hrssc.home.activity.XZZMBLActivity">
 
+    <com.maiyu.hrssc.base.view.HeadView
+        android:id="@+id/head_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/project_head_view_hight"
+        android:background="@color/project_color_basic_white_pure">
+
+    </com.maiyu.hrssc.base.view.HeadView>
+
+
+    <include layout="@layout/view_space_layout"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,18 +26,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <com.maiyu.hrssc.base.view.HeadView
-                android:id="@+id/head_view"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/project_head_view_hight"
-                android:background="@color/project_color_basic_white_pure">
-
-            </com.maiyu.hrssc.base.view.HeadView>
-
-
-            <include layout="@layout/view_space_layout"/>
+            android:orientation="vertical"
+            android:background="@color/project_color_basic_white_pure">
 
 
             <RelativeLayout
@@ -195,14 +195,14 @@
 
                 <Spinner
                     android:id="@+id/spinnsr_view"
+                    style="@style/SpinnerTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:layout_toStartOf="@+id/choose_language_xh"
-                    android:spinnerMode="dropdown"
                     android:background="@color/transparent"
-                    style="@style/SpinnerTextStyle">
+                    android:spinnerMode="dropdown">
                 </Spinner>
             </RelativeLayout>
 
@@ -290,8 +290,8 @@
                 android:layout_marginTop="@dimen/base10dp"
                 android:background="@drawable/view_et_gray_blue_selector"
                 android:gravity="start"
+                android:hint="备注内容"
                 android:padding="@dimen/base5dp"
-                android:text="备注内容"
                 android:textColor="@color/text_title_gray"
                 android:textSize="@dimen/base12dp"/>
 

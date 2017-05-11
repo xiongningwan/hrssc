@@ -1,14 +1,12 @@
 package com.maiyu.hrssc.home.activity.funds.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
-import com.maiyu.hrssc.home.activity.funds.FundsDetailActivity;
 import com.maiyu.hrssc.home.activity.funds.bean.Funds;
 
 import java.util.ArrayList;
@@ -80,9 +78,9 @@ public class FundsHistoryAdapter extends RecyclerView.Adapter<FundsHistoryAdapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext, FundsDetailActivity.class);
+                    //Intent intent = new Intent(mContext, FundsDetailActivity.class);
                     //  intent.putExtra("title", info.getTitle());
-                    mContext.startActivity(intent);
+                   // mContext.startActivity(intent);
                 }
             });
         }

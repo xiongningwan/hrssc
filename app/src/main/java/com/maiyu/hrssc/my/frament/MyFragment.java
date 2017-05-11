@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.ConstantValue;
 import com.maiyu.hrssc.base.activity.AddressManageActivity;
+import com.maiyu.hrssc.base.activity.MessagesActivity;
 import com.maiyu.hrssc.base.bean.DataCenter;
 import com.maiyu.hrssc.base.bean.User;
 import com.maiyu.hrssc.base.engine.IUserEngine;
@@ -30,6 +31,7 @@ import com.maiyu.hrssc.util.BaseAsyncTask;
 import com.maiyu.hrssc.util.EngineFactory;
 import com.maiyu.hrssc.util.HintUitl;
 import com.maiyu.hrssc.util.ImageLoaderUtil;
+import com.maiyu.hrssc.util.SharedPreferencesUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -95,7 +97,8 @@ public class MyFragment extends Fragment {
     @BindView(R.id.jiayi_iv)
     ImageView mJiayi;
     Unbinder unbinder;
-
+    @BindView(R.id.msg_point)
+    View mMsgPoint;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -136,6 +139,13 @@ public class MyFragment extends Fragment {
         mNameTv.setText(mUser.getName());
         mGonghaoValueTv.setText("" + mUser.getUin());
 
+        Boolean msgPointisVisiable = SharedPreferencesUtil.getIsPointViewVisibility(getActivity());
+        if (msgPointisVisiable) {
+            mMsgPoint.setVisibility(View.VISIBLE);
+        } else {
+            mMsgPoint.setVisibility(View.GONE);
+        }
+
     }
 
     private void initData() {
@@ -154,6 +164,7 @@ public class MyFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.msg_btn:
+                startActivity(new Intent(getActivity(), MessagesActivity.class));
                 break;
             case R.id.head_img_view:
                 startActivity(new Intent(getActivity(), PersonalInfoActivity.class));

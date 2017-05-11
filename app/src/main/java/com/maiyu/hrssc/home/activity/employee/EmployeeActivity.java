@@ -1,23 +1,51 @@
 package com.maiyu.hrssc.home.activity.employee;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.amap.api.maps.AMap;
+import com.amap.api.maps.CameraUpdateFactory;
+import com.amap.api.maps.MapView;
+import com.amap.api.maps.UiSettings;
+import com.amap.api.maps.model.BitmapDescriptor;
+import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.MarkerOptions;
 import com.maiyu.hrssc.R;
-import com.maiyu.hrssc.base.activity.BaseActivity;
+import com.maiyu.hrssc.base.ConstantValue;
+import com.maiyu.hrssc.base.activity.CheckPermissionsActivity;
+import com.maiyu.hrssc.base.activity.WebActivity;
+import com.maiyu.hrssc.base.bean.CategoryBaseinfo;
+import com.maiyu.hrssc.base.bean.DataCenter;
+import com.maiyu.hrssc.base.bean.GetWebsiteData;
+import com.maiyu.hrssc.base.engine.IBizEngine;
+import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.base.view.HeadView;
+import com.maiyu.hrssc.base.view.dialog.LoadingDialog;
+import com.maiyu.hrssc.home.activity.XZZMBLActivity;
+import com.maiyu.hrssc.home.bean.Category2;
+import com.maiyu.hrssc.util.BaseAsyncTask;
+import com.maiyu.hrssc.util.EngineFactory;
+import com.maiyu.hrssc.util.SharedPreferencesUtil;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.maiyu.hrssc.R.id.dianhua_tv;
+
 /**
  * 新员工
  */
-public class EmployeeActivity extends BaseActivity {
+public class EmployeeActivity extends CheckPermissionsActivity {
 
 
     @BindView(R.id.head_view)
@@ -32,6 +60,8 @@ public class EmployeeActivity extends BaseActivity {
     TextView mShuomingTv;
     @BindView(R.id.shuoming_ll)
     RelativeLayout mShuomingLl;
+    @BindView(R.id.map_view)
+    MapView mMapView;
     @BindView(R.id.ditu_iv)
     ImageView mDituIv;
     @BindView(R.id.dizhi_iv)
@@ -54,7 +84,7 @@ public class EmployeeActivity extends BaseActivity {
     ImageView mDianhuaIv;
     @BindView(R.id.dianhua_jiantou_iv)
     ImageView mDianhuaJiantouIv;
-    @BindView(R.id.dianhua_tv)
+    @BindView(dianhua_tv)
     TextView mDianhuaTv;
     @BindView(R.id.lianxidianhau_rl)
     RelativeLayout mLianxidianhauRl;
@@ -66,16 +96,48 @@ public class EmployeeActivity extends BaseActivity {
     TextView mGkzpBtn;
     @BindView(R.id.yyrz_btn)
     TextView mYyrzBtn;
+    private String mToken;
+    private String mId;
+    private String mTitle;
+    private List<Category2> mCateGory2List;
+    private LoadingDialog mLoadingDialog;
+    private String mCity;
+    private GetWebsiteData mGetWebsiteData;
+    private AMap aMap;
+    private MarkerOptions markerOption;
+    private LatLng latlng = new LatLng(22.537770, 113.949110);
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_employee);
+        ButterKnife.bind(this);
+        mMapView.onCreate(savedInstanceState);// 此方法必须重写
+       initAll();
+
+    }
+    void initAll() {
+        mId = getIntent().getStringExtra("id");
+        mTitle = getIntent().getStringExtra("name");
+        mLoadingDialog = new LoadingDialog(this);
+        mHeadView.setTitle(mTitle, true, false);
+        mToken = DataCenter.getInstance().getuser().getToken();
+        if (mId != null) {
+            mCity = SharedPreferencesUtil.getCityName(this);
+            new Category2AsyncTask(mToken, mId, mCity).execute();
+        }
+        init();
+    }
 
     @Override
     public void createActivityImpl() {
-        setContentView(R.layout.activity_employee);
-        ButterKnife.bind(this);
+
     }
 
     @Override
     public void initViews() {
-        mHeadView.setTitle("新员工", true, false);
+
+      //  init();
     }
 
     @Override
@@ -92,8 +154,12 @@ public class EmployeeActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.shuoming_ll:
+                if (mGetWebsiteData != null && mGetWebsiteData.getLink() != null) {
+                    openWebActivity();
+                }
                 break;
             case R.id.dizhi_rl:
+                startActivity(new Intent(this, DizhiActivity.class));
                 break;
             case R.id.lianxiren_rl:
                 break;
@@ -110,4 +176,253 @@ public class EmployeeActivity extends BaseActivity {
                 break;
         }
     }
+
+    /**
+     * 获取二级业务
+     */
+    class Category2AsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String token;
+        private String cid;
+        private String city;
+        private List<Category2> list;
+
+        public Category2AsyncTask(String token, String cid, String city) {
+            super();
+            this.token = token;
+            this.cid = cid;
+            this.city = city;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mLoadingDialog.getDialog().show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            IBizEngine engine = EngineFactory.get(IBizEngine.class);
+            try {
+                list = engine.getCategory2(EmployeeActivity.this, token, cid, city);
+            } catch (NetException e) {
+                exception = e;
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            mLoadingDialog.getDialog().dismiss();
+            if (checkException(EmployeeActivity.this)) {
+                return;
+            }
+            if (list != null) {
+
+                setCatgory1(list);
+
+            }
+
+            super.onPostExecute(result);
+        }
+    }
+
+
+    void setCatgory1(List<Category2> list) {
+        if (list.size() < 5) {
+            return;
+        }
+        mCateGory2List = list;
+        Category2 item0 = list.get(0);
+        Category2 item1 = list.get(1);
+        Category2 item2 = list.get(2);
+        Category2 item3 = list.get(3);
+        Category2 item4 = list.get(4);
+        if (item0 != null) {
+            //  mDizhiTv.setText(item0.getName());
+            //  mXzzmbl.setVisibility("0".equals(item0.getStatus()) ? View.VISIBLE : View.GONE);
+            new GetWebsiteAsyncTask(mToken, item0.getCid(), mCity).execute();
+        }
+
+        if (item1 != null) {
+            mTijianBtn.setText(item1.getName());
+            mTijianBtn.setVisibility("0".equals(item1.getStatus()) ? View.VISIBLE : View.GONE);
+        }
+        if (item2 != null) {
+            mXwyzBtn.setText(item2.getName());
+            mXwyzBtn.setVisibility("0".equals(item2.getStatus()) ? View.VISIBLE : View.GONE);
+        }
+        if (item3 != null) {
+            mGkzpBtn.setText(item3.getName());
+            mGkzpBtn.setVisibility("0".equals(item3.getStatus()) ? View.VISIBLE : View.GONE);
+        }
+        if (item4 != null) {
+            mYyrzBtn.setText(item4.getName());
+            mYyrzBtn.setVisibility("0".equals(item3.getStatus()) ? View.VISIBLE : View.GONE);
+        }
+    }
+
+
+    void startRequestActivity(int location, Category2 category2) {
+        if (category2 != null) {
+            Intent intent = null;
+            switch (location) {
+                case 0:
+                    intent = new Intent(this, XZZMBLActivity.class);
+                    break;
+                case 1:
+                    //   intent = new Intent(this, SocialSecurityActivity.class);
+                    intent = new Intent(this, XZZMBLActivity.class);
+                    break;
+                case 2:
+                    intent = new Intent(this, XZZMBLActivity.class);
+                    break;
+                case 3:
+                    intent = new Intent(this, XZZMBLActivity.class);
+                    break;
+            }
+
+            intent.putExtra("id", category2.getId());
+            intent.putExtra("name", category2.getName());
+            startActivity(intent);
+        }
+    }
+
+
+    /**
+     * 获取某个二级业务的基础信息（官方网站，体检、报到地址，联系人，联系方式）
+     */
+    class GetWebsiteAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String token;
+        private String cid2;
+        private String city;
+        private GetWebsiteData getWebsiteData;
+
+        public GetWebsiteAsyncTask(String token, String cid2, String city) {
+            super();
+            this.token = token;
+            this.cid2 = cid2;
+            this.city = city;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mLoadingDialog.getDialog().show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            IBizEngine engine = EngineFactory.get(IBizEngine.class);
+            try {
+                getWebsiteData = engine.getWebsite(EmployeeActivity.this, token, cid2, city);
+            } catch (NetException e) {
+                exception = e;
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            mLoadingDialog.getDialog().dismiss();
+            if (checkException(EmployeeActivity.this)) {
+                return;
+            }
+            if (getWebsiteData != null) {
+                mGetWebsiteData = getWebsiteData;
+                setBaseInfo(getWebsiteData);
+
+            }
+
+            super.onPostExecute(result);
+        }
+    }
+
+    private void setBaseInfo(GetWebsiteData getWebsiteData) {
+        if (getWebsiteData.getCategoryBaseinfo() == null) {
+            return;
+        }
+        CategoryBaseinfo baseInfo = getWebsiteData.getCategoryBaseinfo();
+
+        mCityName.setText(baseInfo.getCity());
+        mDizhiTv.setText(baseInfo.getBaodao_addr());
+        mLianxirenTv.setText(baseInfo.getBaodao_contact());
+        mDianhuaTv.setText(baseInfo.getBaodao_phone());
+    }
+
+    void openWebActivity() {
+        Intent intent = new Intent(this, WebActivity.class);
+        intent.putExtra("url", mGetWebsiteData.getLink());
+        intent.putExtra("titleName", "帮助说明");
+        intent.putExtra("type", ConstantValue.TYPE_IMPORTANT);
+        startActivity(intent);
+    }
+
+
+    /**
+     * 初始化AMap对象
+     */
+    private void init() {
+        if (aMap == null) {
+            aMap = mMapView.getMap();
+            UiSettings uiSettings = aMap.getUiSettings();
+            uiSettings.setZoomControlsEnabled(false);
+            uiSettings.setLogoBottomMargin(-50);//隐藏logo
+            aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 16));
+            addMarkersToMap();// 往地图上添加marker
+
+        }
+    }
+
+    /**
+     * 方法必须重写
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mMapView.onResume();
+    }
+
+    /**
+     * 方法必须重写
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mMapView.onPause();
+    }
+
+    /**
+     * 方法必须重写
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mMapView.onSaveInstanceState(outState);
+    }
+
+    /**
+     * 方法必须重写
+     */
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mMapView.onDestroy();
+    }
+
+    /**
+     * 在地图上添加marker
+     */
+    private void addMarkersToMap() {
+        Bitmap bMap = BitmapFactory.decodeResource(this.getResources(),
+                R.mipmap.icon_dingwei_maker);
+        BitmapDescriptor des = BitmapDescriptorFactory.fromBitmap(bMap);
+
+        markerOption = new MarkerOptions().icon(des)
+                .position(latlng)
+                .draggable(true);
+        aMap.addMarker(markerOption);
+    }
+
 }

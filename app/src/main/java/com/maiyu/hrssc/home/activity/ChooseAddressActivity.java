@@ -69,6 +69,7 @@ public class ChooseAddressActivity extends BaseActivity {
             Intent intent = new Intent();
             intent.putExtra("selfAddress", selfAddress);
             setResult(RESULT_OK, intent);
+            finish();
         }
     }
 

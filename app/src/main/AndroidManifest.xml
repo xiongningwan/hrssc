@@ -401,6 +401,11 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".home.activity.JZZBLActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+        </activity>
 
 
         <!-- 【必须】 (2.30及以上版新增)展示通知的activity -->

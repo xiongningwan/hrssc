@@ -48,9 +48,9 @@
             android:id="@+id/line_divider"
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:layout_marginTop="@dimen/base10dp"
             android:layout_alignStart="@id/city_name"
             android:layout_below="@id/city_name"
+            android:layout_marginTop="@dimen/base10dp"
             android:background="@mipmap/line"/>
 
         <RelativeLayout
@@ -66,16 +66,16 @@
                 android:id="@+id/shuoming_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="报道说明"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:text="报道说明"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:src="@mipmap/icon_xianghou"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"/>
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:src="@mipmap/icon_xianghou"/>
         </RelativeLayout>
     </RelativeLayout>
 
@@ -83,11 +83,18 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@mipmap/line"/>
-    
+
+    <com.amap.api.maps.MapView
+        android:id="@+id/map_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base83dp"
+        android:layout_above="@id/daohang_rl"/>
+
     <ImageView
         android:id="@+id/ditu_iv"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/base83dp"/>
+        android:layout_height="@dimen/base83dp"
+        android:visibility="gone"/>
 
     <View
         android:layout_width="match_parent"
@@ -104,18 +111,17 @@
             android:id="@+id/dizhi_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/icon_dingwei"
+            android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_centerVertical="true"/>
+            android:src="@mipmap/icon_dingwei"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="报道地址"
             android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/base5dp"
             android:layout_toEndOf="@id/dizhi_iv"
-            android:layout_marginStart="@dimen/base5dp"/>
-
+            android:text="报道地址"/>
 
 
         <ImageView
@@ -124,25 +130,24 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/icon_xianghou"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"/>
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:src="@mipmap/icon_xianghou"/>
 
 
         <TextView
             android:id="@+id/dizhi_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="广东省深圳市南山区科技南路55号"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/jiantou_iv"
             android:layout_marginEnd="@dimen/base5dp"
+            android:layout_toStartOf="@id/jiantou_iv"
             android:textColor="@color/text_title_gray"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:background="@mipmap/line"/>
     </RelativeLayout>
 
@@ -156,18 +161,17 @@
             android:id="@+id/lianxiren_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/icon_ren"
+            android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_centerVertical="true"/>
+            android:src="@mipmap/icon_ren"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="联系人"
             android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/base5dp"
             android:layout_toEndOf="@id/lianxiren_iv"
-            android:layout_marginStart="@dimen/base5dp"/>
-
+            android:text="联系人"/>
 
 
         <ImageView
@@ -176,25 +180,24 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/icon_xianghou"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"/>
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:src="@mipmap/icon_xianghou"/>
 
 
         <TextView
             android:id="@+id/lianxiren_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sylvia"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/lianxiren_jiantou_iv"
             android:layout_marginEnd="@dimen/base5dp"
+            android:layout_toStartOf="@id/lianxiren_jiantou_iv"
             android:textColor="@color/text_title_gray"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:background="@mipmap/line"/>
     </RelativeLayout>
 
@@ -208,18 +211,17 @@
             android:id="@+id/dianhua_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/icon_dianhua"
+            android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_centerVertical="true"/>
+            android:src="@mipmap/icon_dianhua"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="联系电话"
             android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/base5dp"
             android:layout_toEndOf="@id/dianhua_iv"
-            android:layout_marginStart="@dimen/base5dp"/>
-
+            android:text="联系电话"/>
 
 
         <ImageView
@@ -228,18 +230,17 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/icon_xianghou"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"/>
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:src="@mipmap/icon_xianghou"/>
 
 
         <TextView
             android:id="@+id/dianhua_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="400-66776677"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/dianhua_jiantou_iv"
             android:layout_marginEnd="@dimen/base5dp"
+            android:layout_toStartOf="@id/dianhua_jiantou_iv"
             android:textColor="@color/text_title_gray"/>
 
 
@@ -252,8 +253,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/project_color_basic_white_pure">
+        android:background="@color/project_color_basic_white_pure"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -269,7 +270,7 @@
                 android:drawablePadding="@dimen/base5dp"
                 android:drawableTop="@mipmap/icon_tijian"
                 android:gravity="center"
-                android:text="体检"/>
+                android:text=""/>
 
             <TextView
                 android:id="@+id/xwyz_btn"
@@ -279,7 +280,7 @@
                 android:drawablePadding="@dimen/base5dp"
                 android:drawableTop="@mipmap/icon_xueweiyanzheng"
                 android:gravity="center"
-                android:text="学位验证"/>
+                android:text=""/>
 
 
         </LinearLayout>
@@ -298,7 +299,7 @@
                 android:drawablePadding="@dimen/base5dp"
                 android:drawableTop="@mipmap/icon_gongka"
                 android:gravity="center"
-                android:text="工卡照片"/>
+                android:text=""/>
 
             <TextView
                 android:id="@+id/yyrz_btn"
@@ -308,7 +309,7 @@
                 android:drawablePadding="@dimen/base5dp"
                 android:drawableTop="@mipmap/icon_yuyueruzhi"
                 android:gravity="center"
-                android:text="预约入职"/>
+                android:text=""/>
 
 
         </LinearLayout>

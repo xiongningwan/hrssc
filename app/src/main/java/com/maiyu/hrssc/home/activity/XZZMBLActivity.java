@@ -35,7 +35,9 @@ import com.maiyu.hrssc.util.EngineFactory;
 import com.maiyu.hrssc.util.HintUitl;
 import com.maiyu.hrssc.util.SharedPreferencesUtil;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,7 +49,7 @@ public class XZZMBLActivity extends BaseActivity {
     @BindView(R.id.head_view)
     HeadView mHeadView;
     @BindView(R.id.city)
-    ImageView mCity;
+    ImageView mCityIv;
     @BindView(R.id.city_name)
     TextView mCityName;
     @BindView(R.id.blsm_rl)
@@ -88,6 +90,18 @@ public class XZZMBLActivity extends BaseActivity {
     private LoadingDialog mLoadingDialog;
     private String mToken;
     private FormData mFormData;
+    private String mCity;
+    private String mGet_way = "";
+
+    private String mRecipient = "";
+    private String mAddress = "";
+    private String mAddress_info = "";
+    private String mTpl_tid = "";
+    private String mTpl_form = "";
+    private List<String> mImageList = new ArrayList<String>();
+    private List<String> mAttachFileList = new ArrayList<String>();
+    private ArrayList<String> mImageListDisplays = new ArrayList<String>();
+    private int mCount = 0;
 
 
     @Override
@@ -99,10 +113,15 @@ public class XZZMBLActivity extends BaseActivity {
 
     @Override
     public void initViews() {
+        mToken = DataCenter.getInstance().getuser().getToken();
+        mCity = SharedPreferencesUtil.getCityName(this);
+
         mId = getIntent().getStringExtra("id");
         mTitle = getIntent().getStringExtra("name");
         mLoadingDialog = new LoadingDialog(this);
         mHeadView.setTitle(mTitle, true, true);
+
+        mCityName.setText(mCity);
 
         TextView rightButtonText = mHeadView.getRightButtonText();
         rightButtonText.setText("提交");
@@ -111,21 +130,60 @@ public class XZZMBLActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //  Toast.makeText(XZZMBLActivity.this, "提交", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(XZZMBLActivity.this, SucceedActivity.class));
+               doSubmit();
             }
         });
 
 
-        String[] languages = getResources().getStringArray(R.array.languages);
-        ArrayAdapter<String>   mSpinnerAdapter = new ArrayAdapter<String>(this, R.layout.custom_simple_spinner_item, languages);
+        final String[] languages = getResources().getStringArray(R.array.languages);
+        ArrayAdapter<String> mSpinnerAdapter = new ArrayAdapter<String>(this, R.layout.custom_simple_spinner_item, languages);
         mSpinner.setAdapter(mSpinnerAdapter);
+
+        setSpecialParam(mTitle);
     }
+
+
+    /**
+     * 提交
+     */
+    void doSubmit() {
+        int set = SharedPreferencesUtil.getSpecialParamSet(this);
+        String type = "1";//0-保存草稿  1-提交申请
+        String brief = mSimpleDescText.getText().toString(); // 描述
+        if(set) {
+
+        }
+        String comment = mEditText.getText().toString(); // 备注
+        String language = mSpinner.getSelectedItem().toString().equals("中文") ? "0" : "1";
+
+        String paths = getSbString(mImageList);
+        String attachs = getSbString(mAttachFileList);
+
+        if (mToken != null && mCity != null && mId != null && mGet_way != null && !mGet_way.equals("")) {
+            new SubmitApplyAsyncTask(mToken, type, mCity, mId, mGet_way,
+                    mAddress, mAddress_info, mRecipient, mTpl_tid, mTpl_form,
+                    brief, comment, language, paths, attachs).execute();
+        }
+    }
+
+
+
+    String getSbString(List list) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+            sb.append(list.get(i));
+            sb.append(";");
+        }
+        if (sb.length() > 0) {
+            sb.deleteCharAt(sb.length() - 1); //调用 字符串的deleteCharAt() 方法,删除最后一个多余的
+        }
+        return sb.toString();
+    }
+
 
     @Override
     public void initData() {
-        mToken = DataCenter.getInstance().getuser().getToken();
-        String city = SharedPreferencesUtil.getCityName(this);
-        new Category2AsyncTask(mToken, mId, city).execute();
+        new Category2AsyncTask(mToken, mId, mCity).execute();
     }
 
     @Override
@@ -155,14 +213,14 @@ public class XZZMBLActivity extends BaseActivity {
             break;
             case R.id.choose_mould_rl:
                 //startActivityForResult(new Intent(this, ChooseTempleActivity.class), 102);
-                    if(mFormData.getTemplates() != null) {
-                        Intent intent = new Intent(this, ChooseTempleActivity.class);
-                        intent.putParcelableArrayListExtra("templates", (ArrayList<? extends Parcelable>) mFormData.getTemplates());
-                        startActivityForResult(intent, 102);
-                    }
+                if (mFormData.getTemplates() != null) {
+                    Intent intent = new Intent(this, ChooseTempleActivity.class);
+                    intent.putParcelableArrayListExtra("templates", (ArrayList<? extends Parcelable>) mFormData.getTemplates());
+                    startActivityForResult(intent, 102);
+                }
                 break;
             case R.id.choose_language_rl:
-                // startActivityForResult(new Intent(this, XZZMBLActivity.class), 102);
+                //  startActivityForResult(new Intent(this, XZZMBLActivity.class), 102);
 
                 break;
             case R.id.simple_desc_rl:
@@ -178,26 +236,63 @@ public class XZZMBLActivity extends BaseActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == PhotoPicker.REQUEST_SELECTED) {
                 ArrayList<String> allSelectedPicture = data.getStringArrayListExtra(PhotoPicker.EXTRA_RESULT);
-                mPickImageView.updatePickImageView(allSelectedPicture);
-
-            } else if (requestCode == 101 && data != null) {
-                mGetStyleText.setText(data.getStringExtra("style"));
-                SelfAddress selfAddress = (SelfAddress) data.getParcelableExtra("selfAddress");
-                if (selfAddress != null) {
-                    HintUitl.toastShort(this, selfAddress.getAddress());
+                //mPickImageView.updatePickImageView(allSelectedPicture);
+                mImageList.clear();
+                mImageListDisplays.clear();
+                for (int i = 0; i < allSelectedPicture.size(); i++) {
+                    File file = new File(allSelectedPicture.get(i));
+                    new uploadPicture(mToken, file).execute();
                 }
 
-            } else if (requestCode == 102) {
+            } else if (requestCode == 101 && data != null) {
+                setGetWay(data);
 
+            } else if (requestCode == 102) {
+                setModule(data);
 
             } else if (requestCode == 104) {
                 mSimpleDescText.setText(data != null ? data.getStringExtra(EtTextActivity.TEXT) : "");
             }
 
         }
-
-
     }
+
+    void setGetWay(Intent data) {
+        if (data == null) {
+            return;
+        }
+        String style = data.getStringExtra("style");
+        if ("自助领取".equals(style)) {
+            mGet_way = "0";
+        } else if ("邮寄".equals(style)) {
+            mGet_way = "1";
+        } else if ("自助打印".equals(style)) {
+            mGet_way = "2";
+        }
+        mGetStyleText.setText(style);
+        SelfAddress selfAddress = (SelfAddress) data.getParcelableExtra("selfAddress");
+        if (selfAddress != null) {
+            mAddress = selfAddress.getAddress();
+            mAddress_info = selfAddress.getAddress_info();
+            HintUitl.toastShort(this, selfAddress.getAddress());
+        }
+
+        mRecipient = data.getStringExtra("recipient");
+        if (mRecipient == null) {
+            mRecipient = "";
+        }
+    }
+
+    void setModule(Intent data) {
+        if (data == null) {
+            return;
+        }
+        String tpl_name = data.getStringExtra("tpl_Name");
+        mTpl_tid = data.getStringExtra("tpl_tid");
+        mTpl_form = data.getStringExtra("tpl_form");
+        mChooseMouldText.setText(tpl_name);
+    }
+
 
     private void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
@@ -295,6 +390,158 @@ public class XZZMBLActivity extends BaseActivity {
         intent.putExtra("titleName", "帮助说明");
         intent.putExtra("type", ConstantValue.TYPE_IMPORTANT);
         startActivity(intent);
+    }
+
+    /**
+     * 申请表单
+     */
+    class SubmitApplyAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String token;
+        private String type;
+        private String city;
+        private String cid2;
+        private String get_way;
+        private String address;
+        private String address_info;
+        private String recipient;
+        private String tpl_tid;
+        private String tpl_form;
+        private String brief;
+        private String comment;
+        private String language;
+        private String images;
+        private String attachs;
+        private String str;
+
+        public SubmitApplyAsyncTask(String token, String type, String city, String cid2, String get_way,
+                                    String address, String address_info, String recipient, String tpl_tid, String tpl_form,
+                                    String brief, String comment, String language, String images, String attachs) {
+            super();
+            this.token = token;
+            this.type = type;
+            this.city = city;
+            this.cid2 = cid2;
+            this.get_way = get_way;
+            this.address = address;
+            this.address_info = address_info;
+            this.recipient = recipient;
+            this.tpl_tid = tpl_tid;
+            this.tpl_form = tpl_form;
+            this.brief = brief;
+            this.comment = comment;
+            this.language = language;
+            this.images = images;
+            this.attachs = attachs;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mLoadingDialog.getDialog().show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            IBizEngine engine = EngineFactory.get(IBizEngine.class);
+            try {
+                str = engine.submitApply(XZZMBLActivity.this, token, type, city, cid2, get_way,
+                        address, address_info, recipient, tpl_tid, tpl_form,
+                        brief, comment, language, images, attachs);
+            } catch (NetException e) {
+                exception = e;
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            mLoadingDialog.getDialog().dismiss();
+            if (checkException(XZZMBLActivity.this)) {
+                return;
+            }
+            if (str != null) {
+                HintUitl.toastShort(XZZMBLActivity.this, str);
+                startActivity(new Intent(XZZMBLActivity.this, SucceedActivity.class));
+            }
+
+            super.onPostExecute(result);
+        }
+    }
+
+
+    /**
+     * 上传图片的统一调用此接口
+     */
+    class uploadPicture extends BaseAsyncTask<Void, Void, Void> {
+        private String token;
+        private File file;
+        private String path;
+
+        public uploadPicture(String token, File file) {
+            super();
+            this.token = token;
+            this.file = file;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mLoadingDialog.getDialog().show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            IBizEngine engine = EngineFactory.get(IBizEngine.class);
+            try {
+                path = engine.uploadPicture(XZZMBLActivity.this, token, file);
+            } catch (NetException e) {
+                exception = e;
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            mLoadingDialog.getDialog().dismiss();
+            if (checkException(XZZMBLActivity.this)) {
+                return;
+            }
+            if (path != null) {
+
+                mImageList.add(path);
+                mImageListDisplays.add(file.getPath());
+                mPickImageView.updatePickImageView(mImageListDisplays);
+            }
+
+            super.onPostExecute(result);
+        }
+    }
+
+
+    void setSpecialParam(String title) {
+
+        if ("户口卡借用".equals(title)) {
+            SharedPreferencesUtil.saveSpecialParamSet(this, 1);
+            mEditText.setHint("是否使用集体户：comment   是/否");
+        } else if ("市内户口迁入".equals(title)) {
+            SharedPreferencesUtil.saveSpecialParamSet(this, 2);
+        } else if ("户口迁出至市内".equals(title)) {
+            SharedPreferencesUtil.saveSpecialParamSet(this, 3);
+        } else if ("市外户口迁入".equals(title)) {
+            SharedPreferencesUtil.saveSpecialParamSet(this, 4);
+        } else if ("学位验证".equals(title)) {
+            SharedPreferencesUtil.saveSpecialParamSet(this, 5);
+        } else if ("工卡照片".equals(title)) {
+            SharedPreferencesUtil.saveSpecialParamSet(this, 6);
+        } else if ("预约入职".equals(title)) {
+            SharedPreferencesUtil.saveSpecialParamSet(this, 7);
+        } else if ("居住证办理".equals(title)) {
+            SharedPreferencesUtil.saveSpecialParamSet(this, 8);
+        } else if ("档案借阅".equals(title)) {
+            SharedPreferencesUtil.saveSpecialParamSet(this, 9);
+        }
     }
 
 }

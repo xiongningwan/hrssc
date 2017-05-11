@@ -44,6 +44,7 @@ import com.maiyu.hrssc.base.engine.IUserEngine;
 import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.base.view.AdvertisementImageBanner;
 import com.maiyu.hrssc.base.view.dialog.LoadingDialog;
+import com.maiyu.hrssc.home.activity.JZZBLActivity;
 import com.maiyu.hrssc.home.activity.ZMBLActivity;
 import com.maiyu.hrssc.home.activity.applying.ApplyingActivity;
 import com.maiyu.hrssc.home.activity.employee.EmployeeActivity;
@@ -188,8 +189,10 @@ public class HomeFragment extends Fragment {
 
 
         mToken = DataCenter.getInstance().getuser().getToken();
-        new GetCitysAsyncTask("1", "10000", mToken).execute();
-        new Category1AsyncTask(mToken).execute();
+        if(mToken != null) {
+            new GetCitysAsyncTask("1", "10000", mToken).execute();
+            new Category1AsyncTask(mToken).execute();
+        }
         setScroll();
     }
 
@@ -427,11 +430,9 @@ public class HomeFragment extends Fragment {
                 // 消息系统
                 // startActivity(new Intent(getActivity(), InformationActivity.class));
                 startActivity(new Intent(getActivity(), MessagesActivity.class));
-
-
-                if (mMsgPoint.getVisibility() == View.VISIBLE) {
+                /*if (mMsgPoint.getVisibility() == View.VISIBLE) {
                     mMsgPoint.setVisibility(View.GONE);
-                }
+                }*/
                 break;
             case R.id.hetong_rl:
                 startActivity(new Intent(getActivity(), TodoActivity.class));
@@ -447,27 +448,41 @@ public class HomeFragment extends Fragment {
             case R.id.btn_sb:
                // startActivity(new Intent(getActivity(), SocialSecurityActivity.class));
                 if (mCateGory1List != null) {
-                    startRequestActivity(1, mCateGory1List.get(0));
+                    startRequestActivity(1, mCateGory1List.get(1));
                 }
                 break;
             case R.id.btn_gjj:
-                startActivity(new Intent(getActivity(), FundsActivity.class));
+                if (mCateGory1List != null) {
+                    startRequestActivity(2, mCateGory1List.get(2));
+                }
+               // startActivity(new Intent(getActivity(), FundsActivity.class));
                 break;
             case R.id.btn_dajy:
                 // 档案借阅
-                startActivity(new Intent(getActivity(), FilesBorrowActivity.class));
+                //startActivity(new Intent(getActivity(), FilesBorrowActivity.class));
+                if (mCateGory1List != null) {
+                    startRequestActivity(3, mCateGory1List.get(3));
+                }
                 break;
             case R.id.btn_hkbl2:
                 // 户口办理
-                startActivity(new Intent(getActivity(), ResidenceActivity.class));
+               // startActivity(new Intent(getActivity(), ResidenceActivity.class));
+                if (mCateGory1List != null) {
+                    startRequestActivity(4, mCateGory1List.get(4));
+                }
                 break;
             case R.id.btn_jzzbl:
                 // 居住证办理
-                startActivity(new Intent(getActivity(), EmployeeActivity.class));
+                if (mCateGory1List != null) {
+                    startRequestActivity(5, mCateGory1List.get(5));
+                }
                 break;
             case R.id.btn_xyg:
                 // 新员工
-                startActivity(new Intent(getActivity(), EmployeeActivity.class));
+                if (mCateGory1List != null) {
+                    startRequestActivity(6, mCateGory1List.get(6));
+                }
+               // startActivity(new Intent(getActivity(), EmployeeActivity.class));
                 break;
             case R.id.btn_more:
                 break;
@@ -610,8 +625,10 @@ public class HomeFragment extends Fragment {
                 && !homeData.getMyMessage().equals("0")
                 && !homeData.getMyMessage().equals("")) {
             mMsgPoint.setVisibility(View.VISIBLE);
+            SharedPreferencesUtil.saveIsPointViewVisibility(getActivity(), true);
         } else {
             mMsgPoint.setVisibility(View.GONE);
+            SharedPreferencesUtil.saveIsPointViewVisibility(getActivity(), true);
         }
 
         ArrayList<Banners> banners = (ArrayList<Banners>) homeData.getBanners();
@@ -621,8 +638,6 @@ public class HomeFragment extends Fragment {
         if (homeData.getNews() != null) {
             mNewsAdapter.setData(homeData.getNews());
         }
-
-
     }
 
     private ArrayList<Banners> addImageServerData(ArrayList<Banners> arrayList) {
@@ -705,19 +720,19 @@ public class HomeFragment extends Fragment {
                     intent = new Intent(getActivity(), SocialSecurityActivity.class);
                     break;
                 case 2:
-                    intent = new Intent(getActivity(), ZMBLActivity.class);
+                    intent = new Intent(getActivity(), FundsActivity.class);
                     break;
                 case 3:
-                    intent = new Intent(getActivity(), ZMBLActivity.class);
+                    intent = new Intent(getActivity(), FilesBorrowActivity.class);
                     break;
                 case 4:
-                    intent = new Intent(getActivity(), ZMBLActivity.class);
+                    intent = new Intent(getActivity(), ResidenceActivity.class);
                     break;
                 case 5:
-                    intent = new Intent(getActivity(), ZMBLActivity.class);
+                    intent = new Intent(getActivity(), JZZBLActivity.class);
                     break;
                 case 6:
-                    intent = new Intent(getActivity(), ZMBLActivity.class);
+                    intent = new Intent(getActivity(), EmployeeActivity.class);
                     break;
                 case 7:
                     intent = new Intent(getActivity(), ZMBLActivity.class);

@@ -16,6 +16,7 @@ import com.maiyu.hrssc.home.bean.Category2;
 import com.maiyu.hrssc.home.bean.FormData;
 import com.zhy.http.okhttp.OkHttpUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
@@ -308,7 +309,6 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         GetWebsiteData data = null;
         try {
             json = JSON.parseObject(json).getString("data");
-            //json = parseObject(json).getString("category2List");
             data = JSON.parseObject(json, GetWebsiteData.class);
 
 
@@ -344,9 +344,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         String data = null;
         try {
             json = JSON.parseObject(json).getString("data");
-            json = JSON.parseObject(json).getString("link");
-            //json = parseObject(json).getString("category2List");
-            // data = JSON.parseObject(json, GetWebsiteData.class);
+            data = JSON.parseObject(json).getString("link");
 
 
         } catch (JSONException e) {
@@ -395,6 +393,74 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         String data = null;
         try {
             data = JSON.parseObject(json).getString("msg");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
+    public String uploadPicture(Context context, String token, File file) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.FILE_SERVER_URI + ConstantValue.path_uploadPicture;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).addFile("file", file.getName(), file).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        String data = null;
+        try {
+            json = JSON.parseObject(json).getString("data");
+            data = JSON.parseObject(json).getString("path");
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
+    public String uploadFile(Context context, String token, File filr) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.FILE_SERVER_URI + ConstantValue.path_uploadFile;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).addFile("filr", filr.getName(), filr).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        String data = null;
+        try {
+            json = JSON.parseObject(json).getString("data");
+            data = JSON.parseObject(json).getString("path");
+
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

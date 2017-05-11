@@ -10,8 +10,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.base.activity.MessagesActivity;
 import com.maiyu.hrssc.service.kefu.LoginActivity;
-import com.maiyu.hrssc.util.HintUitl;
+import com.maiyu.hrssc.util.SharedPreferencesUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,7 +29,8 @@ public class ServiceFragment extends Fragment {
     @BindView(R.id.kefu_btn)
     ImageView mKefuBtn;
     Unbinder unbinder;
-
+    @BindView(R.id.msg_point)
+    View mMsgPoint;
     public ServiceFragment() {
         // Required empty public constructor
     }
@@ -49,7 +51,19 @@ public class ServiceFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_kefu, container, false);
         unbinder = ButterKnife.bind(this, view);
+
+        initViews();
         return view;
+    }
+
+    private void initViews() {
+
+        Boolean msgPointisVisiable = SharedPreferencesUtil.getIsPointViewVisibility(getActivity());
+        if (msgPointisVisiable) {
+            mMsgPoint.setVisibility(View.VISIBLE);
+        } else {
+            mMsgPoint.setVisibility(View.GONE);
+        }
     }
 
 
@@ -63,7 +77,8 @@ public class ServiceFragment extends Fragment {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.msg_iv:
-                HintUitl.toastShort(getActivity(), "msg");
+               // HintUitl.toastShort(getActivity(), "msg");
+                startActivity(new Intent(getActivity(), MessagesActivity.class));
                 break;
             case R.id.kefu_btn:
                 startActivity(new Intent(getActivity(), LoginActivity.class));

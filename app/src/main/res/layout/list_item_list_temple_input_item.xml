@@ -19,7 +19,7 @@
 
     <EditText
         android:id="@+id/input_et"
-        android:layout_width="@dimen/base250dp"
+        android:layout_width="@dimen/base245dp"
         android:layout_height="match_parent"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"

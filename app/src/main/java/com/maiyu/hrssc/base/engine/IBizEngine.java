@@ -11,6 +11,7 @@ import com.maiyu.hrssc.home.bean.Category1;
 import com.maiyu.hrssc.home.bean.Category2;
 import com.maiyu.hrssc.home.bean.FormData;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -143,4 +144,24 @@ public interface IBizEngine {
     String submitApply(Context context, String token, String type, String city, String cid2, String get_way,
                        String address, String address_info, String recipient, String tpl_tid, String tpl_form,
                        String brief, String comment, String language, String images, String attachs) throws NetException;
+
+    /**
+     * 上传图片的统一调用此接口
+     * @param context
+     * @param token
+     * @param file
+     * @return
+     * @throws NetException
+     */
+    String uploadPicture(Context context, String token, File file) throws NetException;
+
+    /**
+     * 用于上传文件，如压缩包，文档，mp3等其他文件（图片除外）
+     * @param context
+     * @param token
+     * @param filr
+     * @return
+     * @throws NetException
+     */
+    String uploadFile(Context context, String token, File filr) throws NetException;
 }

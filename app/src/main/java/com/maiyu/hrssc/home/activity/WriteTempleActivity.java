@@ -1,11 +1,13 @@
 package com.maiyu.hrssc.home.activity;
 
+import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
@@ -33,6 +35,7 @@ public class WriteTempleActivity extends BaseActivity {
     private TempleInputAdapter mAdapter;
 
     private TextView mRightButtonText;
+    private String mTipId;
 
     @Override
     public void createActivityImpl() {
@@ -42,7 +45,7 @@ public class WriteTempleActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        String titleName = getIntent().getStringExtra("title_name");
+        final String titleName = getIntent().getStringExtra("title_name");
         mHeadView.setTitle(titleName, true, true);
         mRightButtonText = mHeadView.getRightButtonText();
         mRightButtonText.setText("保存");
@@ -50,7 +53,19 @@ public class WriteTempleActivity extends BaseActivity {
         mRightButtonText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HintUitl.toastShort(WriteTempleActivity.this, "保存");
+                String sbString = getEtData();
+                if (sbString == null || sbString.equals("")) {
+                    return;
+                }
+
+
+                Intent intent = new Intent();
+                intent.putExtra("tpl_Name", titleName);
+                intent.putExtra("tpl_tid", mTipId);
+                intent.putExtra("tpl_form", sbString);
+                setResult(RESULT_OK, intent);
+                HintUitl.toastShort(WriteTempleActivity.this, "保存成功");
+                finish();
             }
         });
 
@@ -61,12 +76,44 @@ public class WriteTempleActivity extends BaseActivity {
         mRecycleView.setAdapter(mAdapter);
     }
 
+    String getEtData() {
+        // 获取保存模版
+        // 字段必填
+        StringBuilder sb = new StringBuilder();
+        List<EditText> mInputViews = mAdapter.getInputListView();
+        List<TextView> mNameTextViews = mAdapter.getTextViewListView();
+
+
+        for (int i = 0; i < mNameTextViews.size(); i++) {
+            String nameStr = mNameTextViews.get(i).getText().toString();
+            String etString = mInputViews.get(i).getText().toString();
+
+
+            if (etString == null || "".equals(etString)) {
+                HintUitl.toastShort(this, "字段不能为空");
+                sb.setLength(0);
+                break;
+            }
+
+            sb.append(nameStr);
+            sb.append("=");
+            sb.append(etString);
+            sb.append(";");
+        }
+        if (sb.length() > 0) {
+            sb.deleteCharAt(sb.length() - 1); //调用 字符串的deleteCharAt() 方法,删除最后一个多余的
+        }
+        return sb.toString();
+    }
+
+
     @Override
     public void initData() {
         Template template = (Template) getIntent().getParcelableExtra("template");
         if (template != null) {
             mTemplePattern.setText(Html.fromHtml(template.getTemplate()));
             mAdapter.setData(setData(template));
+            mTipId = template.getId();
         }
     }
 

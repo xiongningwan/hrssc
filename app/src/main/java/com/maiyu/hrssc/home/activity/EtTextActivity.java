@@ -44,6 +44,7 @@ public class EtTextActivity extends BaseActivity {
                 HintUitl.toastShort(EtTextActivity.this, "保存");
                 mContent = mTextEt.getText().toString();
                 setResult(RESULT_OK, new Intent().putExtra(TEXT, mContent));
+                finish();
             }
         });
     }

@@ -52,15 +52,17 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:gravity="center_horizontal">
+                android:gravity="center_horizontal"
+                android:visibility="visible">
                 <ImageView
                     android:layout_width="@dimen/base46dp"
                     android:layout_height="@dimen/base46dp"
                     android:src="@mipmap/icon_sbjjcx"/>
                 <TextView
+                    android:id="@+id/chaxun_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="社保缴交查询"/>
+                    android:text=""/>
 
             </LinearLayout>
 
@@ -76,9 +78,10 @@
                     android:layout_height="@dimen/base46dp"
                     android:src="@mipmap/icon_sbzy"/>
                 <TextView
+                    android:id="@+id/shebaozhuanru_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="社保转移(转入)"/>
+                    android:text=""/>
 
             </LinearLayout>
 
@@ -94,9 +97,10 @@
                     android:layout_height="@dimen/base46dp"
                     android:src="@mipmap/icon_sbbx"/>
                 <TextView
+                    android:id="@+id/shebaobaoxiao_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="社保报销"/>
+                    android:text=""/>
             </LinearLayout>
 
 
@@ -120,9 +124,10 @@
                     android:layout_height="@dimen/base46dp"
                     android:src="@mipmap/icon_sbbg"/>
                 <TextView
+                    android:id="@+id/shebaobiangeng_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="社保变更"/>
+                    android:text=""/>
 
             </LinearLayout>
             <LinearLayout
@@ -137,9 +142,10 @@
                     android:layout_height="@dimen/base46dp"
                     android:src="@mipmap/icon_sbzyc"/>
                 <TextView
+                    android:id="@+id/shebaozhuanchu_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="社保转移(转出)"/>
+                    android:text=""/>
 
             </LinearLayout>
             <LinearLayout
@@ -154,9 +160,10 @@
                     android:layout_height="@dimen/base46dp"
                     android:src="@mipmap/icon_sbcbzm"/>
                 <TextView
+                    android:id="@+id/shebaocanbaozm_Tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="社保参保证明"/>
+                    android:text=""/>
             </LinearLayout>
 
 
@@ -179,9 +186,10 @@
                     android:layout_height="@dimen/base46dp"
                     android:src="@mipmap/icon_sbyb"/>
                 <TextView
+                    android:id="@+id/shebaoyibaokabanli_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="社保/医保卡办理"/>
+                    android:text=""/>
 
             </LinearLayout>
             <LinearLayout
@@ -196,9 +204,10 @@
                     android:layout_height="@dimen/base46dp"
                     android:src="@mipmap/icon_ylba"/>
                 <TextView
+                    android:id="@+id/yiliaobeian_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="医疗备案"/>
+                    android:text=""/>
 
             </LinearLayout>
             <LinearLayout
