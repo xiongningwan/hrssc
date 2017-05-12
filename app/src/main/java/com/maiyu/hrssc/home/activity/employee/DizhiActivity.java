@@ -41,7 +41,8 @@ public class DizhiActivity extends CheckPermissionsActivity {
     RelativeLayout mDaohangRl;
     private AMap aMap;
     private MarkerOptions markerOption;
-    private LatLng latlng = new LatLng(22.537770, 113.949110);
+    private LatLng latlng;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,11 +85,17 @@ public class DizhiActivity extends CheckPermissionsActivity {
      */
     private void init() {
         mHeadView.setTitle("地址", true, false);
+        String address = getIntent().getStringExtra("address");
+        Double latitude = getIntent().getDoubleExtra("latitude", 0);
+        Double longitude = getIntent().getDoubleExtra("longitude", 0);
+        latlng = new LatLng(latitude, longitude);
+        mAddressTv.setText(address);
+
 
         if (aMap == null) {
             aMap = mMapView.getMap();
             aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 16));
-            addMarkersToMap();// 往地图上添加marker
+            addMarkersToMap(latlng);// 往地图上添加marker
 
         }
     }
@@ -132,7 +139,7 @@ public class DizhiActivity extends CheckPermissionsActivity {
     /**
      * 在地图上添加marker
      */
-    private void addMarkersToMap() {
+    private void addMarkersToMap(LatLng latlng) {
         Bitmap bMap = BitmapFactory.decodeResource(this.getResources(),
                 R.mipmap.icon_dingwei_maker);
         BitmapDescriptor des = BitmapDescriptorFactory.fromBitmap(bMap);

@@ -25,7 +25,9 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/base200dp"/>
+        android:layout_height="@dimen/base200dp"
+        android:src="@mipmap/banner_zmbl"
+        android:scaleType="centerCrop"/>
 
 
     <include
@@ -36,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:stretchColumns="0,1"
-        >
+        android:background="@color/project_color_basic_white_pure">
 
         <TableRow
             android:layout_height="0dp"

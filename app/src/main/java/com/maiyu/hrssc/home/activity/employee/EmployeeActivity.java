@@ -17,6 +17,11 @@ import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.MarkerOptions;
+import com.amap.api.services.geocoder.GeocodeAddress;
+import com.amap.api.services.geocoder.GeocodeQuery;
+import com.amap.api.services.geocoder.GeocodeResult;
+import com.amap.api.services.geocoder.GeocodeSearch;
+import com.amap.api.services.geocoder.RegeocodeResult;
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.ConstantValue;
 import com.maiyu.hrssc.base.activity.CheckPermissionsActivity;
@@ -105,7 +110,8 @@ public class EmployeeActivity extends CheckPermissionsActivity {
     private GetWebsiteData mGetWebsiteData;
     private AMap aMap;
     private MarkerOptions markerOption;
-    private LatLng latlng = new LatLng(22.537770, 113.949110);
+    private GeocodeSearch geocoderSearch;
+    private LatLng mLatlng = new LatLng(22.537770, 113.949110);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,9 +119,10 @@ public class EmployeeActivity extends CheckPermissionsActivity {
         setContentView(R.layout.activity_employee);
         ButterKnife.bind(this);
         mMapView.onCreate(savedInstanceState);// 此方法必须重写
-       initAll();
+        initAll();
 
     }
+
     void initAll() {
         mId = getIntent().getStringExtra("id");
         mTitle = getIntent().getStringExtra("name");
@@ -137,7 +144,7 @@ public class EmployeeActivity extends CheckPermissionsActivity {
     @Override
     public void initViews() {
 
-      //  init();
+        //  init();
     }
 
     @Override
@@ -159,20 +166,40 @@ public class EmployeeActivity extends CheckPermissionsActivity {
                 }
                 break;
             case R.id.dizhi_rl:
-                startActivity(new Intent(this, DizhiActivity.class));
+                if(mGetWebsiteData != null && mGetWebsiteData.getCategoryBaseinfo() != null) {
+                    CategoryBaseinfo baseInfo = mGetWebsiteData.getCategoryBaseinfo();
+                    Intent intent = new Intent(this, DizhiActivity.class);
+                    intent .putExtra("address" , baseInfo.getBaodao_addr());
+                    intent .putExtra("latitude" , mLatlng.latitude);
+                    intent .putExtra("longitude" , mLatlng.longitude);
+                    startActivity(intent);
+                }
+
                 break;
             case R.id.lianxiren_rl:
                 break;
             case R.id.lianxidianhau_rl:
                 break;
             case R.id.tijian_btn:
-                startActivity(new Intent(this, TijianActivity.class));
+                // startActivity(new Intent(this, TijianActivity.class));
+                if (mCateGory2List != null && mCateGory2List.get(1) != null) {
+                    startRequestActivity(1, mCateGory2List.get(1));
+                }
                 break;
-            case R.id.xwyz_btn:
+            case R.id.xwyz_btn: // 学位验证
+                if (mCateGory2List != null && mCateGory2List.get(2) != null) {
+                    startRequestActivity(2, mCateGory2List.get(2));
+                }
                 break;
             case R.id.gkzp_btn:
+                if (mCateGory2List != null && mCateGory2List.get(3) != null) {
+                    startRequestActivity(3, mCateGory2List.get(3));
+                }
                 break;
             case R.id.yyrz_btn:
+                if (mCateGory2List != null && mCateGory2List.get(4) != null) {
+                    startRequestActivity(4, mCateGory2List.get(4));
+                }
                 break;
         }
     }
@@ -267,17 +294,16 @@ public class EmployeeActivity extends CheckPermissionsActivity {
         if (category2 != null) {
             Intent intent = null;
             switch (location) {
-                case 0:
-                    intent = new Intent(this, XZZMBLActivity.class);
-                    break;
                 case 1:
-                    //   intent = new Intent(this, SocialSecurityActivity.class);
-                    intent = new Intent(this, XZZMBLActivity.class);
+                    intent = new Intent(this, TijianActivity.class);
                     break;
                 case 2:
                     intent = new Intent(this, XZZMBLActivity.class);
                     break;
                 case 3:
+                    intent = new Intent(this, XZZMBLActivity.class);
+                    break;
+                case 4:
                     intent = new Intent(this, XZZMBLActivity.class);
                     break;
             }
@@ -349,6 +375,10 @@ public class EmployeeActivity extends CheckPermissionsActivity {
         mDizhiTv.setText(baseInfo.getBaodao_addr());
         mLianxirenTv.setText(baseInfo.getBaodao_contact());
         mDianhuaTv.setText(baseInfo.getBaodao_phone());
+
+
+        GeocodeQuery query = new GeocodeQuery(baseInfo.getBaodao_addr(), baseInfo.getCity());
+        geocoderSearch.getFromLocationNameAsyn(query);
     }
 
     void openWebActivity() {
@@ -369,8 +399,36 @@ public class EmployeeActivity extends CheckPermissionsActivity {
             UiSettings uiSettings = aMap.getUiSettings();
             uiSettings.setZoomControlsEnabled(false);
             uiSettings.setLogoBottomMargin(-50);//隐藏logo
-            aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 16));
-            addMarkersToMap();// 往地图上添加marker
+
+
+            geocoderSearch = new GeocodeSearch(this);
+            geocoderSearch.setOnGeocodeSearchListener(new GeocodeSearch.OnGeocodeSearchListener() {
+                @Override
+                public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int i) {
+
+                }
+
+                @Override
+                public void onGeocodeSearched(GeocodeResult geocodeResult, int i) {
+                    if (i == 1000) {
+                        if (geocodeResult != null && geocodeResult.getGeocodeAddressList() != null
+                                && geocodeResult.getGeocodeAddressList().size() > 0) {
+
+                            GeocodeAddress address = geocodeResult.getGeocodeAddressList().get(0);
+                            double dimensionality = address.getLatLonPoint().getLatitude();
+                            double longitude = address.getLatLonPoint().getLongitude();
+                            LatLng latlng = new LatLng(dimensionality, longitude);
+
+                            /*aMap.animateCamera(CameraUpdateFactory
+                                    .newLatLngZoom(latlng, 15));
+*/
+                            aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 16));
+                            addMarkersToMap(latlng);// 往地图上添加marker
+                            mLatlng = latlng;
+                        }
+                    }
+                }
+            });
 
         }
     }
@@ -414,7 +472,7 @@ public class EmployeeActivity extends CheckPermissionsActivity {
     /**
      * 在地图上添加marker
      */
-    private void addMarkersToMap() {
+    private void addMarkersToMap(LatLng latlng) {
         Bitmap bMap = BitmapFactory.decodeResource(this.getResources(),
                 R.mipmap.icon_dingwei_maker);
         BitmapDescriptor des = BitmapDescriptorFactory.fromBitmap(bMap);
@@ -424,5 +482,6 @@ public class EmployeeActivity extends CheckPermissionsActivity {
                 .draggable(true);
         aMap.addMarker(markerOption);
     }
+
 
 }

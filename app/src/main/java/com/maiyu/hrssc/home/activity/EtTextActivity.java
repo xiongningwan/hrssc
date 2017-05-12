@@ -10,6 +10,7 @@ import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.activity.BaseActivity;
 import com.maiyu.hrssc.base.view.HeadView;
 import com.maiyu.hrssc.util.HintUitl;
+import com.maiyu.hrssc.util.SharedPreferencesUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,10 +34,10 @@ public class EtTextActivity extends BaseActivity {
     @Override
     public void initViews() {
         String titleName = getIntent().getStringExtra("title_name");
-        mHeadView.setTitle("填写" , true, true);
+        mHeadView.setTitle("填写", true, true);
         mRightButtonText = mHeadView.getRightButtonText();
         mRightButtonText.setText("保存");
-        mRightButtonText.setTextColor(ContextCompat.getColor(this,R.color.project_color_general_hyperlink));
+        mRightButtonText.setTextColor(ContextCompat.getColor(this, R.color.project_color_general_hyperlink));
         mRightButtonText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,7 +52,23 @@ public class EtTextActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        int set = SharedPreferencesUtil.getSpecialParamSet(this);
 
+        if (1 == set) {
+            mTextEt.setHint("借用事由");
+        } else if (2 == set) {
+            mTextEt.setHint("申请说明");
+        } else if (3 == set) {
+            mTextEt.setHint("申请说明");
+        } else if (4 == set) {
+            mTextEt.setHint("申请说明");
+        } else if (7 == set) {
+            mTextEt.setHint("预约入职日期 格式：yyyy-MM-dd HH:mm:ss");
+        } else if (8 == set) {
+            mTextEt.setHint("申请说明");
+        } else if (9 == set) {
+            mTextEt.setHint("申请说明");
+        }
     }
 
     @Override

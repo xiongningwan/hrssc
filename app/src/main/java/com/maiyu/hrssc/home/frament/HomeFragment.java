@@ -485,6 +485,9 @@ public class HomeFragment extends Fragment {
                // startActivity(new Intent(getActivity(), EmployeeActivity.class));
                 break;
             case R.id.btn_more:
+                if (mCateGory1List != null) {
+                    startRequestActivity(7, mCateGory1List.get(7));
+                }
                 break;
             case R.id.more_next_btn:
                 startActivity(new Intent(getActivity(), InformationActivity.class));
@@ -626,9 +629,11 @@ public class HomeFragment extends Fragment {
                 && !homeData.getMyMessage().equals("")) {
             mMsgPoint.setVisibility(View.VISIBLE);
             SharedPreferencesUtil.saveIsPointViewVisibility(getActivity(), true);
+            DataCenter.getInstance().notifyRedPointStatusChange();
         } else {
             mMsgPoint.setVisibility(View.GONE);
-            SharedPreferencesUtil.saveIsPointViewVisibility(getActivity(), true);
+            SharedPreferencesUtil.saveIsPointViewVisibility(getActivity(), false);
+            DataCenter.getInstance().notifyRedPointStatusChange();
         }
 
         ArrayList<Banners> banners = (ArrayList<Banners>) homeData.getBanners();
@@ -730,6 +735,7 @@ public class HomeFragment extends Fragment {
                     break;
                 case 5:
                     intent = new Intent(getActivity(), JZZBLActivity.class);
+                    //intent = new Intent(getActivity(), XZZMBLActivity.class);
                     break;
                 case 6:
                     intent = new Intent(getActivity(), EmployeeActivity.class);

@@ -56,6 +56,7 @@ public class IntegrationFragment extends Fragment implements OnRefreshListener, 
     private IntegrationAdapter mAdapter;
     private String mToken;
     private IntegrationDataObserver integrationObserver;
+    private RedPointDataObserver redPointObserver;
 
 
     public IntegrationFragment() {
@@ -99,15 +100,12 @@ public class IntegrationFragment extends Fragment implements OnRefreshListener, 
 
         mToken = DataCenter.getInstance().getuser().getToken();
         integrationObserver = new IntegrationDataObserver();
+        redPointObserver = new RedPointDataObserver();
         DataCenter.getInstance().registerObserver(integrationObserver);
+        DataCenter.getInstance().registerObserver(redPointObserver);
 
 
-        Boolean msgPointisVisiable = SharedPreferencesUtil.getIsPointViewVisibility(getActivity());
-        if (msgPointisVisiable) {
-            mMsgPoint.setVisibility(View.VISIBLE);
-        } else {
-            mMsgPoint.setVisibility(View.GONE);
-        }
+       setRedPoint();
 
         msgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,6 +126,7 @@ public class IntegrationFragment extends Fragment implements OnRefreshListener, 
         super.onDestroyView();
         unbinder.unbind();
         DataCenter.getInstance().unregisterObserver(integrationObserver);
+        DataCenter.getInstance().unregisterObserver(redPointObserver);
     }
 
     /**
@@ -140,6 +139,29 @@ public class IntegrationFragment extends Fragment implements OnRefreshListener, 
             if (type == DataCenter.TYPE_INTEGTATION_INFO) {
                 mAdapter.refreshIntegration();
             }
+        }
+    }
+
+    /**
+     * 小红点观察者
+     */
+    public class RedPointDataObserver implements DataCenter.DataObserver {
+
+        @Override
+        public void onDataChangedListener(int type, Object... data) {
+            if (type == DataCenter.TYPE_RED_POINT_STATUS) {
+                setRedPoint();
+            }
+        }
+    }
+
+
+    void  setRedPoint() {
+        Boolean msgPointisVisiable = SharedPreferencesUtil.getIsPointViewVisibility(getActivity());
+        if (msgPointisVisiable) {
+            mMsgPoint.setVisibility(View.VISIBLE);
+        } else {
+            mMsgPoint.setVisibility(View.GONE);
         }
     }
 

@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/base90dp"
                 android:layout_toStartOf="@+id/daohang_btn"
-                android:text="广东省深圳市南山区科技南路55号"
+                android:text=""
                 android:layout_centerVertical="true"
                 android:gravity="center"/>
 

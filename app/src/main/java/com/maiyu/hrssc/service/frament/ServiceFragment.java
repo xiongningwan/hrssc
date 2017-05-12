@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.activity.MessagesActivity;
+import com.maiyu.hrssc.base.bean.DataCenter;
 import com.maiyu.hrssc.service.kefu.LoginActivity;
 import com.maiyu.hrssc.util.SharedPreferencesUtil;
 
@@ -31,6 +32,8 @@ public class ServiceFragment extends Fragment {
     Unbinder unbinder;
     @BindView(R.id.msg_point)
     View mMsgPoint;
+    private RedPointDataObserver redPointObserver;
+
     public ServiceFragment() {
         // Required empty public constructor
     }
@@ -58,6 +61,26 @@ public class ServiceFragment extends Fragment {
 
     private void initViews() {
 
+        redPointObserver = new RedPointDataObserver();
+        DataCenter.getInstance().registerObserver(redPointObserver);
+
+        setRedPoint();
+    }
+    /**
+     * 小红点观察者
+     */
+    public class RedPointDataObserver implements DataCenter.DataObserver {
+
+        @Override
+        public void onDataChangedListener(int type, Object... data) {
+            if (type == DataCenter.TYPE_RED_POINT_STATUS) {
+                setRedPoint();
+            }
+        }
+    }
+
+
+    void  setRedPoint() {
         Boolean msgPointisVisiable = SharedPreferencesUtil.getIsPointViewVisibility(getActivity());
         if (msgPointisVisiable) {
             mMsgPoint.setVisibility(View.VISIBLE);
@@ -66,11 +89,11 @@ public class ServiceFragment extends Fragment {
         }
     }
 
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        DataCenter.getInstance().unregisterObserver(redPointObserver);
     }
 
     @OnClick({R.id.msg_iv, R.id.kefu_btn})

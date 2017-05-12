@@ -103,6 +103,7 @@ public class MyFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     private User mUser;
+    private RedPointDataObserver redPointObserver;
 
 
     public MyFragment() {
@@ -139,12 +140,10 @@ public class MyFragment extends Fragment {
         mNameTv.setText(mUser.getName());
         mGonghaoValueTv.setText("" + mUser.getUin());
 
-        Boolean msgPointisVisiable = SharedPreferencesUtil.getIsPointViewVisibility(getActivity());
-        if (msgPointisVisiable) {
-            mMsgPoint.setVisibility(View.VISIBLE);
-        } else {
-            mMsgPoint.setVisibility(View.GONE);
-        }
+        redPointObserver = new RedPointDataObserver();
+        DataCenter.getInstance().registerObserver(redPointObserver);
+
+       setRedPoint();
 
     }
 
@@ -152,12 +151,34 @@ public class MyFragment extends Fragment {
 
         new SignOrNotAsyncTask(mUser.getToken()).execute();
     }
+    /**
+     * 小红点观察者
+     */
+    public class RedPointDataObserver implements DataCenter.DataObserver {
 
+        @Override
+        public void onDataChangedListener(int type, Object... data) {
+            if (type == DataCenter.TYPE_RED_POINT_STATUS) {
+                setRedPoint();
+            }
+        }
+    }
+
+
+    void  setRedPoint() {
+        Boolean msgPointisVisiable = SharedPreferencesUtil.getIsPointViewVisibility(getActivity());
+        if (msgPointisVisiable) {
+            mMsgPoint.setVisibility(View.VISIBLE);
+        } else {
+            mMsgPoint.setVisibility(View.GONE);
+        }
+    }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        DataCenter.getInstance().unregisterObserver(redPointObserver);
     }
 
     @OnClick({R.id.msg_btn, R.id.head_img_view, R.id.name_tv, R.id.gonghao_label_tv, R.id.gonghao_value_tv, R.id.qiandao_btn, R.id.wodeqianming_rl, R.id.xiugaimima_rl, R.id.shoujiandizhi_rl, R.id.kuaijiefuwu_rl, R.id.bangzhuzhongxin_rl, R.id.yijianfankui_rl, R.id.shezhi_rl})

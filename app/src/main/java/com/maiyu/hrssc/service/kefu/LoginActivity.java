@@ -219,7 +219,7 @@ public class LoginActivity extends AppCompatActivity {
 				Intent intent = new IntentBuilder(LoginActivity.this)
 						.setTargetClass(ChatActivity.class)
 						//.setVisitorInfo(MessageHelper.createVisitorInfo())
-						.setServiceIMNumber("kefuchannelimid_039309")
+						.setServiceIMNumber("kefuchannelimid_063052")
 						//.setScheduleAgent(MessageHelper.createAgentIdentity("ceshiok1@qq.com"))
 						//.setShowUserNick(true)
 						//.setBundle(bundle)

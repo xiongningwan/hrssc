@@ -17,6 +17,10 @@ public class DataCenter {
      * 积分改变回调类型
      */
     public static final int TYPE_INTEGTATION_INFO = 3;
+    /**
+     * 小红点状态改变
+     */
+    public static final int TYPE_RED_POINT_STATUS = 4;
 
     /**
      * 个人信息
@@ -89,6 +93,13 @@ public class DataCenter {
 
     public void notifyIntegralChange() {
         notifyObserver(TYPE_INTEGTATION_INFO);
+    }
+
+    /**
+     * 小红点状态改变
+     */
+    public void notifyRedPointStatusChange() {
+        notifyObserver(TYPE_RED_POINT_STATUS);
     }
 
 

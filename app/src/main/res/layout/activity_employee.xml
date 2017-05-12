@@ -40,7 +40,7 @@
             android:layout_marginStart="@dimen/base16dp"
             android:layout_marginTop="@dimen/base18dp"
             android:layout_toEndOf="@id/city_name_icon"
-            android:text="深圳"
+            android:text=""
             android:textColor="@color/text_title_gray"
             android:textSize="@dimen/project_text_size_dp_16"/>
 

@@ -231,7 +231,8 @@
                     android:layout_alignBottom="@+id/textView"
                     android:layout_marginEnd="@dimen/base5dp"
                     android:layout_toStartOf="@+id/simple_desc_xh"
-                    android:text="填写"
+                    android:text=""
+                    android:hint="填写"
                     android:textColor="@color/text_title_gray"
                     android:textSize="@dimen/base14dp"/>
 

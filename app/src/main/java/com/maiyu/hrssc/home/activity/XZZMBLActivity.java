@@ -130,7 +130,7 @@ public class XZZMBLActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 //  Toast.makeText(XZZMBLActivity.this, "提交", Toast.LENGTH_SHORT).show();
-               doSubmit();
+                doSubmit();
             }
         });
 
@@ -150,22 +150,46 @@ public class XZZMBLActivity extends BaseActivity {
         int set = SharedPreferencesUtil.getSpecialParamSet(this);
         String type = "1";//0-保存草稿  1-提交申请
         String brief = mSimpleDescText.getText().toString(); // 描述
-        if(set) {
-
-        }
         String comment = mEditText.getText().toString(); // 备注
         String language = mSpinner.getSelectedItem().toString().equals("中文") ? "0" : "1";
 
         String paths = getSbString(mImageList);
         String attachs = getSbString(mAttachFileList);
 
-        if (mToken != null && mCity != null && mId != null && mGet_way != null && !mGet_way.equals("")) {
-            new SubmitApplyAsyncTask(mToken, type, mCity, mId, mGet_way,
-                    mAddress, mAddress_info, mRecipient, mTpl_tid, mTpl_form,
-                    brief, comment, language, paths, attachs).execute();
+        // 设置特殊字段不为空的情况
+        if (1 == set || 2 == set || 3 == set || 4 == set || 7 == set || 8 == set || 9 == set) {
+            if (brief.equals("")) {
+                HintUitl.toastShort(this, "请填写描述");
+                return;
+            }
         }
-    }
 
+        if (1 == set && comment.equals("")) {
+            HintUitl.toastShort(this, "请填写备注");
+            return;
+        }
+
+        if (mToken == null) {
+            HintUitl.toastShort(this, "error: token为空!");
+            return;
+        }
+        if (mCity == null) {
+            HintUitl.toastShort(this, "error: 城市为空!");
+            return;
+        }
+        if (mId == null) {
+            HintUitl.toastShort(this, "error: 二级菜单id为空!");
+            return;
+        }
+        if (mGet_way == null || mGet_way.equals("")) {
+            HintUitl.toastShort(this, "请选择领取方式");
+            return;
+        }
+
+        new SubmitApplyAsyncTask(mToken, type, mCity, mId, mGet_way,
+                mAddress, mAddress_info, mRecipient, mTpl_tid, mTpl_form,
+                brief, comment, language, paths, attachs).execute();
+    }
 
 
     String getSbString(List list) {
@@ -524,7 +548,7 @@ public class XZZMBLActivity extends BaseActivity {
 
         if ("户口卡借用".equals(title)) {
             SharedPreferencesUtil.saveSpecialParamSet(this, 1);
-            mEditText.setHint("是否使用集体户：comment   是/否");
+            mEditText.setHint("是否使用集体户：是/否");
         } else if ("市内户口迁入".equals(title)) {
             SharedPreferencesUtil.saveSpecialParamSet(this, 2);
         } else if ("户口迁出至市内".equals(title)) {
@@ -543,5 +567,6 @@ public class XZZMBLActivity extends BaseActivity {
             SharedPreferencesUtil.saveSpecialParamSet(this, 9);
         }
     }
+
 
 }

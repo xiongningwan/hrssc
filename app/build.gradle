@@ -102,4 +102,5 @@ dependencies {
     compile files('libs/mid-core-sdk-3.7.2.jar')
     compile files('libs/wup-1.0.0.E-SNAPSHOT.jar')
     compile files('libs/Xg_sdk_v3.1_20170417_0946.jar')
+    compile files('libs/AMap_Search_V4.0.0_20170111.jar')
 }

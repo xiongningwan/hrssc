@@ -44,6 +44,7 @@
             android:background="@mipmap/line"/>
 
         <EditText
+            android:id="@+id/mBrief_et"
             android:layout_width="match_parent"
             android:layout_height="@dimen/base150dp"
             android:background="@color/transparent"
