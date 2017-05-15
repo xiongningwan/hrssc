@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.home.activity.todo.TodoDeitailActivity;
 import com.maiyu.hrssc.home.activity.todo.bean.Todo;
+import com.maiyu.hrssc.util.AppUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -116,7 +117,7 @@ public class TodoPageAdapter extends RecyclerView.Adapter<TodoPageAdapter.TodoPa
             }
 
 
-            time.setText(setTime(dateTime));
+            time.setText(AppUtil.setTime(dateTime));
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -130,41 +131,6 @@ public class TodoPageAdapter extends RecyclerView.Adapter<TodoPageAdapter.TodoPa
         }
     }
 
-    /**
-     * 1分钟内 刚刚
-     * 59分钟内 xx分钟前
-     * 24小时内 xx小时前
-     * 经过24小时  具体日期
-     *
-     * @param dateTime
-     */
-    String setTime(Date dateTime) {
-        Date now = new Date();
-        long nowLong = now.getTime();
-        long dateTimeLong = dateTime.getTime();
 
-        if (nowLong < dateTimeLong) {
-            return "Unknown";
-        }
-
-        long cal = (nowLong - dateTimeLong) / 1000;
-
-        if (cal < 1 * 60) {
-            return "刚刚";
-
-        } else if (cal < 60 * 60) {
-            long minutes = cal / 60;
-            return minutes + "分钟前";
-
-        } else if (cal <= 24 * 60 * 60) {
-            long hours = cal / 60 * 60;
-            return hours + "小时前";
-
-        } else if (cal > 24 * 60 * 60) {
-            return sdf1.format(dateTime) + "";
-        }
-
-        return "";
-    }
 
 }

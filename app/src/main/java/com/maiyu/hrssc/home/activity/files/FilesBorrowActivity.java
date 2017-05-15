@@ -149,6 +149,7 @@ public class FilesBorrowActivity extends BaseActivity {
             return;
         }
 
+        String aid = "0";//如果是新的申请，aid缺省为0
         String type = "1";//0-保存草稿  1-提交申请
         String cid2 = mCategory2.getId(); // 二级业务id
         String mGet_way = "4"; // 缺省
@@ -165,16 +166,15 @@ public class FilesBorrowActivity extends BaseActivity {
         String attachs = "";
 
 
-        if(brief.equals("")) {
+        if (brief.equals("")) {
             HintUitl.toastShort(this, "请填写申请说明");
             return;
         }
 
 
-
         if (mToken != null && mCity != null && mId != null && mGet_way != null && !mGet_way.equals("")) {
 
-            new SubmitApplyAsyncTask(mToken, type, mCity, cid2, mGet_way,
+            new SubmitApplyAsyncTask(aid, mToken, type, mCity, cid2, mGet_way,
                     mAddress, mAddress_info, mRecipient, mTpl_tid, mTpl_form,
                     brief, comment, language, paths, attachs).execute();
         }
@@ -184,6 +184,7 @@ public class FilesBorrowActivity extends BaseActivity {
      * 申请表单
      */
     class SubmitApplyAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String aid;
         private String token;
         private String type;
         private String city;
@@ -201,10 +202,11 @@ public class FilesBorrowActivity extends BaseActivity {
         private String attachs;
         private String str;
 
-        public SubmitApplyAsyncTask(String token, String type, String city, String cid2, String get_way,
+        public SubmitApplyAsyncTask(String aid, String token, String type, String city, String cid2, String get_way,
                                     String address, String address_info, String recipient, String tpl_tid, String tpl_form,
                                     String brief, String comment, String language, String images, String attachs) {
             super();
+            this.aid = aid;
             this.token = token;
             this.type = type;
             this.city = city;
@@ -232,7 +234,7 @@ public class FilesBorrowActivity extends BaseActivity {
         protected Void doInBackground(Void... params) {
             IBizEngine engine = EngineFactory.get(IBizEngine.class);
             try {
-                str = engine.submitApply(FilesBorrowActivity.this, token, type, city, cid2, get_way,
+                str = engine.submitApply(FilesBorrowActivity.this, aid, token, type, city, cid2, get_way,
                         address, address_info, recipient, tpl_tid, tpl_form,
                         brief, comment, language, images, attachs);
             } catch (NetException e) {

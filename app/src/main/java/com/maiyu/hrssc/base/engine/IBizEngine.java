@@ -5,6 +5,7 @@ import android.content.Context;
 import com.maiyu.hrssc.base.bean.Banners;
 import com.maiyu.hrssc.base.bean.GetWebsiteData;
 import com.maiyu.hrssc.base.exception.NetException;
+import com.maiyu.hrssc.home.activity.applying.bean.GetApplysData;
 import com.maiyu.hrssc.home.activity.todo.bean.ContractFlow;
 import com.maiyu.hrssc.home.activity.todo.bean.Todo;
 import com.maiyu.hrssc.home.bean.Category1;
@@ -112,6 +113,7 @@ public interface IBizEngine {
 
     /**
      * 获取某个二级业务的办理说明（适用学位证明、工卡照片、预约入职）
+     *
      * @param context
      * @param token
      * @param cid2
@@ -122,6 +124,7 @@ public interface IBizEngine {
 
     /**
      * 提交申请（适用证明类、学位证明、工卡照片、预约入职）
+     *
      * @param context
      * @param token
      * @param type
@@ -141,12 +144,13 @@ public interface IBizEngine {
      * @return
      * @throws NetException
      */
-    String submitApply(Context context, String token, String type, String city, String cid2, String get_way,
+    String submitApply(Context context, String aid, String token, String type, String city, String cid2, String get_way,
                        String address, String address_info, String recipient, String tpl_tid, String tpl_form,
                        String brief, String comment, String language, String images, String attachs) throws NetException;
 
     /**
      * 上传图片的统一调用此接口
+     *
      * @param context
      * @param token
      * @param file
@@ -157,6 +161,7 @@ public interface IBizEngine {
 
     /**
      * 用于上传文件，如压缩包，文档，mp3等其他文件（图片除外）
+     *
      * @param context
      * @param token
      * @param filr
@@ -164,4 +169,17 @@ public interface IBizEngine {
      * @throws NetException
      */
     String uploadFile(Context context, String token, File filr) throws NetException;
+
+
+    /**
+     * 查询我的申请 ，草稿箱中查询草稿也使用该接口
+     * @param context
+     * @param token
+     * @param status
+     * @param page
+     * @param rows
+     * @return
+     * @throws NetException
+     */
+    GetApplysData getApplys(Context context, String token, String status, String page, String rows) throws NetException;
 }

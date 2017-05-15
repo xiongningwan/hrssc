@@ -148,6 +148,7 @@ public class XZZMBLActivity extends BaseActivity {
      */
     void doSubmit() {
         int set = SharedPreferencesUtil.getSpecialParamSet(this);
+        String aid = "0";//如果是新的申请，aid缺省为0
         String type = "1";//0-保存草稿  1-提交申请
         String brief = mSimpleDescText.getText().toString(); // 描述
         String comment = mEditText.getText().toString(); // 备注
@@ -186,7 +187,7 @@ public class XZZMBLActivity extends BaseActivity {
             return;
         }
 
-        new SubmitApplyAsyncTask(mToken, type, mCity, mId, mGet_way,
+        new SubmitApplyAsyncTask(aid, mToken, type, mCity, mId, mGet_way,
                 mAddress, mAddress_info, mRecipient, mTpl_tid, mTpl_form,
                 brief, comment, language, paths, attachs).execute();
     }
@@ -420,6 +421,7 @@ public class XZZMBLActivity extends BaseActivity {
      * 申请表单
      */
     class SubmitApplyAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String aid;
         private String token;
         private String type;
         private String city;
@@ -437,10 +439,11 @@ public class XZZMBLActivity extends BaseActivity {
         private String attachs;
         private String str;
 
-        public SubmitApplyAsyncTask(String token, String type, String city, String cid2, String get_way,
+        public SubmitApplyAsyncTask(String aid, String token, String type, String city, String cid2, String get_way,
                                     String address, String address_info, String recipient, String tpl_tid, String tpl_form,
                                     String brief, String comment, String language, String images, String attachs) {
             super();
+            this.aid = aid;
             this.token = token;
             this.type = type;
             this.city = city;
@@ -468,7 +471,7 @@ public class XZZMBLActivity extends BaseActivity {
         protected Void doInBackground(Void... params) {
             IBizEngine engine = EngineFactory.get(IBizEngine.class);
             try {
-                str = engine.submitApply(XZZMBLActivity.this, token, type, city, cid2, get_way,
+                str = engine.submitApply(XZZMBLActivity.this, aid, token, type, city, cid2, get_way,
                         address, address_info, recipient, tpl_tid, tpl_form,
                         brief, comment, language, images, attachs);
             } catch (NetException e) {

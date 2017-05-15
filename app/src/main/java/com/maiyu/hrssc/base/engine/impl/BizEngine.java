@@ -9,6 +9,7 @@ import com.maiyu.hrssc.base.bean.Banners;
 import com.maiyu.hrssc.base.bean.GetWebsiteData;
 import com.maiyu.hrssc.base.engine.IBizEngine;
 import com.maiyu.hrssc.base.exception.NetException;
+import com.maiyu.hrssc.home.activity.applying.bean.GetApplysData;
 import com.maiyu.hrssc.home.activity.todo.bean.ContractFlow;
 import com.maiyu.hrssc.home.activity.todo.bean.Todo;
 import com.maiyu.hrssc.home.bean.Category1;
@@ -354,12 +355,13 @@ public class BizEngine extends BaseEngine implements IBizEngine {
     }
 
     @Override
-    public String submitApply(Context context, String token, String type, String city, String cid2, String get_way, String address, String address_info,
+    public String submitApply(Context context, String aid, String token, String type, String city, String cid2, String get_way, String address, String address_info,
                               String recipient, String tpl_tid, String tpl_form, String brief, String comment, String language, String images, String attachs) throws NetException {
         // 发送请求地址到服务器
         String urlString = ConstantValue.SERVER_URI + ConstantValue.path_business_submitApply;
         // 添加参数
         Map<String, String> params = new HashMap<String, String>();
+        params.put("aid", aid);
         params.put("token", token);
         params.put("type", type);
         params.put("city", city);
@@ -459,6 +461,43 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         try {
             json = JSON.parseObject(json).getString("data");
             data = JSON.parseObject(json).getString("path");
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
+    public GetApplysData getApplys(Context context, String token, String status, String page, String rows) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_getApplys;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("status", status);
+        params.put("page", page);
+        params.put("rows", rows);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        GetApplysData data = null;
+        try {
+            json = JSON.parseObject(json).getString("data");
+            data = JSON.parseObject(json, GetApplysData.class);
 
 
         } catch (JSONException e) {

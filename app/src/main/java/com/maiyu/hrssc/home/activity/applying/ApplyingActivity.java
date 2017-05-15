@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 /**
  * 申请
  */
-public class ApplyingActivity extends BaseActivity {
+public class ApplyingActivity extends BaseActivity implements DQSFragment.OnFragmentInteractionListener{
 
     @BindView(R.id.head_view)
     HeadView mHeadView;
@@ -74,6 +74,11 @@ public class ApplyingActivity extends BaseActivity {
     @Override
     public void initOnClick(View v) {
 
+    }
+
+    @Override
+    public void onFragmentInteraction(int count) {
+        mRightButtonText.setText("草稿箱("+count+")");
     }
 
     class ApplyingFragmentPageAdapter extends FragmentPagerAdapter {

@@ -20,7 +20,9 @@ import android.widget.EditText;
 import java.io.File;
 import java.security.MessageDigest;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class AppUtil {
@@ -291,5 +293,45 @@ public class AppUtil {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 1分钟内 刚刚
+     * 59分钟内 xx分钟前
+     * 24小时内 xx小时前
+     * 经过24小时  具体日期
+     *
+     * @param dateTime
+     */
+    public static String setTime(Date dateTime) {
+       // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+        Date now = new Date();
+        long nowLong = now.getTime();
+        long dateTimeLong = dateTime.getTime();
+
+        if (nowLong < dateTimeLong) {
+            return "Unknown";
+        }
+
+        long cal = (nowLong - dateTimeLong) / 1000;
+
+        if (cal < 1 * 60) {
+            return "刚刚";
+
+        } else if (cal < 60 * 60) {
+            long minutes = cal / 60;
+            return minutes + "分钟前";
+
+        } else if (cal <= 24 * 60 * 60) {
+            long hours = cal / 60 * 60;
+            return hours + "小时前";
+
+        } else if (cal > 24 * 60 * 60) {
+            return sdf1.format(dateTime) + "";
+        }
+
+        return "";
     }
 }

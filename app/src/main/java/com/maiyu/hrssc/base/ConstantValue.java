@@ -211,6 +211,10 @@ public interface ConstantValue {
      * 用于上传文件，如压缩包，文档，mp3等其他文件（图片除外）
      */
     String path_uploadFile = "/hrsscBasicController/uploadFile";
+    /**
+     * 查询我的申请 ，草稿箱中查询草稿也使用该接口
+     */
+    String path_getApplys = "/hrsscBusinessController/getApplys";
 
 
     /**

@@ -1,5 +1,6 @@
 package com.maiyu.hrssc.home.activity.applying;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -10,20 +11,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.base.bean.DataCenter;
+import com.maiyu.hrssc.base.engine.IBizEngine;
+import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.maiyu.hrssc.home.activity.applying.adapter.DQSPageAdapter;
 import com.maiyu.hrssc.home.activity.applying.bean.Apply;
+import com.maiyu.hrssc.home.activity.applying.bean.GetApplysData;
+import com.maiyu.hrssc.util.BaseAsyncTask;
+import com.maiyu.hrssc.util.EngineFactory;
+import com.maiyu.hrssc.util.SharedPreferencesUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * 申请 待签署
+ * 申请 待审核
  */
 public class DQSFragment extends Fragment implements OnRefreshListener, OnLoadMoreListener {
     // TODO: Rename parameter arguments, choose names that match
@@ -36,11 +43,14 @@ public class DQSFragment extends Fragment implements OnRefreshListener, OnLoadMo
     @BindView(R.id.refreshLayout)
     SwipeToLoadLayout mRefreshLayout;
     private int mPage = 1;
+    private int mCount = 10;
     private final int init = 1;
     private final int isRefreshing = 2;
     private final int isLoadMoreing = 3;
     private int status = init;
     private DQSPageAdapter mAdapter;
+    private GetApplysData mGetApplysData;
+    private OnFragmentInteractionListener mListener;
 
     public DQSFragment() {
         // Required empty public constructor
@@ -89,14 +99,10 @@ public class DQSFragment extends Fragment implements OnRefreshListener, OnLoadMo
     }
 
     private void initData() {
-        List list = new ArrayList();
-
-        if (1 == mParam1) {
-            list.add(new Apply("劳动合同", "待签署", "2017-2-22 : 14:00"));
-            list.add(new Apply("保密协议", "待签署", "2017-2-22 : 14:00"));
-            list.add(new Apply("薪资证明", "待签署", "2017-2-22 : 14:00"));
-            mAdapter.setData(list);
-        }
+        String token = DataCenter.getInstance().getuser().getToken();
+        String city = SharedPreferencesUtil.getCityName(getActivity());
+        String status = "0"; //状态0待审核，1待办理，2待领取，3待评价，4已完成,5-已驳回 ，6-草稿箱
+        new GetApplysDataAsyncTask(token, status, String.valueOf(mPage), String.valueOf(mCount)).execute();
     }
 
     @Override
@@ -104,6 +110,7 @@ public class DQSFragment extends Fragment implements OnRefreshListener, OnLoadMo
         mPage++;
         status = isLoadMoreing;
         initData();
+        refreshOrLoadMoreComplete();
     }
 
     @Override
@@ -111,6 +118,7 @@ public class DQSFragment extends Fragment implements OnRefreshListener, OnLoadMo
         mPage = 1;
         status = isRefreshing;
         initData();
+        refreshOrLoadMoreComplete();
     }
 
 
@@ -124,5 +132,102 @@ public class DQSFragment extends Fragment implements OnRefreshListener, OnLoadMo
         if (mRefreshLayout.isLoadingMore()) {
             mRefreshLayout.setLoadingMore(false);
         }
+    }
+
+
+    /**
+     * 获取申请列表
+     */
+    class GetApplysDataAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String token;
+        private String status;
+        private String page;
+        private String rows;
+        private GetApplysData getApplysData;
+
+        public GetApplysDataAsyncTask(String token, String status, String page, String rows) {
+            super();
+
+            this.token = token;
+            this.status = status;
+            this.page = page;
+            this.rows = rows;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            IBizEngine engine = EngineFactory.get(IBizEngine.class);
+            try {
+                getApplysData = engine.getApplys(getActivity(), token, status, page, rows);
+            } catch (NetException e) {
+                exception = e;
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            if (checkException(getActivity())) {
+                return;
+            }
+            if (getApplysData != null) {
+                setData(getApplysData);
+            }
+
+            super.onPostExecute(result);
+        }
+    }
+
+    private void setData(GetApplysData getApplysData) {
+        mGetApplysData = getApplysData;
+        //drafts;//:2//草稿数量
+        setDrafts(getApplysData.getDrafts());
+
+        List<Apply> list = getApplysData.getApplys();
+
+        if (list != null && list.size() != 0) {
+            if (status == init) {
+                mAdapter.setData(list);
+            } else if (status == isRefreshing) {
+                mAdapter.setData(list);
+            } else if (status == isLoadMoreing) {
+                mAdapter.loadMoreData(list);
+            }
+        }
+    }
+
+    // TODO: Rename method, update argument and hook method into UI event
+    public void setDrafts(int count) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(count);
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(int count);
     }
 }
