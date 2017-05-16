@@ -8,13 +8,13 @@
     android:orientation="vertical"
     tools:context="com.maiyu.hrssc.home.activity.XZZMBLActivity">
 
-    <com.maiyu.hrssc.base.view.HeadView
-        android:id="@+id/head_view"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/project_head_view_hight"
-        android:background="@color/project_color_basic_white_pure">
 
-    </com.maiyu.hrssc.base.view.HeadView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/project_head_view_hight">
+
+        <include layout="@layout/view_detail_header"/>
+    </RelativeLayout>
 
 
     <include layout="@layout/view_space_layout"/>
@@ -26,8 +26,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/project_color_basic_white_pure">
+            android:background="@color/project_color_basic_white_pure"
+            android:orientation="vertical">
 
 
             <RelativeLayout
@@ -231,8 +231,8 @@
                     android:layout_alignBottom="@+id/textView"
                     android:layout_marginEnd="@dimen/base5dp"
                     android:layout_toStartOf="@+id/simple_desc_xh"
-                    android:text=""
                     android:hint="填写"
+                    android:text=""
                     android:textColor="@color/text_title_gray"
                     android:textSize="@dimen/base14dp"/>
 

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -15,12 +16,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.home.activity.applying.bean.AProgress;
 import com.maiyu.hrssc.home.activity.applying.bean.AttachFile;
 import com.maiyu.hrssc.home.activity.applying.bean.AttachImage;
 import com.maiyu.hrssc.home.activity.applying.bean.Schedule;
 import com.maiyu.hrssc.util.ImageLoaderUtil;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -29,9 +34,9 @@ import java.util.List;
  */
 
 public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.ProgressViewHolder> {
-    private List<Schedule> mList = new ArrayList();
-
-
+    private List<AProgress> mList = new ArrayList();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
 
     private final Context mContext;
@@ -40,7 +45,7 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
         mContext = context;
     }
 
-    public void setData(List<Schedule> list) {
+    public void setData(List<AProgress> list) {
         mList.clear();
         mList.addAll(list);
         notifyDataSetChanged();
@@ -56,7 +61,6 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
 
 
     }
-
 
 
     public void loadMoreData(List list) {
@@ -79,7 +83,7 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
 
     @Override
     public int getItemCount() {
-         return mList.size();
+        return mList.size();
     }
 
 
@@ -100,25 +104,24 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
 
         public ProgressViewHolder(View itemView) {
             super(itemView);
-            ll = (RelativeLayout)itemView.findViewById(R.id.ll);
-            ll_line2 = (RelativeLayout)itemView.findViewById(R.id.ll_line2);
-            rl = (RelativeLayout)itemView.findViewById(R.id.rl);
-            point = (View)itemView.findViewById(R.id.point);
-            line = (View)itemView.findViewById(R.id.line);
-            line3 = (View)itemView.findViewById(R.id.line3);
-            content = (TextView)itemView.findViewById(R.id.content);
-            time = (TextView)itemView.findViewById(R.id.time);
-            mGridView = (GridView)itemView.findViewById(R.id.grid_view);
-            mRecyclerView = (RecyclerView)itemView.findViewById(R.id.file_recyclerView);
-
+            ll = (RelativeLayout) itemView.findViewById(R.id.ll);
+            ll_line2 = (RelativeLayout) itemView.findViewById(R.id.ll_line2);
+            rl = (RelativeLayout) itemView.findViewById(R.id.rl);
+            point = (View) itemView.findViewById(R.id.point);
+            line = (View) itemView.findViewById(R.id.line);
+            line3 = (View) itemView.findViewById(R.id.line3);
+            content = (TextView) itemView.findViewById(R.id.content);
+            time = (TextView) itemView.findViewById(R.id.time);
+            mGridView = (GridView) itemView.findViewById(R.id.grid_view);
+            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.file_recyclerView);
 
 
         }
 
 
         void onBindView() {
-            final Schedule schedule = (Schedule) mList.get(getAdapterPosition());
-            if (schedule == null) {
+            final AProgress aprogress = (AProgress) mList.get(getAdapterPosition());
+            if (aprogress == null) {
                 return;
             }
 
@@ -128,27 +131,47 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
             ll_line2.setVisibility(View.VISIBLE);
 
 
-            if(0 == getAdapterPosition()) {
+            if (0 == getAdapterPosition()) {
                 // 取消顶部线条
                 line3.setVisibility(View.GONE);
                 point.setBackgroundResource(R.mipmap.icon_dian);
-            } else if(mList.size()-1 == getAdapterPosition()) {
+            } else if (mList.size() - 1 == getAdapterPosition()) {
                 // 取消中部和下部线条
                 line.setVisibility(View.GONE);
                 ll_line2.setVisibility(View.GONE);
             }
 
 
+            content.setText(aprogress.getComment());
+            try {
+                Date createTime = sdf.parse(aprogress.getCreate_time());
+                time.setText(sdf1.format(createTime));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
 
-            content.setText(schedule.getContent());
-            time.setText(schedule.getTime());
+            // 添加图片
+            List<String> pictures = new ArrayList<>();
+            pictures.clear();
+            String[] imageArr = aprogress.getImages().split(";");
+            for (int i = 0; i < imageArr.length; i++) {
+                pictures.add(imageArr[i]);
+            }
+
+            // 添加文件
+            List<String> files = new ArrayList<>();
+            files.clear();
+            String[] fileArr = aprogress.getAttachs().split(";");
+            for (int i = 0; i < imageArr.length; i++) {
+                files.add(fileArr[i]);
+            }
 
 
             // 设置gridview
             mGridAdapter = new GridAdapter(mContext);
             mGridView.setAdapter(mGridAdapter);
-            mGridAdapter.updatePickImageView(schedule.getImages(), mGridView, mGridAdapter);
+            mGridAdapter.updatePickImageView(pictures, mGridView, mGridAdapter);
 
             // 设置RecyclerView
             mRecyclerViewAdapter = new AttachFilemRecyclerViewAdapter();
@@ -156,22 +179,18 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
             mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
             mRecyclerView.setAdapter(mRecyclerViewAdapter);
-            mRecyclerViewAdapter.updateFileView(schedule.getFiles(), mRecyclerViewAdapter);
+            mRecyclerViewAdapter.updateFileView(files, mRecyclerViewAdapter);
         }
 
 
-
-
-
     }
-
 
 
     /**
      * 展示图片的GridView的适配器
      */
     class GridAdapter extends BaseAdapter {
-        List<AttachImage> iamges = new ArrayList<>();
+        List<String> iamges = new ArrayList<>();
         LayoutInflater mLayoutInflater = null;
 
         public GridAdapter(Context context) {
@@ -211,7 +230,7 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
                 holder = (ImageViewHolder) convertView.getTag();
             }
 
-            if(iamges.get(position) != null) {
+            if (iamges.get(position) != null) {
                 ImageLoaderUtil.loadImage(
                         holder.image,
                         iamges.get(position).getImageUrl(),
@@ -226,9 +245,9 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
             public ImageView image;
         }
 
-        public void updatePickImageView(List<AttachImage> pictures, GridView mGridView, GridAdapter mGridAdapter) {
+        public void updatePickImageView(List<String> pictures, GridView mGridView, GridAdapter mGridAdapter) {
 
-            if(pictures == null) {
+            if (pictures == null) {
                 return;
             }
 
@@ -241,8 +260,8 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
     }
 
 
-    class  AttachFilemRecyclerViewAdapter extends  RecyclerView.Adapter<AttachFilemRecyclerViewAdapter.AttachFileViewHolder>{
-        List<AttachFile> files = new ArrayList<>();
+    class AttachFilemRecyclerViewAdapter extends RecyclerView.Adapter<AttachFilemRecyclerViewAdapter.AttachFileViewHolder> {
+        List<String> files = new ArrayList<>();
 
 
         @Override
@@ -262,16 +281,17 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
         }
 
 
-        class AttachFileViewHolder extends RecyclerView.ViewHolder{
+        class AttachFileViewHolder extends RecyclerView.ViewHolder {
             private TextView attachFileTv;
+
             public AttachFileViewHolder(View itemView) {
                 super(itemView);
-                attachFileTv = (TextView)itemView.findViewById(R.id.attach_file_tv);
+                attachFileTv = (TextView) itemView.findViewById(R.id.attach_file_tv);
             }
 
             public void onBindView() {
                 AttachFile file = files.get(getAdapterPosition());
-                if(file == null) {
+                if (file == null) {
                     return;
                 }
                 attachFileTv.setText(file.getDesc());
@@ -279,22 +299,21 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
             }
         }
 
-        public void updateFileView(List<AttachFile> list, AttachFilemRecyclerViewAdapter mRecyclerViewAdapter) {
+        public void updateFileView(List<String> list, AttachFilemRecyclerViewAdapter mRecyclerViewAdapter) {
 
-            if(list == null) {
+            if (list == null) {
                 return;
             }
 
             files.clear();
-            files.addAll(list);
+            files.addAll(files);
             mRecyclerViewAdapter.notifyDataSetChanged();
 
         }
     }
 
 
-
-    public  void setListViewHeightBasedOnChildren(GridView listView) {
+    public void setListViewHeightBasedOnChildren(GridView listView) {
         // 获取listview的adapter
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null) {
@@ -323,5 +342,6 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
         // 设置参数
         listView.setLayoutParams(params);
     }
+
 
 }

@@ -12,19 +12,30 @@ import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.activity.BaseActivity;
+import com.maiyu.hrssc.base.bean.DataCenter;
+import com.maiyu.hrssc.base.engine.IBizEngine;
+import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.base.view.HeadView;
 import com.maiyu.hrssc.home.activity.applying.adapter.ProgressAdapter;
-import com.maiyu.hrssc.home.activity.applying.bean.AttachFile;
-import com.maiyu.hrssc.home.activity.applying.bean.AttachImage;
-import com.maiyu.hrssc.home.activity.applying.bean.Schedule;
+import com.maiyu.hrssc.home.activity.applying.bean.AProgress;
+import com.maiyu.hrssc.home.activity.applying.bean.ApplyDetail;
+import com.maiyu.hrssc.home.activity.applying.bean.FindApplyDetailData;
+import com.maiyu.hrssc.util.AppUtil;
+import com.maiyu.hrssc.util.BaseAsyncTask;
+import com.maiyu.hrssc.util.EngineFactory;
 import com.maiyu.hrssc.util.HintUitl;
 
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.maiyu.hrssc.R.id.dayin_success_iv;
+import static com.maiyu.hrssc.R.id.status;
 
 /**
  * 申请详情
@@ -44,7 +55,7 @@ public class ApplyingDetialActivity extends BaseActivity {
     TextView mTitleName;
     @BindView(R.id.time)
     TextView mTime;
-    @BindView(R.id.status)
+    @BindView(status)
     TextView mStatus;
     @BindView(R.id.hetong_lable)
     TextView mHetongLable;
@@ -62,7 +73,7 @@ public class ApplyingDetialActivity extends BaseActivity {
     TextView mWendangdayinLable;
     @BindView(R.id.code)
     TextView mCode;
-    @BindView(R.id.dayin_success_iv)
+    @BindView(dayin_success_iv)
     ImageView mDayinSuccessIv;
     @BindView(R.id.wendangdayin_rl)
     RelativeLayout mWendangdayinRl;
@@ -87,6 +98,10 @@ public class ApplyingDetialActivity extends BaseActivity {
     @BindView(R.id.vertivcal_content)
     RecyclerView mVertivcalContent;
     private ProgressAdapter mAdapter;
+    private String mToken;
+    private String mAid;
+    private FindApplyDetailData mFindApplyDetailData;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @Override
     public void createActivityImpl() {
@@ -97,6 +112,7 @@ public class ApplyingDetialActivity extends BaseActivity {
     @Override
     public void initViews() {
         String title = getIntent().getStringExtra("title");
+        mAid = getIntent().getStringExtra("id");
 
         mHeadView.setTitle(title, true, true);
         TextView rightButtonText = mHeadView.getRightButtonText();
@@ -110,7 +126,6 @@ public class ApplyingDetialActivity extends BaseActivity {
         });
 
 
-
         // 设置列表
         mAdapter = new ProgressAdapter(this);
         mVertivcalContent.setLayoutManager(new FullyLinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -120,39 +135,10 @@ public class ApplyingDetialActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        List<Schedule> list = new ArrayList<>();
-        List<AttachImage> images = new ArrayList<>();
-        List<AttachFile> files = new ArrayList<>();
-
-        images.add(new AttachImage("http://s4.cdn.deahu.com/show/lfile/81E6678F2C08A53370C9CE5D86A8A6C0.jpg", "证明"));
-        images.add(new AttachImage("http://s4.cdn.deahu.com/show/lfile/81E6678F2C08A53370C9CE5D86A8A6C0.jpg", "证明"));
-        images.add(new AttachImage("http://s4.cdn.deahu.com/show/lfile/81E6678F2C08A53370C9CE5D86A8A6C0.jpg", "证明"));
-        images.add(new AttachImage("http://s4.cdn.deahu.com/show/lfile/81E6678F2C08A53370C9CE5D86A8A6C0.jpg", "证明"));
-        images.add(new AttachImage("http://s4.cdn.deahu.com/show/lfile/81E6678F2C08A53370C9CE5D86A8A6C0.jpg", "证明"));
-
-        files.add(new AttachFile("https://sm.wdjcdn.com/release/files/jupiter/5.52.20.13520/wandoujia-web_seo_baidu_homepage.apk", "豌豆荚.apk"));
-        files.add(new AttachFile("https://sm.wdjcdn.com/release/files/jupiter/5.52.20.13520/wandoujia-web_seo_baidu_homepage.apk", "豌豆荚.apk"));
-        files.add(new AttachFile("https://sm.wdjcdn.com/release/files/jupiter/5.52.20.13520/wandoujia-web_seo_baidu_homepage.apk", "豌豆荚.apk"));
-        files.add(new AttachFile("https://sm.wdjcdn.com/release/files/jupiter/5.52.20.13520/wandoujia-web_seo_baidu_homepage.apk", "豌豆荚.apk"));
-
-        Schedule sc = new Schedule();
-        sc.setContent("薪资证明说明。。。。。。");
-        sc.setTime("2017-02-14 14:00");
-
-        list.add(sc);
-        list.add(sc);
-        list.add(sc);
-
-        Schedule sc1 = new Schedule();
-        sc1.setContent("薪资证明说明。。。。。。");
-        sc1.setTime("2017-02-14 14:00");
-        sc1.setFiles(files);
-        sc1.setImages(images);
-
-        list.add(sc1);
-        list.add(sc);
-
-        mAdapter.setData(list);
+        mToken = DataCenter.getInstance().getuser().getToken();
+        if (mAid != null) {
+            new FindApplyDataDataAsyncTask(mToken, mAid).execute();
+        }
     }
 
     @Override
@@ -175,4 +161,113 @@ public class ApplyingDetialActivity extends BaseActivity {
                 break;
         }
     }
+
+    /**
+     * 获取业务详情
+     */
+    class FindApplyDataDataAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String token;
+        private String aid;
+        private FindApplyDetailData findApplyDetailData;
+
+        public FindApplyDataDataAsyncTask(String token, String aid) {
+            super();
+
+            this.token = token;
+            this.aid = aid;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            IBizEngine engine = EngineFactory.get(IBizEngine.class);
+            try {
+                findApplyDetailData = engine.findApplyDetail(ApplyingDetialActivity.this, token, aid);
+            } catch (NetException e) {
+                exception = e;
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            if (checkException(ApplyingDetialActivity.this)) {
+                return;
+            }
+            if (findApplyDetailData != null) {
+                setData(findApplyDetailData);
+            }
+
+            super.onPostExecute(result);
+        }
+    }
+
+    private void setData(FindApplyDetailData findApplyDetailData) {
+        mFindApplyDetailData = findApplyDetailData;
+        ApplyDetail applyDetail = findApplyDetailData.getApply();
+        List<AProgress> list = findApplyDetailData.getProgressList();
+        if (applyDetail != null) {
+            mIdNumber.setText("NO." + applyDetail.getWork_order());
+            mTitleName.setText(applyDetail.getName());
+            setTime(applyDetail);
+            setStatusString(applyDetail);
+            setPrintData(applyDetail);
+            mShenherenText.setText(applyDetail.getAudit_name());
+            mYewuyuanText.setText(applyDetail.getDeal_name());
+        }
+
+        if(list != null && list.size() > 0) {
+            mAdapter.setData(list);
+        }
+
+    }
+
+
+    void setTime(ApplyDetail applyDetail) {
+        Date dateTime = null;
+        try {
+            dateTime = sdf.parse(applyDetail.getCreate_time());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        mTime.setText(AppUtil.setTime(dateTime));
+    }
+
+    void setStatusString(ApplyDetail applyDetail) {
+        if ("0".equals(applyDetail.getStatus())) {
+            mStatus.setText("待审核");
+        } else if ("1".equals(applyDetail.getStatus())) {
+            mStatus.setText("待办理");
+        } else if ("2".equals(applyDetail.getStatus())) {
+            mStatus.setText("待领取");
+        } else if ("3".equals(applyDetail.getStatus())) {
+            mStatus.setText("待评价");
+        } else if ("4".equals(applyDetail.getStatus())) {
+            mStatus.setText("已完成");
+        } else if ("5".equals(applyDetail.getStatus())) {
+            mStatus.setText("已驳回");
+        }
+    }
+
+    void setPrintData(ApplyDetail applyDetail) {
+        //打印状态  0-打印失败 1-打印成功 2-未打印
+        if ("0".equals(applyDetail.getPrint_status())) {
+            mDayinSuccessIv.setBackgroundResource(R.mipmap.icon_dayincg);
+        } else if ("1".equals(applyDetail.getPrint_status())) {
+            mDayinSuccessIv.setBackgroundResource(R.mipmap.icon_dayincg);
+        } else if ("2".equals(applyDetail.getPrint_status())) {
+            mDayinSuccessIv.setBackgroundResource(R.mipmap.icon_dayincg);
+        }
+
+        mCode.setText(applyDetail.getPrint_code());
+    }
+
+
+
+
 }

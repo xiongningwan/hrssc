@@ -25,12 +25,14 @@ import java.util.List;
 
 public class BHPageAdapter extends RecyclerView.Adapter<BHPageAdapter.TodoPageViewHolder> {
 
+    private final View.OnLongClickListener mListener;
     private List<Apply> mList = new ArrayList();
     private final Context mContext;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    public BHPageAdapter(Context context) {
+    public BHPageAdapter(Context context, View.OnLongClickListener listener) {
         mContext = context;
+        mListener = listener;
     }
 
     public void setData(List list) {
@@ -119,7 +121,7 @@ public class BHPageAdapter extends RecyclerView.Adapter<BHPageAdapter.TodoPageVi
             reason.setVisibility(View.VISIBLE);
 
 
-            delBtn.setOnClickListener(new View.OnClickListener() {
+            /*delBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
@@ -140,19 +142,11 @@ public class BHPageAdapter extends RecyclerView.Adapter<BHPageAdapter.TodoPageVi
                     delRL.setVisibility(View.VISIBLE);
                     return false;
                 }
-            });
+            });*/
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                  //  delRL.setVisibility(View.GONE);
+            itemView.setOnLongClickListener(mListener);
+            itemView.setTag(R.id.key_tag_item_data, apply);
 
-
-                    //  Intent intent = new Intent(mContext, InformationDetialActivity.class);
-                    //  intent.putExtra("title", info.getTitle());
-                    //  mContext.startActivity(intent);
-                }
-            });
         }
     }
 

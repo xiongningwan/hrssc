@@ -215,6 +215,18 @@ public interface ConstantValue {
      * 查询我的申请 ，草稿箱中查询草稿也使用该接口
      */
     String path_getApplys = "/hrsscBusinessController/getApplys";
+    /**
+     * 待领取状态的申请  需要确认已领取申请
+     */
+    String path_gain = "/hrsscBusinessController/gain";
+    /**
+     * 删除业务
+     */
+    String path_deleteBusiness = "/hrsscBusinessController/deleteBusiness";
+    /**
+     * 查询业务详情
+     */
+    String path_findApplyDetail = "/hrsscBusinessController/findApplyDetail";
 
 
     /**

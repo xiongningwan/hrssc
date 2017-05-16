@@ -26,8 +26,8 @@ import com.maiyu.hrssc.base.bean.DataCenter;
 import com.maiyu.hrssc.base.engine.IBizEngine;
 import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.base.image.PickImageView;
-import com.maiyu.hrssc.base.view.HeadView;
 import com.maiyu.hrssc.base.view.dialog.LoadingDialog;
+import com.maiyu.hrssc.home.activity.applying.dialog.DraftsDialog;
 import com.maiyu.hrssc.home.bean.FormData;
 import com.maiyu.hrssc.home.bean.SelfAddress;
 import com.maiyu.hrssc.util.BaseAsyncTask;
@@ -46,8 +46,14 @@ import cc.dagger.photopicker.PhotoPicker;
 
 public class XZZMBLActivity extends BaseActivity {
 
-    @BindView(R.id.head_view)
-    HeadView mHeadView;
+    @BindView(R.id.title_left_button)
+    RelativeLayout mTitleLeftButton;
+    @BindView(R.id.title_text)
+    TextView mTitleText;
+    @BindView(R.id.title_right_button)
+    RelativeLayout mTitleRightButton;
+    @BindView(R.id.right_button_text)
+    TextView mRightButtonText;
     @BindView(R.id.city)
     ImageView mCityIv;
     @BindView(R.id.city_name)
@@ -91,7 +97,7 @@ public class XZZMBLActivity extends BaseActivity {
     private String mToken;
     private FormData mFormData;
     private String mCity;
-    private String mGet_way = "";
+    private String mGet_way = "4";
 
     private String mRecipient = "";
     private String mAddress = "";
@@ -102,6 +108,7 @@ public class XZZMBLActivity extends BaseActivity {
     private List<String> mAttachFileList = new ArrayList<String>();
     private ArrayList<String> mImageListDisplays = new ArrayList<String>();
     private int mCount = 0;
+    private DraftsDialog mDialog;
 
 
     @Override
@@ -119,18 +126,24 @@ public class XZZMBLActivity extends BaseActivity {
         mId = getIntent().getStringExtra("id");
         mTitle = getIntent().getStringExtra("name");
         mLoadingDialog = new LoadingDialog(this);
-        mHeadView.setTitle(mTitle, true, true);
+        mTitleText.setText(mTitle);
 
         mCityName.setText(mCity);
 
-        TextView rightButtonText = mHeadView.getRightButtonText();
-        rightButtonText.setText("提交");
-        rightButtonText.setTextColor(ContextCompat.getColor(this, R.color.project_color_general_hyperlink));
-        rightButtonText.setOnClickListener(new View.OnClickListener() {
+        mRightButtonText.setText("提交");
+        mRightButtonText.setTextColor(ContextCompat.getColor(this, R.color.project_color_general_hyperlink));
+        mTitleRightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //  Toast.makeText(XZZMBLActivity.this, "提交", Toast.LENGTH_SHORT).show();
-                doSubmit();
+                String type = "1";//0-保存草稿  1-提交申请
+                doSubmit(type);
+            }
+        });
+        mTitleLeftButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tipDraftDialog();
             }
         });
 
@@ -146,10 +159,9 @@ public class XZZMBLActivity extends BaseActivity {
     /**
      * 提交
      */
-    void doSubmit() {
+    void doSubmit(String type) {
         int set = SharedPreferencesUtil.getSpecialParamSet(this);
         String aid = "0";//如果是新的申请，aid缺省为0
-        String type = "1";//0-保存草稿  1-提交申请
         String brief = mSimpleDescText.getText().toString(); // 描述
         String comment = mEditText.getText().toString(); // 备注
         String language = mSpinner.getSelectedItem().toString().equals("中文") ? "0" : "1";
@@ -571,5 +583,61 @@ public class XZZMBLActivity extends BaseActivity {
         }
     }
 
+    void tipDraftDialog() {
+        if (mDialog == null) {
+            mDialog = new DraftsDialog(this, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // 保存草稿
+                    mDialog.closeDialog();
+                    String type = "0";//0-保存草稿  1-提交申请
+                    doSubmit2(type);
+                }
+            });
+        }
+        mDialog.show();
+    }
 
+    @Override
+    public void onBackPressed() {
+       // super.onBackPressed();
+        tipDraftDialog();
+    }
+
+
+    /**
+     * 提交
+     */
+    void doSubmit2(String type) {
+        int set = SharedPreferencesUtil.getSpecialParamSet(this);
+        String aid = "0";//如果是新的申请，aid缺省为0
+        String brief = mSimpleDescText.getText().toString(); // 描述
+        String comment = mEditText.getText().toString(); // 备注
+        String language = mSpinner.getSelectedItem().toString().equals("中文") ? "0" : "1";
+
+        String paths = getSbString(mImageList);
+        String attachs = getSbString(mAttachFileList);
+
+
+        if (mToken == null) {
+            HintUitl.toastShort(this, "error: token为空!");
+            return;
+        }
+        if (mCity == null) {
+            HintUitl.toastShort(this, "error: 城市为空!");
+            return;
+        }
+        if (mId == null) {
+            HintUitl.toastShort(this, "error: 二级菜单id为空!");
+            return;
+        }
+        if (mGet_way == null || mGet_way.equals("")) {
+            HintUitl.toastShort(this, "请选择领取方式");
+            return;
+        }
+
+        new SubmitApplyAsyncTask(aid, mToken, type, mCity, mId, mGet_way,
+                mAddress, mAddress_info, mRecipient, mTpl_tid, mTpl_form,
+                brief, comment, language, paths, attachs).execute();
+    }
 }

@@ -9,6 +9,7 @@ import com.maiyu.hrssc.base.bean.Banners;
 import com.maiyu.hrssc.base.bean.GetWebsiteData;
 import com.maiyu.hrssc.base.engine.IBizEngine;
 import com.maiyu.hrssc.base.exception.NetException;
+import com.maiyu.hrssc.home.activity.applying.bean.FindApplyDetailData;
 import com.maiyu.hrssc.home.activity.applying.bean.GetApplysData;
 import com.maiyu.hrssc.home.activity.todo.bean.ContractFlow;
 import com.maiyu.hrssc.home.activity.todo.bean.Todo;
@@ -498,6 +499,109 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         try {
             json = JSON.parseObject(json).getString("data");
             data = JSON.parseObject(json, GetApplysData.class);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
+    public String gain(Context context, String token, String aid) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_gain;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("aid", aid);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        String data = null;
+        try {
+            data = JSON.parseObject(json).getString("msg");
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
+    public String deleteBusiness(Context context, String token, String aid) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_deleteBusiness;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("aid", aid);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        String data = null;
+        try {
+            data = JSON.parseObject(json).getString("msg");
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
+    public FindApplyDetailData findApplyDetail(Context context, String token, String aid) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_findApplyDetail;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("aid", aid);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        FindApplyDetailData data = null;
+        try {
+            json = JSON.parseObject(json).getString("data");
+            data = JSON.parseObject(json, FindApplyDetailData.class);
 
 
         } catch (JSONException e) {

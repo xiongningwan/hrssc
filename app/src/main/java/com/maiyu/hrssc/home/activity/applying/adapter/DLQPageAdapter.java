@@ -9,9 +9,7 @@ import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.home.activity.applying.bean.Apply;
-import com.maiyu.hrssc.home.activity.todo.dialog.ConfirmDialog;
 import com.maiyu.hrssc.util.AppUtil;
-import com.maiyu.hrssc.util.HintUitl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,14 +22,17 @@ import java.util.List;
  * 申请 带领取
  */
 
-public class DLQPageAdapter extends RecyclerView.Adapter<DLQPageAdapter.TodoPageViewHolder>{
+public class DLQPageAdapter extends RecyclerView.Adapter<DLQPageAdapter.TodoPageViewHolder> {
 
+    private final View.OnClickListener mListener;
     private List<Apply> mList = new ArrayList();
     private final Context mContext;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    public DLQPageAdapter(Context context) {
+    public DLQPageAdapter(Context context, View.OnClickListener listener) {
+
         mContext = context;
+        mListener = listener;
     }
 
     public void setData(List list) {
@@ -83,7 +84,7 @@ public class DLQPageAdapter extends RecyclerView.Adapter<DLQPageAdapter.TodoPage
 
         void onBindView() {
             final Apply apply = (Apply) mList.get(getAdapterPosition());
-            if(apply == null) {
+            if (apply == null) {
                 return;
             }
             title.setText(apply.getName());
@@ -115,26 +116,12 @@ public class DLQPageAdapter extends RecyclerView.Adapter<DLQPageAdapter.TodoPage
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ConfirmDialog dialog = new ConfirmDialog(mContext, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            HintUitl.toastShort(mContext, "确认领取");
-                        }
-                    });
-                    dialog.setTitleText("确认已领取，确认后不可撤销");
-                    dialog.show();
+
                 }
             });
 
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //  Intent intent = new Intent(mContext, InformationDetialActivity.class);
-                    //  intent.putExtra("title", info.getTitle());
-                    //  mContext.startActivity(intent);
-                }
-            });
+            btn.setOnClickListener(mListener);
+            btn.setTag(R.id.key_tag_item_data, apply);
         }
     }
 

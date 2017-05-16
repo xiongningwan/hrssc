@@ -118,6 +118,7 @@ public class DQSPageAdapter extends RecyclerView.Adapter<DQSPageAdapter.TodoPage
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, ApplyingDetialActivity.class);
+                    intent.putExtra("id", apply.getId());
                     intent.putExtra("title", "待签署详情");
                     mContext.startActivity(intent);
                 }

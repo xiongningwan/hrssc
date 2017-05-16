@@ -19,8 +19,10 @@ import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.maiyu.hrssc.home.activity.applying.adapter.BHPageAdapter;
 import com.maiyu.hrssc.home.activity.applying.bean.Apply;
 import com.maiyu.hrssc.home.activity.applying.bean.GetApplysData;
+import com.maiyu.hrssc.home.activity.todo.dialog.ConfirmDialog;
 import com.maiyu.hrssc.util.BaseAsyncTask;
 import com.maiyu.hrssc.util.EngineFactory;
+import com.maiyu.hrssc.util.HintUitl;
 
 import java.util.List;
 
@@ -48,6 +50,7 @@ public class BHFragment extends Fragment implements OnRefreshListener, OnLoadMor
     private int status = init;
     private BHPageAdapter mAdapter;
     private GetApplysData mGetApplysData;
+    private String mToken;
 
     public BHFragment() {
         // Required empty public constructor
@@ -89,16 +92,16 @@ public class BHFragment extends Fragment implements OnRefreshListener, OnLoadMor
         mRefreshLayout.setOnRefreshListener(this);
 
         // 设置列表
-        mAdapter = new BHPageAdapter(getActivity());
+        mAdapter = new BHPageAdapter(getActivity(), new OnItemLongClickListener());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(mAdapter);
     }
 
     private void initData() {
-        String token = DataCenter.getInstance().getuser().getToken();
+        mToken = DataCenter.getInstance().getuser().getToken();
         String status = "5"; //状态0待审核，1待办理，2待领取，3待评价，4已完成,5-已驳回 ，6-草稿箱
-        new GetApplysDataAsyncTask(token, status, String.valueOf(mPage), String.valueOf(mCount)).execute();
+        new GetApplysDataAsyncTask(mToken, status, String.valueOf(mPage), String.valueOf(mCount)).execute();
     }
 
     @Override
@@ -191,6 +194,75 @@ public class BHFragment extends Fragment implements OnRefreshListener, OnLoadMor
             } else if (status == isLoadMoreing) {
                 mAdapter.loadMoreData(list);
             }
+        }
+    }
+
+    /**
+     * 删除业务
+     */
+    class DeleteBusinessAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String token;
+        private String aid;
+        private String str;
+
+        public DeleteBusinessAsyncTask(String token, String aid) {
+            super();
+
+            this.token = token;
+            this.aid = aid;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            IBizEngine engine = EngineFactory.get(IBizEngine.class);
+            try {
+                str = engine.deleteBusiness(getActivity(), token, aid);
+            } catch (NetException e) {
+                exception = e;
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            if (checkException(getActivity())) {
+                return;
+            }
+            if (str != null) {
+                HintUitl.toastShort(getActivity(), str);
+            }
+
+            super.onPostExecute(result);
+        }
+    }
+
+
+    class OnItemLongClickListener implements View.OnLongClickListener {
+        ConfirmDialog dialog;
+
+        @Override
+        public boolean onLongClick(View v) {
+            if (dialog == null) {
+                dialog = new ConfirmDialog(getActivity(), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Apply apply = (Apply) v.getTag(R.id.key_tag_item_data);
+                        if (apply != null) {
+                            new DeleteBusinessAsyncTask(mToken, apply.getId()).execute();
+                        }
+                        dialog.closeDialog();
+                    }
+                });
+            }
+            dialog.setTitleText("是否删除该业务");
+            dialog.show();
+            return false;
         }
     }
 }

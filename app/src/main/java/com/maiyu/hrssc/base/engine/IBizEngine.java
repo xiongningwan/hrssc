@@ -5,6 +5,7 @@ import android.content.Context;
 import com.maiyu.hrssc.base.bean.Banners;
 import com.maiyu.hrssc.base.bean.GetWebsiteData;
 import com.maiyu.hrssc.base.exception.NetException;
+import com.maiyu.hrssc.home.activity.applying.bean.FindApplyDetailData;
 import com.maiyu.hrssc.home.activity.applying.bean.GetApplysData;
 import com.maiyu.hrssc.home.activity.todo.bean.ContractFlow;
 import com.maiyu.hrssc.home.activity.todo.bean.Todo;
@@ -182,4 +183,31 @@ public interface IBizEngine {
      * @throws NetException
      */
     GetApplysData getApplys(Context context, String token, String status, String page, String rows) throws NetException;
+    /**
+     * 待领取状态的申请  需要确认已领取申请
+     * @param context
+     * @param token
+     * @param aid
+     * @return
+     * @throws NetException
+     */
+    String gain(Context context, String token, String aid) throws NetException;
+    /**
+     * 删除业务
+     * @param context
+     * @param token
+     * @param aid
+     * @return
+     * @throws NetException
+     */
+    String deleteBusiness(Context context, String token, String aid) throws NetException;
+    /**
+     * 查询业务详情
+     * @param context
+     * @param token
+     * @param aid
+     * @return
+     * @throws NetException
+     */
+    FindApplyDetailData findApplyDetail(Context context, String token, String aid) throws NetException;
 }

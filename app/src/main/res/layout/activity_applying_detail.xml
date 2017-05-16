@@ -41,7 +41,8 @@
                     android:layout_marginBottom="@dimen/base10dp"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:layout_marginTop="@dimen/base10dp"
-                    android:text="NO.124"/>
+                    android:text="NO."
+                    android:textColor="@color/text_content_gray"/>
 
                 <View
                     android:id="@+id/divier_line"
@@ -69,7 +70,7 @@
                     android:layout_marginStart="@dimen/base10dp"
                     android:layout_marginTop="@dimen/base10dp"
                     android:layout_toEndOf="@id/icon_xiangqing"
-                    android:text="薪资证明办理"
+                    android:text=""
                     android:textColor="@color/text_title_gray"
                     android:textSize="@dimen/project_text_size_dp_16"/>
 
@@ -114,7 +115,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:text="内容详情"/>
+                    android:text="内容详情"
+                    android:textColor="@color/text_content_gray"/>
 
                 <ImageView
                     android:id="@+id/arrow_iv"
@@ -151,7 +153,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:text="运单记录"/>
+                    android:text="运单记录"
+                    android:textColor="@color/text_content_gray"/>
 
                 <ImageView
                     android:id="@+id/yundanjilv_arrow_iv"
@@ -188,7 +191,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:layout_marginTop="@dimen/base10dp"
-                    android:text="文档打印码"/>
+                    android:text="文档打印码"
+                    android:textColor="@color/text_content_gray"/>
 
 
                 <TextView
@@ -229,7 +233,8 @@
                 android:layout_marginBottom="@dimen/base10dp"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="@dimen/base10dp"
-                android:text="办理进度"/>
+                android:text="办理进度"
+                android:textColor="@color/text_content_gray"/>
 
             <View
                 android:id="@+id/divier_line_2"
@@ -270,7 +275,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/base5dp"
                     android:layout_toEndOf="@id/shenheren_lable"
-                    android:text="samuel"/>
+                    android:text="samuel"
+                    android:textColor="@color/text_content_gray"/>
 
 
                 <View
@@ -295,7 +301,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/base5dp"
                     android:layout_toEndOf="@id/icon_yewuyuan"
-                    android:text="审核人:"
+                    android:text="业务员:"
                     android:textColor="@color/text_title_gray"/>
 
                 <TextView
@@ -305,7 +311,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/base5dp"
                     android:layout_toEndOf="@id/yewuyuan_lable"
-                    android:text="bily"/>
+                    android:text="bily"
+                    android:textColor="@color/text_content_gray"/>
 
 
             </RelativeLayout>

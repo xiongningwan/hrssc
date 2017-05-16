@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="@dimen/activity_horizontal_margin"
+              android:layout_marginRight="@dimen/activity_horizontal_margin"
+              android:background="@drawable/corner_view_unclick_dialog"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/title_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/base10dp"
+        android:layout_marginTop="@dimen/base20dp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="确认返回"
+            android:textColor="@color/text_title_gray"
+            android:textSize="@dimen/project_text_size_dp_19"/>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/content_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/base15dp"
+        android:layout_marginTop="@dimen/base2dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text=""/>
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/bottom_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/base25dp"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/quit_no_draft"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base49dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/base15dp"
+            android:layout_marginStart="@dimen/base15dp"
+            android:layout_marginBottom="@dimen/base15dp"
+            android:background="@drawable/corner_view_unclick_dialog"
+            android:gravity="center"
+            android:text="退出不保存草稿"
+            android:textColor="@color/text_title_gray"
+            android:textSize="@dimen/project_text_size_dp_16"
+            />
+
+        <TextView
+            android:id="@+id/quit_have_draft"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base49dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/base15dp"
+            android:layout_marginStart="@dimen/base15dp"
+            android:layout_marginBottom="@dimen/base15dp"
+            android:background="@drawable/corner_view_unclick_dialog"
+            android:gravity="center"
+            android:text="退出并保存草稿"
+            android:textColor="@color/text_title_gray"
+            android:textSize="@dimen/project_text_size_dp_16"/>
+
+
+        <TextView
+            android:id="@+id/cancle_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base49dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/base15dp"
+            android:layout_marginStart="@dimen/base15dp"
+            android:background="@drawable/corner_view_click_dialog"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/project_color_basic_white_pure"
+            android:textSize="@dimen/project_text_size_dp_16"/>
+    </LinearLayout>
+
+</LinearLayout>
