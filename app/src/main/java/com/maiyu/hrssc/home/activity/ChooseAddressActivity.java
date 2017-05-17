@@ -11,7 +11,6 @@ import com.maiyu.hrssc.base.activity.BaseActivity;
 import com.maiyu.hrssc.base.view.HeadView;
 import com.maiyu.hrssc.home.adapter.AddressAdapter;
 import com.maiyu.hrssc.home.bean.SelfAddress;
-import com.maiyu.hrssc.util.HintUitl;
 
 import java.util.ArrayList;
 
@@ -65,7 +64,7 @@ public class ChooseAddressActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             SelfAddress selfAddress = (SelfAddress) v.getTag(R.id.key_tag_item_data);
-            HintUitl.toastShort(ChooseAddressActivity.this, selfAddress.getAddress_info());
+            //HintUitl.toastShort(ChooseAddressActivity.this, selfAddress.getAddress_info());
             Intent intent = new Intent();
             intent.putExtra("selfAddress", selfAddress);
             setResult(RESULT_OK, intent);

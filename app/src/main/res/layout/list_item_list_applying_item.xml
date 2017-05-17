@@ -22,7 +22,6 @@
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="1"
-            android:text="劳动合同"
             android:textColor="@color/text_title_gray"/>
 
 
@@ -34,7 +33,6 @@
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:layout_marginTop="@dimen/base8dp"
             android:gravity="center"
-            android:text="2017-01-22 14:00"
             android:textColor="@color/project_color_general_text_secondary"
             android:textSize="@dimen/project_text_size_dp_12"/>
 
@@ -53,7 +51,6 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:text="待签署"
                 android:textColor="@color/project_color_general_hyperlink"/>
 
 
@@ -81,7 +78,6 @@
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:ellipsize="end"
             android:lines="3"
-            android:text="驳回理由文本..................驳回理由文本.........驳回理由文本........."
             android:textSize="@dimen/project_text_size_dp_12"
             android:visibility="gone"/>
 

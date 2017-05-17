@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 
 import com.maiyu.hrssc.R;
-import com.maiyu.hrssc.home.activity.applying.bean.AttachImage;
+import com.maiyu.hrssc.base.ConstantValue;
 import com.maiyu.hrssc.util.ImageLoaderUtil;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import java.util.List;
  * 展示图片的GridView的适配器
  */
 public class ImageGridAdapter extends BaseAdapter {
-    List<AttachImage> mList = new ArrayList<>();
+    List<String> mList = new ArrayList<>();
     LayoutInflater mLayoutInflater = null;
 
     public ImageGridAdapter(Context context) {
@@ -66,10 +66,10 @@ public class ImageGridAdapter extends BaseAdapter {
             holder = (ImageViewHolder) convertView.getTag();
         }
 
-        if(mList.get(position) != null) {
+        if (mList.get(position) != null) {
             ImageLoaderUtil.loadImage(
                     holder.image,
-                    mList.get(position).getImageUrl(),
+                    ConstantValue.FILE_SERVER_URI + mList.get(position),
                     R.mipmap.user_profile_image_default);
         }
 
@@ -81,9 +81,9 @@ public class ImageGridAdapter extends BaseAdapter {
         public ImageView image;
     }
 
-    public void updatePickImageView(List<AttachImage> pictures, GridView mGridView) {
+    public void updatePickImageView(List<String> pictures, GridView mGridView) {
 
-        if(pictures == null) {
+        if (pictures == null) {
             return;
         }
 
@@ -94,7 +94,7 @@ public class ImageGridAdapter extends BaseAdapter {
 
     }
 
-    public  void setListViewHeightBasedOnChildren(GridView listView) {
+    public void setListViewHeightBasedOnChildren(GridView listView) {
         // 获取listview的adapter
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null) {

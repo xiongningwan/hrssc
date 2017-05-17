@@ -11,10 +11,6 @@ import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.activity.BaseActivity;
 import com.maiyu.hrssc.base.view.HeadView;
 import com.maiyu.hrssc.home.activity.applying.adapter.ImageGridAdapter;
-import com.maiyu.hrssc.home.activity.applying.bean.AttachImage;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,12 +62,12 @@ public class TijianActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        List<AttachImage> images = new ArrayList<>();
+       /* List<String> images = new ArrayList<>();
         images.add(new AttachImage("http://s4.cdn.deahu.com/show/lfile/81E6678F2C08A53370C9CE5D86A8A6C0.jpg", "证明"));
         images.add(new AttachImage("http://s4.cdn.deahu.com/show/lfile/81E6678F2C08A53370C9CE5D86A8A6C0.jpg", "证明"));
         images.add(new AttachImage("http://s4.cdn.deahu.com/show/lfile/81E6678F2C08A53370C9CE5D86A8A6C0.jpg", "证明"));
-        images.add(new AttachImage("http://s4.cdn.deahu.com/show/lfile/81E6678F2C08A53370C9CE5D86A8A6C0.jpg", "证明"));
-        mGridAdapter.updatePickImageView(images, mGridView);
+        images.add(new AttachImage("http://s4.cdn.deahu.com/show/lfile/81E6678F2C08A53370C9CE5D86A8A6C0.jpg", "证明"));*/
+       // mGridAdapter.updatePickImageView(images, mGridView);
     }
 
     @Override

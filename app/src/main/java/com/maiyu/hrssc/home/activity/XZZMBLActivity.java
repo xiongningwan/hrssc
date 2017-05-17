@@ -311,12 +311,14 @@ public class XZZMBLActivity extends BaseActivity {
         if (selfAddress != null) {
             mAddress = selfAddress.getAddress();
             mAddress_info = selfAddress.getAddress_info();
-            HintUitl.toastShort(this, selfAddress.getAddress());
+            HintUitl.toastShort(this, selfAddress.getAddress_info());
         }
 
         mRecipient = data.getStringExtra("recipient");
         if (mRecipient == null) {
             mRecipient = "";
+        } else {
+            HintUitl.toastShort(this, mRecipient);
         }
     }
 

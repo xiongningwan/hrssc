@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -16,10 +15,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.base.ConstantValue;
 import com.maiyu.hrssc.home.activity.applying.bean.AProgress;
-import com.maiyu.hrssc.home.activity.applying.bean.AttachFile;
-import com.maiyu.hrssc.home.activity.applying.bean.AttachImage;
-import com.maiyu.hrssc.home.activity.applying.bean.Schedule;
 import com.maiyu.hrssc.util.ImageLoaderUtil;
 
 import java.text.ParseException;
@@ -163,7 +160,7 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
             List<String> files = new ArrayList<>();
             files.clear();
             String[] fileArr = aprogress.getAttachs().split(";");
-            for (int i = 0; i < imageArr.length; i++) {
+            for (int i = 0; i < fileArr.length; i++) {
                 files.add(fileArr[i]);
             }
 
@@ -181,8 +178,6 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
             mRecyclerView.setAdapter(mRecyclerViewAdapter);
             mRecyclerViewAdapter.updateFileView(files, mRecyclerViewAdapter);
         }
-
-
     }
 
 
@@ -233,7 +228,7 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
             if (iamges.get(position) != null) {
                 ImageLoaderUtil.loadImage(
                         holder.image,
-                        iamges.get(position).getImageUrl(),
+                        ConstantValue.FILE_SERVER_URI + iamges.get(position),
                         R.mipmap.user_profile_image_default);
             }
 
@@ -290,11 +285,11 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
             }
 
             public void onBindView() {
-                AttachFile file = files.get(getAdapterPosition());
+                String file = files.get(getAdapterPosition());
                 if (file == null) {
                     return;
                 }
-                attachFileTv.setText(file.getDesc());
+                attachFileTv.setText(file.substring(file.lastIndexOf("/") + 1, file.length()));
 
             }
         }
@@ -306,7 +301,7 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
             }
 
             files.clear();
-            files.addAll(files);
+            files.addAll(list);
             mRecyclerViewAdapter.notifyDataSetChanged();
 
         }

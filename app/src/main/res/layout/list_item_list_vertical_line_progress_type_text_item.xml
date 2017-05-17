@@ -107,6 +107,10 @@
             android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="@dimen/base3dp"
+            android:paddingEnd="@dimen/base3dp"
+            android:layout_marginTop="@dimen/base5dp"
+            android:layout_marginBottom="@dimen/base5dp"
             android:text="办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明办理文字说明"
             android:textColor="@color/text_title_gray"/>
 
@@ -141,6 +145,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/file_recyclerView"
             android:layout_marginTop="@dimen/base5dp"
+            android:paddingStart="@dimen/base5dp"
             android:text="2016-12-12 18:56"
             android:textSize="@dimen/project_text_size_dp_12"
             android:textColor="@color/project_color_general_text_secondary"/>

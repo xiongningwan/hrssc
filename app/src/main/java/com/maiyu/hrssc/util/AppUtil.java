@@ -315,17 +315,17 @@ public class AppUtil {
             return "Unknown";
         }
 
-        long cal = (nowLong - dateTimeLong) / 1000;
+        long cal = (nowLong - dateTimeLong) / 1000; // 秒
 
-        if (cal < 1 * 60) {
+        if (cal < 1 * 60) {  // 小于60秒或1分钟
             return "刚刚";
 
-        } else if (cal < 60 * 60) {
+        } else if (cal < 60 * 60) { // 小于60分钟或1小时
             long minutes = cal / 60;
             return minutes + "分钟前";
 
-        } else if (cal <= 24 * 60 * 60) {
-            long hours = cal / 60 * 60;
+        } else if (cal <= 24 * 60 * 60) { // 小于24小时
+            long hours = cal / (60 * 60);
             return hours + "小时前";
 
         } else if (cal > 24 * 60 * 60) {

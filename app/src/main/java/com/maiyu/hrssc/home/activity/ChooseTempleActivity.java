@@ -12,7 +12,6 @@ import com.maiyu.hrssc.base.view.HeadView;
 import com.maiyu.hrssc.home.adapter.TempleAdapter;
 import com.maiyu.hrssc.home.bean.SelfAddress;
 import com.maiyu.hrssc.home.bean.Template;
-import com.maiyu.hrssc.util.HintUitl;
 
 import java.util.ArrayList;
 
@@ -65,7 +64,7 @@ public class ChooseTempleActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             Template template = (Template) v.getTag(R.id.key_tag_item_data);
-            HintUitl.toastShort(ChooseTempleActivity.this, template.getName());
+           // HintUitl.toastShort(ChooseTempleActivity.this, template.getName());
            /* Intent intent = new Intent();
             intent.putExtra("template", template);
             setResult(RESULT_OK, intent);*/

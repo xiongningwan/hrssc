@@ -11,7 +11,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/project_head_view_hight">
+        android:layout_height="@dimen/project_head_view_hight"
+        android:background="@color/project_color_basic_white_pure">
 
         <include layout="@layout/view_detail_header"/>
     </RelativeLayout>
@@ -107,7 +108,7 @@
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:layout_toStartOf="@+id/xh"
                     android:textColor="@color/text_title_gray"
-                    android:textSize="@dimen/base14dp"/>
+                    android:textSize="@dimen/project_text_size_dp_15"/>
 
                 <ImageView
                     android:id="@+id/xh"
@@ -144,7 +145,7 @@
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:layout_toStartOf="@+id/choose_mould_xh"
                     android:textColor="@color/text_title_gray"
-                    android:textSize="@dimen/base14dp"/>
+                    android:textSize="@dimen/project_text_size_dp_15"/>
 
                 <ImageView
                     android:id="@+id/choose_mould_xh"
@@ -234,7 +235,7 @@
                     android:hint="填写"
                     android:text=""
                     android:textColor="@color/text_title_gray"
-                    android:textSize="@dimen/base14dp"/>
+                    android:textSize="@dimen/project_text_size_dp_15"/>
 
                 <ImageView
                     android:id="@+id/simple_desc_xh"

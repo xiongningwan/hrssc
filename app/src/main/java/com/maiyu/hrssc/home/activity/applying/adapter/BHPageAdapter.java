@@ -119,7 +119,7 @@ public class BHPageAdapter extends RecyclerView.Adapter<BHPageAdapter.TodoPageVi
 
             btn.setVisibility(View.GONE);
             reason.setVisibility(View.VISIBLE);
-
+            reason.setText(apply.getResult());
 
             /*delBtn.setOnClickListener(new View.OnClickListener() {
                 @Override

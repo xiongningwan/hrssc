@@ -102,6 +102,7 @@ public class ApplyingDetialActivity extends BaseActivity {
     private String mAid;
     private FindApplyDetailData mFindApplyDetailData;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private TextView rightButtonText;
 
     @Override
     public void createActivityImpl() {
@@ -115,7 +116,7 @@ public class ApplyingDetialActivity extends BaseActivity {
         mAid = getIntent().getStringExtra("id");
 
         mHeadView.setTitle(title, true, true);
-        TextView rightButtonText = mHeadView.getRightButtonText();
+        rightButtonText = mHeadView.getRightButtonText();
         rightButtonText.setText("评价");
         rightButtonText.setTextColor(ContextCompat.getColor(this, R.color.project_color_general_hyperlink));
         rightButtonText.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +125,7 @@ public class ApplyingDetialActivity extends BaseActivity {
                 HintUitl.toastShort(ApplyingDetialActivity.this, "评价");
             }
         });
+        rightButtonText.setVisibility(View.GONE);
 
 
         // 设置列表
@@ -150,14 +152,18 @@ public class ApplyingDetialActivity extends BaseActivity {
     @OnClick({R.id.hetong_rl, R.id.yundanjilv_rl})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.hetong_rl:
+            case R.id.hetong_rl: {
                 // 内容详情
-                startActivity(new Intent(this, ContentDetialActivity.class));
-
+                Intent intent = new Intent(this, ContentDetialActivity.class);
+                intent.putExtra("FindApplyDetailData", mFindApplyDetailData);
+                startActivity(intent);
+            }
                 break;
             case R.id.yundanjilv_rl:
                 // 运单记录
-                startActivity(new Intent(this, YDJLActivity.class));
+                Intent intent = new Intent(this, YDJLActivity.class);
+                intent.putExtra("FindApplyDetailData", mFindApplyDetailData);
+                startActivity(intent);
                 break;
         }
     }
@@ -221,7 +227,7 @@ public class ApplyingDetialActivity extends BaseActivity {
             mYewuyuanText.setText(applyDetail.getDeal_name());
         }
 
-        if(list != null && list.size() > 0) {
+        if (list != null && list.size() > 0) {
             mAdapter.setData(list);
         }
 
@@ -247,6 +253,7 @@ public class ApplyingDetialActivity extends BaseActivity {
             mStatus.setText("待领取");
         } else if ("3".equals(applyDetail.getStatus())) {
             mStatus.setText("待评价");
+            rightButtonText.setVisibility(View.VISIBLE);
         } else if ("4".equals(applyDetail.getStatus())) {
             mStatus.setText("已完成");
         } else if ("5".equals(applyDetail.getStatus())) {
@@ -255,19 +262,23 @@ public class ApplyingDetialActivity extends BaseActivity {
     }
 
     void setPrintData(ApplyDetail applyDetail) {
-        //打印状态  0-打印失败 1-打印成功 2-未打印
-        if ("0".equals(applyDetail.getPrint_status())) {
-            mDayinSuccessIv.setBackgroundResource(R.mipmap.icon_dayincg);
-        } else if ("1".equals(applyDetail.getPrint_status())) {
-            mDayinSuccessIv.setBackgroundResource(R.mipmap.icon_dayincg);
-        } else if ("2".equals(applyDetail.getPrint_status())) {
-            mDayinSuccessIv.setBackgroundResource(R.mipmap.icon_dayincg);
+        // 领取方式：0:自取 1:邮寄, 2打印
+        if ("2".equals(applyDetail.getGet_way())) {
+            mWendangdayinRl.setVisibility(View.VISIBLE);
+            // 打印状态  0-打印失败 1-打印成功 2-未打印
+            if ("0".equals(applyDetail.getPrint_status())) {
+                mDayinSuccessIv.setVisibility(View.GONE);
+            } else if ("1".equals(applyDetail.getPrint_status())) {
+                mDayinSuccessIv.setVisibility(View.VISIBLE);
+            } else if ("2".equals(applyDetail.getPrint_status())) {
+                mDayinSuccessIv.setVisibility(View.GONE);
+            }
+
+            mCode.setText(applyDetail.getPrint_code());
+        } else {
+            mWendangdayinRl.setVisibility(View.GONE);
         }
-
-        mCode.setText(applyDetail.getPrint_code());
     }
-
-
 
 
 }

@@ -138,7 +138,7 @@
     </style>
 
     <style name="SpinnerTextStyle">
-        <item name="android:textSize">@dimen/base14dp</item>
+        <item name="android:textSize">@dimen/base15dp</item>
         <item name="android:textColor">@color/text_title_gray</item>
     </style>
 

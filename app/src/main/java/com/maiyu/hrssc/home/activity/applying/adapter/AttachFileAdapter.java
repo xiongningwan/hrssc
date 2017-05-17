@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
-import com.maiyu.hrssc.home.activity.applying.bean.AttachFile;
+import com.maiyu.hrssc.home.activity.applying.bean.AProgress;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class AttachFileAdapter extends RecyclerView.Adapter<AttachFileAdapter.AttachFileViewHolder> {
 
-    private List<AttachFile> mList = new ArrayList();
+    private List<String> mList = new ArrayList();
     private final Context mContext;
 
     public AttachFileAdapter(Context context) {
@@ -66,12 +66,22 @@ public class AttachFileAdapter extends RecyclerView.Adapter<AttachFileAdapter.At
         }
 
         public void onBindView() {
-            AttachFile file = mList.get(getAdapterPosition());
+            String file = mList.get(getAdapterPosition());
             if(file == null) {
                 return;
             }
-            attachFileTv.setText(file.getDesc());
 
+            attachFileTv.setText(file.substring(file.lastIndexOf("/") + 1, file.length()));
+
+        }
+    }
+
+    void setFiles(AProgress aprogress) {
+        // 添加文件
+        List<String> files = new ArrayList<>();
+        String[] fileArr = aprogress.getAttachs().split(";");
+        for (int i = 0; i < fileArr.length; i++) {
+            files.add(fileArr[i]);
         }
     }
 

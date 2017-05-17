@@ -67,10 +67,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/divier_line"
-                    android:layout_marginStart="@dimen/base10dp"
-                    android:layout_marginTop="@dimen/base10dp"
+                    android:layout_marginStart="@dimen/base13dp"
+                    android:layout_marginTop="@dimen/base17dp"
                     android:layout_toEndOf="@id/icon_xiangqing"
-                    android:text=""
                     android:textColor="@color/text_title_gray"
                     android:textSize="@dimen/project_text_size_dp_16"/>
 
@@ -80,10 +79,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/title_name"
-                    android:layout_marginStart="@dimen/base10dp"
-                    android:layout_marginTop="@dimen/base30dp"
+                    android:layout_marginStart="@dimen/base13dp"
+                    android:layout_marginTop="@dimen/base22dp"
                     android:layout_toEndOf="@id/icon_xiangqing"
-                    android:text="14:00"
+                    android:text=""
                     android:textColor="@color/project_color_general_text_secondary"
                     android:textSize="@dimen/project_text_size_dp_12"/>
 
@@ -94,10 +93,9 @@
                     android:layout_alignParentEnd="true"
                     android:layout_below="@id/title_name"
                     android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                    android:layout_marginTop="@dimen/base30dp"
-                    android:text="待签署"
+                    android:layout_marginTop="@dimen/base17dp"
                     android:textColor="@color/project_color_general_hyperlink"
-                    android:textSize="@dimen/project_text_size_dp_16"
+                    android:textSize="@dimen/project_text_size_dp_15"
                     />
             </RelativeLayout>
 
@@ -131,11 +129,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/base5dp"
+                    android:layout_marginEnd="@dimen/base8dp"
                     android:layout_toStartOf="@id/arrow_iv"
-                    android:text="查看详情"
+                    android:text="查看详细"
                     android:textColor="@color/text_title_gray"
-                    android:textSize="@dimen/project_text_size_dp_16"/>
+                    android:textSize="@dimen/project_text_size_dp_15"/>
             </RelativeLayout>
 
 
@@ -169,11 +167,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/base5dp"
+                    android:layout_marginEnd="@dimen/base8dp"
                     android:layout_toStartOf="@id/yundanjilv_arrow_iv"
-                    android:text="查看详情"
+                    android:text="查看详细"
                     android:textColor="@color/text_title_gray"
-                    android:textSize="@dimen/project_text_size_dp_16"/>
+                    android:textSize="@dimen/project_text_size_dp_15"/>
             </RelativeLayout>
 
 
@@ -183,7 +181,8 @@
                 android:id="@+id/wendangdayin_rl"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/base100dp"
-                android:background="@color/project_color_basic_white_pure">
+                android:background="@color/project_color_basic_white_pure"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/wendangdayin_lable"
@@ -213,7 +212,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                    android:src="@mipmap/icon_dayincg"/>
+                    android:src="@mipmap/icon_dayincg"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -275,7 +275,6 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/base5dp"
                     android:layout_toEndOf="@id/shenheren_lable"
-                    android:text="samuel"
                     android:textColor="@color/text_content_gray"/>
 
 
@@ -311,7 +310,6 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/base5dp"
                     android:layout_toEndOf="@id/yewuyuan_lable"
-                    android:text="bily"
                     android:textColor="@color/text_content_gray"/>
 
 

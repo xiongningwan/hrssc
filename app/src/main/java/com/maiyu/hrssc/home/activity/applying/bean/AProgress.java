@@ -1,10 +1,13 @@
 package com.maiyu.hrssc.home.activity.applying.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Administrator on 2017/5/16.
  */
 
-public class AProgress {
+public class AProgress implements Parcelable {
     private String id;// 12,     //进度ID
     private String attachs;// ,//附件
     private String admin;// superadmin,//添加人员用户名（不展示）
@@ -79,4 +82,47 @@ public class AProgress {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.attachs);
+        dest.writeString(this.admin);
+        dest.writeString(this.deal_name);
+        dest.writeString(this.create_time);
+        dest.writeString(this.images);
+        dest.writeString(this.appid);
+        dest.writeString(this.comment);
+    }
+
+    public AProgress() {
+    }
+
+    protected AProgress(Parcel in) {
+        this.id = in.readString();
+        this.attachs = in.readString();
+        this.admin = in.readString();
+        this.deal_name = in.readString();
+        this.create_time = in.readString();
+        this.images = in.readString();
+        this.appid = in.readString();
+        this.comment = in.readString();
+    }
+
+    public static final Parcelable.Creator<AProgress> CREATOR = new Parcelable.Creator<AProgress>() {
+        @Override
+        public AProgress createFromParcel(Parcel source) {
+            return new AProgress(source);
+        }
+
+        @Override
+        public AProgress[] newArray(int size) {
+            return new AProgress[size];
+        }
+    };
 }

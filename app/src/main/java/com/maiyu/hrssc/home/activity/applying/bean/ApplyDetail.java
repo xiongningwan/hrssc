@@ -1,10 +1,13 @@
 package com.maiyu.hrssc.home.activity.applying.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Administrator on 2017/5/16.
  */
 
-public class ApplyDetail {
+public class ApplyDetail implements Parcelable {
     private String uid;// 1,                            //用户id
     private String result;// sss,                     //被驳回的理由
     private String attachs;// ,                       //附件
@@ -29,6 +32,7 @@ public class ApplyDetail {
     private String cid1;// 1,           //一级业务id
     private String postal_type;// -1,  //邮件类型 -1 无快递公司      0 其他快递
     private String tpl_tid;// 17,      //模板id
+    private String tpl_name;// ,      //模板name
     private String ext1;// ,         //扩展字段1
     private String ext2;// ,         //扩展字段2
     private String audit_name;// 审核员1,//审核员名称
@@ -42,6 +46,18 @@ public class ApplyDetail {
     private String brief;// 描述,    //描述
     private String aid_audit;// 管理员1//审核员用户名（不展示，展示的是审核员名称）
 
+
+    public String getTpl_name() {
+        return tpl_name;
+    }
+
+    public void setTpl_name(String tpl_name) {
+        this.tpl_name = tpl_name;
+    }
+
+    public static Creator<ApplyDetail> getCREATOR() {
+        return CREATOR;
+    }
 
     public String getUid() {
         return uid;
@@ -330,4 +346,105 @@ public class ApplyDetail {
     public void setAid_audit(String aid_audit) {
         this.aid_audit = aid_audit;
     }
+
+    public ApplyDetail() {
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.uid);
+        dest.writeString(this.result);
+        dest.writeString(this.attachs);
+        dest.writeString(this.link);
+        dest.writeString(this.address_info);
+        dest.writeString(this.work_order);
+        dest.writeString(this.print_code);
+        dest.writeString(this.tpl_content);
+        dest.writeString(this.recipient);
+        dest.writeString(this.city);
+        dest.writeString(this.postal_number);
+        dest.writeString(this.id);
+        dest.writeString(this.deal_name);
+        dest.writeString(this.name);
+        dest.writeString(this.tpl_form);
+        dest.writeString(this.tpl_document);
+        dest.writeString(this.pageid);
+        dest.writeString(this.print_status);
+        dest.writeString(this.status);
+        dest.writeString(this.cid2);
+        dest.writeString(this.aid_deal);
+        dest.writeString(this.cid1);
+        dest.writeString(this.postal_type);
+        dest.writeString(this.tpl_tid);
+        dest.writeString(this.tpl_name);
+        dest.writeString(this.ext1);
+        dest.writeString(this.ext2);
+        dest.writeString(this.audit_name);
+        dest.writeString(this.address);
+        dest.writeString(this.create_time);
+        dest.writeString(this.images);
+        dest.writeString(this.audit_time);
+        dest.writeString(this.get_way);
+        dest.writeString(this.language);
+        dest.writeString(this.comment);
+        dest.writeString(this.brief);
+        dest.writeString(this.aid_audit);
+    }
+
+    protected ApplyDetail(Parcel in) {
+        this.uid = in.readString();
+        this.result = in.readString();
+        this.attachs = in.readString();
+        this.link = in.readString();
+        this.address_info = in.readString();
+        this.work_order = in.readString();
+        this.print_code = in.readString();
+        this.tpl_content = in.readString();
+        this.recipient = in.readString();
+        this.city = in.readString();
+        this.postal_number = in.readString();
+        this.id = in.readString();
+        this.deal_name = in.readString();
+        this.name = in.readString();
+        this.tpl_form = in.readString();
+        this.tpl_document = in.readString();
+        this.pageid = in.readString();
+        this.print_status = in.readString();
+        this.status = in.readString();
+        this.cid2 = in.readString();
+        this.aid_deal = in.readString();
+        this.cid1 = in.readString();
+        this.postal_type = in.readString();
+        this.tpl_tid = in.readString();
+        this.tpl_name = in.readString();
+        this.ext1 = in.readString();
+        this.ext2 = in.readString();
+        this.audit_name = in.readString();
+        this.address = in.readString();
+        this.create_time = in.readString();
+        this.images = in.readString();
+        this.audit_time = in.readString();
+        this.get_way = in.readString();
+        this.language = in.readString();
+        this.comment = in.readString();
+        this.brief = in.readString();
+        this.aid_audit = in.readString();
+    }
+
+    public static final Creator<ApplyDetail> CREATOR = new Creator<ApplyDetail>() {
+        @Override
+        public ApplyDetail createFromParcel(Parcel source) {
+            return new ApplyDetail(source);
+        }
+
+        @Override
+        public ApplyDetail[] newArray(int size) {
+            return new ApplyDetail[size];
+        }
+    };
 }

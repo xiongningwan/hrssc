@@ -88,6 +88,12 @@ public class WriteTempleActivity extends BaseActivity {
             String nameStr = mNameTextViews.get(i).getText().toString();
             String etString = mInputViews.get(i).getText().toString();
 
+            if(etString.contains(";") || etString.contains("=") || etString.contains("；")) {
+                HintUitl.toastShort(this, "字段不能有特殊字符;= ");
+                sb.setLength(0);
+                break;
+            }
+
 
             if (etString == null || "".equals(etString)) {
                 HintUitl.toastShort(this, "字段不能为空");

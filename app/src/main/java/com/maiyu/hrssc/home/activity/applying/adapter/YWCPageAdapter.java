@@ -1,6 +1,7 @@
 package com.maiyu.hrssc.home.activity.applying.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.home.activity.applying.ApplyingDetialActivity;
 import com.maiyu.hrssc.home.activity.applying.bean.Apply;
 import com.maiyu.hrssc.util.AppUtil;
 
@@ -116,9 +118,10 @@ public class YWCPageAdapter extends RecyclerView.Adapter<YWCPageAdapter.TodoPage
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //  Intent intent = new Intent(mContext, InformationDetialActivity.class);
-                    //  intent.putExtra("title", info.getTitle());
-                    //  mContext.startActivity(intent);
+                    Intent intent = new Intent(mContext, ApplyingDetialActivity.class);
+                    intent.putExtra("id", apply.getId());
+                    intent.putExtra("title", "申请详情");
+                    mContext.startActivity(intent);
                 }
             });
         }

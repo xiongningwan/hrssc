@@ -84,6 +84,10 @@ public class AddressManageActivity extends BaseActivity implements OnRefreshList
 
     @Override
     public void initData() {
+        String style = getIntent().getStringExtra("style");
+        if("邮寄".equals(style)) {
+            setResult(RESULT_OK);
+        }
         new AddressListAsyncTask(mToken, String.valueOf(mPage), String.valueOf(mCount)).execute();
     }
 
@@ -317,4 +321,8 @@ public class AddressManageActivity extends BaseActivity implements OnRefreshList
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

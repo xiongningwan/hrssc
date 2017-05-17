@@ -16,7 +16,6 @@ import com.maiyu.hrssc.base.view.dialog.LoadingDialog;
 import com.maiyu.hrssc.home.bean.SelfAddress;
 import com.maiyu.hrssc.util.BaseAsyncTask;
 import com.maiyu.hrssc.util.EngineFactory;
-import com.maiyu.hrssc.util.HintUitl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,11 +82,12 @@ public class GetStyleActivity extends BaseActivity {
             }
             break;
             case R.id.yj_rl: {
-                Intent data2 = new Intent();
-                data2.putExtra("style", "邮寄");
+
+                Intent intent = new Intent(this, AddressManageActivity.class);
+                intent.putExtra("style", "邮寄");
                 //setResult(RESULT_OK, data2);
                 // startActivityForResult(new Intent(this, DeliveryAddressActivity.class), 112);
-                startActivityForResult(new Intent(this, AddressManageActivity.class), 112);
+                startActivityForResult(intent, 112);
             }
             break;
         }
@@ -104,13 +104,13 @@ public class GetStyleActivity extends BaseActivity {
                         SelfAddress selfAddress = (SelfAddress) data.getParcelableExtra("selfAddress");
                         data.putExtra("style", "自助领取");
                         setResult(RESULT_OK, data);
-                        HintUitl.toastShort(this, data != null ? selfAddress.getAddress() : "未选取到地址");
+                       // HintUitl.toastShort(this, data != null ? selfAddress.getAddress_info() : "未选取到地址");
                     }
                     break;
                 case 112:
-                    if (data != null) {
+                    //if (data != null) {
                         new AddressListAsyncTask(mToken, String.valueOf(mPage), String.valueOf(mCount)).execute();
-                    }
+                   // }
                     break;
 
             }

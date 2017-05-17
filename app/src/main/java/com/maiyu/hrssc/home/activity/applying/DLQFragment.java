@@ -236,6 +236,8 @@ public class DLQFragment extends Fragment implements OnRefreshListener, OnLoadMo
             }
             if (str != null) {
                 HintUitl.toastShort(getActivity(), str);
+                // 刷新列表
+                onRefresh();
             }
 
             super.onPostExecute(result);
