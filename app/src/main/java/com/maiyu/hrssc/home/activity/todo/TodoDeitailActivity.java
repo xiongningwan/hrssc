@@ -79,6 +79,7 @@ public class TodoDeitailActivity extends BaseActivity {
     private String mId;
     private ContractFlow mContractFlow;
     ConfirmDialog dialog;
+
     @Override
     public void createActivityImpl() {
         setContentView(R.layout.activity_todo_deitail);
@@ -227,7 +228,7 @@ public class TodoDeitailActivity extends BaseActivity {
 
         mAddressDetailText.setText(contractFlow.getAddress());
         String document = contractFlow.getTpl_document();
-        String contractName = document.substring(document.lastIndexOf("/"), document.lastIndexOf("."));
+        String contractName = getDocumentName(document);
         mContract.setText(contractName);
         mBeizhuEt.setText(contractFlow.getBrief());
     }
@@ -235,7 +236,7 @@ public class TodoDeitailActivity extends BaseActivity {
 
     private void seeContract(ContractFlow contractFlow) {
         String document = contractFlow.getTpl_document();
-        String contractName = document.substring(document.lastIndexOf("/"), document.lastIndexOf("."));
+        String contractName = getDocumentName(document);
 
         Intent intent = new Intent(this, WebActivity.class);
         intent.putExtra("url", ConstantValue.FILE_SERVER_URI + contractFlow.getTpl_document());
@@ -243,6 +244,13 @@ public class TodoDeitailActivity extends BaseActivity {
         intent.putExtra("type", ConstantValue.TYPE_ORDINARY);
         startActivity(intent);
     }
+
+
+    String getDocumentName(String document) {
+
+        return  document.substring(document.lastIndexOf("/") + 1, document.length());
+    }
+
 
 
     /**
@@ -296,7 +304,7 @@ public class TodoDeitailActivity extends BaseActivity {
 
 
     void signContract(String title, String content, final String signWay) {
-         dialog = new ConfirmDialog(this, new View.OnClickListener() {
+        dialog = new ConfirmDialog(this, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dissmiss();

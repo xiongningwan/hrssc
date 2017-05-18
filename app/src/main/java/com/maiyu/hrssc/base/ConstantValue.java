@@ -227,6 +227,10 @@ public interface ConstantValue {
      * 查询业务详情
      */
     String path_findApplyDetail = "/hrsscBusinessController/findApplyDetail";
+    /**
+     * 获取体检结果
+     */
+    String path_getHealthCheck = "/hrsscBusinessController/getHealthCheck";
 
 
     /**

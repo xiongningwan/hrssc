@@ -166,12 +166,12 @@ public class EmployeeActivity extends CheckPermissionsActivity {
                 }
                 break;
             case R.id.dizhi_rl:
-                if(mGetWebsiteData != null && mGetWebsiteData.getCategoryBaseinfo() != null) {
+                if (mGetWebsiteData != null && mGetWebsiteData.getCategoryBaseinfo() != null) {
                     CategoryBaseinfo baseInfo = mGetWebsiteData.getCategoryBaseinfo();
                     Intent intent = new Intent(this, DizhiActivity.class);
-                    intent .putExtra("address" , baseInfo.getBaodao_addr());
-                    intent .putExtra("latitude" , mLatlng.latitude);
-                    intent .putExtra("longitude" , mLatlng.longitude);
+                    intent.putExtra("address", baseInfo.getBaodao_addr());
+                    intent.putExtra("latitude", mLatlng.latitude);
+                    intent.putExtra("longitude", mLatlng.longitude);
                     startActivity(intent);
                 }
 
@@ -296,6 +296,7 @@ public class EmployeeActivity extends CheckPermissionsActivity {
             switch (location) {
                 case 1:
                     intent = new Intent(this, TijianActivity.class);
+                    intent.putExtra("GetWebSiteData", mGetWebsiteData);
                     break;
                 case 2:
                     intent = new Intent(this, XZZMBLActivity.class);

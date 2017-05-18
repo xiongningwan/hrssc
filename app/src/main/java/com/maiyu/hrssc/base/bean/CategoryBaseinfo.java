@@ -1,10 +1,13 @@
 package com.maiyu.hrssc.base.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * 获取某个二级业务的基础信息（官方网站，体检、报到地址，联系人，联系方式）
  */
 
-public class CategoryBaseinfo {
+public class CategoryBaseinfo implements Parcelable {
     private String id;//5,              //id
     private String city;//深圳市,      //城市
     private String cid1;//2,            //所属一级业务
@@ -87,4 +90,49 @@ public class CategoryBaseinfo {
     public void setBaodao_phone(String baodao_phone) {
         this.baodao_phone = baodao_phone;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.city);
+        dest.writeString(this.cid1);
+        dest.writeString(this.cid2);
+        dest.writeString(this.website);
+        dest.writeString(this.create_time);
+        dest.writeString(this.baodao_addr);
+        dest.writeString(this.baodao_contact);
+        dest.writeString(this.baodao_phone);
+    }
+
+    public CategoryBaseinfo() {
+    }
+
+    protected CategoryBaseinfo(Parcel in) {
+        this.id = in.readString();
+        this.city = in.readString();
+        this.cid1 = in.readString();
+        this.cid2 = in.readString();
+        this.website = in.readString();
+        this.create_time = in.readString();
+        this.baodao_addr = in.readString();
+        this.baodao_contact = in.readString();
+        this.baodao_phone = in.readString();
+    }
+
+    public static final Parcelable.Creator<CategoryBaseinfo> CREATOR = new Parcelable.Creator<CategoryBaseinfo>() {
+        @Override
+        public CategoryBaseinfo createFromParcel(Parcel source) {
+            return new CategoryBaseinfo(source);
+        }
+
+        @Override
+        public CategoryBaseinfo[] newArray(int size) {
+            return new CategoryBaseinfo[size];
+        }
+    };
 }

@@ -11,7 +11,7 @@ public class ContractFlow {
     private String brief;//哈哈,
     private String tpl_cid;//100018,
     private String tpl_name;//北京地区开发人员劳动合同（中文）,
-    private String tpl_form;//,
+    private String tpl_form;//, //此字段在本接口用于展示合同详情，是拼接好的html,直接展示在合同预览处
     private String sender;//,
     private String sign_way;//2,
     private String print_code;//1493104018912    //新增打印码字段

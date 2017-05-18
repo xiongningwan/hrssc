@@ -3,6 +3,7 @@ package com.maiyu.hrssc.base.engine;
 import android.content.Context;
 
 import com.maiyu.hrssc.base.bean.Banners;
+import com.maiyu.hrssc.base.bean.CheckResult;
 import com.maiyu.hrssc.base.bean.GetWebsiteData;
 import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.home.activity.applying.bean.FindApplyDetailData;
@@ -174,6 +175,7 @@ public interface IBizEngine {
 
     /**
      * 查询我的申请 ，草稿箱中查询草稿也使用该接口
+     *
      * @param context
      * @param token
      * @param status
@@ -183,8 +185,10 @@ public interface IBizEngine {
      * @throws NetException
      */
     GetApplysData getApplys(Context context, String token, String status, String page, String rows) throws NetException;
+
     /**
      * 待领取状态的申请  需要确认已领取申请
+     *
      * @param context
      * @param token
      * @param aid
@@ -192,8 +196,10 @@ public interface IBizEngine {
      * @throws NetException
      */
     String gain(Context context, String token, String aid) throws NetException;
+
     /**
      * 删除业务
+     *
      * @param context
      * @param token
      * @param aid
@@ -201,8 +207,10 @@ public interface IBizEngine {
      * @throws NetException
      */
     String deleteBusiness(Context context, String token, String aid) throws NetException;
+
     /**
      * 查询业务详情
+     *
      * @param context
      * @param token
      * @param aid
@@ -210,4 +218,16 @@ public interface IBizEngine {
      * @throws NetException
      */
     FindApplyDetailData findApplyDetail(Context context, String token, String aid) throws NetException;
+
+    /**
+     * 体检结果
+     *
+     * @param context
+     * @param token
+     * @return
+     * @throws NetException
+     */
+    CheckResult getHealthCheck(Context context, String token) throws NetException;
+
+
 }

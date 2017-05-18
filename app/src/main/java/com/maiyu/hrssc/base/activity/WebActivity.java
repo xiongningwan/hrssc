@@ -241,7 +241,7 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
             //return super.shouldOverrideUrlLoading(view, url);
             return true;
         }
-
+/*
         @Override
         public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
             // HintUitl.toastShort(WebActivity.this, "加载网页失败!");
@@ -254,7 +254,7 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
             }
 
             super.onReceivedError(view, errorCode, description, failingUrl);
-        }
+        }*/
 
         @TargetApi(Build.VERSION_CODES.M)
         @Override

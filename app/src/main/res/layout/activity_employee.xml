@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@id/city_name"
             android:layout_below="@id/line_divider"
-            android:layout_marginTop="@dimen/base10dp"
+            android:layout_marginTop="@dimen/base8dp"
             android:layout_toEndOf="@id/city_name_icon">
 
             <TextView
