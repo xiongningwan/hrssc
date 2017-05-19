@@ -59,15 +59,15 @@ public class FundsActivity extends BaseActivity {
         mId = getIntent().getStringExtra("id");
         mTitle = getIntent().getStringExtra("name");
         mLoadingDialog = new LoadingDialog(this);
-        mHeadView.setTitle(mTitle, true, true);
+        mHeadView.setTitle(mTitle, true, false);
         TextView rightBtnTv = mHeadView.getRightButtonText();
         rightBtnTv.setText("历史");
         rightBtnTv.setTextColor(ContextCompat.getColor(this, R.color.project_color_general_hyperlink));
         rightBtnTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 startActivity(new Intent(FundsActivity.this, FundsHistoryActivity.class));
+
             }
         });
     }

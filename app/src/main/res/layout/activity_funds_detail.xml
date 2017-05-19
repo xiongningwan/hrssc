@@ -56,7 +56,6 @@
                 android:layout_below="@id/point"
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
-                android:text="200.00元"
                 android:textColor="@color/project_color_basic_white_pure"/>
 
         </RelativeLayout>
@@ -93,7 +92,6 @@
                 android:id="@+id/value_jfd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="深圳"
                 android:textColor="@color/text_title_gray"/>
 
         </TableRow>
@@ -107,7 +105,7 @@
                 android:id="@+id/lable_jnyf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="缴纳月份"
+                android:text="缴纳年月"
                 android:textColor="@color/text_title_gray"/>
 
             <TextView
@@ -121,7 +119,6 @@
                 android:id="@+id/value_jnyf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="11"
                 android:textColor="@color/text_title_gray"/>
 
         </TableRow>
@@ -149,7 +146,6 @@
                 android:id="@+id/value_jfjs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5000.00"
                 android:textColor="@color/text_title_gray"/>
 
         </TableRow>
@@ -177,7 +173,6 @@
                 android:id="@+id/value_dwbl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10"
                 android:textColor="@color/text_title_gray"/>
 
         </TableRow>
@@ -205,7 +200,6 @@
                 android:id="@+id/value_grbl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5"
                 android:textColor="@color/text_title_gray"/>
 
         </TableRow>

@@ -12,6 +12,8 @@ import com.maiyu.hrssc.base.engine.IBizEngine;
 import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.home.activity.applying.bean.FindApplyDetailData;
 import com.maiyu.hrssc.home.activity.applying.bean.GetApplysData;
+import com.maiyu.hrssc.home.activity.funds.bean.PublicFund;
+import com.maiyu.hrssc.home.activity.socialsecurity.bean.SocialSecurityFirstData;
 import com.maiyu.hrssc.home.activity.todo.bean.ContractFlow;
 import com.maiyu.hrssc.home.activity.todo.bean.Todo;
 import com.maiyu.hrssc.home.bean.Category1;
@@ -644,5 +646,112 @@ public class BizEngine extends BaseEngine implements IBizEngine {
             e.printStackTrace();
         }
         return data;
+    }
+
+    @Override
+    public SocialSecurityFirstData getSocialSecurityFirst(Context context, String token) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_getSocialSecurityFirst;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        SocialSecurityFirstData data = null;
+        try {
+            json = JSON.parseObject(json).getString("data");
+            data = JSON.parseObject(json, SocialSecurityFirstData.class);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+
+    @Override
+    public PublicFund getPublicFundFirst(Context context, String token) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_getPublicFundFirst;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        PublicFund data = null;
+        try {
+            json = JSON.parseObject(json).getString("data");
+            json = JSON.parseObject(json).getString("publicFund");
+            data = JSON.parseObject(json, PublicFund.class);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    @Override
+    public List<PublicFund> getPublicFunds(Context context, String token, String page, String rows) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_getPublicFunds;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("page", page);
+        params.put("rows", rows);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        List<PublicFund> list = null;
+        try {
+            json = JSON.parseObject(json).getString("data");
+            json = JSON.parseObject(json).getString("publicFunds");
+            list = JSON.parseArray(json, PublicFund.class);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }

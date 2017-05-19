@@ -61,7 +61,6 @@
                         android:layout_below="@id/point"
                         android:layout_centerHorizontal="true"
                         android:gravity="center"
-                        android:text="1000.00元"
                         android:textColor="@color/project_color_basic_white_pure"/>
 
                 </RelativeLayout>
@@ -124,7 +123,7 @@
                         android:layout_height="@dimen/base45dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="缴纳月份"
+                        android:text="缴纳年月"
                         android:textColor="@color/project_color_basic_white_pure"/>
 
                     <TextView
@@ -163,7 +162,6 @@
                         android:layout_height="@dimen/base45dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="深圳"
                         android:textColor="@color/text_title_gray"/>
 
                     <TextView
@@ -172,7 +170,6 @@
                         android:layout_height="@dimen/base45dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="11"
                         android:textColor="@color/text_title_gray"/>
 
                     <TextView
@@ -181,7 +178,6 @@
                         android:layout_height="@dimen/base45dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="5000.00"
                         android:textColor="@color/text_title_gray"/>
 
                     <TextView
@@ -190,7 +186,6 @@
                         android:layout_height="@dimen/base45dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="100.00"
                         android:textColor="@color/text_title_gray"/>
 
                 </TableRow>

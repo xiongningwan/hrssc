@@ -250,11 +250,12 @@ public class DLQFragment extends Fragment implements OnRefreshListener, OnLoadMo
 
         @Override
         public void onClick(View v) {
+            final Apply apply = (Apply) v.getTag(R.id.key_tag_item_data);
             if (dialog == null) {
                 dialog = new ConfirmDialog(getActivity(), new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Apply apply = (Apply) v.getTag(R.id.key_tag_item_data);
+
                         if (apply != null) {
                             new GainAsyncTask(mToken, apply.getId()).execute();
                         }

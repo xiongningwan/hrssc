@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/project_color_basic_white_pure"
+    android:orientation="vertical"
+    tools:context="com.maiyu.hrssc.home.activity.socialsecurity.SSHistoryActivity">
+
+    <com.maiyu.hrssc.base.view.HeadView
+        android:id="@+id/head_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/project_head_view_hight">
+
+    </com.maiyu.hrssc.base.view.HeadView>
+
+    <include layout="@layout/view_space_layout"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/project_color_general_hyperlink2"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/base45dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="缴纳地"
+            android:textColor="@color/text_title_gray"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/base45dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="缴纳年月"
+            android:textColor="@color/text_title_gray"/>
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/base45dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="缴纳基数"
+            android:textColor="@color/text_title_gray"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/base45dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="单位比例"
+            android:textColor="@color/text_title_gray"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/base45dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="个人比例"
+            android:textColor="@color/text_title_gray"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/base45dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="缴费金额"
+            android:textColor="@color/text_title_gray"/>
+    </LinearLayout>
+
+    <include
+        layout="@layout/layout_recirclerview_fresh_to_toad"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
+</LinearLayout>

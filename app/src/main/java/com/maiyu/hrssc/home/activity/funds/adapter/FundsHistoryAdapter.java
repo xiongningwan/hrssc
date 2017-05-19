@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
-import com.maiyu.hrssc.home.activity.funds.bean.Funds;
+import com.maiyu.hrssc.home.activity.funds.bean.PublicFund;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +16,9 @@ import java.util.List;
  * Created by Administrator on 2017/4/5.
  */
 
-public class FundsHistoryAdapter extends RecyclerView.Adapter<FundsHistoryAdapter.TodoPageViewHolder>{
+public class FundsHistoryAdapter extends RecyclerView.Adapter<FundsHistoryAdapter.TodoPageViewHolder> {
 
-    private List<Funds> mList = new ArrayList();
+    private List<PublicFund> mList = new ArrayList();
     private final Context mContext;
 
     public FundsHistoryAdapter(Context context) {
@@ -40,7 +40,7 @@ public class FundsHistoryAdapter extends RecyclerView.Adapter<FundsHistoryAdapte
 
     @Override
     public TodoPageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = View.inflate(mContext, R.layout.list_item_list_ss_history_item, null);
+        View view = View.inflate(mContext, R.layout.list_item_list_fund_history_item, null);
         return new TodoPageViewHolder(view);
     }
 
@@ -56,23 +56,35 @@ public class FundsHistoryAdapter extends RecyclerView.Adapter<FundsHistoryAdapte
 
 
     class TodoPageViewHolder extends RecyclerView.ViewHolder {
+        private TextView city;
         private TextView time;
-        private TextView money;
+        private TextView jishu;
+        private TextView danweibili;
+        private TextView gerenbili;
+        private TextView amount;
 
         public TodoPageViewHolder(View itemView) {
             super(itemView);
+            city = (TextView) itemView.findViewById(R.id.city);
             time = (TextView) itemView.findViewById(R.id.time);
-            money = (TextView) itemView.findViewById(R.id.money);
+            jishu = (TextView) itemView.findViewById(R.id.jishu);
+            danweibili = (TextView) itemView.findViewById(R.id.danweibili);
+            gerenbili = (TextView) itemView.findViewById(R.id.gerenbili);
+            amount = (TextView) itemView.findViewById(R.id.amount);
         }
 
 
         void onBindView() {
-            final Funds item = (Funds) mList.get(getAdapterPosition());
-            if(item == null) {
+            final PublicFund item = (PublicFund) mList.get(getAdapterPosition());
+            if (item == null) {
                 return;
             }
-            time.setText(item.getTime());
-            money.setText(item.getMoney()+"元");
+            city.setText(item.getCity());
+            time.setText(item.getPaytime());
+            jishu.setText(item.getBase());
+            danweibili.setText(item.getPercent_company());
+            gerenbili.setText(item.getPercent_personal());
+            amount.setText(item.getPayamount());
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +92,7 @@ public class FundsHistoryAdapter extends RecyclerView.Adapter<FundsHistoryAdapte
                 public void onClick(View v) {
                     //Intent intent = new Intent(mContext, FundsDetailActivity.class);
                     //  intent.putExtra("title", info.getTitle());
-                   // mContext.startActivity(intent);
+                    // mContext.startActivity(intent);
                 }
             });
         }

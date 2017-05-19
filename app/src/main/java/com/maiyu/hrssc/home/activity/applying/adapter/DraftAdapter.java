@@ -9,10 +9,14 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
-import com.maiyu.hrssc.home.activity.applying.bean.Draft;
+import com.maiyu.hrssc.home.activity.applying.bean.Apply;
+import com.maiyu.hrssc.util.AppUtil;
 import com.maiyu.hrssc.util.LogHelper;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -21,9 +25,9 @@ import java.util.List;
  */
 
 public class DraftAdapter extends RecyclerView.Adapter<DraftAdapter.TodoPageViewHolder> {
-
-    private List<Draft> mList = new ArrayList();
-    private List<Draft> mIndexs = new ArrayList();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private List<Apply> mList = new ArrayList();
+    private List<Apply> mIndexs = new ArrayList();
     private final Context mContext;
     private boolean isShow = false;
 
@@ -43,12 +47,21 @@ public class DraftAdapter extends RecyclerView.Adapter<DraftAdapter.TodoPageView
         notifyItemRangeChanged(startPosition, list.size());
     }
 
+    public List<Apply> getRemoveDrafts() {
+        return mIndexs;
+    }
+
+    public void detele(Apply draft) {
+        mList.remove(draft);
+        notifyDataSetChanged();
+    }
+
     public void detele() {
         if (mIndexs.size() == 0) {
             return;
         }
 
-        for (Draft draft : mIndexs) {
+        for (Apply draft : mIndexs) {
             mList.remove(draft);
             LogHelper.d("remove", "mList" + mList.toString());
         }
@@ -94,13 +107,18 @@ public class DraftAdapter extends RecyclerView.Adapter<DraftAdapter.TodoPageView
 
 
         void onBindView() {
-            final Draft draft = (Draft) mList.get(getAdapterPosition());
+            final Apply draft = (Apply) mList.get(getAdapterPosition());
             if (draft == null) {
                 return;
             }
-            title.setText(draft.getTitle());
-            time.setText(draft.getTime());
-
+            title.setText(draft.getName());
+            Date dateTime = null;
+            try {
+                dateTime = sdf.parse(draft.getCreate_time());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            time.setText(AppUtil.setTime(dateTime));
             deleteBtn.setChecked(false);
 
 

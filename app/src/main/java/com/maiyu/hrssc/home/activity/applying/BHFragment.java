@@ -236,6 +236,7 @@ public class BHFragment extends Fragment implements OnRefreshListener, OnLoadMor
             }
             if (str != null) {
                 HintUitl.toastShort(getActivity(), str);
+                mAdapter.notifyItemDel();
             }
 
             super.onPostExecute(result);
@@ -248,11 +249,12 @@ public class BHFragment extends Fragment implements OnRefreshListener, OnLoadMor
 
         @Override
         public boolean onLongClick(View v) {
+            final Apply apply = (Apply) v.getTag(R.id.key_tag_item_data);
+
             if (dialog == null) {
                 dialog = new ConfirmDialog(getActivity(), new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Apply apply = (Apply) v.getTag(R.id.key_tag_item_data);
                         if (apply != null) {
                             new DeleteBusinessAsyncTask(mToken, apply.getId()).execute();
                         }

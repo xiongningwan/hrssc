@@ -231,6 +231,19 @@ public interface ConstantValue {
      * 获取体检结果
      */
     String path_getHealthCheck = "/hrsscBusinessController/getHealthCheck";
+    /**
+     * 首次加载个人社保
+     */
+    String path_getSocialSecurityFirst = "/hrsscSocialSecurityController/getSocialSecurityFirst";
+
+    /**
+     * 获取个人最新公积金缴交
+     */
+    String path_getPublicFundFirst = "/hrsscSocialSecurityController/getPublicFundFirst";
+    /**
+     * 获取公积金列表
+     */
+    String path_getPublicFunds = "/hrsscSocialSecurityController/getPublicFunds";
 
 
     /**

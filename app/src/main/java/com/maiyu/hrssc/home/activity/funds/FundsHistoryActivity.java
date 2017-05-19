@@ -7,14 +7,18 @@ import android.view.View;
 
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.activity.BaseActivity;
+import com.maiyu.hrssc.base.bean.DataCenter;
+import com.maiyu.hrssc.base.engine.IBizEngine;
+import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.base.view.HeadView;
 import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.SwipeToLoadLayout;
 import com.maiyu.hrssc.home.activity.funds.adapter.FundsHistoryAdapter;
-import com.maiyu.hrssc.home.activity.funds.bean.Funds;
+import com.maiyu.hrssc.home.activity.funds.bean.PublicFund;
+import com.maiyu.hrssc.util.BaseAsyncTask;
+import com.maiyu.hrssc.util.EngineFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -29,15 +33,17 @@ public class FundsHistoryActivity extends BaseActivity implements OnRefreshListe
     @BindView(R.id.refreshLayout)
     SwipeToLoadLayout mRefreshLayout;
     private int mPage = 1;
+    private int mCount = 10;
     private final int init = 1;
     private final int isRefreshing = 2;
     private final int isLoadMoreing = 3;
     private int status = init;
     private FundsHistoryAdapter mAdapter;
+    private String mToken;
 
     @Override
     public void createActivityImpl() {
-        setContentView(R.layout.activity_sshistory);
+        setContentView(R.layout.activity_fund_history);
         ButterKnife.bind(this);
     }
 
@@ -60,12 +66,9 @@ public class FundsHistoryActivity extends BaseActivity implements OnRefreshListe
 
     @Override
     public void initData() {
-        List<Funds> list = new ArrayList<>();
-        list.add(new Funds("2016-01-01" , "500.00"));
-        list.add(new Funds("2016-01-01" , "500.00"));
-        list.add(new Funds("2016-01-01" , "500.00"));
-        list.add(new Funds("2016-01-01" , "500.00"));
-        mAdapter.setData(list);
+
+        mToken = DataCenter.getInstance().getuser().getToken();
+        new GetPublicFundsAsyncTask(mToken, String.valueOf(mPage), String.valueOf(mCount)).execute();
     }
 
     @Override
@@ -78,7 +81,7 @@ public class FundsHistoryActivity extends BaseActivity implements OnRefreshListe
     public void onLoadMore() {
         mPage++;
         status = isLoadMoreing;
-        // initData();
+        initData();
         refreshOrLoadMoreComplete();
     }
 
@@ -86,8 +89,7 @@ public class FundsHistoryActivity extends BaseActivity implements OnRefreshListe
     public void onRefresh() {
         mPage = 1;
         status = isRefreshing;
-        // initData();
-
+        initData();
         refreshOrLoadMoreComplete();
     }
 
@@ -101,6 +103,66 @@ public class FundsHistoryActivity extends BaseActivity implements OnRefreshListe
         }
         if (mRefreshLayout.isLoadingMore()) {
             mRefreshLayout.setLoadingMore(false);
+        }
+    }
+
+    /**
+     * 获取公积金列表
+     */
+    class GetPublicFundsAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String token;
+        private String page;
+        private String rows;
+        private List<PublicFund> list;
+
+        public GetPublicFundsAsyncTask(String token, String page, String rows) {
+            super();
+
+            this.token = token;
+            this.page = page;
+            this.rows = rows;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            IBizEngine engine = EngineFactory.get(IBizEngine.class);
+            try {
+                list = engine.getPublicFunds(FundsHistoryActivity.this, token, page, rows);
+            } catch (NetException e) {
+                exception = e;
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            if (checkException(FundsHistoryActivity.this)) {
+                return;
+            }
+            if (list != null) {
+                setData(list);
+            }
+
+            super.onPostExecute(result);
+        }
+    }
+
+    private void setData(List<PublicFund> list) {
+
+        if (list != null && list.size() != 0) {
+            if (status == init) {
+                mAdapter.setData(list);
+            } else if (status == isRefreshing) {
+                mAdapter.setData(list);
+            } else if (status == isLoadMoreing) {
+                mAdapter.loadMoreData(list);
+            }
         }
     }
 }

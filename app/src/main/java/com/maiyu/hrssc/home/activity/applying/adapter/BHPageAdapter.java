@@ -29,6 +29,8 @@ public class BHPageAdapter extends RecyclerView.Adapter<BHPageAdapter.TodoPageVi
     private List<Apply> mList = new ArrayList();
     private final Context mContext;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private int mPosition;
+    private Apply mApply;
 
     public BHPageAdapter(Context context, View.OnLongClickListener listener) {
         mContext = context;
@@ -74,6 +76,7 @@ public class BHPageAdapter extends RecyclerView.Adapter<BHPageAdapter.TodoPageVi
         private RelativeLayout delRL;
         private Button delBtn;
         private Button recommitBtn;
+        private Apply mApply;
 
         public TodoPageViewHolder(View itemView) {
             super(itemView);
@@ -144,10 +147,20 @@ public class BHPageAdapter extends RecyclerView.Adapter<BHPageAdapter.TodoPageVi
                 }
             });*/
 
-            itemView.setOnLongClickListener(mListener);
             itemView.setTag(R.id.key_tag_item_data, apply);
+            itemView.setOnLongClickListener(mListener);
+            mApply = apply;
 
         }
     }
+
+    public void notifyItemDel() {
+        if(mApply != null) {
+            mList.remove(mPosition);
+            notifyDataSetChanged();
+        }
+
+    }
+
 
 }

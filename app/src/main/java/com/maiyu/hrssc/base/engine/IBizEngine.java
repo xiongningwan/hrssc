@@ -8,6 +8,8 @@ import com.maiyu.hrssc.base.bean.GetWebsiteData;
 import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.home.activity.applying.bean.FindApplyDetailData;
 import com.maiyu.hrssc.home.activity.applying.bean.GetApplysData;
+import com.maiyu.hrssc.home.activity.funds.bean.PublicFund;
+import com.maiyu.hrssc.home.activity.socialsecurity.bean.SocialSecurityFirstData;
 import com.maiyu.hrssc.home.activity.todo.bean.ContractFlow;
 import com.maiyu.hrssc.home.activity.todo.bean.Todo;
 import com.maiyu.hrssc.home.bean.Category1;
@@ -228,6 +230,33 @@ public interface IBizEngine {
      * @throws NetException
      */
     CheckResult getHealthCheck(Context context, String token) throws NetException;
+
+    /**
+     * 首次加载个人社保
+     * @param context
+     * @param token
+     * @return
+     * @throws NetException
+     */
+    SocialSecurityFirstData getSocialSecurityFirst(Context context, String token) throws NetException;
+    /**
+     * 获取个人最新公积金缴交
+     * @param context
+     * @param token
+     * @return
+     * @throws NetException
+     */
+    PublicFund getPublicFundFirst(Context context, String token) throws NetException;
+    /**
+     * 获取个人公积金缴交列表
+     * @param context
+     * @param token
+     * @param page
+     * @param rows
+     * @return
+     * @throws NetException
+     */
+    List<PublicFund> getPublicFunds(Context context, String token, String page, String rows) throws NetException;
 
 
 }
