@@ -244,10 +244,10 @@ public class SSDetailActivity extends BaseActivity {
 
                 // 公司缴纳
                 mMoney1.setText(yanglao[1]);
-                mMoney1.setText(yiliao[1]);
-                mMoney1.setText(gonshang[1]);
-                mMoney1.setText(shiye[1]);
-                mMoney1.setText(shengyu[1]);
+                mMoney2.setText(yiliao[1]);
+                mMoney3.setText(gonshang[1]);
+                mMoney4.setText(shiye[1]);
+                mMoney5.setText(shengyu[1]);
 
                 // 公司缴纳合计
                 mJiaonaHejiValue.setText(mSocialSecurityFirstData.getCompantTotal());
@@ -262,10 +262,10 @@ public class SSDetailActivity extends BaseActivity {
 
                 // 个人缴纳
                 mMoney1.setText(yanglao[3]);
-                mMoney1.setText(yiliao[3]);
-                mMoney1.setText(gonshang[3]);
-                mMoney1.setText(shiye[3]);
-                mMoney1.setText(shengyu[3]);
+                mMoney2.setText(yiliao[3]);
+                mMoney3.setText(gonshang[3]);
+                mMoney4.setText(shiye[3]);
+                mMoney5.setText(shengyu[3]);
 
                 // 个人缴纳合计
                 mJiaonaHejiValue.setText(mSocialSecurityFirstData.getPersonalTotal());

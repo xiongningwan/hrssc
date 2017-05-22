@@ -15,6 +15,7 @@ import android.widget.ListAdapter;
 import android.widget.RelativeLayout;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.util.ImageLoaderUtil;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class PickImageView extends RelativeLayout {
     //存放所有选择的照片
     private ArrayList<String> allSelectedPictures = new ArrayList<String>();
     private Context mContext;
+    private UpdateOuterDataListener mListener;
 
     public PickImageView(Context context) {
         super(context);
@@ -119,8 +121,14 @@ public class PickImageView extends RelativeLayout {
 
             } else {
                 holder.delete.setVisibility(View.VISIBLE);
-                ImageLoader.getInstance().displayImage("file://" + allSelectedPictures.get(position),
-                        holder.image);
+                String imageUrl = allSelectedPictures.get(position);
+                if (imageUrl.contains("http")) {
+                    ImageLoaderUtil.loadImage(holder.image, imageUrl, R.mipmap.user_profile_image_default);
+                } else {
+                    ImageLoader.getInstance().displayImage("file://" + allSelectedPictures.get(position),
+                            holder.image);
+                }
+
 
                 holder.delete.setOnClickListener(new OnClickListener() {
                     @Override
@@ -130,13 +138,30 @@ public class PickImageView extends RelativeLayout {
 
                         //更新UI
                         mGridview.setAdapter(mGridAdapter);
+
+
+                        // 更新外部
+                        if (mListener != null) {
+                            mListener.updateData(position);
+                        }
                     }
                 });
+
+                // holder.delete.setOnClickListener(mListener);
 
             }
             return convertView;
         }
     }
+
+    public void setUpdateOterDataListener(UpdateOuterDataListener listener) {
+        mListener = listener;
+    }
+
+    public interface UpdateOuterDataListener {
+        public void updateData(int positon);
+    }
+
 
     private void settingPickImage(Context context) {
 
@@ -167,7 +192,6 @@ public class PickImageView extends RelativeLayout {
         mGridAdapter.notifyDataSetChanged();
 
     }
-
 
 
     public static void setListViewHeightBasedOnChildren(GridView listView) {

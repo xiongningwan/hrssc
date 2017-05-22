@@ -14,6 +14,7 @@ import com.maiyu.hrssc.home.activity.applying.bean.FindApplyDetailData;
 import com.maiyu.hrssc.home.activity.applying.bean.GetApplysData;
 import com.maiyu.hrssc.home.activity.funds.bean.PublicFund;
 import com.maiyu.hrssc.home.activity.socialsecurity.bean.SocialSecurityFirstData;
+import com.maiyu.hrssc.home.activity.socialsecurity.bean.SocialSecurityList;
 import com.maiyu.hrssc.home.activity.todo.bean.ContractFlow;
 import com.maiyu.hrssc.home.activity.todo.bean.Todo;
 import com.maiyu.hrssc.home.bean.Category1;
@@ -30,6 +31,7 @@ import java.util.Map;
 
 import okhttp3.Response;
 
+import static com.alibaba.fastjson.JSON.parseArray;
 import static com.alibaba.fastjson.JSON.parseObject;
 
 public class BizEngine extends BaseEngine implements IBizEngine {
@@ -62,7 +64,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         try {
             json = parseObject(json).getString("data");
             json = parseObject(json).getString("clist");
-            list = JSON.parseArray(json, Todo.class);
+            list = parseArray(json, Todo.class);
 
 
         } catch (JSONException e) {
@@ -204,7 +206,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         try {
             json = parseObject(json).getString("data");
             json = parseObject(json).getString("category1List");
-            list = JSON.parseArray(json, Category1.class);
+            list = parseArray(json, Category1.class);
 
 
         } catch (JSONException e) {
@@ -241,7 +243,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         try {
             json = parseObject(json).getString("data");
             json = parseObject(json).getString("category2List");
-            list = JSON.parseArray(json, Category2.class);
+            list = parseArray(json, Category2.class);
 
 
         } catch (JSONException e) {
@@ -682,6 +684,41 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         return data;
     }
 
+    @Override
+    public SocialSecurityFirstData getSocialSecurityByDate(Context context, String token, String qryDate) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_getSocialSecurityByDate;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("qryDate", qryDate);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        SocialSecurityFirstData data = null;
+        try {
+            json = JSON.parseObject(json).getString("data");
+            data = JSON.parseObject(json, SocialSecurityFirstData.class);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
 
     @Override
     public PublicFund getPublicFundFirst(Context context, String token) throws NetException {
@@ -746,12 +783,124 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         try {
             json = JSON.parseObject(json).getString("data");
             json = JSON.parseObject(json).getString("publicFunds");
-            list = JSON.parseArray(json, PublicFund.class);
+            list = parseArray(json, PublicFund.class);
 
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return list;
+    }
+
+    @Override
+    public List<SocialSecurityList> getSocialSecurityDateWithTotalList(Context context, String token, String page, String rows) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_getSocialSecurityDateWithTotalList;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("page", page);
+        params.put("rows", rows);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        List<SocialSecurityList> list = null;
+        try {
+            json = JSON.parseObject(json).getString("data");
+            json = JSON.parseObject(json).getString("socialSecurityList");
+            list = parseArray(json, SocialSecurityList.class);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public List<String> getEvaluateTags(Context context, String token) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_getEvaluateTags;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        List<String> list = null;
+        try {
+            json = JSON.parseObject(json).getString("data");
+            json = JSON.parseObject(json).getString("tags");
+            list = JSON.parseArray(json, String.class);
+            //  arr = json.split(",");
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    @Override
+    public String evaluateApply(Context context, String token, String aid, String star1, String star2, String comment1, String comment2, String tag) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_evaluateApply;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("aid", aid);
+        params.put("star1", star1);
+        params.put("star2", star2);
+        params.put("comment1", comment1);
+        params.put("comment2", comment2);
+        params.put("tag", tag);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        String str = null;
+        try {
+            str = JSON.parseObject(json).getString("msg");
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return str;
     }
 }

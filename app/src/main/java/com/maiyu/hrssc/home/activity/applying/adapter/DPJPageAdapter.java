@@ -25,11 +25,12 @@ import java.util.List;
  * 申请 待评价
  */
 
-public class DPJPageAdapter extends RecyclerView.Adapter<DPJPageAdapter.TodoPageViewHolder>{
+public class DPJPageAdapter extends RecyclerView.Adapter<DPJPageAdapter.TodoPageViewHolder> {
 
     private List<Apply> mList = new ArrayList();
     private final Context mContext;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     public DPJPageAdapter(Context context) {
         mContext = context;
     }
@@ -83,7 +84,7 @@ public class DPJPageAdapter extends RecyclerView.Adapter<DPJPageAdapter.TodoPage
 
         void onBindView() {
             final Apply apply = (Apply) mList.get(getAdapterPosition());
-            if(apply == null) {
+            if (apply == null) {
                 return;
             }
             title.setText(apply.getName());
@@ -117,14 +118,13 @@ public class DPJPageAdapter extends RecyclerView.Adapter<DPJPageAdapter.TodoPage
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                     Intent intent = new Intent(mContext, EvaluationActivity.class);
-                    //  intent.putExtra("title", info.getTitle());
+                    Intent intent = new Intent(mContext, EvaluationActivity.class);
+                    intent.putExtra("aid", apply.getId());
+                    intent.putExtra("name", apply.getName());
+                    intent.putExtra("orderNo", apply.getWork_order());
                     mContext.startActivity(intent);
                 }
             });
-
-
-
 
 
             itemView.setOnClickListener(new View.OnClickListener() {

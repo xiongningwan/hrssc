@@ -1,6 +1,7 @@
 package com.maiyu.hrssc.home.activity.applying.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.home.activity.applying.ApplyingDetialActivity;
 import com.maiyu.hrssc.home.activity.applying.bean.Apply;
 import com.maiyu.hrssc.util.AppUtil;
 
@@ -146,6 +148,15 @@ public class BHPageAdapter extends RecyclerView.Adapter<BHPageAdapter.TodoPageVi
                     return false;
                 }
             });*/
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, ApplyingDetialActivity.class);
+                    intent.putExtra("id", apply.getId());
+                    intent.putExtra("title", "申请详情");
+                    mContext.startActivity(intent);
+                }
+            });
 
             itemView.setTag(R.id.key_tag_item_data, apply);
             itemView.setOnLongClickListener(mListener);

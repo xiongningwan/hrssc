@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.home.activity.socialsecurity.SSHistoryDetailActivity;
-import com.maiyu.hrssc.home.activity.socialsecurity.bean.HistoryItem;
+import com.maiyu.hrssc.home.activity.socialsecurity.bean.SocialSecurityList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.List;
 
 public class SSHistoryAdapter extends RecyclerView.Adapter<SSHistoryAdapter.TodoPageViewHolder>{
 
-    private List<HistoryItem> mList = new ArrayList();
+    private List<SocialSecurityList> mList = new ArrayList();
     private final Context mContext;
 
     public SSHistoryAdapter(Context context) {
@@ -70,19 +70,19 @@ public class SSHistoryAdapter extends RecyclerView.Adapter<SSHistoryAdapter.Todo
 
 
         void onBindView() {
-            final HistoryItem item = (HistoryItem) mList.get(getAdapterPosition());
+            final SocialSecurityList item = (SocialSecurityList) mList.get(getAdapterPosition());
             if(item == null) {
                 return;
             }
-            time.setText(item.getTime());
-            money.setText(item.getMoney()+"元");
+            time.setText(item.getData());
+            money.setText(item.getTotal()+"元");
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, SSHistoryDetailActivity.class);
-                 //  intent.putExtra("title", info.getTitle());
+                    intent.putExtra("qryDate", item.getData());
                     mContext.startActivity(intent);
                 }
             });

@@ -27,6 +27,8 @@ import com.maiyu.hrssc.base.engine.IBizEngine;
 import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.base.image.PickImageView;
 import com.maiyu.hrssc.base.view.dialog.LoadingDialog;
+import com.maiyu.hrssc.home.activity.applying.bean.ApplyDetail;
+import com.maiyu.hrssc.home.activity.applying.bean.FindApplyDetailData;
 import com.maiyu.hrssc.home.activity.applying.dialog.DraftsDialog;
 import com.maiyu.hrssc.home.bean.FormData;
 import com.maiyu.hrssc.home.bean.SelfAddress;
@@ -44,6 +46,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cc.dagger.photopicker.PhotoPicker;
 
+import static com.maiyu.hrssc.R.id.choose_mould_text;
+import static com.maiyu.hrssc.R.id.get_style_text;
+
 public class XZZMBLActivity extends BaseActivity {
 
     @BindView(R.id.title_left_button)
@@ -60,13 +65,13 @@ public class XZZMBLActivity extends BaseActivity {
     TextView mCityName;
     @BindView(R.id.blsm_rl)
     RelativeLayout mBlsmRl;
-    @BindView(R.id.get_style_text)
+    @BindView(get_style_text)
     TextView mGetStyleText;
     @BindView(R.id.xh)
     ImageView mXh;
     @BindView(R.id.get_style_rl)
     RelativeLayout mGetStyleRl;
-    @BindView(R.id.choose_mould_text)
+    @BindView(choose_mould_text)
     TextView mChooseMouldText;
     @BindView(R.id.choose_mould_xh)
     ImageView mChooseMouldXh;
@@ -109,7 +114,7 @@ public class XZZMBLActivity extends BaseActivity {
     private ArrayList<String> mImageListDisplays = new ArrayList<String>();
     private int mCount = 0;
     private DraftsDialog mDialog;
-
+    private String mAid = "0"; // 申请id，如果是【已驳回】【重新提交】或者【草稿箱】里面重新提交，这个时候需传递申请id,后台会做一个修改操作。如果是新的申请，aid缺省为0
 
     @Override
     public void createActivityImpl() {
@@ -153,6 +158,24 @@ public class XZZMBLActivity extends BaseActivity {
         mSpinner.setAdapter(mSpinnerAdapter);
 
         setSpecialParam(mTitle);
+
+
+        // 如果是草稿箱来的
+        mAid = getIntent().getStringExtra("aid");
+        if (mAid != null) {
+            new FindApplyDataDataAsyncTask(mToken, mAid).execute();
+        } else {
+            mAid = "0"; // 新申请
+        }
+
+
+        mPickImageView.setUpdateOterDataListener(new PickImageView.UpdateOuterDataListener() {
+            @Override
+            public void updateData(int postion) {
+                mImageList.remove(postion);
+                mImageListDisplays.remove(postion);
+            }
+        });
     }
 
 
@@ -161,7 +184,7 @@ public class XZZMBLActivity extends BaseActivity {
      */
     void doSubmit(String type) {
         int set = SharedPreferencesUtil.getSpecialParamSet(this);
-        String aid = "0";//如果是新的申请，aid缺省为0
+
         String brief = mSimpleDescText.getText().toString(); // 描述
         String comment = mEditText.getText().toString(); // 备注
         String language = mSpinner.getSelectedItem().toString().equals("中文") ? "0" : "1";
@@ -199,7 +222,7 @@ public class XZZMBLActivity extends BaseActivity {
             return;
         }
 
-        new SubmitApplyAsyncTask(aid, mToken, type, mCity, mId, mGet_way,
+        new SubmitApplyAsyncTask(mAid, mToken, type, mCity, mId, mGet_way,
                 mAddress, mAddress_info, mRecipient, mTpl_tid, mTpl_form,
                 brief, comment, language, paths, attachs).execute();
     }
@@ -274,10 +297,13 @@ public class XZZMBLActivity extends BaseActivity {
             if (requestCode == PhotoPicker.REQUEST_SELECTED) {
                 ArrayList<String> allSelectedPicture = data.getStringArrayListExtra(PhotoPicker.EXTRA_RESULT);
                 //mPickImageView.updatePickImageView(allSelectedPicture);
-                mImageList.clear();
-                mImageListDisplays.clear();
+                //mImageList.clear();
+                // mImageListDisplays.clear();
                 for (int i = 0; i < allSelectedPicture.size(); i++) {
                     File file = new File(allSelectedPicture.get(i));
+                    if (file.getPath().contains("http")) {
+                        continue;
+                    }
                     new uploadPicture(mToken, file).execute();
                 }
 
@@ -582,6 +608,8 @@ public class XZZMBLActivity extends BaseActivity {
             SharedPreferencesUtil.saveSpecialParamSet(this, 8);
         } else if ("档案借阅".equals(title)) {
             SharedPreferencesUtil.saveSpecialParamSet(this, 9);
+        } else {
+            SharedPreferencesUtil.saveSpecialParamSet(this, 10);
         }
     }
 
@@ -602,17 +630,16 @@ public class XZZMBLActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-       // super.onBackPressed();
+        // super.onBackPressed();
         tipDraftDialog();
     }
 
 
     /**
-     * 提交
+     * 提交到草稿箱
      */
     void doSubmit2(String type) {
         int set = SharedPreferencesUtil.getSpecialParamSet(this);
-        String aid = "0";//如果是新的申请，aid缺省为0
         String brief = mSimpleDescText.getText().toString(); // 描述
         String comment = mEditText.getText().toString(); // 备注
         String language = mSpinner.getSelectedItem().toString().equals("中文") ? "0" : "1";
@@ -638,8 +665,118 @@ public class XZZMBLActivity extends BaseActivity {
             return;
         }
 
-        new SubmitApplyAsyncTask(aid, mToken, type, mCity, mId, mGet_way,
+        new SubmitApplyAsyncTask(mAid, mToken, type, mCity, mId, mGet_way,
                 mAddress, mAddress_info, mRecipient, mTpl_tid, mTpl_form,
                 brief, comment, language, paths, attachs).execute();
     }
+
+
+    /**
+     * 获取业务详情
+     */
+    class FindApplyDataDataAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String token;
+        private String aid;
+        private FindApplyDetailData findApplyDetailData;
+
+        public FindApplyDataDataAsyncTask(String token, String aid) {
+            super();
+
+            this.token = token;
+            this.aid = aid;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            IBizEngine engine = EngineFactory.get(IBizEngine.class);
+            try {
+                findApplyDetailData = engine.findApplyDetail(XZZMBLActivity.this, token, aid);
+            } catch (NetException e) {
+                exception = e;
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            if (checkException(XZZMBLActivity.this)) {
+                return;
+            }
+            if (findApplyDetailData != null) {
+                setData(findApplyDetailData);
+            }
+
+            super.onPostExecute(result);
+        }
+    }
+
+    private void setData(FindApplyDetailData findApplyDetailData) {
+        ApplyDetail applyDetail = findApplyDetailData.getApply();
+        if (applyDetail != null) {
+            setGetWay(applyDetail);
+            setTemple(applyDetail);
+            setLanguage(applyDetail);
+            mSimpleDescText.setText(applyDetail.getBrief());
+            mEditText.setText(applyDetail.getComment());
+            setImages(applyDetail.getImages());
+        }
+    }
+
+    void setGetWay(ApplyDetail applyDetail) {
+        // 领取方式：0:自取 1:邮寄, 2打印
+        if ("0".equals(applyDetail.getGet_way())) {
+            mGetStyleText.setText("自助领取");
+            mGet_way = "0";
+
+        } else if ("1".equals(applyDetail.getGet_way())) {
+            mGetStyleText.setText("邮寄");
+            mGet_way = "1";
+
+        } else if ("2".equals(applyDetail.getGet_way())) {
+            mGetStyleText.setText("自助打印");
+            mGet_way = "2";
+        }
+    }
+
+    void setTemple(ApplyDetail applyDetail) {
+        mChooseMouldText.setText(applyDetail.getTpl_name());
+        mTpl_tid = applyDetail.getTpl_tid();
+        mTpl_form = applyDetail.getTpl_form();
+    }
+
+    void setLanguage(ApplyDetail applyDetail) {
+        //语言：0中文 1英文
+        if ("0".equals(applyDetail.getLanguage())) {
+            mSpinner.setSelection(0);
+        } else {
+            mSpinner.setSelection(1);
+        }
+    }
+
+    void setImages(String images) {
+        if (images == null) {
+            return;
+        }
+        ArrayList<String> imageList = new ArrayList<String>();
+        String[] imageArr = images.split(";");
+        for (int i = 0; i < imageArr.length; i++) {
+            if (!imageArr[i].contains("http")) {
+                imageList.add(ConstantValue.FILE_SERVER_URI + imageArr[i]);
+            } else {
+                imageList.add(imageArr[i]);
+            }
+        }
+        mImageList.clear();
+        mImageList.addAll(imageList);
+        mImageListDisplays.clear();
+        mImageListDisplays.addAll(imageList);
+        mPickImageView.updatePickImageView(imageList);
+    }
+
 }

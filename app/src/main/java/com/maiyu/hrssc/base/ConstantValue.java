@@ -244,6 +244,22 @@ public interface ConstantValue {
      * 获取公积金列表
      */
     String path_getPublicFunds = "/hrsscSocialSecurityController/getPublicFunds";
+    /**
+     * 查看社保记录
+     */
+    String path_getSocialSecurityDateWithTotalList = "/hrsscSocialSecurityController/getSocialSecurityDateWithTotalList";
+    /**
+     * 根据时间查询个人社保
+     */
+    String path_getSocialSecurityByDate = "/hrsscSocialSecurityController/getSocialSecurityByDate";
+    /**
+     * 获取评价的几个标签， 标签是后台可配置的
+     */
+    String path_getEvaluateTags = "/hrsscBusinessController/getEvaluateTags";
+    /**
+     * 提交评价
+     */
+    String path_evaluateApply = "/hrsscBusinessController/evaluateApply";
 
 
     /**

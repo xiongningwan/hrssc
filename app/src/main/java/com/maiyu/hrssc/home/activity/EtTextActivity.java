@@ -68,6 +68,8 @@ public class EtTextActivity extends BaseActivity {
             mTextEt.setHint("申请说明");
         } else if (9 == set) {
             mTextEt.setHint("申请说明");
+        } else {
+            mTextEt.setHint("申请说明");
         }
     }
 

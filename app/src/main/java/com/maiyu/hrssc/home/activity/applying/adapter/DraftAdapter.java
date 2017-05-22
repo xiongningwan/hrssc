@@ -1,6 +1,7 @@
 package com.maiyu.hrssc.home.activity.applying.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.home.activity.XZZMBLActivity;
 import com.maiyu.hrssc.home.activity.applying.bean.Apply;
 import com.maiyu.hrssc.util.AppUtil;
 import com.maiyu.hrssc.util.LogHelper;
@@ -144,9 +146,11 @@ public class DraftAdapter extends RecyclerView.Adapter<DraftAdapter.TodoPageView
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //  Intent intent = new Intent(mContext, InformationDetialActivity.class);
-                    //  intent.putExtra("title", info.getTitle());
-                    //  mContext.startActivity(intent);
+                    Intent intent = new Intent(mContext, XZZMBLActivity.class);
+                    intent.putExtra("id", draft.getCid2()); // 二级id
+                    intent.putExtra("name", draft.getName());
+                    intent.putExtra("aid", draft.getId()); // 申请id
+                    mContext.startActivity(intent);
                 }
             });
         }

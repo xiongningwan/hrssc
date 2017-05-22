@@ -161,9 +161,10 @@ public class ApplyingDetialActivity extends BaseActivity {
                 break;
             case R.id.yundanjilv_rl:
                 // 运单记录
-                Intent intent = new Intent(this, YDJLActivity.class);
+               /* Intent intent = new Intent(this, YDJLActivity.class);
                 intent.putExtra("FindApplyDetailData", mFindApplyDetailData);
-                startActivity(intent);
+                startActivity(intent);*/
+               HintUitl.toastShort(this, "【待开通】");
                 break;
         }
     }

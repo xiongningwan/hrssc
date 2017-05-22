@@ -17,12 +17,16 @@
 
     <include layout="@layout/view_space_layout"/>
 
+
+
     <TextView
         android:id="@+id/no_value"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/base34dp"
+        android:layout_marginTop="@dimen/base8dp"
+        android:layout_marginBottom="@dimen/base8dp"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:text="NO.124"
+        android:text="NO."
         android:gravity="center"/>
 
     <View
@@ -49,7 +53,6 @@
             android:layout_height="@dimen/base34dp"
             android:layout_marginStart="@dimen/base14dp"
             android:layout_marginTop="@dimen/base16dp"
-            android:text="薪资证明办理"
             android:layout_toEndOf="@id/icon_xiangqing"
             android:gravity="center"
             android:textColor="@color/text_title_gray"/>
@@ -95,6 +98,20 @@
                 android:src="@drawable/view_evaluation_star_selector"/>
         </LinearLayout>-->
 
+        <RatingBar
+            android:id="@+id/room_ratingbar_shenqing"
+            style="@style/roomRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:rating="4"
+            android:stepSize="1"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@id/icon_xiangqing"
+            android:layout_below="@id/title_name"
+            android:layout_marginStart="@dimen/base14dp">
+        </RatingBar>
+
         <LinearLayout
             android:id="@+id/shenqing_star_ll"
             android:layout_width="wrap_content"
@@ -103,7 +120,8 @@
             android:layout_below="@id/title_name"
             android:layout_marginTop="@dimen/base1dp"
             android:layout_marginStart="@dimen/base14dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <CheckBox
                 android:id="@+id/shenqing_star_1"
@@ -164,13 +182,17 @@
         android:text="对业务员评价"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
-        android:textColor="@color/text_title_gray"/>
+        android:textColor="@color/text_title_gray"
+        android:layout_marginTop="@dimen/base3dp"
+        android:layout_marginBottom="@dimen/base3dp"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:background="@mipmap/line"/>
+
+
 
 
     <LinearLayout
@@ -220,42 +242,66 @@
 
         <Button
             android:id="@+id/fuwutaidu_btn"
-            android:layout_width="@dimen/base86dp"
+            android:layout_width="@dimen/base90dp"
             android:layout_height="@dimen/base31dp"
             android:background="@drawable/corner_view_btn_white_blue_selector"
-            android:text="服务态度+1"
             android:textColor="@color/activity_evaluation_btn_text_selector"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"/>
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/yirongtaidu_btn"
-            android:layout_width="@dimen/base86dp"
+            android:layout_width="@dimen/base90dp"
             android:layout_height="@dimen/base31dp"
             android:background="@drawable/corner_view_btn_white_blue_selector"
-            android:text="仪容态度+1"
             android:textColor="@color/activity_evaluation_btn_text_selector"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_toEndOf="@id/fuwutaidu_btn"/>
+            android:layout_toEndOf="@id/fuwutaidu_btn"
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/yewushuliandu_btn"
-            android:layout_width="@dimen/base86dp"
+            android:layout_width="@dimen/base90dp"
             android:layout_height="@dimen/base31dp"
             android:background="@drawable/corner_view_btn_white_blue_selector"
-            android:text="业务熟练度+1"
             android:textColor="@color/activity_evaluation_btn_text_selector"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_toEndOf="@id/yirongtaidu_btn"/>
+            android:layout_toEndOf="@id/yirongtaidu_btn"
+            android:visibility="gone"/>
+
         <Button
             android:id="@+id/lijialiyi_btn"
-            android:layout_width="@dimen/base86dp"
+            android:layout_width="@dimen/base90dp"
             android:layout_height="@dimen/base31dp"
             android:background="@drawable/corner_view_btn_white_blue_selector"
-            android:text="礼仪礼节+1"
             android:layout_marginTop="@dimen/base10dp"
             android:textColor="@color/activity_evaluation_btn_text_selector"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_below="@id/fuwutaidu_btn"/>
+            android:layout_below="@id/fuwutaidu_btn"
+            android:visibility="gone"/>
+        <Button
+            android:id="@+id/tag_5_btn"
+            android:layout_width="@dimen/base90dp"
+            android:layout_height="@dimen/base31dp"
+            android:background="@drawable/corner_view_btn_white_blue_selector"
+            android:layout_toEndOf="@id/lijialiyi_btn"
+            android:layout_marginTop="@dimen/base10dp"
+            android:textColor="@color/activity_evaluation_btn_text_selector"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_below="@id/fuwutaidu_btn"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/tag_6_btn"
+            android:layout_width="@dimen/base90dp"
+            android:layout_height="@dimen/base31dp"
+            android:background="@drawable/corner_view_btn_white_blue_selector"
+            android:layout_toEndOf="@id/tag_5_btn"
+            android:layout_marginTop="@dimen/base10dp"
+            android:textColor="@color/activity_evaluation_btn_text_selector"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_below="@id/fuwutaidu_btn"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 

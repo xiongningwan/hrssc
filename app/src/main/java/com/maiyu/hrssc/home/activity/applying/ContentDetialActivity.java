@@ -162,6 +162,7 @@ public class ContentDetialActivity extends BaseActivity {
             case R.id.lqfs_rl:
                 break;
             case R.id.yundanjilv_rl:
+
                 break;
             case R.id.simple_desc_rl:
                 break;

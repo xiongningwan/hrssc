@@ -1,90 +1,713 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-    <LinearLayout
+    <com.maiyu.hrssc.base.view.HeadView
+        android:id="@+id/head_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/project_color_basic_white"
-        android:orientation="vertical">
+        android:layout_height="@dimen/project_head_view_hight">
+
+    </com.maiyu.hrssc.base.view.HeadView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@mipmap/line"/>
 
 
-        <com.maiyu.hrssc.base.view.HeadView
-            android:id="@+id/head_view"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/project_head_view_hight">
-
-        </com.maiyu.hrssc.base.view.HeadView>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@mipmap/line"/>
+            android:layout_height="match_parent"
+            android:background="@color/project_color_basic_white"
+            android:orientation="vertical">
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/base45dp"
-            android:background="@color/project_color_general_hyperlink">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/base45dp"
+                android:background="@color/project_color_general_hyperlink">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/base45dp"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:gravity="center"
+                    android:text="社保"
+                    android:textColor="@color/project_color_basic_white_pure"/>
+
+
+                <TextView
+                    android:id="@+id/heji_jin_e_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/base45dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:gravity="center"
+                    android:text="合计金额：--元"
+                    android:textColor="@color/project_color_basic_white_pure"/>
+
+            </RelativeLayout>
+
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/base45dp"
-                android:gravity="center"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:text="社保"
-                android:textColor="@color/project_color_basic_white_pure"/>
+                android:layout_marginTop="@dimen/base10dp"
+                android:text="单位缴纳"
+                android:textSize="@dimen/project_text_size_dp_12"/>
 
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="0,1,2,3,4">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base45dp"
+                    android:layout_marginTop="@dimen/base10dp"
+                    android:background="@color/project_color_general_hyperlink2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="缴纳项目"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="缴纳地"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="缴纳年月"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="缴费基数"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="缴费金额"
+                        android:textColor="@color/text_title_gray"/>
+                </TableRow>
+
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base45dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="养老保险"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/address_1"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/month_1"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/jishu_1"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/money_1"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base45dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="医疗保险"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/address_2"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/month_2"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/jishu_2"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/money_2"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base45dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="工伤保险"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/address_3"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/month_3"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/jishu_3"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/money_3"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base45dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="失业保险"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/address_4"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/month_4"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/jishu_4"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/money_4"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base45dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="生育医疗"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/address_5"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/month_5"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/jishu_5"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/money_5"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                </TableRow>
+
+
+            </TableLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/base45dp"
+                android:background="@color/project_color_general_hyperlink3"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="start|center_vertical"
+                    android:paddingStart="@dimen/base8dp"
+                    android:text="单位缴纳合计"
+                    android:textColor="@color/text_title_gray"
+                    android:textSize="@dimen/base13dp"/>
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/base45dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="缴纳月份"
+                    android:textColor="@color/text_title_gray"
+                    android:visibility="invisible"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/base45dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="缴费基数"
+                    android:textColor="@color/text_title_gray"
+                    android:visibility="invisible"/>
+
+                <TextView
+                    android:id="@+id/jiaona_heji_value"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/base45dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/text_title_gray"/>
+
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/heji_jin_e_value"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/base45dp"
-                android:gravity="center"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:text="合计金额：4000.00元"
-                android:textColor="@color/project_color_basic_white_pure"/>
-
-        </RelativeLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/base10dp"
+                android:text="个人缴纳"
+                android:textSize="@dimen/project_text_size_dp_12"/>
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/base10dp"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:text="单位缴纳"
-            android:textSize="@dimen/project_text_size_dp_12"/>
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base45dp"
+                    android:layout_marginTop="@dimen/base10dp"
+                    android:background="@color/project_color_general_hyperlink2">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="缴纳项目"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="缴纳地"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="缴纳年月"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="缴费基数"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="缴费金额"
+                        android:textColor="@color/text_title_gray"/>
+                </TableRow>
 
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchColumns="0,1,2,3,4">
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base45dp">
 
-            <TableRow
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="养老保险"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/p_address_1"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/p_month_1"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/p_jishu_1"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/p_money_1"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base45dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="医疗保险"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/p_address_2"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/p_month_2"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/p_jishu_2"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/p_money_2"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base45dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="工伤保险"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/p_address_3"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/p_month_3"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/p_jishu_3"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/p_money_3"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base45dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="失业保险"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/p_address_4"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/p_month_4"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/p_jishu_4"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/p_money_4"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base45dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="生育医疗"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/p_address_5"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/p_month_5"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/p_jishu_5"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                    <TextView
+                        android:id="@+id/p_money_5"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/base45dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/text_title_gray"/>
+
+                </TableRow>
+
+
+            </TableLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/base45dp"
-                android:layout_marginTop="@dimen/base10dp"
-                android:background="@color/project_color_general_hyperlink2">
+                android:background="@color/project_color_general_hyperlink3"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="缴纳项目"
-                    android:textColor="@color/text_title_gray"/>
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="start|center_vertical"
+                    android:paddingStart="@dimen/base8dp"
+                    android:text="个人缴纳合计"
+                    android:textColor="@color/text_title_gray"
+                    android:textSize="@dimen/base13dp"/>
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="缴纳地"
-                    android:textColor="@color/text_title_gray"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -92,7 +715,8 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="缴纳月份"
-                    android:textColor="@color/text_title_gray"/>
+                    android:textColor="@color/text_title_gray"
+                    android:visibility="invisible"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -100,684 +724,22 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="缴费基数"
-                    android:textColor="@color/text_title_gray"/>
+                    android:textColor="@color/text_title_gray"
+                    android:visibility="invisible"/>
 
                 <TextView
+                    android:id="@+id/p_jiaona_heji_value"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/base45dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="缴费金额"
-                    android:textColor="@color/text_title_gray"/>
-            </TableRow>
-
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/base45dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="养老保险"
                     android:textColor="@color/text_title_gray"/>
 
-                <TextView
-                    android:id="@+id/address_1"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="深圳"
-                    android:textColor="@color/text_title_gray"/>
+            </LinearLayout>
 
-                <TextView
-                    android:id="@+id/month_1"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="11"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/jishu_1"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="5000.00"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/money_1"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="100.00"
-                    android:textColor="@color/text_title_gray"/>
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/base45dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="医疗保险"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/address_2"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="深圳"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/month_2"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="11"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/jishu_2"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="5000.00"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/money_2"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="100.00"
-                    android:textColor="@color/text_title_gray"/>
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/base45dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="工伤保险"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/address_3"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="深圳"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/month_3"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="11"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/jishu_3"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="5000.00"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/money_3"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="100.00"
-                    android:textColor="@color/text_title_gray"/>
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/base45dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="失业保险"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/address_4"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="深圳"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/month_4"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="11"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/jishu_4"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="5000.00"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/money_4"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="100.00"
-                    android:textColor="@color/text_title_gray"/>
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/base45dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="生育医疗"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/address_5"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="深圳"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/month_5"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="11"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/jishu_5"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="5000.00"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/money_5"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="100.00"
-                    android:textColor="@color/text_title_gray"/>
-
-            </TableRow>
-
-
-        </TableLayout>
-
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/base45dp"
-            android:background="@color/project_color_general_hyperlink3"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:gravity="start|center_vertical"
-                android:paddingStart="@dimen/base8dp"
-                android:text="单位缴纳合计"
-                android:textColor="@color/text_title_gray"
-                android:textSize="@dimen/base13dp"/>
-
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/base45dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="缴纳月份"
-                android:textColor="@color/text_title_gray"
-                android:visibility="invisible"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/base45dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="缴费基数"
-                android:textColor="@color/text_title_gray"
-                android:visibility="invisible"/>
-
-            <TextView
-                android:id="@+id/jiaona_heji_value"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/base45dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="500.00"
-                android:textColor="@color/text_title_gray"/>
 
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/base10dp"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:text="个人缴纳"
-            android:textSize="@dimen/project_text_size_dp_12"/>
+    </ScrollView>
 
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/base45dp"
-                android:layout_marginTop="@dimen/base10dp"
-                android:background="@color/project_color_general_hyperlink2">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="缴纳项目"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="缴纳地"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="缴纳月份"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="缴费基数"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="缴费金额"
-                    android:textColor="@color/text_title_gray"/>
-            </TableRow>
-
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/base45dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="养老保险"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/p_address_1"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="深圳"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/p_month_1"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="11"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/p_jishu_1"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="5000.00"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/p_money_1"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="100.00"
-                    android:textColor="@color/text_title_gray"/>
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/base45dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="医疗保险"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/p_address_2"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="深圳"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/p_month_2"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="11"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/p_jishu_2"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="5000.00"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/p_money_2"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="100.00"
-                    android:textColor="@color/text_title_gray"/>
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/base45dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="工伤保险"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/p_address_3"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="深圳"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/p_month_3"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="11"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/p_jishu_3"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="5000.00"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/p_money_3"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="100.00"
-                    android:textColor="@color/text_title_gray"/>
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/base45dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="失业保险"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/p_address_4"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="深圳"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/p_month_4"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="11"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/p_jishu_4"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="5000.00"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/p_money_4"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="100.00"
-                    android:textColor="@color/text_title_gray"/>
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/base45dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="生育医疗"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/p_address_5"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="深圳"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/p_month_5"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="11"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/p_jishu_5"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="5000.00"
-                    android:textColor="@color/text_title_gray"/>
-
-                <TextView
-                    android:id="@+id/p_money_5"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/base45dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="100.00"
-                    android:textColor="@color/text_title_gray"/>
-
-            </TableRow>
-
-
-        </TableLayout>
-
-
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/base45dp"
-            android:background="@color/project_color_general_hyperlink3"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:gravity="start|center_vertical"
-                android:paddingStart="@dimen/base8dp"
-                android:text="个人缴纳合计"
-                android:textColor="@color/text_title_gray"
-                android:textSize="@dimen/base13dp"/>
-
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/base45dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="缴纳月份"
-                android:textColor="@color/text_title_gray"
-                android:visibility="invisible"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/base45dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="缴费基数"
-                android:textColor="@color/text_title_gray"
-                android:visibility="invisible"/>
-
-            <TextView
-                android:id="@+id/p_jiaona_heji_value"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/base45dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="500.00"
-                android:textColor="@color/text_title_gray"/>
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-</ScrollView>
+</LinearLayout>

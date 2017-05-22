@@ -208,7 +208,6 @@
                         android:layout_height="@dimen/base45dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="深圳"
                         android:textColor="@color/text_title_gray"/>
 
                     <TextView
@@ -217,7 +216,6 @@
                         android:layout_height="@dimen/base45dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="11"
                         android:textColor="@color/text_title_gray"/>
 
                     <TextView
@@ -226,7 +224,6 @@
                         android:layout_height="@dimen/base45dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="5000.00"
                         android:textColor="@color/text_title_gray"/>
 
                     <TextView
@@ -235,7 +232,6 @@
                         android:layout_height="@dimen/base45dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="100.00"
                         android:textColor="@color/text_title_gray"/>
 
                 </TableRow>
@@ -258,7 +254,6 @@
                         android:layout_height="@dimen/base45dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="深圳"
                         android:textColor="@color/text_title_gray"/>
 
                     <TextView
@@ -267,7 +262,6 @@
                         android:layout_height="@dimen/base45dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="11"
                         android:textColor="@color/text_title_gray"/>
 
                     <TextView
@@ -276,7 +270,6 @@
                         android:layout_height="@dimen/base45dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="5000.00"
                         android:textColor="@color/text_title_gray"/>
 
                     <TextView
@@ -285,7 +278,6 @@
                         android:layout_height="@dimen/base45dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="100.00"
                         android:textColor="@color/text_title_gray"/>
 
                 </TableRow>
@@ -308,7 +300,6 @@
                         android:layout_height="@dimen/base45dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="深圳"
                         android:textColor="@color/text_title_gray"/>
 
                     <TextView
@@ -317,7 +308,6 @@
                         android:layout_height="@dimen/base45dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="11"
                         android:textColor="@color/text_title_gray"/>
 
                     <TextView
@@ -326,7 +316,6 @@
                         android:layout_height="@dimen/base45dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="5000.00"
                         android:textColor="@color/text_title_gray"/>
 
                     <TextView
@@ -335,7 +324,6 @@
                         android:layout_height="@dimen/base45dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="100.00"
                         android:textColor="@color/text_title_gray"/>
 
                 </TableRow>
@@ -358,7 +346,6 @@
                         android:layout_height="@dimen/base45dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="深圳"
                         android:textColor="@color/text_title_gray"/>
 
                     <TextView
@@ -367,7 +354,6 @@
                         android:layout_height="@dimen/base45dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="11"
                         android:textColor="@color/text_title_gray"/>
 
                     <TextView
@@ -376,7 +362,6 @@
                         android:layout_height="@dimen/base45dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="5000.00"
                         android:textColor="@color/text_title_gray"/>
 
                     <TextView
@@ -385,7 +370,6 @@
                         android:layout_height="@dimen/base45dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="100.00"
                         android:textColor="@color/text_title_gray"/>
 
                 </TableRow>
@@ -436,7 +420,6 @@
                         android:layout_height="@dimen/base45dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="500.00"
                         android:textColor="@color/project_color_basic_white_pure"/>
 
                 </TableRow>

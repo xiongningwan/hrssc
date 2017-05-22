@@ -10,6 +10,7 @@ import com.maiyu.hrssc.home.activity.applying.bean.FindApplyDetailData;
 import com.maiyu.hrssc.home.activity.applying.bean.GetApplysData;
 import com.maiyu.hrssc.home.activity.funds.bean.PublicFund;
 import com.maiyu.hrssc.home.activity.socialsecurity.bean.SocialSecurityFirstData;
+import com.maiyu.hrssc.home.activity.socialsecurity.bean.SocialSecurityList;
 import com.maiyu.hrssc.home.activity.todo.bean.ContractFlow;
 import com.maiyu.hrssc.home.activity.todo.bean.Todo;
 import com.maiyu.hrssc.home.bean.Category1;
@@ -233,22 +234,38 @@ public interface IBizEngine {
 
     /**
      * 首次加载个人社保
+     *
      * @param context
      * @param token
      * @return
      * @throws NetException
      */
     SocialSecurityFirstData getSocialSecurityFirst(Context context, String token) throws NetException;
+
+    /**
+     * 根据时间查询个人社保s
+     *
+     * @param context
+     * @param token
+     * @param qryDate
+     * @return
+     * @throws NetException
+     */
+    SocialSecurityFirstData getSocialSecurityByDate(Context context, String token, String qryDate) throws NetException;
+
     /**
      * 获取个人最新公积金缴交
+     *
      * @param context
      * @param token
      * @return
      * @throws NetException
      */
     PublicFund getPublicFundFirst(Context context, String token) throws NetException;
+
     /**
      * 获取个人公积金缴交列表
+     *
      * @param context
      * @param token
      * @param page
@@ -257,6 +274,45 @@ public interface IBizEngine {
      * @throws NetException
      */
     List<PublicFund> getPublicFunds(Context context, String token, String page, String rows) throws NetException;
+
+    /**
+     * 查看社保记录
+     *
+     * @param context
+     * @param token
+     * @param page
+     * @param rows
+     * @return
+     * @throws NetException
+     */
+    List<SocialSecurityList> getSocialSecurityDateWithTotalList(Context context, String token, String page, String rows) throws NetException;
+
+    /**
+     * 获取评价的几个标签
+     *
+     * @param context
+     * @param token
+     * @return
+     * @throws NetException
+     */
+    List<String> getEvaluateTags(Context context, String token) throws NetException;
+
+
+    /**
+     * 提交评价
+     *
+     * @param context
+     * @param token
+     * @param aid
+     * @param star1
+     * @param star2
+     * @param comment1
+     * @param comment2
+     * @param tag
+     * @return
+     * @throws NetException
+     */
+    String evaluateApply(Context context, String token, String aid, String star1, String star2, String comment1, String comment2, String tag) throws NetException;
 
 
 }

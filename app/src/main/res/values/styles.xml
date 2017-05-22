@@ -31,6 +31,13 @@
         <item name="android:textColor">@color/activity_main_bottom_tab_text_selector</item>
         <item name="android:textSize">@dimen/project_text_size_dp_12</item>
     </style>
+
+
+    <style name="roomRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/room_rating_bar</item>
+        <item name="android:minHeight">@dimen/base20dp</item>
+        <item name="android:maxHeight">@dimen/base20dp</item>
+    </style>
     <!--
     <style name="project_input_text_style">
         <item name="android:textColor">@color/project_color_important_text_default</item>
