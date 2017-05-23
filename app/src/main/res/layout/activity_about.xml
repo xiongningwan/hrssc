@@ -1,18 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/project_color_basic_white"
-    android:orientation="vertical">
+    android:background="@color/project_color_basic_white_pure">
 
-    <com.maiyu.hrssc.base.view.HeadView
-        android:id="@+id/head_view"
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/project_head_view_hight"
-        android:background="@color/project_color_basic_white_pure"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <include layout="@layout/view_space_layout"/>
+        <com.maiyu.hrssc.base.view.HeadView
+            android:id="@+id/head_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/project_head_view_hight"
+            android:background="@color/project_color_basic_white_pure"/>
+
+        <include layout="@layout/view_space_layout"/>
+    </LinearLayout>
 
 
-</LinearLayout>
+    <View
+        android:id="@+id/point"
+        android:layout_width="1px"
+        android:layout_height="1px"
+        android:layout_centerInParent="true"/>
+
+    <ImageView
+        android:layout_width="@dimen/base80dp"
+        android:layout_height="@dimen/base80dp"
+        android:layout_above="@id/point"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/base102dp"
+        android:src="@mipmap/zte_rsy"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/point"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/base8dp"
+        android:text="中兴HRSSC平台V.1.0"
+        android:textSize="@dimen/project_text_size_dp_12"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/base25dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Copyright © 中兴通讯"
+            android:textSize="@dimen/project_text_size_dp_12"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/base8dp"
+            android:text="All Rights Reserved"
+            android:textSize="@dimen/project_text_size_dp_12"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -176,7 +176,7 @@ public class LoginActivity extends BaseActivity {
         String loginName = map.get("loginName");
         String loginPwd = map.get("loginPwd");
         String loginType = map.get("loginType");
-        if (loginName != null && loginPwd != null) {
+        if (loginName != null && loginPwd != null && !loginName.equals("") && !loginPwd.equals("")) {
             // 登录
             String type = loginType;
             String mac = AppUtil.getMac(LoginActivity.this);

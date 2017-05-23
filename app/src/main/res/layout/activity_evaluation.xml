@@ -104,9 +104,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:numStars="5"
-            android:rating="4"
+            android:rating="5"
             android:stepSize="1"
-            android:layout_marginLeft="10dp"
             android:layout_toEndOf="@id/icon_xiangqing"
             android:layout_below="@id/title_name"
             android:layout_marginStart="@dimen/base14dp">
@@ -193,7 +192,18 @@
         android:background="@mipmap/line"/>
 
 
-
+    <RatingBar
+        android:id="@+id/room_ratingbar_person"
+        style="@style/roomRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:rating="5"
+        android:stepSize="1"
+        android:layout_marginTop="@dimen/base31dp"
+        android:layout_marginStart="@dimen/base14dp"
+        android:layout_gravity="center">
+    </RatingBar>
 
     <LinearLayout
         android:id="@+id/person_star_ll"
@@ -201,7 +211,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/base31dp"
         android:layout_gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <CheckBox
             android:id="@+id/person_star_1"

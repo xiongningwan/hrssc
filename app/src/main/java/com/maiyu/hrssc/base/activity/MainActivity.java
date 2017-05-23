@@ -1,10 +1,12 @@
 package com.maiyu.hrssc.base.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.maiyu.hrssc.home.frament.HomeFragment;
 import com.maiyu.hrssc.integration.frament.IntegrationFragment;
 import com.maiyu.hrssc.my.frament.MyFragment;
 import com.maiyu.hrssc.service.frament.ServiceFragment;
+import com.maiyu.hrssc.util.DownloadService;
 import com.maiyu.hrssc.util.HintUitl;
 import com.maiyu.hrssc.util.PackageInfoUtil;
 import com.tencent.android.tpush.XGIOperateCallback;
@@ -32,20 +35,24 @@ public class MainActivity extends CheckPermissionsActivity {
     private RelativeLayout mTabJifenView;
     private RelativeLayout mTabKefuView;
     private RelativeLayout mTabMyView;
-    /** activity 中的 fragment */
+    /**
+     * activity 中的 fragment
+     */
     private ArrayList<Fragment> mFragments = new ArrayList<Fragment>();
     private ArrayList<RelativeLayout> mTabViews = new ArrayList<RelativeLayout>();
     private TabFragmentPagerAdapter mTabAdapter;
     private long mExitTime = 0;
-    /** 更新时间间隔  12小时*/
-    private long period = 86400000/2;
+    /**
+     * 更新时间间隔  12小时
+     */
+    private long period = 86400000 / 2;
    /* private PermissionsDispatcher mPemissionsDispatcher;
     private UpdateExternalStorageBizImp mExternalStorageBizImp;*/
 
     @Override
     public void createActivityImpl() {
         setContentView(R.layout.activity_main);
-     //   checkPermission();
+        //   checkPermission();
     }
 
     @SuppressWarnings("deprecation")
@@ -84,7 +91,7 @@ public class MainActivity extends CheckPermissionsActivity {
         mContentView.setOffscreenPageLimit(3);
         mContentView.setScanScroll(false);
         mTabViews.get(0).setSelected(true);
-       // StatusBarCompat.translucentStatusBar(this, false); // 状态栏半透明
+        // StatusBarCompat.translucentStatusBar(this, false); // 状态栏半透明
     }
 
     public class TabFragmentPagerAdapter extends FragmentPagerAdapter {
@@ -112,7 +119,6 @@ public class MainActivity extends CheckPermissionsActivity {
 
     /**
      * pager 改变的时候tab产生变化
-     *
      */
     public class TabPageChangeListener implements OnPageChangeListener {
         @Override
@@ -141,6 +147,7 @@ public class MainActivity extends CheckPermissionsActivity {
     @Override
     public void initData() {
         initXG();
+        autoUpdate();
     }
 
     @Override
@@ -190,6 +197,10 @@ public class MainActivity extends CheckPermissionsActivity {
         mContentView.setCurrentItem(0, true);
     }
 
+    public void finishHome() {
+        finish();
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -209,12 +220,9 @@ public class MainActivity extends CheckPermissionsActivity {
     }
 
 
-
-
-
     /**
-    * 根据一定的时间间隔自动更新
-    */
+     * 根据一定的时间间隔自动更新
+     */
     private void autoUpdate() {
         long code = PackageInfoUtil.getVersionCode(MainActivity.this);
       /*  if (AppUtil.networkConnected(this)) {
@@ -224,7 +232,36 @@ public class MainActivity extends CheckPermissionsActivity {
         // 关闭每天2次检查间隔，使用每次进入主界面进行检查
        /* if (SharedPreferencesUtil.isPopUp(this, period)) {
         }*/
+
+        showDialog();
     }
+
+    private void showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("升级提示");
+        builder.setMessage("版本：1.0.1\n大小：6.5M\n1、修改Bug\n2、增加功能");
+        builder.setNegativeButton("稍后再说", new AlertDialog.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+            }
+        });
+
+        builder.setPositiveButton("马上跟新", new AlertDialog.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                Intent intent = new Intent(MainActivity.this, DownloadService.class);
+                intent.putExtra("url", "http://surveyapp.fy.chaoxing.com/app/LauncherDemo5.apk");
+                startService(intent);
+            }
+        });
+        builder.show();
+    }
+
 
    /* *//**
      * 加载数据异步任务
@@ -303,53 +340,50 @@ public class MainActivity extends CheckPermissionsActivity {
     }*/
 
 
+    /*********一下是信鸽推送初始化**************/
+    private void initXG() {
 
+        // 开启logcat输出，方便debug，发布时请关闭
+        //XGPushConfig.enableDebug(this, true);
+        // 如果需要知道注册是否成功，请使用registerPush(getApplicationContext(), XGIOperateCallback)带callback版本
+        // 如果需要绑定账号，请使用registerPush(getApplicationContext(),account)版本
+        // 具体可参考详细的开发指南
+        // 传递的参数为ApplicationContext
+        final String account = DataCenter.getInstance().getuser().getAccount();
+        XGPushConfig.enableDebug(this, true);
+        XGPushManager.registerPush(this, account, new XGIOperateCallback() {
 
-      /*********一下是信鸽推送初始化**************/
-      private void initXG() {
+            @Override
+            public void onSuccess(Object data, int flag) {
+                Log.d("TPush", "注册成功，设备token为：" + data + "account:" + account);
+            }
 
-          // 开启logcat输出，方便debug，发布时请关闭
-          //XGPushConfig.enableDebug(this, true);
-          // 如果需要知道注册是否成功，请使用registerPush(getApplicationContext(), XGIOperateCallback)带callback版本
-          // 如果需要绑定账号，请使用registerPush(getApplicationContext(),account)版本
-          // 具体可参考详细的开发指南
-          // 传递的参数为ApplicationContext
-          final String account = DataCenter.getInstance().getuser().getAccount();
-          XGPushConfig.enableDebug(this, true);
-          XGPushManager.registerPush(this, account, new XGIOperateCallback() {
+            @Override
+            public void onFail(Object data, int errCode, String msg) {
+                Log.d("TPush", "注册失败，错误码：" + errCode + ",错误信息：" + msg);
+            }
 
-              @Override
-              public void onSuccess(Object data, int flag) {
-                  Log.d("TPush", "注册成功，设备token为：" + data + "account:" + account);
-              }
+        });
 
-              @Override
-              public void onFail(Object data, int errCode, String msg) {
-                  Log.d("TPush", "注册失败，错误码：" + errCode + ",错误信息：" + msg);
-              }
-
-          });
-
-          // 2.36（不包括）之前的版本需要调用以下2行代码
+        // 2.36（不包括）之前的版本需要调用以下2行代码
         /*  Intent service = new Intent(context, XGPushServiceV3.class);
           context.startService(service);*/
 
-          // 其它常用的API：
-          // 绑定账号（别名）注册：registerPush(context,account)或registerPush(context,account, XGIOperateCallback)，其中account为APP账号，可以为任意字符串（qq、openid或任意第三方），业务方一定要注意终端与后台保持一致。
-          // 取消绑定账号（别名）：registerPush(context,"*")，即account="*"为取消绑定，解绑后，该针对该账号的推送将失效
-          // 反注册（不再接收消息）：unregisterPush(context)
-          // 设置标签：setTag(context, tagName)
-          // 删除标签：deleteTag(context, tagName)
+        // 其它常用的API：
+        // 绑定账号（别名）注册：registerPush(context,account)或registerPush(context,account, XGIOperateCallback)，其中account为APP账号，可以为任意字符串（qq、openid或任意第三方），业务方一定要注意终端与后台保持一致。
+        // 取消绑定账号（别名）：registerPush(context,"*")，即account="*"为取消绑定，解绑后，该针对该账号的推送将失效
+        // 反注册（不再接收消息）：unregisterPush(context)
+        // 设置标签：setTag(context, tagName)
+        // 删除标签：deleteTag(context, tagName)
 
-      }
+    }
 
-      // 信鸽推送需要
-      @Override
-      protected void onNewIntent(Intent intent) {
-          super.onNewIntent(intent);
-          setIntent(intent);// 必须要调用这句
-      }
-
+    // 信鸽推送需要
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);// 必须要调用这句
+    }
 
 
 }

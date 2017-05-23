@@ -7,6 +7,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
@@ -78,6 +79,13 @@ public class EvaluationActivity extends BaseActivity {
     Button mTag5Btn;
     @BindView(R.id.tag_6_btn)
     Button mTag6Btn;
+    @BindView(R.id.room_ratingbar_person)
+    RatingBar mRatingbarPerson;
+    @BindView(R.id.room_ratingbar_shenqing)
+    RatingBar mRatingbaShengqing;
+
+
+
     int mStart1 = 0;
     int mStart2 = 0;
     String mTag;
@@ -110,9 +118,10 @@ public class EvaluationActivity extends BaseActivity {
     }
 
     private void evaluationApply() {
+        mStart1 = (int) mRatingbaShengqing.getRating();
+        mStart2 = (int) mRatingbarPerson.getRating();
 
-
-        getStart();
+        //getStart();
         getTag();
         String comment1 = mEvaluationToShenqingEt.getText().toString();
         String comment2 = mEvaluationToPersonEt.getText().toString();
@@ -133,13 +142,13 @@ public class EvaluationActivity extends BaseActivity {
             HintUitl.toastShort(this, "请先评定业务员星级");
             return;
         }
-        if (mTag == null) {
+        if (mTag == null || mTag.equals("")) {
             HintUitl.toastShort(this, "评价标签不能为空");
             return;
         }
 
 
-        new EvaluateApplyAsyncTask(mToken, mAid, String.valueOf(mStart1), String.valueOf(mStart2), comment1, comment2, mTag);
+        new EvaluateApplyAsyncTask(mToken, mAid, String.valueOf(mStart1), String.valueOf(mStart2), comment1, comment2, mTag).execute();
     }
 
     @Override
@@ -497,6 +506,7 @@ public class EvaluationActivity extends BaseActivity {
             }
             if (str != null) {
                 HintUitl.toastShort(EvaluationActivity.this, str);
+                finish();
             }
 
             super.onPostExecute(result);

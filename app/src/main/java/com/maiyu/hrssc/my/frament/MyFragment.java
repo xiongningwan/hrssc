@@ -15,6 +15,8 @@ import android.widget.TextView;
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.ConstantValue;
 import com.maiyu.hrssc.base.activity.AddressManageActivity;
+import com.maiyu.hrssc.base.activity.LoginActivity;
+import com.maiyu.hrssc.base.activity.MainActivity;
 import com.maiyu.hrssc.base.activity.MessagesActivity;
 import com.maiyu.hrssc.base.bean.DataCenter;
 import com.maiyu.hrssc.base.bean.User;
@@ -39,9 +41,12 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static android.app.Activity.RESULT_OK;
+
 public class MyFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final int QUREST_CODE_LOGOUT = 200;
     @BindView(R.id.address_btn_text)
     TextView mAddressBtnText;
     @BindView(R.id.address_btn)
@@ -238,8 +243,10 @@ public class MyFragment extends Fragment {
             case R.id.yijianfankui_rl:
                 startActivity(new Intent(getActivity(), FeedBackActivity.class));
                 break;
-            case R.id.shezhi_rl:
-                startActivity(new Intent(getActivity(), SettingActivity.class));
+            case R.id.shezhi_rl: {
+                Intent intent = new Intent(getActivity(), SettingActivity.class);
+                startActivityForResult(intent, QUREST_CODE_LOGOUT);
+            }
                 break;
         }
     }
@@ -337,5 +344,16 @@ public class MyFragment extends Fragment {
         }
     }
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK) {
+            if(requestCode == QUREST_CODE_LOGOUT) {
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                ((MainActivity)getActivity()).finishHome();
+            }
+        }
+    }
 }

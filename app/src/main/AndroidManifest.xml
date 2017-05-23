@@ -406,6 +406,8 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait">
         </activity>
+        <!--更新service-->
+        <service android:name="com.maiyu.hrssc.util.DownloadService"/>
         <activity
             android:name=".home.activity.JZZBLActivity"
             android:configChanges="orientation"
