@@ -2,6 +2,7 @@ package com.maiyu.hrssc.base;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.hyphenate.chat.ChatClient;
 import com.hyphenate.helpdesk.easeui.UIProvider;
@@ -99,6 +100,13 @@ public class HrsscApplication extends Application {
         }
         return false;
     }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+
 
     public void initXg() {
 

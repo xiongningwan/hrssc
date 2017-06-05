@@ -17,7 +17,7 @@ android {
 //    resourcePrefix "liji_"
 
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion 19
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"

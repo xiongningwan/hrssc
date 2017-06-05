@@ -1,6 +1,7 @@
 package com.maiyu.hrssc.integration.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.ConstantValue;
+import com.maiyu.hrssc.integration.activity.ProductItemActivity;
 import com.maiyu.hrssc.integration.bean.Record;
 import com.maiyu.hrssc.util.ImageLoaderUtil;
 
@@ -88,15 +90,14 @@ public class DuihuanRecordAdapter extends RecyclerView.Adapter<DuihuanRecordAdap
             time.setText(record.getCreate_time());
             ImageLoaderUtil.loadImage(image, ConstantValue.FILE_SERVER_URI + record.getImg_url(), R.mipmap.user_profile_image_default);
 
-
-            /*itemView.setOnClickListener(new View.OnClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(mContext, RecordDetailActivity.class);
-                    intent.putExtra("orderId", record.getId());
+                    Intent intent = new Intent(mContext, ProductItemActivity.class);
+                    intent.putExtra("productId", record.getPid());
                     mContext.startActivity(intent);
                 }
-            });*/
+            });
         }
     }
 

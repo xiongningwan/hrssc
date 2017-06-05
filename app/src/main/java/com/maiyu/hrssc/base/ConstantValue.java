@@ -260,6 +260,18 @@ public interface ConstantValue {
      * 提交评价
      */
     String path_evaluateApply = "/hrsscBusinessController/evaluateApply";
+    /**
+     * 版本更新
+     */
+    String path_getVersion = "/hrsscBasicController/getVersion";
+    /**
+     * 电子签署链接
+     */
+    String path_electronSign = "/hrsscContractController/electronSign";
+    /**
+     * 积分兑换规则
+     */
+    String path_toIntegralRulePage = "/hrsscSystemConfig/toIntegralRulePage";
 
 
     /**

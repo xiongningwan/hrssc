@@ -101,7 +101,7 @@ public class DuihuanActivity extends BaseActivity {
         if (product != null) {
             mPid = product.getId();
             mProductDescTv.setText(product.getName());
-            mProductJifenTv.setText(product.getWorth());
+            mProductJifenTv.setText(product.getPrice());
             mProductNoTv.setText("×" + product.getLefts());
         }
 

@@ -84,5 +84,6 @@
     <string-array name="languages">
         <item>中文</item>
         <item>英文</item>
+        <item>中英文</item>
     </string-array>
 </resources>

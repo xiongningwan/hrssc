@@ -5,6 +5,7 @@ import android.content.Context;
 import com.maiyu.hrssc.base.bean.Banners;
 import com.maiyu.hrssc.base.bean.CheckResult;
 import com.maiyu.hrssc.base.bean.GetWebsiteData;
+import com.maiyu.hrssc.base.bean.Version;
 import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.home.activity.applying.bean.FindApplyDetailData;
 import com.maiyu.hrssc.home.activity.applying.bean.GetApplysData;
@@ -313,6 +314,24 @@ public interface IBizEngine {
      * @throws NetException
      */
     String evaluateApply(Context context, String token, String aid, String star1, String star2, String comment1, String comment2, String tag) throws NetException;
+
+    /**
+     * 版本更新
+     * @param context
+     * @return
+     * @throws NetException
+     */
+    Version getVersion(Context context) throws NetException;
+
+    /**
+     * 电子签署链接
+     * @param context
+     * @param token
+     * @param aid
+     * @return
+     * @throws NetException
+     */
+    String electronSign(Context context, String token, String aid) throws NetException;
 
 
 }

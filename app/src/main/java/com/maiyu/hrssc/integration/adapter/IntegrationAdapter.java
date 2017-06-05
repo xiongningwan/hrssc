@@ -156,7 +156,7 @@ public class IntegrationAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                             R.mipmap.user_profile_image_default);
 
                     productName1.setText(item1.getName());
-                    productJifen1.setText(item1.getWorth() + "积分");
+                    productJifen1.setText(item1.getPrice() + "积分");
 
                     productRL1.setVisibility(View.VISIBLE);
                     productRL1.setTag(R.id.key_tag_item_data, item1);
@@ -173,7 +173,7 @@ public class IntegrationAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                             R.mipmap.user_profile_image_default);
 
                     productName2.setText(item2.getName());
-                    productJifen2.setText(item2.getWorth() + "积分");
+                    productJifen2.setText(item2.getPrice() + "积分");
 
                     productRL2.setVisibility(View.VISIBLE);
                     productRL2.setTag(R.id.key_tag_item_data, item2);

@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.base.ConstantValue;
 import com.maiyu.hrssc.base.activity.MessagesActivity;
+import com.maiyu.hrssc.base.activity.WebActivity;
 import com.maiyu.hrssc.base.bean.Banners;
 import com.maiyu.hrssc.base.bean.DataCenter;
 import com.maiyu.hrssc.base.engine.IBizEngine;
@@ -34,12 +36,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+import static com.maiyu.hrssc.R.id.address_btn;
+
 public class IntegrationFragment extends Fragment implements OnRefreshListener, OnLoadMoreListener {
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
     @BindView(R.id.refreshLayout)
     SwipeToLoadLayout mRefreshLayout;
-    @BindView(R.id.address_btn)
+    @BindView(address_btn)
     RelativeLayout headLeftBtn;
     @BindView(R.id.msg_btn)
     RelativeLayout msgBtn;
@@ -113,6 +117,15 @@ public class IntegrationFragment extends Fragment implements OnRefreshListener, 
                 startActivity(new Intent(getActivity(), MessagesActivity.class));
             }
         });
+
+        headLeftBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = ConstantValue.FILE_SERVER_URI + ConstantValue.path_toIntegralRulePage;
+                 openWebActivity(url);
+
+            }
+        });
     }
 
     void initData() {
@@ -163,6 +176,14 @@ public class IntegrationFragment extends Fragment implements OnRefreshListener, 
         } else {
             mMsgPoint.setVisibility(View.GONE);
         }
+    }
+
+    void openWebActivity(String url) {
+        Intent intent = new Intent(getActivity(), WebActivity.class);
+        intent.putExtra("url", url);
+        intent.putExtra("titleName", "积分规则");
+        intent.putExtra("type", ConstantValue.TYPE_IMPORTANT);
+        startActivity(intent);
     }
 
 

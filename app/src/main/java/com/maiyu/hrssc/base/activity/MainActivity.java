@@ -14,12 +14,17 @@ import android.widget.RelativeLayout;
 
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.bean.DataCenter;
+import com.maiyu.hrssc.base.bean.Version;
+import com.maiyu.hrssc.base.engine.IBizEngine;
+import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.base.view.CustomViewPager;
 import com.maiyu.hrssc.home.frament.HomeFragment;
 import com.maiyu.hrssc.integration.frament.IntegrationFragment;
 import com.maiyu.hrssc.my.frament.MyFragment;
 import com.maiyu.hrssc.service.frament.ServiceFragment;
+import com.maiyu.hrssc.util.BaseAsyncTask;
 import com.maiyu.hrssc.util.DownloadService;
+import com.maiyu.hrssc.util.EngineFactory;
 import com.maiyu.hrssc.util.HintUitl;
 import com.maiyu.hrssc.util.PackageInfoUtil;
 import com.tencent.android.tpush.XGIOperateCallback;
@@ -233,29 +238,40 @@ public class MainActivity extends CheckPermissionsActivity {
        /* if (SharedPreferencesUtil.isPopUp(this, period)) {
         }*/
 
-        showDialog();
+        new VersionCheckAsyncTask().execute();
     }
 
-    private void showDialog() {
+    private void showDialog(final Version version) {
+
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("升级提示");
-        builder.setMessage("版本：1.0.1\n大小：6.5M\n1、修改Bug\n2、增加功能");
-        builder.setNegativeButton("稍后再说", new AlertDialog.OnClickListener() {
+        builder.setMessage(version.getComment());
 
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
+        //0-不强制  1-强制更新
+        if ("1".equals(version.getMust())) {
+            builder.setCancelable(false);
 
-            }
-        });
+        } else {
 
-        builder.setPositiveButton("马上跟新", new AlertDialog.OnClickListener() {
+            builder.setNegativeButton("稍后再说", new AlertDialog.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+
+                }
+            });
+        }
+
+
+        builder.setPositiveButton("立刻更新", new AlertDialog.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 Intent intent = new Intent(MainActivity.this, DownloadService.class);
-                intent.putExtra("url", "http://surveyapp.fy.chaoxing.com/app/LauncherDemo5.apk");
+                intent.putExtra("url", version.getUrl());
                 startService(intent);
             }
         });
@@ -263,17 +279,13 @@ public class MainActivity extends CheckPermissionsActivity {
     }
 
 
-   /* *//**
+    /**
      * 加载数据异步任务
-     *//*
+     */
     class VersionCheckAsyncTask extends BaseAsyncTask<Void, Void, Void> {
-        private Check check;
-        private String appType;
-        private String versionVal;
+        private Version version;
 
-        public VersionCheckAsyncTask(String appType, String versionVal) {
-            this.appType = appType;
-            this.versionVal = versionVal;
+        public VersionCheckAsyncTask() {
         }
 
         @Override
@@ -283,9 +295,9 @@ public class MainActivity extends CheckPermissionsActivity {
 
         @Override
         protected Void doInBackground(Void... params) {
-            IUserEngine engine = EngineFactory.get(IUserEngine.class);
+            IBizEngine engine = EngineFactory.get(IBizEngine.class);
             try {
-                check = engine.getVersionCheck(MainActivity.this, appType, versionVal);
+                version = engine.getVersion(MainActivity.this);
             } catch (NetException e) {
                 exception = e;
                 e.printStackTrace();
@@ -298,12 +310,15 @@ public class MainActivity extends CheckPermissionsActivity {
             if (checkException(MainActivity.this)) {
                 return;
             }
-            if (check != null) {
-                new UpdateManager(MainActivity.this, check, true);
+            if (version != null) {
+                if (version.getCode() > PackageInfoUtil.getVersionCode(MainActivity.this)) {
+                    // 更新
+                    showDialog(version);
+                }
             }
             super.onPostExecute(result);
         }
-    }*/
+    }
 
    /* private void checkPermission() {
         // 动态权限

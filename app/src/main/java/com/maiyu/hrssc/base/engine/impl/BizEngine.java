@@ -8,6 +8,7 @@ import com.maiyu.hrssc.base.ConstantValue;
 import com.maiyu.hrssc.base.bean.Banners;
 import com.maiyu.hrssc.base.bean.CheckResult;
 import com.maiyu.hrssc.base.bean.GetWebsiteData;
+import com.maiyu.hrssc.base.bean.Version;
 import com.maiyu.hrssc.base.engine.IBizEngine;
 import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.home.activity.applying.bean.FindApplyDetailData;
@@ -896,6 +897,77 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         String str = null;
         try {
             str = JSON.parseObject(json).getString("msg");
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return str;
+    }
+
+    @Override
+    public Version getVersion(Context context) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_getVersion;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("type", "0");
+        Response response = null;
+
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        Version version = null;
+        try {
+            json = JSON.parseObject(json).getString("data");
+            json = JSON.parseObject(json).getString("version");
+            version = JSON.parseObject(json, Version.class);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return version;
+    }
+
+    @Override
+    public String electronSign(Context context, String token, String aid) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.FILE_SERVER_URI + ConstantValue.path_electronSign;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("aid", aid);
+        Response response = null;
+
+        String json = "";
+        try {
+            response = OkHttpUtils.get().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        String str = null;
+        try {
+            str = JSON.parseObject(json).getString("data");
 
 
         } catch (JSONException e) {

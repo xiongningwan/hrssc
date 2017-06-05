@@ -181,9 +181,11 @@ public class ProductItemActivity extends BaseActivity {
         if (product != null) {
 
             mName.setText(product.getName());
-            mJifen.setText(product.getWorth());
+            mJifen.setText(product.getPrice());
             mShuliang.setText("数量:" + product.getLefts());
-            mJiazhi.setText("价值:" + product.getPrice());
+
+            double d = Double.parseDouble(product.getWorth())/100;
+            mJiazhi.setText("价值:" + d);
             if ("1".equals(product.getStatus())) {
                 mDuihuanRl.setBackgroundResource(R.color.project_color_general_text_secondary);
                 mDuihuanBtn.setVisibility(View.GONE);

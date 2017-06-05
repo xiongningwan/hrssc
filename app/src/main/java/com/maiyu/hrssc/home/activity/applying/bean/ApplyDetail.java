@@ -41,7 +41,7 @@ public class ApplyDetail implements Parcelable {
     private String images;// ,        //图片
     private String audit_time;// 2017-05-10 14;//52;//38,//审核时间
     private String get_way;// 1,      //领取方式：0;//自取 1;//邮寄, 2打印
-    private String language;// 0,      //语言：0中文 1英文
+    private String language;// 0,      //语言：0中文 1英文 2 中英文
     private String comment;// 备注,  //备注
     private String brief;// 描述,    //描述
     private String aid_audit;// 管理员1//审核员用户名（不展示，展示的是审核员名称）

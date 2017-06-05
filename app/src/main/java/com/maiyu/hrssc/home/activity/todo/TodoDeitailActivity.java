@@ -3,6 +3,7 @@ package com.maiyu.hrssc.home.activity.todo;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -31,6 +32,7 @@ import butterknife.OnClick;
 
 import static com.maiyu.hrssc.R.id.address_detail_text;
 import static com.maiyu.hrssc.R.id.status;
+
 
 public class TodoDeitailActivity extends BaseActivity {
 
@@ -68,6 +70,8 @@ public class TodoDeitailActivity extends BaseActivity {
     View mDivierLine3;
     @BindView(R.id.beizhu_et)
     TextView mBeizhuEt;
+    @BindView(R.id.toto_qianming_ll)
+    LinearLayout mTodoQianmingLL;
     @BindView(R.id.dangmian_qianhsu)
     TextView mDangmianQS;
     @BindView(R.id.dianzi_qianhsu)
@@ -79,6 +83,7 @@ public class TodoDeitailActivity extends BaseActivity {
     private String mId;
     private ContractFlow mContractFlow;
     ConfirmDialog dialog;
+    private String mTitleNameString;
 
     @Override
     public void createActivityImpl() {
@@ -88,10 +93,14 @@ public class TodoDeitailActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        String titleName = getIntent().getStringExtra("title");
+        mTitleNameString = getIntent().getStringExtra("title");
         mId = getIntent().getStringExtra("id");
-        mHeadView.setTitle(titleName + "详情", true, false);
+        String statusStr = getIntent().getStringExtra("status");
+        mHeadView.setTitle(mTitleNameString + "详情", true, false);
         mLoadingDialog = new LoadingDialog(this);
+
+
+        setViewStatus(statusStr);
     }
 
     @Override
@@ -100,6 +109,17 @@ public class TodoDeitailActivity extends BaseActivity {
         if (mId != null) {
             new ContractFlowAsyncTask(mToken, mId).execute();
         }
+    }
+
+    void setViewStatus(String statusStr) {
+        if(statusStr == null) {
+            return;
+        }
+
+        if ("0".equals(statusStr)) { // 待签署
+            mTodoQianmingLL.setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Override
@@ -126,7 +146,14 @@ public class TodoDeitailActivity extends BaseActivity {
             case R.id.dianzi_qianhsu:
                 // 电子签署
 
-                startActivity(new Intent(this, SignActivity.class));
+                // startActivity(new Intent(this, SignActivity.class));
+                /*if (mId != null && mToken != null) {
+                    new GetElectronSignAsyncTask(mToken, mId).execute();
+                } else {
+                    HintUitl.toastShort(this, "参数错误");
+                }*/
+                String url = ConstantValue.FILE_SERVER_URI + ConstantValue.path_electronSign + "?token=" + mToken + "&aid=" + mId;
+                openWebActivity(url);
 
                 break;
             case R.id.youji_qianhsu:
@@ -248,9 +275,8 @@ public class TodoDeitailActivity extends BaseActivity {
 
     String getDocumentName(String document) {
 
-        return  document.substring(document.lastIndexOf("/") + 1, document.length());
+        return document.substring(document.lastIndexOf("/") + 1, document.length());
     }
-
 
 
     /**
@@ -318,4 +344,60 @@ public class TodoDeitailActivity extends BaseActivity {
         dialog.show();
     }
 
+
+    /**
+     * 电子签署链接
+     */
+    class GetElectronSignAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String token;
+        private String id;
+        private String str;
+
+        public GetElectronSignAsyncTask(String token, String id) {
+            super();
+
+            this.token = token;
+            this.id = id;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mLoadingDialog.getDialog().show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            IBizEngine engine = EngineFactory.get(IBizEngine.class);
+            try {
+                str = engine.electronSign(TodoDeitailActivity.this, token, id);
+            } catch (NetException e) {
+                exception = e;
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            mLoadingDialog.getDialog().dismiss();
+            if (checkException(TodoDeitailActivity.this)) {
+                return;
+            }
+            if (str != null) {
+                HintUitl.toastShort(TodoDeitailActivity.this, str);
+                openWebActivity(str);
+            }
+
+            super.onPostExecute(result);
+        }
+    }
+
+    void openWebActivity(String url) {
+        Intent intent = new Intent(this, WebActivity.class);
+        intent.putExtra("url", url);
+        intent.putExtra("titleName", "");
+        intent.putExtra("type", ConstantValue.TYPE_IMPORTANT);
+        startActivity(intent);
+    }
 }

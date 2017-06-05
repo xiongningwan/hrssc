@@ -50,11 +50,11 @@
             android:id="@+id/title_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/time"
+            android:layout_alignTop="@+id/icon_xiangqing"
             android:text=""
             android:textColor="@color/text_title_gray"
-            android:textSize="@dimen/project_text_size_dp_16"
-            android:layout_alignTop="@+id/icon_xiangqing"
-            android:layout_alignStart="@+id/time"/>
+            android:textSize="@dimen/project_text_size_dp_16"/>
 
 
         <TextView
@@ -114,12 +114,12 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/base5dp"
             android:layout_marginStart="@dimen/base8dp"
-            android:layout_toStartOf="@id/arrow_iv"
             android:layout_toEndOf="@id/hetong_lable"
-            android:text=""
-            android:lines="1"
-            android:gravity="end"
+            android:layout_toStartOf="@id/arrow_iv"
             android:ellipsize="end"
+            android:gravity="end"
+            android:lines="1"
+            android:text=""
             android:textColor="@color/text_title_gray"
             android:textSize="@dimen/project_text_size_dp_16"/>
     </RelativeLayout>
@@ -205,12 +205,12 @@
         android:id="@+id/beizhu_et"
         android:layout_width="match_parent"
         android:layout_height="@dimen/base80dp"
+        android:background="@color/transparent"
         android:gravity="start"
         android:paddingEnd="@dimen/activity_horizontal_margin"
         android:paddingStart="@dimen/activity_horizontal_margin"
-        android:textSize="@dimen/project_text_size_dp_12"
-        android:background="@color/transparent"
-        android:paddingTop="@dimen/base5dp"/>
+        android:paddingTop="@dimen/base5dp"
+        android:textSize="@dimen/project_text_size_dp_12"/>
 
     <View
         android:layout_width="match_parent"
@@ -223,18 +223,19 @@
         android:background="@color/project_color_basic_white">
 
 
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/base47dp"
             android:layout_alignParentBottom="true"
             android:background="@color/project_color_basic_white_pure">
+
             <View
                 android:id="@+id/line1"
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_alignParentTop="true"
                 android:background="@mipmap/line"/>
+
             <View
                 android:id="@+id/line2"
                 android:layout_width="match_parent"
@@ -243,11 +244,12 @@
                 android:background="@mipmap/line"/>
 
             <LinearLayout
-                android:id="@+id/qianming_ll"
+                android:id="@+id/toto_qianming_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/dangmian_qianhsu"
@@ -282,8 +284,6 @@
             </LinearLayout>
         </RelativeLayout>
     </RelativeLayout>
-
-
 
 
 </LinearLayout>

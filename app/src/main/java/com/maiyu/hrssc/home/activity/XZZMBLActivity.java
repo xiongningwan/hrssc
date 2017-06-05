@@ -187,7 +187,9 @@ public class XZZMBLActivity extends BaseActivity {
 
         String brief = mSimpleDescText.getText().toString(); // 描述
         String comment = mEditText.getText().toString(); // 备注
-        String language = mSpinner.getSelectedItem().toString().equals("中文") ? "0" : "1";
+
+
+        String language = getLaguageParam();
 
         String paths = getSbString(mImageList);
         String attachs = getSbString(mAttachFileList);
@@ -225,6 +227,18 @@ public class XZZMBLActivity extends BaseActivity {
         new SubmitApplyAsyncTask(mAid, mToken, type, mCity, mId, mGet_way,
                 mAddress, mAddress_info, mRecipient, mTpl_tid, mTpl_form,
                 brief, comment, language, paths, attachs).execute();
+    }
+
+
+    String getLaguageParam() {
+        String languageStr = mSpinner.getSelectedItem().toString();
+        if (languageStr.equals("中文")) {
+            return "0";
+        } else if (languageStr.equals("英文")) {
+            return "1";
+        } else {
+            return "2";
+        }
     }
 
 
@@ -642,7 +656,7 @@ public class XZZMBLActivity extends BaseActivity {
         int set = SharedPreferencesUtil.getSpecialParamSet(this);
         String brief = mSimpleDescText.getText().toString(); // 描述
         String comment = mEditText.getText().toString(); // 备注
-        String language = mSpinner.getSelectedItem().toString().equals("中文") ? "0" : "1";
+        String language = getLaguageParam();
 
         String paths = getSbString(mImageList);
         String attachs = getSbString(mAttachFileList);
@@ -751,11 +765,13 @@ public class XZZMBLActivity extends BaseActivity {
     }
 
     void setLanguage(ApplyDetail applyDetail) {
-        //语言：0中文 1英文
+        //语言：0中文 1英文 2中英文
         if ("0".equals(applyDetail.getLanguage())) {
             mSpinner.setSelection(0);
-        } else {
+        } else if ("1".equals(applyDetail.getLanguage())) {
             mSpinner.setSelection(1);
+        } else {
+            mSpinner.setSelection(2);
         }
     }
 
