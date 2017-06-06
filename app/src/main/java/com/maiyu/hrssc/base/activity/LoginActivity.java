@@ -75,7 +75,7 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.new_employee_tv:
                 startActivity(new Intent(this, NewEmployeeLoginActivity.class));
-                finish();
+               // finish();
                 break;
             case R.id.forget_pwd_tv:
                 startActivity(new Intent(this, ForgetPwdActivity.class));

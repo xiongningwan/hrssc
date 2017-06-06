@@ -16,6 +16,7 @@ import com.maiyu.hrssc.base.exception.NetException;
 import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.OnLoadMoreListener;
 import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.OnRefreshListener;
 import com.maiyu.hrssc.base.view.aspsine.swipetoloadlayout.SwipeToLoadLayout;
+import com.maiyu.hrssc.home.activity.todo.adapter.NoPageAdapter;
 import com.maiyu.hrssc.home.activity.todo.adapter.TodoPageAdapter;
 import com.maiyu.hrssc.home.activity.todo.bean.Todo;
 import com.maiyu.hrssc.util.BaseAsyncTask;
@@ -46,6 +47,7 @@ public class TodoFragment extends Fragment implements OnRefreshListener, OnLoadM
     private final int isLoadMoreing = 3;
     private int status = init;
     private TodoPageAdapter mAdapter;
+    private NoPageAdapter mNoAdapter;
 
     public TodoFragment() {
         // Required empty public constructor
@@ -88,9 +90,10 @@ public class TodoFragment extends Fragment implements OnRefreshListener, OnLoadM
 
         // 设置列表
         mAdapter = new TodoPageAdapter(getActivity());
+        mNoAdapter = new NoPageAdapter(getActivity());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(mNoAdapter);
     }
 
     private void initData() {
@@ -180,8 +183,11 @@ public class TodoFragment extends Fragment implements OnRefreshListener, OnLoadM
             if (checkException(getActivity())) {
                 return;
             }
-            if (list != null) {
+            if (list != null && list.size() != 0) {
+                mRecyclerView.setAdapter(mAdapter);
                 setData(list);
+            } else {
+                mRecyclerView.setAdapter(mNoAdapter);
             }
 
             super.onPostExecute(result);

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,9 @@ public class PickImageView extends RelativeLayout {
     private ArrayList<String> allSelectedPictures = new ArrayList<String>();
     private Context mContext;
     private UpdateOuterDataListener mListener;
+    private boolean mIsFirstCamera;
+    private int mCount = 0;
+
 
     public PickImageView(Context context) {
         super(context);
@@ -105,54 +109,64 @@ public class PickImageView extends RelativeLayout {
             }
 
 
-            if (position == allSelectedPictures.size()) {
-                holder.image.setImageBitmap(
-                        BitmapFactory.decodeResource(convertView.getResources(),
-                                R.mipmap.icon_upiantianjia));
-
-                holder.delete.setVisibility(View.GONE);
-
-                holder.image.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        settingPickImage(mContext);
-                    }
-                });
-
-            } else {
-                holder.delete.setVisibility(View.VISIBLE);
-                String imageUrl = allSelectedPictures.get(position);
-                if (imageUrl.contains("http")) {
-                    ImageLoaderUtil.loadImage(holder.image, imageUrl, R.mipmap.user_profile_image_default);
-                } else {
-                    ImageLoader.getInstance().displayImage("file://" + allSelectedPictures.get(position),
-                            holder.image);
-                }
+            setParam(position, holder, convertView);
 
 
-                holder.delete.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //点击后移除图片
-                        allSelectedPictures.remove(position);
-
-                        //更新UI
-                        mGridview.setAdapter(mGridAdapter);
-
-
-                        // 更新外部
-                        if (mListener != null) {
-                            mListener.updateData(position);
-                        }
-                    }
-                });
-
-                // holder.delete.setOnClickListener(mListener);
-
-            }
             return convertView;
         }
     }
+
+    void setParam(final int position, ViewHolder holder, View convertView) {
+        if (position != allSelectedPictures.size()) {
+            Log.i("PickImageView", "position!=allSelectedPictures.size()" + "position:" + position + "****allSelectedPictures.size():" + allSelectedPictures.size());
+            holder.delete.setVisibility(View.VISIBLE);
+            String imageUrl = allSelectedPictures.get(position);
+            if (imageUrl.contains("http")) {
+                ImageLoaderUtil.loadImage(holder.image, imageUrl, R.mipmap.user_profile_image_default);
+            } else {
+                ImageLoader.getInstance().displayImage("file://" + allSelectedPictures.get(position),
+                        holder.image);
+            }
+
+
+            holder.delete.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //点击后移除图片
+                    allSelectedPictures.remove(position);
+
+                    //更新UI
+                    mGridview.setAdapter(mGridAdapter);
+
+
+                    // 更新外部
+                    if (mListener != null) {
+                        mListener.updateData(position);
+                    }
+                }
+            });
+
+
+            // holder.delete.setOnClickListener(mListener);
+        } else {
+            holder.image.setImageBitmap(
+                    BitmapFactory.decodeResource(convertView.getResources(),
+                            R.mipmap.icon_upiantianjia));
+
+            holder.delete.setVisibility(View.GONE);
+
+            holder.image.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    settingPickImage(mContext);
+                }
+            });
+            Log.i("PickImageView", "position==allSelectedPictures.size()" + "position:" + position + "****allSelectedPictures.size():" + allSelectedPictures.size());
+
+
+        }
+    }
+
 
     public void setUpdateOterDataListener(UpdateOuterDataListener listener) {
         mListener = listener;
@@ -193,6 +207,15 @@ public class PickImageView extends RelativeLayout {
 
     }
 
+    public void updatePickImageView(ArrayList<String> pictures, boolean isFirstCamera) {
+        mIsFirstCamera = isFirstCamera;
+        allSelectedPictures.clear();
+        allSelectedPictures.addAll(pictures);
+        setListViewHeightBasedOnChildren(mGridview);
+        mGridAdapter.notifyDataSetChanged();
+
+    }
+
 
     public static void setListViewHeightBasedOnChildren(GridView listView) {
         // 获取listview的adapter
@@ -202,7 +225,7 @@ public class PickImageView extends RelativeLayout {
         }
         // 固定列宽，有多少列
         int col = 3;// listView.getNumColumns();
-        int extraHeight = 10;
+        int extraHeight = 50;
         int totalHeight = 0;
         // i每次加4，相当于listAdapter.getCount()小于等于4时 循环一次，计算一次item的高度，
         // listAdapter.getCount()小于等于8时计算两次高度相加

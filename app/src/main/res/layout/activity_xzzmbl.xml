@@ -232,7 +232,12 @@
                     android:layout_alignBottom="@+id/textView"
                     android:layout_marginEnd="@dimen/base5dp"
                     android:layout_toStartOf="@+id/simple_desc_xh"
+                    android:layout_toEndOf="@id/textView"
+                    android:layout_marginStart="@dimen/base8dp"
+                    android:lines="1"
+                    android:ellipsize="end"
                     android:hint="填写"
+                    android:gravity="end"
                     android:text=""
                     android:textColor="@color/text_title_gray"
                     android:textSize="@dimen/project_text_size_dp_15"/>

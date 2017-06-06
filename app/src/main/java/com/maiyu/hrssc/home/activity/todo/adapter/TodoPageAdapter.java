@@ -2,6 +2,7 @@ package com.maiyu.hrssc.home.activity.todo.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * 合同
@@ -122,6 +125,8 @@ public class TodoPageAdapter extends RecyclerView.Adapter<TodoPageAdapter.TodoPa
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    ((FragmentActivity)mContext).setResult(RESULT_OK); // 返回首页刷新
+
                     Intent intent = new Intent(mContext, TodoDeitailActivity.class);
                     intent.putExtra("title", todo.getTpl_name());
                     intent.putExtra("id", todo.getId());

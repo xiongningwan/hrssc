@@ -3,6 +3,7 @@ package com.hyphenate.helpdesk.easeui.ui;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -571,9 +572,25 @@ public class ChatFragment extends BaseFragment implements ChatManager.MessageLis
                 + System.currentTimeMillis() + ".jpg");
         cameraFilePath = cameraFile.getAbsolutePath();
         cameraFile.getParentFile().mkdirs();
-        startActivityForResult(
+
+
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+
+        if (currentapiVersion<24){
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile));
+            startActivityForResult(intent, REQUEST_CODE_CAMERA);
+        }else {
+            ContentValues contentValues = new ContentValues(1);
+            contentValues.put(MediaStore.Images.Media.DATA, cameraFile.getAbsolutePath());
+            Uri uri = getContext().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,contentValues);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+            startActivityForResult(intent, REQUEST_CODE_CAMERA);
+        }
+       /* startActivityForResult(
                 new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)),
-                REQUEST_CODE_CAMERA);
+                REQUEST_CODE_CAMERA);*/
     }
 
     /**

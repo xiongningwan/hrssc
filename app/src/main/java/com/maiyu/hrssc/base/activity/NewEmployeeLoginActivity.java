@@ -45,7 +45,7 @@ public class NewEmployeeLoginActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        mHeadView.setTitle("新员工登录", true, false);
+        mHeadView.setTitle("新/离职员工登录", true, false);
         mLoadingDialog = new LoadingDialog(this);
     }
 

@@ -94,7 +94,7 @@
             android:layout_marginEnd="@dimen/base10dp"
             android:layout_marginTop="@dimen/base20dp"
             android:layout_toStartOf="@id/point"
-            android:text="新员工登录入口"
+            android:text="新/离职员工登录入口"
             android:textSize="@dimen/project_text_size_dp_12"/>
 
         <TextView

@@ -12,13 +12,21 @@
         android:background="@color/project_color_basic_white_pure">
 
 
-        <ImageView
-            android:id="@+id/back_iv"
+        <RelativeLayout
+            android:id="@+id/back_iv_rl"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:src="@mipmap/icon_back"/>
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/activity_horizontal_margin">
+
+            <ImageView
+                android:id="@+id/back_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/icon_back"/>
+        </RelativeLayout>
+
+
 
         <EditText
             android:id="@+id/search_et"
@@ -27,7 +35,7 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_toEndOf="@id/back_iv"
+            android:layout_toEndOf="@id/back_iv_rl"
             android:layout_toStartOf="@+id/search_btn"
             android:background="@drawable/corner_view_search_et_bg"
             android:drawableLeft="@mipmap/icon_fangdajing"

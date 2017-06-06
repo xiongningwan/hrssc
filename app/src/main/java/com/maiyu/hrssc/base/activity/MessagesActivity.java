@@ -94,6 +94,8 @@ public class MessagesActivity extends BaseActivity implements OnRefreshListener,
 
         @Override
         public void onClick(View v) {
+            setResult(RESULT_OK); // 返回首页刷新
+
             Messages messages = (Messages) v.getTag(R.id.key_tag_item_data);
             Intent intent = new Intent(MessagesActivity.this, MessageDetailActivity.class);
             intent.putExtra(MESSAGE_ITEM_ID, messages.getId());
@@ -109,6 +111,8 @@ public class MessagesActivity extends BaseActivity implements OnRefreshListener,
 
         @Override
         public void onClick(View v) {
+            setResult(RESULT_OK); // 返回首页刷新
+
             Messages messages = (Messages) v.getTag(R.id.key_tag_item_data);
             int position = mMessageAdapter.getPosition(messages);
             mMessageAdapter.removeItem(position);

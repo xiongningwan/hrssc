@@ -59,7 +59,7 @@ public class FeedBackActivity extends BaseActivity {
 
     @OnClick(R.id.confirm_btn)
     public void onClick() {
-        String feedBackStr = mFeedBackEt.getText().toString();
+        String feedBackStr = mFeedBackEt.getText().toString().trim();
 
         if (feedBackStr == null || "".equals(feedBackStr)) {
             HintUitl.toastShort(this, "输入框不能为空");

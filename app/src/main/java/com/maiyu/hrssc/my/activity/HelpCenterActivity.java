@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
@@ -29,11 +30,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.maiyu.hrssc.R.id.back_iv;
+import static com.maiyu.hrssc.R.id.back_iv_rl;
+
 /**
  * 帮助中心
  */
 public class HelpCenterActivity extends BaseActivity implements OnRefreshListener, OnLoadMoreListener {
-    @BindView(R.id.back_iv)
+    @BindView(back_iv_rl)
+    RelativeLayout mBackIvRL;
+    @BindView(back_iv)
     ImageView mBackIv;
     @BindView(R.id.search_et)
     EditText mSearchEt;
@@ -92,10 +98,11 @@ public class HelpCenterActivity extends BaseActivity implements OnRefreshListene
     }
 
 
-    @OnClick({R.id.back_iv, R.id.search_et, R.id.search_btn})
+    @OnClick({back_iv_rl, R.id.search_et, R.id.search_btn})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.back_iv:
+            case back_iv_rl:
+                finish();
                 break;
             case R.id.search_et:
                 break;

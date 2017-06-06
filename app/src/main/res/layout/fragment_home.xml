@@ -199,7 +199,7 @@
                         android:layout_marginEnd="@dimen/base16dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:visibility="gone">
+                        android:visibility="visible">
 
                         <TextView
                             android:id="@+id/myApply_tv"
@@ -210,7 +210,7 @@
                             android:gravity="center"
                             android:text="0"
                             android:textColor="@color/project_color_basic_white_pure"
-                            android:textSize="@dimen/project_text_size_dp_12"/>
+                            android:visibility="gone"/>
 
                         <ImageView
                             android:id="@+id/xianghou"

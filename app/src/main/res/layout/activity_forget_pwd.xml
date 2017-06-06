@@ -39,7 +39,7 @@
             android:background="@color/transparent"
             android:drawableLeft="@mipmap/icon_ren_gray"
             android:drawablePadding="@dimen/base10dp"
-            android:hint="请输入工号"
+            android:hint="请输入工号、账号"
             android:textColorHint="@color/project_color_general_text_secondary"
             android:textSize="@dimen/project_text_size_dp_14"/>
 

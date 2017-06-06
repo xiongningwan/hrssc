@@ -39,18 +39,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginTop="@dimen/base29dp">
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_weight="1"
             android:gravity="center_horizontal">
             <LinearLayout
                 android:id="@+id/chaxun_ll"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
@@ -69,15 +69,15 @@
 
             <LinearLayout
                 android:id="@+id/shebaozhuanru_ll"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center_horizontal">
                 <ImageView
                     android:layout_width="@dimen/base46dp"
                     android:layout_height="@dimen/base46dp"
-                    android:src="@mipmap/icon_sbzy"/>
+                    android:src="@mipmap/icon_sbbg"/>
                 <TextView
                     android:id="@+id/shebaozhuanru_tv"
                     android:layout_width="wrap_content"
@@ -88,15 +88,15 @@
 
             <LinearLayout
                 android:id="@+id/shebaobaoxiao_ll"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center_horizontal">
                 <ImageView
                     android:layout_width="@dimen/base46dp"
                     android:layout_height="@dimen/base46dp"
-                    android:src="@mipmap/icon_sbbx"/>
+                    android:src="@mipmap/icon_sbyb"/>
                 <TextView
                     android:id="@+id/shebaobaoxiao_tv"
                     android:layout_width="wrap_content"
@@ -108,22 +108,22 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_weight="1"
             android:gravity="center_horizontal">
             <LinearLayout
                 android:id="@+id/shebaobiangeng_ll"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center_horizontal">
                 <ImageView
                     android:layout_width="@dimen/base46dp"
                     android:layout_height="@dimen/base46dp"
-                    android:src="@mipmap/icon_sbbg"/>
+                    android:src="@mipmap/icon_sbzy"/>
                 <TextView
                     android:id="@+id/shebaobiangeng_tv"
                     android:layout_width="wrap_content"
@@ -133,8 +133,8 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/shebaozhuanchu_ll"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center_horizontal">
@@ -151,15 +151,15 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/shebaocanbaozm_ll"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center_horizontal">
                 <ImageView
                     android:layout_width="@dimen/base46dp"
                     android:layout_height="@dimen/base46dp"
-                    android:src="@mipmap/icon_sbcbzm"/>
+                    android:src="@mipmap/icon_ylba"/>
                 <TextView
                     android:id="@+id/shebaocanbaozm_Tv"
                     android:layout_width="wrap_content"
@@ -170,22 +170,22 @@
 
         </LinearLayout>
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_weight="1"
             android:gravity="center_horizontal">
             <LinearLayout
                 android:id="@+id/shebaoyibaokabanli_ll"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center_horizontal">
                 <ImageView
                     android:layout_width="@dimen/base46dp"
                     android:layout_height="@dimen/base46dp"
-                    android:src="@mipmap/icon_sbyb"/>
+                    android:src="@mipmap/icon_sbbx"/>
                 <TextView
                     android:id="@+id/shebaoyibaokabanli_tv"
                     android:layout_width="wrap_content"
@@ -195,15 +195,15 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/yiliaobeian_ll"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center_horizontal">
                 <ImageView
                     android:layout_width="@dimen/base46dp"
                     android:layout_height="@dimen/base46dp"
-                    android:src="@mipmap/icon_ylba"/>
+                    android:src="@mipmap/icon_sbcbzm"/>
                 <TextView
                     android:id="@+id/yiliaobeian_tv"
                     android:layout_width="wrap_content"
@@ -213,8 +213,8 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/wu_ll"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"

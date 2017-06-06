@@ -9,6 +9,7 @@ import android.os.Build;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.DownloadListener;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -90,6 +91,8 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
 
         mWebView.setWebChromeClient(new WebChromeClient());
         mWebView.setWebViewClient(new WebViewClient());
+        mWebView.setDownloadListener(new MyWebViewDownLoadListener());
+
 
         User user = DataCenter.getInstance().getuser();
         mJSIImp = new JavaScriptInterface(user);
@@ -342,5 +345,15 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    private class MyWebViewDownLoadListener implements DownloadListener {
 
+        @Override
+        public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype,
+                                    long contentLength) {
+            Uri uri = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+        }
+
+    }
 }

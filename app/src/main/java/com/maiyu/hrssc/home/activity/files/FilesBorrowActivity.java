@@ -158,7 +158,7 @@ public class FilesBorrowActivity extends BaseActivity {
         String mRecipient = "";
         String mTpl_tid = "0";
         String mTpl_form = "";
-        String brief = mBriefEt.getText().toString(); // 描述
+        String brief = mBriefEt.getText().toString().trim(); // 描述
         String comment = ""; // 备注
         String language = "0";
 

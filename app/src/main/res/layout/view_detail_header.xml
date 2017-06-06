@@ -34,7 +34,7 @@
 
     <RelativeLayout
         android:id="@+id/title_right_button"
-        android:layout_width="@dimen/base62dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
@@ -46,7 +46,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text=""/>
+            android:text=""
+            android:lines="1"
+            android:ellipsize="end"/>
     </RelativeLayout>
 
 </merge>

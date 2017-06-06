@@ -74,6 +74,8 @@ public class HomeFragment extends Fragment {
     static final int REQUEST_ACCESS_FINE_LOCATION_PERMISSION = 101;
     static final int REQUEST_SELECT_CITY = 102;
     public static final String CITY_LIST = "city_list";
+    private static final int MSG_REQUEST_CODE = 103;
+    private static final int TODO_REQUEST_CODE = 104;
     @BindView(swipe_reshresh_layout)
     SwipeRefreshLayout mSwipeReshreshLayout;
     @BindView(R.id.address_btn_text)
@@ -389,7 +391,9 @@ public class HomeFragment extends Fragment {
      */
     private void stopLocation() {
         // 停止定位
-        locationClient.stopLocation();
+        if(locationClient != null) {
+            locationClient.stopLocation();
+        }
     }
 
     /**
@@ -429,13 +433,13 @@ public class HomeFragment extends Fragment {
             case R.id.msg_btn:
                 // 消息系统
                 // startActivity(new Intent(getActivity(), InformationActivity.class));
-                startActivity(new Intent(getActivity(), MessagesActivity.class));
+                startActivityForResult(new Intent(getActivity(), MessagesActivity.class), MSG_REQUEST_CODE);
                 /*if (mMsgPoint.getVisibility() == View.VISIBLE) {
                     mMsgPoint.setVisibility(View.GONE);
                 }*/
                 break;
             case R.id.hetong_rl:
-                startActivity(new Intent(getActivity(), TodoActivity.class));
+                startActivityForResult(new Intent(getActivity(), TodoActivity.class), TODO_REQUEST_CODE);
                 break;
             case R.id.shenqing_rl:
                 startActivity(new Intent(getActivity(), ApplyingActivity.class));
@@ -509,6 +513,16 @@ public class HomeFragment extends Fragment {
                         // 请求首页数据
                         new getHomeData(mAddressBtnText.getText().toString(), mToken).execute();
                     }
+                    break;
+                case MSG_REQUEST_CODE:
+                    Log.i("home_resultCode_code","MSG_REQUEST_CODE");
+                    // 刷新home
+                    new getHomeData(mAddressBtnText.getText().toString(), mToken).execute();
+                    break;
+                case TODO_REQUEST_CODE:
+                    Log.i("home_resultCode_code","TODO_REQUEST_CODE");
+                    // 刷新home
+                    new getHomeData(mAddressBtnText.getText().toString(), mToken).execute();
                     break;
             }
         }

@@ -1,8 +1,10 @@
 package com.maiyu.hrssc.home.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Parcelable;
@@ -10,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -310,7 +313,8 @@ public class XZZMBLActivity extends BaseActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == PhotoPicker.REQUEST_SELECTED) {
                 ArrayList<String> allSelectedPicture = data.getStringArrayListExtra(PhotoPicker.EXTRA_RESULT);
-                //mPickImageView.updatePickImageView(allSelectedPicture);
+               // mPickImageView.updatePickImageView(allSelectedPicture);
+              //  Log.i("PickImageView", "allSelectedPicture:" + allSelectedPicture.size());
                 //mImageList.clear();
                 // mImageListDisplays.clear();
                 for (int i = 0; i < allSelectedPicture.size(); i++) {
@@ -331,6 +335,25 @@ public class XZZMBLActivity extends BaseActivity {
                 mSimpleDescText.setText(data != null ? data.getStringExtra(EtTextActivity.TEXT) : "");
             }
 
+        }
+    }
+
+    boolean getSetFirstCamera() {
+        SharedPreferences sp = getSharedPreferences("user_info_camera", Context.MODE_PRIVATE);
+        long cameraFalg = sp.getLong("CAMERA", 0);
+        Log.i("PickImageView", "cameraFalg:" + cameraFalg);
+        if (1 == cameraFalg) {
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putLong("CAMERA", 0);
+            editor.commit();
+        }
+
+        mCount++;
+        Log.i("PickImageView", "mCount:" + mCount);
+        if (mCount == 1 && cameraFalg == 1) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -544,6 +567,9 @@ public class XZZMBLActivity extends BaseActivity {
             if (str != null) {
                 HintUitl.toastShort(XZZMBLActivity.this, str);
                 startActivity(new Intent(XZZMBLActivity.this, SucceedActivity.class));
+                if("0".equals(type)) {
+                    finish();
+                }
             }
 
             super.onPostExecute(result);

@@ -1,7 +1,9 @@
 package cc.dagger.photopicker.utils;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -42,10 +44,26 @@ public class ImageCaptureManager {
             // Create the File where the photo should go
             File photoFile = createImageFile();
             // Continue only if the File was successfully created
-            if (photoFile != null) {
+            /*if (photoFile != null) {
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
                         Uri.fromFile(photoFile));
+            }*/
+
+            int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+            if (currentapiVersion<24){
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+               // startActivityForResult(takePictureIntent, REQUEST_CAMERA);
+            }else {
+                ContentValues contentValues = new ContentValues(0);
+                contentValues.put(MediaStore.Images.Media.DATA, photoFile.getAbsolutePath());
+                Uri uri = mContext.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,contentValues);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+              //  startActivityForResult(intent, REQUEST_CAMERA);
             }
+            SharedPreferences perfer = mContext.getSharedPreferences("user_info_camera", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = perfer.edit();
+            editor.putLong("CAMERA", 1);
+            editor.commit();
         }
         return takePictureIntent;
     }

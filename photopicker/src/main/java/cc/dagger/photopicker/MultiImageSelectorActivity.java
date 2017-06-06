@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -23,7 +24,7 @@ import cc.dagger.photopicker.picker.SelectMode;
  * Updated by wzfu on 2016/5/22
  */
 public class MultiImageSelectorActivity extends AppCompatActivity
-        implements MultiImageSelectorFragment.Callback{
+        implements MultiImageSelectorFragment.Callback {
 
     // Default image size
     private static final int DEFAULT_IMAGE_SIZE = 9;
@@ -43,7 +44,7 @@ public class MultiImageSelectorActivity extends AppCompatActivity
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if(toolbar != null){
+        if (toolbar != null) {
             setSupportActionBar(toolbar);
         }
 
@@ -58,9 +59,9 @@ public class MultiImageSelectorActivity extends AppCompatActivity
 
         mDefaultCount = pickerParams.maxPickSize;
 
-        if(pickerParams.mode == SelectMode.MULTI) {
+        if (pickerParams.mode == SelectMode.MULTI) {
 
-            if(pickerParams.selectedPaths != null){
+            if (pickerParams.selectedPaths != null) {
                 resultList = pickerParams.selectedPaths;
             }
         }
@@ -80,12 +81,18 @@ public class MultiImageSelectorActivity extends AppCompatActivity
                 return true;
 
             case menuItemDoneId:
-                if(resultList != null && resultList.size() > 0) {
+                if (resultList.size() > mDefaultCount) {
+                    Toast.makeText(this, R.string.msg_amount_limit, Toast.LENGTH_SHORT).show();
+                    break;
+                }
+
+
+                if (resultList != null && resultList.size() > 0) {
                     // Notify success
                     Intent data = new Intent();
                     data.putStringArrayListExtra(PhotoPicker.EXTRA_RESULT, resultList);
                     setResult(RESULT_OK, data);
-                }else{
+                } else {
                     setResult(RESULT_CANCELED);
                 }
                 finish();
@@ -102,11 +109,12 @@ public class MultiImageSelectorActivity extends AppCompatActivity
 
     /**
      * Update done button by select image data
+     *
      * @param resultList selected image data
      */
-    public void updateDoneText(ArrayList<String> resultList){
+    public void updateDoneText(ArrayList<String> resultList) {
 
-        if(menuItemDone == null || resultList == null){
+        if (menuItemDone == null || resultList == null) {
             return;
         }
 
@@ -126,7 +134,7 @@ public class MultiImageSelectorActivity extends AppCompatActivity
 
     @Override
     public void onImageSelected(String path) {
-        if(!resultList.contains(path)) {
+        if (!resultList.contains(path)) {
             resultList.add(path);
         }
         updateDoneText(resultList);
@@ -134,7 +142,7 @@ public class MultiImageSelectorActivity extends AppCompatActivity
 
     @Override
     public void onImageUnselected(String path) {
-        if(resultList.contains(path)){
+        if (resultList.contains(path)) {
             resultList.remove(path);
         }
         updateDoneText(resultList);
@@ -142,7 +150,7 @@ public class MultiImageSelectorActivity extends AppCompatActivity
 
     @Override
     public void onCameraShot(String filePath) {
-        if(filePath != null) {
+        if (filePath != null) {
             Intent data = new Intent();
             resultList.add(filePath);
             data.putStringArrayListExtra(PhotoPicker.EXTRA_RESULT, resultList);
@@ -156,7 +164,8 @@ public class MultiImageSelectorActivity extends AppCompatActivity
         menuItemDone = menu.add(Menu.NONE, menuItemDoneId, 0, "Finish");
         menuItemDone.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         menuItemDone.setVisible(false);
-        updateDoneText(resultList);;
+        updateDoneText(resultList);
+        ;
         return true;
     }
 
