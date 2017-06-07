@@ -148,6 +148,8 @@ public class XZZMBLActivity extends BaseActivity {
                 doSubmit(type);
             }
         });
+
+
         mTitleLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -119,13 +119,7 @@ public class ApplyingDetialActivity extends BaseActivity {
         rightButtonText = mHeadView.getRightButtonText();
         rightButtonText.setText("评价");
         rightButtonText.setTextColor(ContextCompat.getColor(this, R.color.project_color_general_hyperlink));
-        rightButtonText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                HintUitl.toastShort(ApplyingDetialActivity.this, "评价");
-            }
-        });
-        rightButtonText.setVisibility(View.GONE);
+        rightButtonText.setVisibility(View.VISIBLE);
 
 
         // 设置列表
@@ -158,13 +152,13 @@ public class ApplyingDetialActivity extends BaseActivity {
                 intent.putExtra("FindApplyDetailData", mFindApplyDetailData);
                 startActivity(intent);
             }
-                break;
+            break;
             case R.id.yundanjilv_rl:
                 // 运单记录
                /* Intent intent = new Intent(this, YDJLActivity.class);
                 intent.putExtra("FindApplyDetailData", mFindApplyDetailData);
                 startActivity(intent);*/
-               HintUitl.toastShort(this, "【待开通】");
+                HintUitl.toastShort(this, "【待开通】");
                 break;
         }
     }
@@ -245,7 +239,7 @@ public class ApplyingDetialActivity extends BaseActivity {
         mTime.setText(AppUtil.setTime(dateTime));
     }
 
-    void setStatusString(ApplyDetail applyDetail) {
+    void setStatusString(final ApplyDetail applyDetail) {
         if ("0".equals(applyDetail.getStatus())) {
             mStatus.setText("待审核");
         } else if ("1".equals(applyDetail.getStatus())) {
@@ -255,6 +249,18 @@ public class ApplyingDetialActivity extends BaseActivity {
         } else if ("3".equals(applyDetail.getStatus())) {
             mStatus.setText("待评价");
             rightButtonText.setVisibility(View.VISIBLE);
+            rightButtonText.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //  HintUitl.toastShort(ApplyingDetialActivity.this, "评价");
+
+                    Intent intent = new Intent(ApplyingDetialActivity.this, EvaluationActivity.class);
+                    intent.putExtra("aid", applyDetail.getId());
+                    intent.putExtra("name", applyDetail.getName());
+                    intent.putExtra("orderNo", applyDetail.getWork_order());
+                    startActivity(intent);
+                }
+            });
         } else if ("4".equals(applyDetail.getStatus())) {
             mStatus.setText("已完成");
         } else if ("5".equals(applyDetail.getStatus())) {

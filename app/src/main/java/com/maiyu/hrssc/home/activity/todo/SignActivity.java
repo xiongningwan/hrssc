@@ -6,7 +6,10 @@ import android.widget.LinearLayout;
 
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.activity.BaseActivity;
+import com.maiyu.hrssc.base.bean.DataCenter;
+import com.maiyu.hrssc.base.bean.User;
 import com.maiyu.hrssc.base.view.HeadView;
+import com.maiyu.hrssc.util.ImageLoaderUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,6 +22,7 @@ public class SignActivity extends BaseActivity {
     ImageView mSignIv;
     @BindView(R.id.no_sign_ll)
     LinearLayout mNoSignLl;
+    private User mUser;
 
 
     @Override
@@ -30,6 +34,16 @@ public class SignActivity extends BaseActivity {
     @Override
     public void initViews() {
         mHeadView.setTitle("我的签名", true, false);
+        mUser = DataCenter.getInstance().getuser();
+
+        if (mUser != null && mUser.getSignature() != null) {
+            mNoSignLl.setVisibility(View.GONE);
+            mSignIv.setVisibility(View.VISIBLE);
+            ImageLoaderUtil.loadImage(mSignIv, mUser.getSignature(), R.mipmap.user_profile_image_default);
+        } else {
+            mNoSignLl.setVisibility(View.VISIBLE);
+            mSignIv.setVisibility(View.GONE);
+        }
     }
 
     @Override

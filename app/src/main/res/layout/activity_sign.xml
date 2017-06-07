@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/project_color_basic_white"
-    tools:context="com.maiyu.hrssc.home.activity.todo.SignActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.maiyu.hrssc.home.activity.todo.SignActivity">
 
 
     <com.maiyu.hrssc.base.view.HeadView
@@ -27,9 +27,11 @@
         <ImageView
             android:id="@+id/sign_iv"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/base100dp"
+            android:layout_height="@dimen/base200dp"
             android:src="@mipmap/user_profile_image_default"
-            android:visibility="gone"/>
+            android:background="@color/project_color_basic_white_pure"
+            android:visibility="gone"
+            android:layout_centerHorizontal="true"/>
 
 
         <LinearLayout
@@ -37,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-           android:layout_marginTop="@dimen/base160dp"
+            android:layout_marginTop="@dimen/base160dp"
             android:orientation="vertical">
 
 

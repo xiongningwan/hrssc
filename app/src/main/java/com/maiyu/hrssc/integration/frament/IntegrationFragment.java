@@ -126,11 +126,12 @@ public class IntegrationFragment extends Fragment implements OnRefreshListener, 
 
             }
         });
+
+        new BannerAsyncTask(mToken).execute();
     }
 
     void initData() {
         new ProductsListAsyncTask(mToken, String.valueOf(mPage), String.valueOf(mCount)).execute();
-        new BannerAsyncTask(mToken).execute();
     }
 
 
@@ -204,10 +205,9 @@ public class IntegrationFragment extends Fragment implements OnRefreshListener, 
 
     @Override
     public void onLoadMore() {
-        //mPage++;
+        mPage++;
         status = isLoadMoreing;
-        //  initData();
-        new ProductsListAsyncTask(mToken, String.valueOf(mPage), String.valueOf(mCount)).execute();
+        initData();
         refreshOrLoadMoreComplete();
     }
 

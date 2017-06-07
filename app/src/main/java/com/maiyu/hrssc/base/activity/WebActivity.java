@@ -263,13 +263,13 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
         @Override
         public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
             super.onReceivedError(view, request, error);
-            if (WebViewClient.ERROR_HOST_LOOKUP == error.getErrorCode() || WebViewClient.ERROR_TIMEOUT == error.getErrorCode()) {
+           /* if (WebViewClient.ERROR_HOST_LOOKUP == error.getErrorCode() || WebViewClient.ERROR_TIMEOUT == error.getErrorCode()) {
                 // 网络问题
                 mWebView.loadUrl(" file:///android_asset/html/error.html ");
             } else {
                 mWebView.loadUrl(" file:///android_asset/html/error1.html ");
 
-            }
+            }*/
         }
 
         @Override
