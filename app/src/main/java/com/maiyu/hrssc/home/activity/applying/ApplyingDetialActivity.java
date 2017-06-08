@@ -119,7 +119,7 @@ public class ApplyingDetialActivity extends BaseActivity {
         rightButtonText = mHeadView.getRightButtonText();
         rightButtonText.setText("评价");
         rightButtonText.setTextColor(ContextCompat.getColor(this, R.color.project_color_general_hyperlink));
-        rightButtonText.setVisibility(View.VISIBLE);
+        rightButtonText.setVisibility(View.GONE);
 
 
         // 设置列表

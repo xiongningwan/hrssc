@@ -315,8 +315,8 @@ public class XZZMBLActivity extends BaseActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == PhotoPicker.REQUEST_SELECTED) {
                 ArrayList<String> allSelectedPicture = data.getStringArrayListExtra(PhotoPicker.EXTRA_RESULT);
-               // mPickImageView.updatePickImageView(allSelectedPicture);
-              //  Log.i("PickImageView", "allSelectedPicture:" + allSelectedPicture.size());
+                // mPickImageView.updatePickImageView(allSelectedPicture);
+                //  Log.i("PickImageView", "allSelectedPicture:" + allSelectedPicture.size());
                 //mImageList.clear();
                 // mImageListDisplays.clear();
                 for (int i = 0; i < allSelectedPicture.size(); i++) {
@@ -569,9 +569,8 @@ public class XZZMBLActivity extends BaseActivity {
             if (str != null) {
                 HintUitl.toastShort(XZZMBLActivity.this, str);
                 startActivity(new Intent(XZZMBLActivity.this, SucceedActivity.class));
-                if("0".equals(type)) {
-                    finish();
-                }
+                finish();
+
             }
 
             super.onPostExecute(result);

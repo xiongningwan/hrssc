@@ -96,6 +96,7 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
 
         User user = DataCenter.getInstance().getuser();
         mJSIImp = new JavaScriptInterface(user);
+        mWebView.addJavascriptInterface(mJSIImp, "injs");
 
         Intent intent = getIntent();
         mType = intent.getIntExtra("type", 0);
@@ -167,6 +168,8 @@ public class WebActivity extends BaseActivity implements SwipeRefreshLayout.OnRe
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intent);
         }
+
+
 
 
     }

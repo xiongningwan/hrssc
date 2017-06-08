@@ -69,7 +69,7 @@
         android:layout_height="@dimen/project_btn_hight"
         android:layout_marginTop="@dimen/base79dp"
         android:layout_gravity="center_horizontal"
-        android:text="返回工作台"
+        android:text="返回首页"
         android:textColor="@color/project_color_basic_white_pure"
         android:background="@drawable/corner_view_selector"/>
 </LinearLayout>

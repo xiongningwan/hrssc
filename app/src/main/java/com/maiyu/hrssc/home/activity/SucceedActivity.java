@@ -1,11 +1,13 @@
 package com.maiyu.hrssc.home.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.activity.BaseActivity;
+import com.maiyu.hrssc.base.activity.MainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,6 +52,10 @@ public class SucceedActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.btn_back_home_work:
+
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 finish();
                 break;
         }

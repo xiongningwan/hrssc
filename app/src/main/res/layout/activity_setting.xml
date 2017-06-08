@@ -119,7 +119,7 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/base5dp"
             android:layout_toStartOf="@id/arraw_iv"
-            android:text="有最新版本"
+            android:text=""
             android:textColor="@color/color_general_text_red"
             android:textSize="@dimen/project_text_size_dp_12"/>
     </RelativeLayout>
