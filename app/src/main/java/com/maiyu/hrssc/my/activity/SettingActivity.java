@@ -20,7 +20,6 @@ import com.maiyu.hrssc.base.view.dialog.LoadingDialog;
 import com.maiyu.hrssc.util.BaseAsyncTask;
 import com.maiyu.hrssc.util.DownloadService;
 import com.maiyu.hrssc.util.EngineFactory;
-import com.maiyu.hrssc.util.HintUitl;
 import com.maiyu.hrssc.util.ImageLoaderUtil;
 import com.maiyu.hrssc.util.PackageInfoUtil;
 import com.maiyu.hrssc.util.SharedPreferencesUtil;
@@ -53,6 +52,10 @@ public class SettingActivity extends BaseActivity {
     RelativeLayout mLogoutRL;
     private LoadingDialog mLoadingDialog;
     private Version mVersion;
+    private int UPDATE_STATUS = 1;
+    private int CLICK_STATUS = 2;
+    private int INIT_STATUS = 1;
+
 
     @Override
     public void createActivityImpl() {
@@ -97,12 +100,8 @@ public class SettingActivity extends BaseActivity {
 
             case R.id.update_rl:
                 // 更新
-                if (mVersion != null) {
-
-                    showDialog(mVersion);
-                } else {
-                    HintUitl.toastShort(this, "没有可更新的");
-                }
+                UPDATE_STATUS = CLICK_STATUS;
+                new VersionCheckAsyncTask().execute();
                 break;
 
             case R.id.logout_rl:
@@ -247,8 +246,10 @@ public class SettingActivity extends BaseActivity {
             }
             if (version != null) {
                 if (version.getCode() > PackageInfoUtil.getVersionCode(SettingActivity.this)) {
-                    mUpdateHintTv.setText("有最新版本!");
-                    mVersion = version;
+                    mUpdateHintTv.setText("有最新版本");
+                    if(UPDATE_STATUS == CLICK_STATUS) {
+                        showDialog(version);
+                    }
                 } else {
                     mUpdateHintTv.setText("已是最新版本!");
                 }

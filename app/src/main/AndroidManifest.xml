@@ -413,6 +413,17 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait">
         </activity>
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.maiyu.hrssc.fileprovider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+
 
 
         <!-- 【必须】 (2.30及以上版新增)展示通知的activity -->

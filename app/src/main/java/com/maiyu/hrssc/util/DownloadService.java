@@ -14,6 +14,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 
 import com.maiyu.hrssc.R;
@@ -79,7 +80,7 @@ public class DownloadService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        DOWN_APK_URL= intent.getStringExtra("url");
+        DOWN_APK_URL = intent.getStringExtra("url");
         //hongyang大神封装好的okHttp网络请求
         //启动分线程下载
         new Thread(new Runnable() {
@@ -115,7 +116,7 @@ public class DownloadService extends Service {
                     public void inProgress(final float progress, long total, int id) {
                         super.inProgress(progress, total, id);
                         //Log.e(TAG, "inProgress() 当前线程 == " + Thread.currentThread().getName());
-                       // autoDownLoad = (Boolean) SPUtils.get(DownloadService.this, SPUtils.WIFI_DOWNLOAD_SWITCH, false);
+                        // autoDownLoad = (Boolean) SPUtils.get(DownloadService.this, SPUtils.WIFI_DOWNLOAD_SWITCH, false);
                         //判断开关状态 开 则静默下载
                         if (autoDownLoad) {
                             //说明自动更新 这里服务在后台默默运行下载 只能看日志了
@@ -170,15 +171,20 @@ public class DownloadService extends Service {
             //当进度为100%时 传入安装apk的intent
             File fileLocation = new File(Environment.getExternalStorageDirectory(), APK_NAME);
             intent = new Intent(Intent.ACTION_VIEW);
-            intent.addCategory("android.intent.category.DEFAULT");
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.setDataAndType(Uri.fromFile(fileLocation), "application/vnd.android.package-archive");
+            if (Build.VERSION.SDK_INT >= 24) {
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                intent.setDataAndType(FileProvider.getUriForFile(this, "com.maiyu.hrssc.fileprovider", fileLocation), "application/vnd.android.package-archive");
+            } else {
+                intent.addCategory("android.intent.category.DEFAULT");
+                intent.setDataAndType(Uri.fromFile(fileLocation), "application/vnd.android.package-archive");
+            }
         }
-        if (intent == null){
+        if (intent == null) {
             intent = new Intent(); //暂时没有更好的办法 保证不能为空即可
         }
         //表示返回的PendingIntent仅能执行一次，执行完后自动取消
-        PendingIntent pendingIntent  = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
         Notification notification = new Notification.Builder(this)
                 .setSmallIcon(R.mipmap.logo)//App小的图标
@@ -206,10 +212,16 @@ public class DownloadService extends Service {
 
         File fileLocation = new File(Environment.getExternalStorageDirectory(), APK_NAME);
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.addCategory("android.intent.category.DEFAULT");
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setDataAndType(Uri.fromFile(fileLocation), "application/vnd.android.package-archive");
+        if (Build.VERSION.SDK_INT >= 24) {
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.setDataAndType(FileProvider.getUriForFile(this, "com.maiyu.hrssc.fileprovider", fileLocation), "application/vnd.android.package-archive");
+        } else {
+            intent.addCategory("android.intent.category.DEFAULT");
+            intent.setDataAndType(Uri.fromFile(fileLocation), "application/vnd.android.package-archive");
+        }
         startActivity(intent);
+
 
         //停止服务
         stopSelf();
