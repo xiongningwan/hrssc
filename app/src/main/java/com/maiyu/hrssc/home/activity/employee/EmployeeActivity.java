@@ -268,7 +268,7 @@ public class EmployeeActivity extends CheckPermissionsActivity {
         if (item0 != null) {
             //  mDizhiTv.setText(item0.getName());
             //  mXzzmbl.setVisibility("0".equals(item0.getStatus()) ? View.VISIBLE : View.GONE);
-            new GetWebsiteAsyncTask(mToken, item0.getCid(), mCity).execute();
+            new GetWebsiteAsyncTask(mToken, item0.getId(), mCity).execute();
         }
 
         if (item1 != null) {

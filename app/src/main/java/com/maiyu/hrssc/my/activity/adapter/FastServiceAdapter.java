@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.base.ConstantValue;
 import com.maiyu.hrssc.base.adapter.BaseViewHolder;
 import com.maiyu.hrssc.my.activity.bean.FastService;
 import com.maiyu.hrssc.util.ImageLoaderUtil;
@@ -88,7 +89,7 @@ public class FastServiceAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             desc.setText(fastService.getBrief());
 
             if (fastService.getIcon() != null) {
-                ImageLoaderUtil.loadImage(imgIv, fastService.getIcon(), R.mipmap.user_profile_image_default);
+                ImageLoaderUtil.loadImage(imgIv, ConstantValue.FILE_SERVER_URI + fastService.getIcon(), R.mipmap.user_profile_image_default);
             }
 
             goBtn.setTag(R.id.key_tag_item_data, fastService);

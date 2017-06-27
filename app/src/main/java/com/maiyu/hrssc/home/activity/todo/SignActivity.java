@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.base.ConstantValue;
 import com.maiyu.hrssc.base.activity.BaseActivity;
 import com.maiyu.hrssc.base.bean.DataCenter;
 import com.maiyu.hrssc.base.bean.User;
@@ -39,7 +40,7 @@ public class SignActivity extends BaseActivity {
         if (mUser != null && mUser.getSignature() != null) {
             mNoSignLl.setVisibility(View.GONE);
             mSignIv.setVisibility(View.VISIBLE);
-            ImageLoaderUtil.loadImage(mSignIv, mUser.getSignature(), R.mipmap.user_profile_image_default);
+            ImageLoaderUtil.loadImage(mSignIv, ConstantValue.FILE_SERVER_URI + mUser.getSignature(), R.mipmap.user_profile_image_default);
         } else {
             mNoSignLl.setVisibility(View.VISIBLE);
             mSignIv.setVisibility(View.GONE);
