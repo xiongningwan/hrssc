@@ -129,8 +129,8 @@ public class EmployeeActivity extends CheckPermissionsActivity {
         mLoadingDialog = new LoadingDialog(this);
         mHeadView.setTitle(mTitle, true, false);
         mToken = DataCenter.getInstance().getuser().getToken();
-        if (mId != null) {
-            mCity = SharedPreferencesUtil.getCityName(this);
+        mCity = SharedPreferencesUtil.getCityName(this);
+        if (mId != null && mCity != null) {
             new Category2AsyncTask(mToken, mId, mCity).execute();
         }
         init();
@@ -265,7 +265,7 @@ public class EmployeeActivity extends CheckPermissionsActivity {
         Category2 item2 = list.get(2);
         Category2 item3 = list.get(3);
         Category2 item4 = list.get(4);
-        if (item0 != null) {
+        if (item0 != null && mCity != null) {
             //  mDizhiTv.setText(item0.getName());
             //  mXzzmbl.setVisibility("0".equals(item0.getStatus()) ? View.VISIBLE : View.GONE);
             new GetWebsiteAsyncTask(mToken, item0.getId(), mCity).execute();

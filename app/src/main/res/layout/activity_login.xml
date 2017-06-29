@@ -9,14 +9,12 @@
     tools:context="com.maiyu.hrssc.base.activity.LoginActivity">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:layout_width="@dimen/base120dp"
+        android:layout_height="@dimen/base120dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/base89dp"
-        android:text="ZTE中兴"
-        android:textColor="@color/project_color_general_hyperlink"
-        android:textSize="46dp"/>
+        android:layout_marginTop="@dimen/base69dp"
+        android:src="@mipmap/logo"/>
 
 
     <LinearLayout
@@ -24,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/base30dp"
         android:layout_marginStart="@dimen/base30dp"
-        android:layout_marginTop="@dimen/base89dp"
+        android:layout_marginTop="@dimen/base29dp"
         android:background="@drawable/view_stroke_gray_bg"
         android:orientation="vertical">
 
@@ -73,7 +71,7 @@
             android:layout_height="@dimen/base44dp"
             android:layout_marginEnd="@dimen/base30dp"
             android:layout_marginStart="@dimen/base30dp"
-            android:layout_marginTop="@dimen/base46dp"
+            android:layout_marginTop="@dimen/base26dp"
             android:background="@drawable/corner_view_selector"
             android:text="登录"
             android:textColor="@color/project_color_basic_white_pure"
@@ -93,7 +91,7 @@
             android:layout_below="@id/confirm_btn"
             android:layout_marginEnd="@dimen/base10dp"
             android:layout_marginTop="@dimen/base20dp"
-            android:layout_toStartOf="@id/point"
+            android:layout_alignRight="@id/confirm_btn"
             android:text="新/离职员工登录入口"
             android:textSize="@dimen/project_text_size_dp_12"/>
 
@@ -105,7 +103,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="@dimen/base10dp"
             android:layout_marginTop="@dimen/base20dp"
-            android:layout_toEndOf="@id/point"
+            android:layout_alignStart="@id/confirm_btn"
             android:text="忘记密码"
             android:textColor="@color/project_color_general_hyperlink"
             android:textSize="@dimen/project_text_size_dp_12"/>
