@@ -1,6 +1,7 @@
 package com.maiyu.hrssc.base.engine.impl;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
@@ -22,6 +23,8 @@ import com.maiyu.hrssc.home.bean.Category1;
 import com.maiyu.hrssc.home.bean.Category2;
 import com.maiyu.hrssc.home.bean.FormData;
 import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.builder.PostFormBuilder;
+import com.zhy.http.okhttp.request.RequestCall;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,6 +37,7 @@ import okhttp3.Response;
 
 import static com.alibaba.fastjson.JSON.parseArray;
 import static com.alibaba.fastjson.JSON.parseObject;
+import static com.zhy.http.okhttp.OkHttpUtils.post;
 
 public class BizEngine extends BaseEngine implements IBizEngine {
     @Override
@@ -49,7 +53,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            response = post().tag(context).url(urlString).params(params).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -85,7 +89,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            response = post().tag(context).url(urlString).params(params).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -121,7 +125,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            response = post().tag(context).url(urlString).params(params).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -158,7 +162,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            response = post().tag(context).url(urlString).params(params).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -191,7 +195,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            response = post().tag(context).url(urlString).params(params).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -225,17 +229,32 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         params.put("token", token);
         params.put("cid", cid);
         params.put("city", city);
+
+        Log.i("xndebug", "token:"+token+"cid:"+cid+"city"+city);
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            response = post().tag(context).url(urlString).params(params).build().execute();
+
+            PostFormBuilder p = OkHttpUtils.post();
+            Log.i("xndebug", "OkHttpUtils.post():"+p);
+            PostFormBuilder t = p.tag(context);
+            Log.i("xndebug", "p.tag:"+t);
+            PostFormBuilder u = t.url(urlString);
+            Log.i("xndebug", "t.url:"+u);
+            PostFormBuilder b = u.params(params);
+            Log.i("xndebug", "u.params:"+b);
+            RequestCall e = b.build();
+            e.execute();
+
+
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        Log.i("xndebug", "json:"+json.toString());
         // 处理返回码
         dispatcherException(context, json);
 
@@ -250,6 +269,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        Log.i("xndebug", "list:"+list.toString());
         return list;
     }
 
@@ -265,7 +285,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            response = post().tag(context).url(urlString).params(params).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -302,7 +322,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            response = post().tag(context).url(urlString).params(params).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -337,7 +357,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            response = post().tag(context).url(urlString).params(params).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -387,7 +407,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            response = post().tag(context).url(urlString).params(params).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -418,7 +438,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).addFile("file", file.getName(), file).build().execute();
+            response = post().tag(context).url(urlString).params(params).addFile("file", file.getName(), file).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -452,7 +472,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).addFile("filr", filr.getName(), filr).build().execute();
+            response = post().tag(context).url(urlString).params(params).addFile("filr", filr.getName(), filr).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -489,7 +509,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            response = post().tag(context).url(urlString).params(params).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -524,7 +544,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            response = post().tag(context).url(urlString).params(params).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -558,7 +578,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            response = post().tag(context).url(urlString).params(params).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -592,7 +612,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            response = post().tag(context).url(urlString).params(params).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -626,7 +646,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            response = post().tag(context).url(urlString).params(params).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -661,7 +681,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            response = post().tag(context).url(urlString).params(params).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -696,7 +716,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            response = post().tag(context).url(urlString).params(params).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -731,7 +751,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            response = post().tag(context).url(urlString).params(params).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -768,7 +788,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            response = post().tag(context).url(urlString).params(params).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -805,7 +825,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            response = post().tag(context).url(urlString).params(params).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -840,7 +860,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            response = post().tag(context).url(urlString).params(params).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -882,7 +902,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
         Response response = null;
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            response = post().tag(context).url(urlString).params(params).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -916,7 +936,7 @@ public class BizEngine extends BaseEngine implements IBizEngine {
 
         String json = "";
         try {
-            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            response = post().tag(context).url(urlString).params(params).build().execute();
             json = new String(response.body().bytes(), ConstantValue.ENCODING);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

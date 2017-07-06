@@ -34,7 +34,6 @@
 
 
 
-
 ##反射
 -keepattributes Signature
 -keepattributes EnclosingMethod
@@ -50,8 +49,13 @@
 -keep class com.maiyu.hrssc.home.activity.information.bean.**{*;}
 -keep class com.maiyu.hrssc.home.activity.socialsecurity.bean.**{*;}
 -keep class com.maiyu.hrssc.home.activity.todo.bean.**{*;}
-#-keep class com.maiyu.hrssc.activity.fragment.*{*;}
-
+-keep class com.maiyu.hrssc.home.frament.**{*;}
+-keep class com.maiyu.hrssc.base.activity.**{*;}
+-keep class com.maiyu.hrssc.base.**{*;}
+-keep class com.maiyu.hrssc.base.activity.LoginActivity{*;}
+-keep class com.maiyu.hrssc.home.activity.employee.**{*;}
+-keep class com.maiyu.hrssc.base.**{*;}
+-keep class com.maiyu.hrssc.util.**{*;}
 
 ## api类
 -keep public class * extends android.app.Fragment
@@ -64,6 +68,10 @@
 -keep public class * extends android.app.backup.BackupAgentHelper
 -keep public class * extends android.preference.Preference
 -keep public class * extends android.support.v4.**
+-keep public class * extends android.graphics.**
+
+
+
 -keep public class com.android.vending.licensing.ILicensingService
 
 -keepclasseswithmembernames class * {
@@ -143,12 +151,37 @@ public static ** valueOf(java.lang.String);
 ## ----------------------------------
 ##      高德地图
 ## ----------------------------------
--keep class com.amap.api.**{*;}
--keep class com.loc.**{*;}
--keep class com.autonavi.**
+#-keep class com.amap.api.**{*;}
+#-keep class com.loc.**{*;}
+#-keep class com.autonavi.**
+
+#3D 地图
+    -keep   class com.amap.api.maps.**{*;}
+    -keep   class com.autonavi.amap.mapcore.*{*;}
+    -keep   class com.amap.api.trace.**{*;}
+
+  #  定位
+    -keep class com.amap.api.location.**{*;}
+    -keep class com.amap.api.fence.**{*;}
+    -keep class com.autonavi.aps.amapapi.model.**{*;}
+
+   # 搜索
+    -keep   class com.amap.api.services.**{*;}
+
+   # 2D地图
+    -keep class com.amap.api.maps2d.**{*;}
+    -keep class com.amap.api.mapcore2d.**{*;}
+
+   # 导航
+    -keep class com.amap.api.navi.**{*;}
+    -keep class com.autonavi.**{*;}
+
 -dontwarn  com.amap.api.**
 -dontwarn  com.loc.**
 -dontwarn  com.autonavi.**
+
+
+
 
 ## ----------------------------------
 ##      retrofit2
@@ -198,3 +231,19 @@ public static ** valueOf(java.lang.String);
 -keep class com.tencent.mid.** {* ;}
 -dontwarn  com.tencent.android.tpush.**
 -dontwarn  com.tencent.mid.**
+
+
+## ----------------------------------
+##      butterknife
+## ----------------------------------
+-keep class butterknife.** { *; }
+-dontwarn butterknife.internal.**
+-keep class **$$ViewBinder { *; }
+
+-keepclasseswithmembernames class * {
+    @butterknife.* <fields>;
+}
+
+-keepclasseswithmembernames class * {
+    @butterknife.* <methods>;
+}

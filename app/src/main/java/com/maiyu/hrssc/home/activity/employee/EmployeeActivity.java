@@ -130,10 +130,10 @@ public class EmployeeActivity extends CheckPermissionsActivity {
         mHeadView.setTitle(mTitle, true, false);
         mToken = DataCenter.getInstance().getuser().getToken();
         mCity = SharedPreferencesUtil.getCityName(this);
-        if (mId != null && mCity != null) {
+        if (mId != null && mCity != null && !"".equals(mCity)) {
             new Category2AsyncTask(mToken, mId, mCity).execute();
         }
-        init();
+       init();
     }
 
     @Override
@@ -401,7 +401,6 @@ public class EmployeeActivity extends CheckPermissionsActivity {
             uiSettings.setZoomControlsEnabled(false);
             uiSettings.setLogoBottomMargin(-50);//隐藏logo
 
-
             geocoderSearch = new GeocodeSearch(this);
             geocoderSearch.setOnGeocodeSearchListener(new GeocodeSearch.OnGeocodeSearchListener() {
                 @Override
@@ -430,7 +429,6 @@ public class EmployeeActivity extends CheckPermissionsActivity {
                     }
                 }
             });
-
         }
     }
 
