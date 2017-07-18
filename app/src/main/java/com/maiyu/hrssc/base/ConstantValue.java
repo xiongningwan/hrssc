@@ -28,8 +28,8 @@ public interface ConstantValue {
      * 服务器地址
      */
     // String SERVER_URI = "http://" + HOST + ":" + port + CONTEXT;
-    String SERVER_URI = "http://hrssctest.trydo.online";
-    String FILE_SERVER_URI = "http://hrsscadmin.trydo.online";//测试
+    String SERVER_URI = "http://hrssctest.wenhua407.top";
+    String FILE_SERVER_URI = "http://hrsscadmin.wenhua407.top";//测试
     // String SERVER_URI = "http://api.huijialicai.cn" + CONTEXT;//发布
 
     /**

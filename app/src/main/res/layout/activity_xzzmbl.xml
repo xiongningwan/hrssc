@@ -120,8 +120,27 @@
                     android:src="@mipmap/icon_xianghou"/>
             </RelativeLayout>
 
-            <include layout="@layout/view_space_layout"/>
+            <LinearLayout
+                android:id="@+id/style_mould_divider"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@mipmap/line"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base8dp"
+                    android:background="@color/color_space"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@mipmap/line"/>
+            </LinearLayout>
 
             <RelativeLayout
                 android:id="@+id/choose_mould_rl"
@@ -158,7 +177,27 @@
             </RelativeLayout>
 
 
-            <include layout="@layout/view_space_layout"/>
+            <LinearLayout
+                android:id="@+id/mould_language_divider"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@mipmap/line"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base8dp"
+                    android:background="@color/color_space"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@mipmap/line"/>
+            </LinearLayout>
 
             <RelativeLayout
                 android:id="@+id/choose_language_rl"
@@ -207,8 +246,27 @@
                 </Spinner>
             </RelativeLayout>
 
-            <include layout="@layout/view_space_layout"/>
+            <LinearLayout
+                android:id="@+id/language_desc_divider"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@mipmap/line"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base8dp"
+                    android:background="@color/color_space"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@mipmap/line"/>
+            </LinearLayout>
 
             <RelativeLayout
                 android:id="@+id/simple_desc_rl"
@@ -217,7 +275,7 @@
 
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/desc_lable_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -228,16 +286,16 @@
                     android:id="@+id/simple_desc_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/textView"
-                    android:layout_alignBottom="@+id/textView"
+                    android:layout_alignBaseline="@+id/desc_lable_textView"
+                    android:layout_alignBottom="@+id/desc_lable_textView"
                     android:layout_marginEnd="@dimen/base5dp"
-                    android:layout_toStartOf="@+id/simple_desc_xh"
-                    android:layout_toEndOf="@id/textView"
                     android:layout_marginStart="@dimen/base8dp"
-                    android:lines="1"
+                    android:layout_toEndOf="@id/desc_lable_textView"
+                    android:layout_toStartOf="@+id/simple_desc_xh"
                     android:ellipsize="end"
-                    android:hint="填写"
                     android:gravity="end"
+                    android:hint="填写"
+                    android:lines="1"
                     android:text=""
                     android:textColor="@color/text_title_gray"
                     android:textSize="@dimen/project_text_size_dp_15"/>
@@ -252,9 +310,30 @@
                     android:src="@mipmap/icon_xianghou"/>
             </RelativeLayout>
 
-            <include layout="@layout/view_space_layout"/>
+            <LinearLayout
+                android:id="@+id/desc_image_divider"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@mipmap/line"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base8dp"
+                    android:background="@color/color_space"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@mipmap/line"/>
+            </LinearLayout>
 
             <TextView
+                android:id="@+id/tupianxuantian"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
@@ -265,6 +344,7 @@
                 android:id="@+id/pcik_image_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/base8dp"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="@dimen/base5dp">
@@ -282,25 +362,34 @@
                 android:text="备注"/>
 
             <View
+                android:id="@+id/line_beizhu"
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="@dimen/base5dp"
                 android:background="@mipmap/line"/>
 
-            <EditText
-                android:id="@+id/editText"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/base90dp"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_marginTop="@dimen/base10dp"
-                android:background="@drawable/view_et_gray_blue_selector"
-                android:gravity="start"
-                android:hint="备注内容"
-                android:padding="@dimen/base5dp"
-                android:textColor="@color/text_title_gray"
-                android:textSize="@dimen/base12dp"/>
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+
+                <EditText
+                    android:id="@+id/editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/base90dp"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/base10dp"
+                    android:background="@drawable/view_et_gray_blue_selector"
+                    android:gravity="start"
+                    android:hint="备注内容"
+                    android:padding="@dimen/base5dp"
+                    android:textColor="@color/text_title_gray"
+                    android:textSize="@dimen/base12dp"/>
+
+            </FrameLayout>
 
 
             <View

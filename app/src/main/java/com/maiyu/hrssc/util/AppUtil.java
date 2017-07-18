@@ -28,20 +28,22 @@ import java.util.List;
 public class AppUtil {
 
     /**
-    * 获取屏幕分辨率
-    * @param context
-    * @return
-    */
+     * 获取屏幕分辨率
+     *
+     * @param context
+     * @return
+     */
     public static int[] getScreenDispaly(Context context) {
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         int width = windowManager.getDefaultDisplay().getWidth();// 手机屏幕的宽度
         int height = windowManager.getDefaultDisplay().getHeight();// 手机屏幕的高度
-        int result[] = { width, height };
+        int result[] = {width, height};
         return result;
     }
 
     /**
      * 拨打电话
+     *
      * @param context
      */
   /*  public static void phoneCall(Context context) {
@@ -50,7 +52,6 @@ public class AppUtil {
         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number));
         context.startActivity(intent);
     }*/
-
     public static String getMac(Context context) {
         String m_szAndroidID = Secure.getString(context.getContentResolver(), Secure.ANDROID_ID);
         return m_szAndroidID;
@@ -58,7 +59,7 @@ public class AppUtil {
 
 
     public static String md5(String s) {
-        char hexDigits[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+        char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
         try {
             byte[] btInput = s.getBytes();
             MessageDigest mdInst = MessageDigest.getInstance("MD5");
@@ -81,6 +82,7 @@ public class AppUtil {
 
     /**
      * 格式化金额
+     *
      * @param money
      * @return
      */
@@ -91,18 +93,19 @@ public class AppUtil {
 
     /**
      * 格式整数
+     *
      * @param num
      * @return
      */
     public static String formatNumber(long num) {
-       DecimalFormat format = new DecimalFormat("###,##0");
+        DecimalFormat format = new DecimalFormat("###,##0");
         return format.format(num);
     }
 
 
-
     /**
      * 隐藏格式化输出身份证
+     *
      * @param idCard
      * @return
      */
@@ -117,6 +120,7 @@ public class AppUtil {
 
     /**
      * 隐藏格式化输出手机号码
+     *
      * @param no
      * @return
      */
@@ -151,8 +155,11 @@ public class AppUtil {
         return deletedFiles;
     }
 
-  /*  *//**
+  /*  */
+
+    /**
      * 网络是否连接
+     *
      * @param context
      * @return
      *//*
@@ -183,11 +190,9 @@ public class AppUtil {
 
     /**
      * 启动到app详情界面
-     * 
-     * @param appPkg
-     *            App的包名
-     * @param marketPkg
-     *            应用商店包名 ,如果为""则由系统弹出应用商店列表供用户选择,否则调转到目标市场的应用详情界面，某些应用商店可能会失败
+     *
+     * @param appPkg    App的包名
+     * @param marketPkg 应用商店包名 ,如果为""则由系统弹出应用商店列表供用户选择,否则调转到目标市场的应用详情界面，某些应用商店可能会失败
      */
     public static void launchAppDetail(Context context, String appPkg, String marketPkg) {
         try {
@@ -206,20 +211,22 @@ public class AppUtil {
 
     /**
      * 隐藏输入法
+     *
      * @param context
      */
     public void hideSoftInputFromWindow(Context context) {
         //判断隐藏软键盘是否弹出
-        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        boolean isOpen=imm.isActive();//isOpen若返回true，则表示输入法打开
-        if(isOpen) {
-            imm. hideSoftInputFromWindow(((Activity)context).getCurrentFocus().getWindowToken(),
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        boolean isOpen = imm.isActive();//isOpen若返回true，则表示输入法打开
+        if (isOpen) {
+            imm.hideSoftInputFromWindow(((Activity) context).getCurrentFocus().getWindowToken(),
                     InputMethodManager.HIDE_NOT_ALWAYS);
         }
     }
 
     /**
      * 获取输入框焦点
+     *
      * @param context
      * @param mInputView
      */
@@ -233,30 +240,31 @@ public class AppUtil {
 
     /**
      * 隐藏输入法
+     *
      * @param context
      * @param mInputView
      */
     public void hideSoftInputFromWindow(Context context, EditText mInputView) {
-        InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(mInputView.getWindowToken(),0);
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mInputView.getWindowToken(), 0);
 
     }
+
     /*
        * 判断是否安装
        */
-    public static boolean isAppInstalled(Context context,String packagename)
-    {
+    public static boolean isAppInstalled(Context context, String packagename) {
         PackageInfo packageInfo;
         try {
             packageInfo = context.getPackageManager().getPackageInfo(packagename, 0);
-        }catch (PackageManager.NameNotFoundException e) {
+        } catch (PackageManager.NameNotFoundException e) {
             packageInfo = null;
             e.printStackTrace();
         }
-        if(packageInfo ==null){
+        if (packageInfo == null) {
             //System.out.println("没有安装");
             return false;
-        }else{
+        } else {
             //System.out.println("已经安装");
             return true;
         }
@@ -265,7 +273,8 @@ public class AppUtil {
 
     /**
      * 判断应用是否已经启动
-     * @param context 一个context
+     *
+     * @param context     一个context
      * @param packageName 要判断应用的包名
      * @return boolean
      */
@@ -285,6 +294,7 @@ public class AppUtil {
 
     /**
      * 判断型号是不是p8
+     *
      * @return
      */
     public static boolean isHuaWeiGRAUL10() {
@@ -304,7 +314,7 @@ public class AppUtil {
      * @param dateTime
      */
     public static String setTime(Date dateTime) {
-       // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
         Date now = new Date();
@@ -334,4 +344,10 @@ public class AppUtil {
 
         return "";
     }
+
+
+    public static boolean isInstallByread(String packageName) {
+        return new File("/data/data/" + packageName).exists();
+    }
+
 }

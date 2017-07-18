@@ -1,6 +1,7 @@
 package com.maiyu.hrssc.home.activity;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -36,12 +38,14 @@ import com.maiyu.hrssc.home.activity.applying.dialog.DraftsDialog;
 import com.maiyu.hrssc.home.bean.FormData;
 import com.maiyu.hrssc.home.bean.SelfAddress;
 import com.maiyu.hrssc.util.BaseAsyncTask;
+import com.maiyu.hrssc.util.BitmapUtils;
 import com.maiyu.hrssc.util.EngineFactory;
 import com.maiyu.hrssc.util.HintUitl;
 import com.maiyu.hrssc.util.SharedPreferencesUtil;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
@@ -49,8 +53,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cc.dagger.photopicker.PhotoPicker;
 
+import static com.maiyu.hrssc.R.id.choose_language_rl;
+import static com.maiyu.hrssc.R.id.choose_mould_rl;
 import static com.maiyu.hrssc.R.id.choose_mould_text;
 import static com.maiyu.hrssc.R.id.get_style_text;
+import static com.maiyu.hrssc.R.id.pcik_image_view;
+import static com.maiyu.hrssc.R.id.simple_desc_text;
 
 public class XZZMBLActivity extends BaseActivity {
 
@@ -78,26 +86,42 @@ public class XZZMBLActivity extends BaseActivity {
     TextView mChooseMouldText;
     @BindView(R.id.choose_mould_xh)
     ImageView mChooseMouldXh;
-    @BindView(R.id.choose_mould_rl)
+    @BindView(choose_mould_rl)
     RelativeLayout mChooseMouldRl;
     @BindView(R.id.choose_language_text)
     TextView mChooseLanguageText;
     @BindView(R.id.choose_language_xh)
     ImageView mChooseLanguageXh;
-    @BindView(R.id.choose_language_rl)
+    @BindView(choose_language_rl)
     RelativeLayout mChooseLanguageRl;
-    @BindView(R.id.simple_desc_text)
+    @BindView(simple_desc_text)
     TextView mSimpleDescText;
     @BindView(R.id.simple_desc_xh)
     ImageView mSimpleDescXh;
     @BindView(R.id.simple_desc_rl)
     RelativeLayout mSimpleDescRl;
+    @BindView(R.id.desc_lable_textView)
+    TextView mDescLableTextView;
     @BindView(R.id.editText)
     EditText mEditText;
-    @BindView(R.id.pcik_image_view)
+    @BindView(pcik_image_view)
     PickImageView mPickImageView;
     @BindView(R.id.spinnsr_view)
     Spinner mSpinner;
+
+    @BindView(R.id.desc_image_divider)
+    View mDescImageDivider;
+    @BindView(R.id.language_desc_divider)
+    View mLanguageDescDivider;
+    @BindView(R.id.mould_language_divider)
+    View mMouldLanguageDivider;
+    @BindView(R.id.style_mould_divider)
+    View mStyleMouldDivider;
+    @BindView(R.id.tupianxuantian)
+    TextView mTupianxuantian;
+    @BindView(R.id.line_beizhu)
+    View mLine_beizhu;
+
 
     private String mId;
     private String mTitle;
@@ -118,6 +142,9 @@ public class XZZMBLActivity extends BaseActivity {
     private int mCount = 0;
     private DraftsDialog mDialog;
     private String mAid = "0"; // 申请id，如果是【已驳回】【重新提交】或者【草稿箱】里面重新提交，这个时候需传递申请id,后台会做一个修改操作。如果是新的申请，aid缺省为0
+    private int mYear;
+    private int mMonth;
+    private int mDay;
 
     @Override
     public void createActivityImpl() {
@@ -189,8 +216,14 @@ public class XZZMBLActivity extends BaseActivity {
      */
     void doSubmit(String type) {
         int set = SharedPreferencesUtil.getSpecialParamSet(this);
+        String brief = "";
+        if (!"预约入职".equals(mTitle)) {
+            brief = mSimpleDescText.getText().toString(); // 描述
+        } else {
+            brief = mYear + "-" + mMonth + "-" + mDay; // 描述
+        }
 
-        String brief = mSimpleDescText.getText().toString(); // 描述
+
         String comment = mEditText.getText().toString(); // 备注
 
 
@@ -270,7 +303,7 @@ public class XZZMBLActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.blsm_rl, R.id.get_style_rl, R.id.choose_mould_rl, R.id.choose_language_rl, R.id.simple_desc_rl})
+    @OnClick({R.id.blsm_rl, R.id.get_style_rl, choose_mould_rl, choose_language_rl, R.id.simple_desc_rl})
     public void onClick(View view) {
         if (mFormData == null) {
             return;
@@ -290,7 +323,7 @@ public class XZZMBLActivity extends BaseActivity {
                 }
             }
             break;
-            case R.id.choose_mould_rl:
+            case choose_mould_rl:
                 //startActivityForResult(new Intent(this, ChooseTempleActivity.class), 102);
                 if (mFormData.getTemplates() != null) {
                     Intent intent = new Intent(this, ChooseTempleActivity.class);
@@ -298,16 +331,23 @@ public class XZZMBLActivity extends BaseActivity {
                     startActivityForResult(intent, 102);
                 }
                 break;
-            case R.id.choose_language_rl:
+            case choose_language_rl:
                 //  startActivityForResult(new Intent(this, XZZMBLActivity.class), 102);
 
                 break;
             case R.id.simple_desc_rl:
-                startActivityForResult(new Intent(this, EtTextActivity.class), 104);
+                if (!"预约入职".equals(mTitle)) {
+                    startActivityForResult(new Intent(this, EtTextActivity.class), 104);
+                }
                 break;
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        BitmapUtils.deleteCacheFile();
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -319,8 +359,17 @@ public class XZZMBLActivity extends BaseActivity {
                 //  Log.i("PickImageView", "allSelectedPicture:" + allSelectedPicture.size());
                 //mImageList.clear();
                 // mImageListDisplays.clear();
-                for (int i = 0; i < allSelectedPicture.size(); i++) {
-                    File file = new File(allSelectedPicture.get(i));
+                // Log.i("REQUEST_SELECTED", "allSelectedPicture:"+allSelectedPicture.size() +"***" + allSelectedPicture.toString());
+                ArrayList<String> temPathList = new ArrayList<>();
+                for(int i = 0; i < allSelectedPicture.size(); i++) {
+                    String tempPath = BitmapUtils.compressImageUpload(allSelectedPicture.get(i));
+                    temPathList.add(tempPath);
+                }
+
+
+
+                for (int i = 0; i < temPathList.size(); i++) {
+                    File file = new File(temPathList.get(i));
                     if (file.getPath().contains("http")) {
                         continue;
                     }
@@ -621,6 +670,7 @@ public class XZZMBLActivity extends BaseActivity {
                 mImageList.add(path);
                 mImageListDisplays.add(file.getPath());
                 mPickImageView.updatePickImageView(mImageListDisplays);
+                //    Log.i("REQUEST_SELECTED", "mImageListDisplays:"+mImageListDisplays.size() +"***" + mImageListDisplays.toString());
             }
 
             super.onPostExecute(result);
@@ -641,10 +691,82 @@ public class XZZMBLActivity extends BaseActivity {
             SharedPreferencesUtil.saveSpecialParamSet(this, 4);
         } else if ("学位验证".equals(title)) {
             SharedPreferencesUtil.saveSpecialParamSet(this, 5);
+            // 为了和ios一样  隐藏 领取方式  选择模版 开具语言
+            mGetStyleRl.setVisibility(View.GONE);
+            mChooseMouldRl.setVisibility(View.GONE);
+            mChooseLanguageRl.setVisibility(View.GONE);
+            mSimpleDescRl.setVisibility(View.GONE);
+            mDescImageDivider.setVisibility(View.GONE);
+            mLanguageDescDivider.setVisibility(View.GONE);
+            mMouldLanguageDivider.setVisibility(View.GONE);
+            mStyleMouldDivider.setVisibility(View.GONE);
+            mTupianxuantian.setText("图片");
+            mLine_beizhu.setVisibility(View.GONE);
+            mEditText.setHint("");
+
         } else if ("工卡照片".equals(title)) {
             SharedPreferencesUtil.saveSpecialParamSet(this, 6);
+            // 为了和ios一样  隐藏 领取方式  选择模版 开具语言
+            mGetStyleRl.setVisibility(View.GONE);
+            mChooseMouldRl.setVisibility(View.GONE);
+            mChooseLanguageRl.setVisibility(View.GONE);
+            mSimpleDescRl.setVisibility(View.GONE);
+            mDescImageDivider.setVisibility(View.GONE);
+            mLanguageDescDivider.setVisibility(View.GONE);
+            mMouldLanguageDivider.setVisibility(View.GONE);
+            mStyleMouldDivider.setVisibility(View.GONE);
+            mTupianxuantian.setText("图片");
+            mLine_beizhu.setVisibility(View.GONE);
+            mEditText.setHint("");
         } else if ("预约入职".equals(title)) {
             SharedPreferencesUtil.saveSpecialParamSet(this, 7);
+            // 为了和ios一样  隐藏 领取方式  选择模版 开具语言
+            mGetStyleRl.setVisibility(View.GONE);
+            mChooseMouldRl.setVisibility(View.GONE);
+            mChooseLanguageRl.setVisibility(View.GONE);
+            mPickImageView.setVisibility(View.GONE);
+
+            mDescImageDivider.setVisibility(View.GONE);
+            mLanguageDescDivider.setVisibility(View.GONE);
+            mMouldLanguageDivider.setVisibility(View.GONE);
+            mStyleMouldDivider.setVisibility(View.GONE);
+            mTupianxuantian.setText("图片");
+            mTupianxuantian.setVisibility(View.GONE);
+            mLine_beizhu.setVisibility(View.GONE);
+            mEditText.setHint("");
+
+            mDescLableTextView.setText("预约入职日期");
+            final Calendar calendar = Calendar.getInstance();
+            mYear = calendar.get(Calendar.YEAR);
+            mMonth = calendar.get(Calendar.MONTH);
+            mDay = calendar.get(Calendar.DAY_OF_MONTH);
+
+            mSimpleDescText.setText("请选择日期");
+            mSimpleDescRl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new DatePickerDialog(XZZMBLActivity.this, new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int month, int day) {
+                            // TODO Auto-generated method stub
+                            mYear = year;
+                            mMonth = month;
+                            mDay = day;
+                            //更新EditText控件日期 小于10加0
+                            mSimpleDescText.setText(new StringBuilder()
+                                    .append(mYear)
+                                    .append("年")
+                                    .append((mMonth + 1) < 10 ? 0 + (mMonth + 1) : (mMonth + 1))
+                                    .append("月")
+                                    .append((mDay < 10) ? 0 + mDay : mDay)
+                                    .append("日"));
+                        }
+                    }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                            calendar.get(Calendar.DAY_OF_MONTH)).show();
+                }
+            });
+
+
         } else if ("居住证办理".equals(title)) {
             SharedPreferencesUtil.saveSpecialParamSet(this, 8);
         } else if ("档案借阅".equals(title)) {
@@ -681,7 +803,13 @@ public class XZZMBLActivity extends BaseActivity {
      */
     void doSubmit2(String type) {
         int set = SharedPreferencesUtil.getSpecialParamSet(this);
-        String brief = mSimpleDescText.getText().toString(); // 描述
+        String brief = "";
+        if (!"预约入职".equals(mTitle)) {
+            brief = mSimpleDescText.getText().toString(); // 描述
+        } else {
+            brief = mYear + "-" + mMonth + "-" + mDay; // 描述
+        }
+
         String comment = mEditText.getText().toString(); // 备注
         String language = getLaguageParam();
 

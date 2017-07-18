@@ -78,7 +78,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="体检说明"/>
+                        android:text="体检须知"/>
 
                     <ImageView
                         android:layout_width="wrap_content"

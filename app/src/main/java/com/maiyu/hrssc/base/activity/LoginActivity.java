@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.maiyu.hrssc.R;
 import com.maiyu.hrssc.base.ConstantValue;
@@ -25,9 +26,15 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.com.zte.android.common.log.Log;
+import cn.com.zte.android.securityauth.config.SSOAuthConfig;
+import cn.com.zte.android.securityauth.interfaces.SSOAuthCheckCallBack;
+import cn.com.zte.android.securityauth.manager.SSOAuthCheckManager;
+import cn.com.zte.android.securityauth.manager.SSOAuthLoginManager;
+import cn.com.zte.android.widget.dialog.DialogManager;
 
 public class LoginActivity extends BaseActivity {
-
+    String TAG = "LoginActivity";
     @BindView(R.id.work_no_et)
     EditText mWorkNoEt;
     @BindView(R.id.pwd_et)
@@ -59,6 +66,7 @@ public class LoginActivity extends BaseActivity {
         mWorkNoEt.setText(loginName);
         // 自动登录
         autoLogin();
+       // checkSSOLogin();
     }
 
     @Override
@@ -75,7 +83,7 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.new_employee_tv:
                 startActivity(new Intent(this, NewEmployeeLoginActivity.class));
-               // finish();
+                // finish();
                 break;
             case R.id.forget_pwd_tv:
                 startActivity(new Intent(this, ForgetPwdActivity.class));
@@ -184,6 +192,133 @@ public class LoginActivity extends BaseActivity {
             String login_way = ConstantValue.CLIENT_TYPE_ANDROID;
             new LoginAsyncTask(type, loginName, loginPwd, mac, version, login_way).execute();
         }
+
+    }
+
+
+
+    /**
+     * @return void 返回类型
+     * @throws
+     * @Title: checkSSOLogin
+     * @Description: SSL登录检查
+     */
+
+    private void checkSSOLogin() {
+
+
+        SSOAuthCheckCallBack authCheckCallBack = new SSOAuthCheckCallBack() {
+
+
+            /**
+             * 应用关闭前回调，可以做一些现场保护数据操作.
+             *
+             * @see cn.com.zte.android.securityauth.interfaces.SSOAuthCheckCallBack#onAppClosePre()
+             */
+            @Override
+            public void onAppClosePre() {
+
+                // 应用关闭前回调，可以做一些现场保护数据操作.
+
+                // SplashActivity.this.finish();
+
+            }
+
+
+            @Override
+
+            public void onMOANotInstalled() {
+
+                // 弹出安装MOA的提醒
+
+                DialogManager.showToast(LoginActivity.this, getResources()
+
+                        .getString(R.string.app_text_need_install_moa));
+
+            }
+
+
+            @Override
+
+            public void onAuthSuccess() {
+
+                Log.i(TAG, "onAuthSuccess...");
+
+                DialogManager.showToast(getApplicationContext(), getResources()
+
+                        .getString(R.string.app_text_sso_success));
+
+                //   goToMainActivity();
+
+            }
+
+
+            /**
+             * Http通讯错误回调.
+             *
+             * @see  //cn.com.zte.android.securityauth.sso.client.AuthCheckCallBack#onHttpError()
+             */
+            @Override
+            public void onHttpError(String strCode, String strMsg) {
+
+                // 弹出错误信息
+
+                DialogManager.showToast(getApplicationContext(), strMsg);
+
+                // 阻止进入下一界面
+
+                finish();
+
+            }
+
+
+            @Override
+
+            public void onAuthFailureTrans() {
+
+                Toast.makeText(LoginActivity.this, "token 校验失败 ...",
+
+                        Toast.LENGTH_LONG).show();
+
+            }
+
+
+            @Override
+
+            public void onFailure(String content) {
+
+                Toast.makeText(LoginActivity.this, "校验token 通信失败 ...",
+                        Toast.LENGTH_LONG).show();
+
+            }
+
+        };
+
+
+        // 构造SSOAuthCheckManager
+
+        SSOAuthCheckManager acm = new SSOAuthCheckManager(this,
+
+                "A00262", authCheckCallBack, false);
+/*
+        SSOAuthCheckManager acm = new SSOAuthCheckManager(this,
+
+                MyApplication.getAppid(), authCheckCallBack, false);
+*/
+
+
+        // 配置IP和端口
+
+        acm.config(R.xml.map_sso_config);
+
+        SSOAuthLoginManager.IS_TEST_ENVIRONMENT = true;
+
+        SSOAuthConfig.setMoaLauncherActvityName("com.zte.softda.StartActivity");
+
+
+        // 执行SSO检查
+
+        acm.check();
 
     }
 }

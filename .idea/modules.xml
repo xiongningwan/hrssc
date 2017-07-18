@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/hrssc.iml" filepath="$PROJECT_DIR$/hrssc.iml" />
       <module fileurl="file://$PROJECT_DIR$/kefu-easeui/kefu-easeui.iml" filepath="$PROJECT_DIR$/kefu-easeui/kefu-easeui.iml" />
       <module fileurl="file://$PROJECT_DIR$/photopicker/photopicker.iml" filepath="$PROJECT_DIR$/photopicker/photopicker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zTEAndroidSecurityAuthLib/zTEAndroidSecurityAuthLib.iml" filepath="$PROJECT_DIR$/zTEAndroidSecurityAuthLib/zTEAndroidSecurityAuthLib.iml" />
     </modules>
   </component>
 </project>

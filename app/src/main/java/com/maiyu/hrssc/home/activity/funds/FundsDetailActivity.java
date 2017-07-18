@@ -5,7 +5,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.maiyu.hrssc.R;
+import com.maiyu.hrssc.base.ConstantValue;
 import com.maiyu.hrssc.base.activity.BaseActivity;
+import com.maiyu.hrssc.base.activity.WebActivity;
 import com.maiyu.hrssc.base.bean.DataCenter;
 import com.maiyu.hrssc.base.engine.IBizEngine;
 import com.maiyu.hrssc.base.exception.NetException;
@@ -86,10 +88,17 @@ public class FundsDetailActivity extends BaseActivity {
                 startActivity(new Intent(FundsDetailActivity.this, FundsHistoryActivity.class));
                 break;
             case R.id.wangzhi_tv:
+                openWebActivity("https://seyb.szsi.gov.cn/web/ggfw/app/index.html#/ggfw/home");
                 break;
         }
     }
 
+    void openWebActivity(String url) {
+        Intent intent = new Intent(this, WebActivity.class);
+        intent.putExtra("url", url);
+        intent.putExtra("type", ConstantValue.TYPE_IMPORTANT);
+        startActivity(intent);
+    }
 
     /**
      * 首次加载个人社保

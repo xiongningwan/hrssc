@@ -16,8 +16,8 @@ android {
         applicationId "com.maiyu.hrssc"
         minSdkVersion 19
         targetSdkVersion 25
-        versionCode 4
-        versionName "1.0.1"
+        versionCode 6
+        versionName "1.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
@@ -104,5 +104,7 @@ dependencies {
     compile files('libs/wup-1.0.0.E-SNAPSHOT.jar')
     compile files('libs/Xg_sdk_v3.1_20170417_0946.jar')
     compile files('libs/AMap_Search_V4.0.0_20170111.jar')
-    compile 'com.android.support:multidex:1.0.0' // 分包
+    compile 'com.android.support:multidex:1.0.0'
+    // 分包
+    compile project(':zTEAndroidSecurityAuthLib')
 }

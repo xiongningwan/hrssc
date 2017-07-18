@@ -296,7 +296,7 @@ public class EmployeeActivity extends CheckPermissionsActivity {
             switch (location) {
                 case 1:
                     intent = new Intent(this, TijianActivity.class);
-                    intent.putExtra("GetWebSiteData", mGetWebsiteData);
+                    intent.putExtra("GetWebsiteData", mGetWebsiteData);
                     break;
                 case 2:
                     intent = new Intent(this, XZZMBLActivity.class);

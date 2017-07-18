@@ -116,6 +116,8 @@ public class PickImageView extends RelativeLayout {
         }
     }
 
+    boolean isLast;
+
     void setParam(final int position, ViewHolder holder, View convertView) {
         if (position != allSelectedPictures.size()) {
             Log.i("PickImageView", "position!=allSelectedPictures.size()" + "position:" + position + "****allSelectedPictures.size():" + allSelectedPictures.size());
@@ -146,7 +148,6 @@ public class PickImageView extends RelativeLayout {
                 }
             });
 
-
             // holder.delete.setOnClickListener(mListener);
         } else {
             holder.image.setImageBitmap(
@@ -161,7 +162,9 @@ public class PickImageView extends RelativeLayout {
                     settingPickImage(mContext);
                 }
             });
-            Log.i("PickImageView", "position==allSelectedPictures.size()" + "position:" + position + "****allSelectedPictures.size():" + allSelectedPictures.size());
+            isLast = true;
+
+            Log.i("PickImageView", "position==allSelectedPictures.size()" + "position:" + position + "****allSelectedPictures.size():" + allSelectedPictures.size() + "flag:" + "1");
 
 
         }
@@ -187,7 +190,7 @@ public class PickImageView extends RelativeLayout {
                 .showCamera(true)
                 .multi()
                 .maxPickSize(9) // 最大选择数
-                .selectedPaths(allSelectedPictures) // 已选择的照片地址
+                // .selectedPaths(allSelectedPictures) // 已选择的照片地址
                 .start((Activity) context); // 从Fragment、Activity中启动
 
     }
@@ -203,8 +206,9 @@ public class PickImageView extends RelativeLayout {
         allSelectedPictures.clear();
         allSelectedPictures.addAll(pictures);
         setListViewHeightBasedOnChildren(mGridview);
-        mGridAdapter.notifyDataSetChanged();
-
+     //   mGridAdapter.notifyDataSetChanged();
+        //更新UI
+        mGridview.setAdapter(mGridAdapter);
     }
 
     public void updatePickImageView(ArrayList<String> pictures, boolean isFirstCamera) {

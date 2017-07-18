@@ -247,3 +247,11 @@ public static ** valueOf(java.lang.String);
 -keepclasseswithmembernames class * {
     @butterknife.* <methods>;
 }
+
+
+## ----------------------------------
+##      cn.com.zte sso
+## ----------------------------------
+-keep class cn.com.zte.** { *; }
+-dontwarn cn.com.zte.**
+

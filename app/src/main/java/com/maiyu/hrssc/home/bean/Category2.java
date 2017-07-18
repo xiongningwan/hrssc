@@ -1,10 +1,13 @@
 package com.maiyu.hrssc.home.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * 获取一级业务下的二级业务
  */
 
-public class Category2 {
+public class Category2 implements Parcelable {
     private String name;//薪资证明办理,//二级业务名称
     private String id;//29,              //二级业务id
     private String comment;//null,    //二级业务描述
@@ -95,4 +98,51 @@ public class Category2 {
     public void setPageid(String pageid) {
         this.pageid = pageid;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.name);
+        dest.writeString(this.id);
+        dest.writeString(this.comment);
+        dest.writeString(this.link);
+        dest.writeString(this.status);
+        dest.writeString(this.create_time);
+        dest.writeString(this.city);
+        dest.writeString(this.can_agent);
+        dest.writeString(this.cid);
+        dest.writeString(this.pageid);
+    }
+
+    public Category2() {
+    }
+
+    protected Category2(Parcel in) {
+        this.name = in.readString();
+        this.id = in.readString();
+        this.comment = in.readString();
+        this.link = in.readString();
+        this.status = in.readString();
+        this.create_time = in.readString();
+        this.city = in.readString();
+        this.can_agent = in.readString();
+        this.cid = in.readString();
+        this.pageid = in.readString();
+    }
+
+    public static final Parcelable.Creator<Category2> CREATOR = new Parcelable.Creator<Category2>() {
+        @Override
+        public Category2 createFromParcel(Parcel source) {
+            return new Category2(source);
+        }
+
+        @Override
+        public Category2[] newArray(int size) {
+            return new Category2[size];
+        }
+    };
 }

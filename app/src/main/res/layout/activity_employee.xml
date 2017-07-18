@@ -67,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="报道说明"/>
+                android:text="办理说明"/>
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -121,7 +121,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/base5dp"
             android:layout_toEndOf="@id/dizhi_iv"
-            android:text="报道地址"/>
+            android:text="报到地址"/>
 
 
         <ImageView

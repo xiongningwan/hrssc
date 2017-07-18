@@ -41,6 +41,8 @@ import com.maiyu.hrssc.base.view.dialog.LoadingDialog;
 import com.maiyu.hrssc.home.activity.applying.adapter.ImageGridAdapter;
 import com.maiyu.hrssc.util.BaseAsyncTask;
 import com.maiyu.hrssc.util.EngineFactory;
+import com.maiyu.hrssc.util.HintUitl;
+import com.maiyu.hrssc.util.SharedPreferencesUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -87,7 +89,6 @@ public class TijianActivity extends CheckPermissionsActivity {
     private ImageGridAdapter mGridAdapter;
     private LoadingDialog mLoadingDialog;
     private String mToken;
-    private GetWebsiteData mGetWebsiteData;
     private String mId;
     private String mTitle;
     private AMap aMap;
@@ -96,7 +97,9 @@ public class TijianActivity extends CheckPermissionsActivity {
     private LatLng mLatlng = new LatLng(22.537770, 113.949110);
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-
+    private GetWebsiteData mGetWebsiteData;
+    private String mCity;
+    private String mTijianLink;
 
 
     @Override
@@ -117,13 +120,20 @@ public class TijianActivity extends CheckPermissionsActivity {
 
         mId = getIntent().getStringExtra("id");
         mTitle = getIntent().getStringExtra("name");
-        mGetWebsiteData = getIntent().getParcelableExtra("GetWebSiteData");
+        mGetWebsiteData = getIntent().getParcelableExtra("GetWebsiteData");
+
 
         mHeadView.setTitle(mTitle, true, false);
         mLoadingDialog = new LoadingDialog(this);
         mToken = DataCenter.getInstance().getuser().getToken();
 
         setBaseInfo(mGetWebsiteData);
+
+
+        mCity = SharedPreferencesUtil.getCityName(this);
+        if (mId != null && mCity != null && !"".equals(mCity)) {
+            new GetWebsiteAsyncTask(mToken, mId, mCity).execute();
+        }
         new CheckResultAsyncTask(mToken).execute();
     }
 
@@ -151,8 +161,10 @@ public class TijianActivity extends CheckPermissionsActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.shuoming_ll:
-                if (mGetWebsiteData != null && mGetWebsiteData.getLink() != null) {
+                if (mTijianLink != null) {
                     openWebActivity();
+                } else {
+                    HintUitl.toastShort(this, "没有体检须知");
                 }
                 break;
             case R.id.dizhi_rl:
@@ -222,9 +234,9 @@ public class TijianActivity extends CheckPermissionsActivity {
     void setCheckResult(CheckResult checkResult) {
         mContent.setText(checkResult.getResult());
 
-        try{
+        try {
             mTime.setText(sdf1.format(sdf.parse(checkResult.getCreate_time())));
-        }catch (ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 
@@ -232,8 +244,6 @@ public class TijianActivity extends CheckPermissionsActivity {
         List images = jsonArray.toJavaList(String.class);
         mGridAdapter.updatePickImageView(images, mGridView);
     }
-
-
 
 
     private void setBaseInfo(GetWebsiteData getWebsiteData) {
@@ -251,7 +261,7 @@ public class TijianActivity extends CheckPermissionsActivity {
 
     void openWebActivity() {
         Intent intent = new Intent(this, WebActivity.class);
-        intent.putExtra("url", mGetWebsiteData.getLink());
+        intent.putExtra("url", mTijianLink);
         intent.putExtra("titleName", "帮助说明");
         intent.putExtra("type", ConstantValue.TYPE_IMPORTANT);
         startActivity(intent);
@@ -348,6 +358,57 @@ public class TijianActivity extends CheckPermissionsActivity {
                 .position(latlng)
                 .draggable(true);
         aMap.addMarker(markerOption);
+    }
+
+
+    /**
+     * 获取某个二级业务的基础信息（官方网站，体检、报到地址，联系人，联系方式）
+     */
+    class GetWebsiteAsyncTask extends BaseAsyncTask<Void, Void, Void> {
+        private String token;
+        private String cid2;
+        private String city;
+        private GetWebsiteData getWebsiteData;
+
+        public GetWebsiteAsyncTask(String token, String cid2, String city) {
+            super();
+            this.token = token;
+            this.cid2 = cid2;
+            this.city = city;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mLoadingDialog.getDialog().show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            IBizEngine engine = EngineFactory.get(IBizEngine.class);
+            try {
+                getWebsiteData = engine.getWebsite(TijianActivity.this, token, cid2, city);
+            } catch (NetException e) {
+                exception = e;
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            mLoadingDialog.getDialog().dismiss();
+            if (checkException(TijianActivity.this)) {
+                return;
+            }
+            if (getWebsiteData != null) {
+
+                mTijianLink = getWebsiteData.getLink();
+
+            }
+
+            super.onPostExecute(result);
+        }
     }
 
 }

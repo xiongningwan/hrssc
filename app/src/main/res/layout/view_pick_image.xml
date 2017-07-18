@@ -6,7 +6,7 @@
     <GridView
         android:id="@+id/grid_view"
         android:layout_width="fill_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:horizontalSpacing="2dp"
         android:verticalSpacing="5dp"
         android:scrollbars="none"
