@@ -12,14 +12,20 @@
     <!-- API 服务器是否采用Https协议 false | true  -->
     <entry key="sso_api_server_https_flag" >false</entry>
     <!-- API 服务器外网IP  -->
-    <entry key="sso_api_server_ip_outer" >113.98.59.175</entry>
+    <!--<entry key="sso_api_server_ip_outer" >113.98.59.175</entry>-->
+    <!--<entry key="sso_api_server_ip_outer" >113.140.11.239</entry>-->
+    <entry key="sso_api_server_ip_outer" >mdm.zte.com.cn</entry>
     <!-- API 服务器内网IP  -->
-    <entry key="sso_api_server_ip_inner" >10.89.208.188</entry>
+    <!--<entry key="sso_api_server_ip_inner" >10.89.208.188</entry>-->
+    <entry key="sso_api_server_ip_inner" >mdm.zte.com.cn</entry>
     <!-- API 服务器外网端口  -->
-    <entry key="sso_api_server_port_outer" >8080</entry>
+    <!--<entry key="sso_api_server_port_outer" >8080</entry>-->
+    <!--<entry key="sso_api_server_port_outer" >8888</entry>-->
+    <entry key="sso_api_server_port_outer" >80</entry>
     <!-- API 服务器内网端口  -->
+   <!-- <entry key="sso_api_server_port_inner" >80</entry>-->
     <entry key="sso_api_server_port_inner" >80</entry>
-    
+
     
     <!-- ####################   注销设备的浏览器URL地址       ####################  -->
     <!-- 注销设备的浏览器URL外网地址  -->

@@ -31,6 +31,19 @@ public interface IUserEngine {
      * @throws NetException
      */
     public User login(Context context, String type, String account, String password, String mac, String version, String login_way) throws NetException;
+    /**
+     * 登录
+     *
+     * @param context
+     * @param account    UUID
+     * @param name  CNM
+     * @param mac       Mac地址，如果获取不到给空
+     * @param version   版本号，如1.2.1
+     * @param login_way ios/android/web  保证一样
+     * @return
+     * @throws NetException
+     */
+    public User userLoginMOA(Context context,  String account, String name, String mac, String version, String login_way) throws NetException;
 
 
     /**

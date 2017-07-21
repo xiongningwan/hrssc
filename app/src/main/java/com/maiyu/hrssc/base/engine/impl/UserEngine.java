@@ -73,6 +73,47 @@ public class UserEngine extends BaseEngine implements IUserEngine {
     }
 
     @Override
+    public User userLoginMOA(Context context, String account, String name, String mac, String version, String login_way) throws NetException {
+        // 发送请求地址到服务器
+        String urlString = ConstantValue.SERVER_URI + ConstantValue.path_activity_login_user_login_moa;
+        // 添加参数
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("account", account);
+        params.put("name", name);
+        params.put("mac", mac);
+        params.put("version", version);
+        params.put("login_way", login_way);
+        Response response = null;
+        String json = "";
+        try {
+            response = OkHttpUtils.post().tag(context).url(urlString).params(params).build().execute();
+            json = new String(response.body().bytes(), ConstantValue.ENCODING);
+            LogHelper.d("HTTPResult", "json:" + json.toString());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 处理返回码
+        dispatcherException(context, json);
+
+        // 解析返回的数据并封装
+        User user = null;
+        try {
+            json = parseObject(json).getString("data");
+            String json_user = JSON.parseObject(json).getString("user");
+
+            user = JSON.parseObject(json_user, User.class);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    @Override
     public List<City> getCitys(Context context, String page, String rows, String token) throws NetException {
         // 发送请求地址到服务器
         String urlString = ConstantValue.SERVER_URI + ConstantValue.path_fragment_home_get_citys;

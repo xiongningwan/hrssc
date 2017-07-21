@@ -43,6 +43,10 @@ public interface ConstantValue {
      */
     String path_activity_login_user_login = "/hrsscLoginController/userLogin";
     /**
+     * 单点登录
+     */
+    String path_activity_login_user_login_moa = "/hrsscLoginController/userLoginMOA";
+    /**
      * 城市列表
      */
     String path_fragment_home_get_citys = "/hrsscBasicController/getCitys";
