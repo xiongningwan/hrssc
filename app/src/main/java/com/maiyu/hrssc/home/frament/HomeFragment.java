@@ -39,6 +39,7 @@ import com.maiyu.hrssc.base.bean.Banners;
 import com.maiyu.hrssc.base.bean.City;
 import com.maiyu.hrssc.base.bean.DataCenter;
 import com.maiyu.hrssc.base.bean.HomeData;
+import com.maiyu.hrssc.base.bean.User;
 import com.maiyu.hrssc.base.engine.IBizEngine;
 import com.maiyu.hrssc.base.engine.IUserEngine;
 import com.maiyu.hrssc.base.exception.NetException;
@@ -57,6 +58,7 @@ import com.maiyu.hrssc.home.activity.todo.TodoActivity;
 import com.maiyu.hrssc.home.bean.Category1;
 import com.maiyu.hrssc.util.BaseAsyncTask;
 import com.maiyu.hrssc.util.EngineFactory;
+import com.maiyu.hrssc.util.HintUitl;
 import com.maiyu.hrssc.util.SharedPreferencesUtil;
 
 import java.util.ArrayList;
@@ -143,6 +145,7 @@ public class HomeFragment extends Fragment {
     private String mToken;
     private HomeFragmentNewsAdapter mNewsAdapter;
     private List<Category1> mCateGory1List;
+    private User mUser;
     // TODO: Rename and change types of parameters
 
 
@@ -191,7 +194,8 @@ public class HomeFragment extends Fragment {
 
 
         mToken = DataCenter.getInstance().getuser().getToken();
-        if(mToken != null) {
+        mUser = DataCenter.getInstance().getuser();
+        if (mToken != null) {
             new GetCitysAsyncTask("1", "10000", mToken).execute();
             new Category1AsyncTask(mToken).execute();
         }
@@ -391,7 +395,7 @@ public class HomeFragment extends Fragment {
      */
     private void stopLocation() {
         // 停止定位
-        if(locationClient != null) {
+        if (locationClient != null) {
             locationClient.stopLocation();
         }
     }
@@ -417,6 +421,23 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    private boolean isFresher() {
+
+        if (mUser != null && "0".equals(mUser.getStatus())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    void openFunctionActivity(int location) {
+        if (mCateGory1List != null && !isFresher()) {
+            startRequestActivity(0, mCateGory1List.get(0));
+        } else {
+            HintUitl.toastShort(getActivity(), "新员工不能使用该功能");
+        }
     }
 
     @OnClick({R.id.address_btn, R.id.msg_btn, R.id.hetong_rl, R.id.shenqing_rl, R.id.btn_zmbl, R.id.btn_sb, R.id.btn_gjj, R.id.btn_dajy, R.id.btn_hkbl2, R.id.btn_jzzbl, R.id.btn_xyg, R.id.btn_more, R.id.more_next_btn})
@@ -445,53 +466,39 @@ public class HomeFragment extends Fragment {
                 startActivity(new Intent(getActivity(), ApplyingActivity.class));
                 break;
             case R.id.btn_zmbl:
-                if (mCateGory1List != null) {
-                    startRequestActivity(0, mCateGory1List.get(0));
-                }
+                openFunctionActivity(0);
                 break;
             case R.id.btn_sb:
-               // startActivity(new Intent(getActivity(), SocialSecurityActivity.class));
-                if (mCateGory1List != null) {
-                    startRequestActivity(1, mCateGory1List.get(1));
-                }
+                // startActivity(new Intent(getActivity(), SocialSecurityActivity.class));
+                openFunctionActivity(1);
                 break;
             case R.id.btn_gjj:
-                if (mCateGory1List != null) {
-                    startRequestActivity(2, mCateGory1List.get(2));
-                }
-               // startActivity(new Intent(getActivity(), FundsActivity.class));
+                openFunctionActivity(2);
+                // startActivity(new Intent(getActivity(), FundsActivity.class));
                 break;
             case R.id.btn_dajy:
                 // 档案借阅
                 //startActivity(new Intent(getActivity(), FilesBorrowActivity.class));
-                if (mCateGory1List != null) {
-                    startRequestActivity(3, mCateGory1List.get(3));
-                }
+                openFunctionActivity(3);
                 break;
             case R.id.btn_hkbl2:
                 // 户口办理
-               // startActivity(new Intent(getActivity(), ResidenceActivity.class));
-                if (mCateGory1List != null) {
-                    startRequestActivity(4, mCateGory1List.get(4));
-                }
+                // startActivity(new Intent(getActivity(), ResidenceActivity.class));
+                openFunctionActivity(4);
                 break;
             case R.id.btn_jzzbl:
                 // 居住证办理
-                if (mCateGory1List != null) {
-                    startRequestActivity(5, mCateGory1List.get(5));
-                }
+                openFunctionActivity(5);
                 break;
             case R.id.btn_xyg:
                 // 新员工
-                if (mCateGory1List != null) {
+                if (mCateGory1List != null && isFresher()) {
                     startRequestActivity(6, mCateGory1List.get(6));
                 }
-               // startActivity(new Intent(getActivity(), EmployeeActivity.class));
+                // startActivity(new Intent(getActivity(), EmployeeActivity.class));
                 break;
             case R.id.btn_more:
-                if (mCateGory1List != null) {
-                    startRequestActivity(7, mCateGory1List.get(7));
-                }
+                openFunctionActivity(7);
                 break;
             case R.id.more_next_btn:
                 startActivity(new Intent(getActivity(), InformationActivity.class));
@@ -515,12 +522,12 @@ public class HomeFragment extends Fragment {
                     }
                     break;
                 case MSG_REQUEST_CODE:
-                    Log.i("home_resultCode_code","MSG_REQUEST_CODE");
+                    Log.i("home_resultCode_code", "MSG_REQUEST_CODE");
                     // 刷新home
                     new getHomeData(mAddressBtnText.getText().toString(), mToken).execute();
                     break;
                 case TODO_REQUEST_CODE:
-                    Log.i("home_resultCode_code","TODO_REQUEST_CODE");
+                    Log.i("home_resultCode_code", "TODO_REQUEST_CODE");
                     // 刷新home
                     new getHomeData(mAddressBtnText.getText().toString(), mToken).execute();
                     break;
