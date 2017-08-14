@@ -434,7 +434,7 @@ public class HomeFragment extends Fragment {
 
     void openFunctionActivity(int location) {
         if (mCateGory1List != null && !isFresher()) {
-            startRequestActivity(0, mCateGory1List.get(0));
+            startRequestActivity(location, mCateGory1List.get(location));
         } else {
             HintUitl.toastShort(getActivity(), "新员工不能使用该功能");
         }
@@ -492,7 +492,7 @@ public class HomeFragment extends Fragment {
                 break;
             case R.id.btn_xyg:
                 // 新员工
-                if (mCateGory1List != null && isFresher()) {
+                if (mCateGory1List != null) {
                     startRequestActivity(6, mCateGory1List.get(6));
                 }
                 // startActivity(new Intent(getActivity(), EmployeeActivity.class));

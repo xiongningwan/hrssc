@@ -57,7 +57,7 @@ public class HrsscApplication extends Application {
 
 
         //Kefu sdk 初始化简写方式：
-        ChatClient.getInstance().init(this, new ChatClient.Options().setAppkey("1103170512115823#kefuchannelapp41283").setTenantId("YXA6kvYZwDbXEeecZquvFVzLHQ"));
+        ChatClient.getInstance().init(this, new ChatClient.Options().setAppkey("1103170512115823#kefuchannelapp41283").setTenantId("41283"));
         // Kefu EaseUI的初始化
         UIProvider.getInstance().init(this);
 

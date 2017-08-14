@@ -221,7 +221,7 @@ public class LoginActivity extends AppCompatActivity {
 						//.setVisitorInfo(MessageHelper.createVisitorInfo())
 						.setServiceIMNumber("kefuchannelimid_063052")
 						//.setScheduleAgent(MessageHelper.createAgentIdentity("ceshiok1@qq.com"))
-						//.setShowUserNick(true)
+						.setShowUserNick(true)
 						//.setBundle(bundle)
 						.build();
 				startActivity(intent);

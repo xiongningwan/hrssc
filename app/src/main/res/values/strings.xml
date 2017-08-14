@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HRSSC</string>
+    <string name="app_name">ssc</string>
 
     <string name="home_page_home">首页</string>
     <string name="home_page_jifen">积分兑换</string>

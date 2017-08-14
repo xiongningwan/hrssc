@@ -75,7 +75,8 @@
             android:background="@drawable/corner_view_selector"
             android:text="登录"
             android:textColor="@color/project_color_basic_white_pure"
-            android:textSize="@dimen/project_text_size_dp_16"/>
+            android:textSize="@dimen/project_text_size_dp_16"
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/sso_btn"
@@ -86,7 +87,7 @@
             android:layout_marginTop="@dimen/base26dp"
             android:layout_below="@id/confirm_btn"
             android:background="@drawable/corner_view_selector"
-            android:text="单点登录"
+            android:text="在职员工登录"
             android:textColor="@color/project_color_basic_white_pure"
             android:textSize="@dimen/project_text_size_dp_16"/>
 
@@ -104,7 +105,7 @@
             android:layout_below="@id/sso_btn"
             android:layout_marginEnd="@dimen/base10dp"
             android:layout_marginTop="@dimen/base20dp"
-            android:layout_alignRight="@id/confirm_btn"
+            android:layout_alignRight="@id/sso_btn"
             android:text="新/离职员工登录入口"
             android:textSize="@dimen/project_text_size_dp_12"/>
 
@@ -116,7 +117,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="@dimen/base10dp"
             android:layout_marginTop="@dimen/base20dp"
-            android:layout_alignStart="@id/confirm_btn"
+            android:layout_alignStart="@id/sso_btn"
             android:text="忘记密码"
             android:textColor="@color/project_color_general_hyperlink"
             android:textSize="@dimen/project_text_size_dp_12"/>

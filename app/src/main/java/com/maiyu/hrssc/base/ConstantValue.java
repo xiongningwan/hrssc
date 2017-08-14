@@ -12,7 +12,7 @@ public interface ConstantValue {
      * 服务器主机地址
      */
     String HOST = "hrssctest.trydo.online"; //测试
-    //String HOST = "healthapp.jhjhome.com";//发布
+    //String HOST = "hrssctest.trydo.online"";//发布
     /**
      * 项目 context
      */
@@ -28,10 +28,13 @@ public interface ConstantValue {
      * 服务器地址
      */
     // String SERVER_URI = "http://" + HOST + ":" + port + CONTEXT;
-    String SERVER_URI = "http://hrssctest.wenhua407.top";
-    String FILE_SERVER_URI = "http://hrsscadmin.wenhua407.top";//测试
+   // String SERVER_URI = "http://hrssctest.wenhua407.top";
+    //String FILE_SERVER_URI = "http://hrsscadmin.wenhua407.top";//测试
     // String SERVER_URI = "http://api.huijialicai.cn" + CONTEXT;//发布
 
+
+    String SERVER_URI = "http://210.21.240.220:88/HRSSC_Server";
+    String FILE_SERVER_URI = "http://210.21.240.220:88/uploadFiles";//测试
     /**
      * logo
      */
