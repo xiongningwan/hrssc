@@ -34,7 +34,7 @@ public interface ConstantValue {
 
 
     String SERVER_URI = "http://210.21.240.220:88/HRSSC_Server";
-    String FILE_SERVER_URI = "http://210.21.240.220:88/uploadFiles";//测试
+    String FILE_SERVER_URI = "http://210.21.240.220:88/HRSSC_ADMIN";
     /**
      * logo
      */
